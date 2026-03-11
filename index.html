@@ -1,0 +1,2373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seller Pulse v7 — February 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F8FA;
+  --white: #FFFFFF;
+  --border: #E4E7EC;
+  --ink: #0D1117;
+  --ink2: #3D4451;
+  --muted: #6B7280;
+  --faint: #9CA3AF;
+  --green: #059669;
+  --green-bg: #ECFDF5;
+  --green-border: #A7F3D0;
+  --red: #DC2626;
+  --red-bg: #FEF2F2;
+  --red-border: #FECACA;
+  --amber: #D97706;
+  --amber-bg: #FFFBEB;
+  --amber-border: #FDE68A;
+  --blue: #2563EB;
+  --blue-bg: #EFF6FF;
+  --blue-border: #BFDBFE;
+  --orange: #EA580C;
+  --orange-bg: #FFF7ED;
+  --orange-border: #FED7AA;
+  --purple: #7C3AED;
+  --purple-bg: #F5F3FF;
+  --purple-border: #DDD6FE;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 13px; }
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+}
+/* ─── HEADER ─── */
+.hdr {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 36px;
+  display: flex; align-items: stretch; justify-content: space-between;
+  height: 54px;
+}
+.hdr-left { display: flex; align-items: center; gap: 12px; }
+.live-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: #22C55E;
+  box-shadow: 0 0 0 3px rgba(34,197,94,.15);
+  animation: livepulse 2.4s ease-in-out infinite;
+}
+@keyframes livepulse { 0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,.15)} 50%{box-shadow:0 0 0 6px rgba(34,197,94,.06)} }
+.hdr-title { font-size: 14px; font-weight: 700; letter-spacing: -.3px; }
+.hdr-sub   { font-size: 10.5px; color: var(--muted); margin-top: 1px; }
+.hdr-right { display: flex; align-items: center; gap: 8px; }
+.hdr-chip {
+  font-size: 10px; font-family: 'JetBrains Mono', monospace; font-weight: 500;
+  color: var(--muted); background: var(--bg); border: 1px solid var(--border);
+  padding: 4px 10px; border-radius: 5px;
+}
+/* ─── PAGE ─── */
+.pg { padding: 20px 36px 36px; max-width: 1360px; }
+
+/* ─── SECTION LABEL ─── */
+.sh {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 12px; margin-top: 26px;
+}
+.sh:first-child { margin-top: 0; }
+.sh-t { font-size: 11px; font-weight: 700; color: var(--ink2); white-space: nowrap; text-transform: uppercase; letter-spacing: .6px; }
+.sh-l { flex: 1; height: 1px; background: var(--border); }
+.sh-b {
+  flex-shrink: 0; font-size: 9px; font-weight: 600; padding: 3px 9px;
+  border-radius: 4px; font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase; letter-spacing: .4px; white-space: nowrap;
+}
+
+/* ─── VITAL SIGNS ─── */
+.vitals { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 12px; }
+.vital {
+  background: var(--white); border: 1px solid var(--border); border-radius: 11px;
+  padding: 15px 16px;
+  position: relative; overflow: hidden;
+}
+.vital::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.v-green::before { background: var(--green); }
+.v-amber::before { background: var(--amber); }
+.v-red::before   { background: var(--red); }
+.v-blue::before  { background: var(--blue); }
+.v-purple::before { background: var(--purple); }
+.vt { font-size: 9.5px; font-weight: 600; color: var(--faint); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 8px; }
+.vn { font-size: 30px; font-weight: 800; line-height: 1; letter-spacing: -1px; }
+.vs { font-size: 10px; color: var(--muted); margin-top: 3px; }
+.vc { font-size: 9.5px; font-weight: 700; margin-top: 5px; display: flex; align-items: center; gap: 3px; }
+.vspk { margin-top: 8px; }
+
+/* ─── SOURCE ROW CHIPS ─── */
+.src-row { display: flex; align-items: center; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+.src-chip {
+  display: flex; align-items: center; gap: 5px; font-size: 9.5px; font-weight: 600;
+  padding: 4px 10px; border-radius: 5px;
+}
+.sc-nps    { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+.sc-qrf    { background: var(--orange-bg); color: var(--orange); border: 1px solid var(--orange-border); }
+.sc-int    { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
+.src-desc  { font-size: 9.5px; color: var(--faint); }
+.src-sep   { color: var(--border); }
+
+/* ─── PROBLEM CARDS ─── */
+.problems { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 10px; }
+.prob {
+  background: var(--white); border: 1.5px solid var(--border); border-radius: 12px;
+  overflow: hidden;
+}
+.prob.p-critical { border-color: var(--red-border); }
+.prob.p-chronic  { border-color: var(--amber-border); }
+.prob-top {
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.prob.p-critical .prob-top { background: var(--red-bg); border-bottom-color: var(--red-border); }
+.prob.p-chronic  .prob-top { background: var(--amber-bg); border-bottom-color: var(--amber-border); }
+.pt-row1 { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+.pt-icon { font-size: 18px; line-height: 1; }
+.pt-badges { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+.pb {
+  font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 3px;
+  font-family: 'JetBrains Mono', monospace; white-space: nowrap;
+}
+.pb-crit { background: #FEE2E2; color: var(--red); }
+.pb-chrn { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+/* Badge tooltips */
+.pb-tip {
+  position: relative; cursor: help;
+}
+.pb-tip::after {
+  content: attr(data-tip);
+  position: absolute; bottom: calc(100% + 7px); left: 50%; transform: translateX(-50%);
+  background: #1E293B; color: #F8FAFC;
+  font-size: 10px; font-weight: 500; line-height: 1.45;
+  font-family: 'Sora', sans-serif; letter-spacing: 0;
+  padding: 7px 11px; border-radius: 7px;
+  white-space: nowrap; pointer-events: none;
+  opacity: 0; transition: opacity .15s;
+  z-index: 999;
+  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+}
+.pb-tip::before {
+  content: '';
+  position: absolute; bottom: calc(100% + 2px); left: 50%; transform: translateX(-50%);
+  border: 5px solid transparent; border-top-color: #1E293B;
+  pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 999;
+}
+.pb-tip:hover::after, .pb-tip:hover::before { opacity: 1; }
+.pb-dual { background: #FEF9C3; color: #A16207; border: 1px solid #FDE047; }
+.pb-nps  { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+.pb-qrf  { background: var(--orange-bg); color: var(--orange); border: 1px solid var(--orange-border); }
+.pb-int  { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
+.pt-name { font-size: 13px; font-weight: 800; color: var(--ink); margin-bottom: 3px; line-height: 1.25; }
+.pt-desc { font-size: 10.5px; color: var(--muted); line-height: 1.5; }
+.prob-body { padding: 12px 16px; }
+/* signal rows */
+.sig-row {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 7px 10px; border-radius: 7px; margin-bottom: 6px;
+}
+.sig-row:last-child { margin-bottom: 0; }
+.sig-row.s-nps  { background: var(--blue-bg); }
+.sig-row.s-qrf  { background: var(--orange-bg); }
+.sig-row.s-int  { background: var(--purple-bg); }
+.sig-row.s-none { background: var(--bg); }
+.sig-src {
+  font-size: 7.5px; font-weight: 700; padding: 2px 5px; border-radius: 3px;
+  flex-shrink: 0; margin-top: 2px; font-family: 'JetBrains Mono', monospace;
+}
+.ss-nps { background: var(--blue-border); color: var(--blue); }
+.ss-qrf { background: var(--orange-border); color: var(--orange); }
+.ss-int { background: var(--purple-border); color: var(--purple); }
+.ss-no  { background: #E5E7EB; color: var(--faint); }
+.sig-body { flex: 1; min-width: 0; }
+.sig-main { font-size: 11px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+.sig-sub  { font-size: 9.5px; color: var(--muted); margin-top: 1px; line-height: 1.4; }
+.sig-tag  { font-size: 8.5px; font-weight: 700; margin-top: 3px; }
+.t-rise  { color: var(--red); }
+.t-flat  { color: var(--muted); }
+.t-fall  { color: var(--green); }
+/* subreasons inside prob */
+.sub-sect { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+.sub-ttl { font-size: 8.5px; font-weight: 700; color: var(--faint); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+.sub-r { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.sub-r:last-child { margin-bottom: 0; }
+.sub-nm  { font-size: 9.5px; color: var(--ink2); min-width: 130px; }
+.sub-trk { flex: 1; height: 4px; background: #F3F4F6; border-radius: 2px; overflow: hidden; }
+.sub-fill { height: 100%; border-radius: 2px; }
+.sub-v   { font-size: 9.5px; font-weight: 700; color: var(--ink2); font-family: 'JetBrains Mono', monospace; min-width: 20px; text-align: right; }
+/* chronic badge */
+.chronic-bar {
+  margin: 10px 0 0; padding: 6px 10px; border-radius: 6px;
+  font-size: 9px; font-weight: 600; color: var(--amber); background: var(--amber-bg);
+  border: 1px solid var(--amber-border); display: flex; align-items: center; gap: 5px;
+}
+
+/* ─── NPS TREND ─── */
+.nps-trend {
+  background: var(--white); border: 1px solid var(--border); border-radius: 11px;
+  padding: 16px 20px; display: flex; align-items: center; gap: 20px;
+}
+.nt-left { flex-shrink: 0; }
+.nt-score { font-size: 44px; font-weight: 800; color: var(--green); line-height: 1; letter-spacing: -2px; }
+.nt-label { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.nt-badge { display: inline-block; margin-top: 5px; font-size: 8.5px; font-weight: 700; background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); padding: 2px 8px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }
+.nt-mid { flex: 1; }
+.nt-chart { width: 100%; }
+.nt-months { display: flex; justify-content: space-between; margin-top: 4px; }
+.nt-mo { font-size: 8px; font-family: 'JetBrains Mono', monospace; color: var(--faint); }
+.nt-mo.now { color: var(--green); font-weight: 700; }
+.nt-right { display: flex; gap: 10px; flex-shrink: 0; }
+.nt-seg { text-align: center; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
+.nts-v { font-size: 22px; font-weight: 800; line-height: 1; }
+.nts-l { font-size: 9px; color: var(--muted); margin-top: 2px; }
+
+/* ─── QRF TREND ─── */
+.qrf-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; }
+.qrf-summary {
+  background: var(--white); border: 1px solid var(--border); border-radius: 11px;
+  padding: 16px 18px;
+}
+.qrf-overall { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.qo-num { font-size: 38px; font-weight: 800; color: var(--ink); letter-spacing: -1.5px; line-height: 1; }
+.qo-unit { font-size: 14px; font-weight: 700; color: var(--muted); }
+.qo-sub { font-size: 10px; color: var(--muted); margin-bottom: 12px; }
+.qrf-trend-chart { margin: 10px 0 4px; }
+.qrf-mo-labels { display: flex; justify-content: space-between; }
+.qml { font-size: 8px; font-family: 'JetBrains Mono', monospace; color: var(--faint); }
+.qml.now { color: var(--ink); font-weight: 700; }
+.qrf-note { font-size: 9.5px; color: var(--muted); background: var(--amber-bg); border: 1px solid var(--amber-border); border-radius: 6px; padding: 7px 10px; margin-top: 10px; line-height: 1.55; }
+
+.qrf-bars-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 11px;
+  padding: 16px 18px;
+}
+.qb-title { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
+.qb-sub { font-size: 9.5px; color: var(--muted); margin-bottom: 14px; }
+.qb-row {
+  display: grid; grid-template-columns: 1fr 190px 60px 88px;
+  align-items: center; gap: 10px; padding: 8px 0;
+  border-bottom: 1px solid #F9FAFB;
+}
+.qb-row:last-child { border-bottom: none; }
+.qb-name { font-size: 11px; font-weight: 700; }
+.qb-plain { font-size: 9.5px; color: var(--muted); margin-top: 1px; }
+.qb-link { font-size: 8.5px; font-weight: 700; margin-top: 2px; color: #A16207; }
+.qb-track { height: 8px; background: #F3F4F6; border-radius: 4px; overflow: hidden; }
+.qb-fill { height: 100%; border-radius: 4px; }
+.qb-count { font-size: 12px; font-weight: 700; font-family: 'JetBrains Mono', monospace; text-align: right; }
+.qb-chip { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 20px; text-align: center; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+.qc-up { background: var(--red-bg); color: var(--red); }
+.qc-dn { background: var(--green-bg); color: var(--green); }
+.qc-fl { background: #F3F4F6; color: var(--muted); }
+
+/* ─── INTERNAL FEEDBACK ─── */
+.int-layout { display: grid; grid-template-columns: 280px 1fr; gap: 10px; }
+.int-summary {
+  background: var(--white); border: 1px solid var(--border); border-radius: 11px;
+  padding: 16px 18px;
+}
+.int-rating-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.int-stars { font-size: 14px; letter-spacing: -2px; }
+.int-r-big { font-size: 38px; font-weight: 800; color: var(--ink); letter-spacing: -1.5px; line-height: 1; }
+.int-r-sub { font-size: 9.5px; color: var(--muted); margin-top: 2px; }
+.int-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.ibr-star { font-size: 9.5px; font-weight: 600; color: var(--muted); width: 32px; flex-shrink: 0; }
+.ibr-track { flex: 1; height: 7px; background: #F3F4F6; border-radius: 3px; overflow: hidden; }
+.ibr-fill { height: 100%; border-radius: 3px; }
+.ibr-n { font-size: 9px; font-family: 'JetBrains Mono', monospace; color: var(--muted); width: 36px; text-align: right; flex-shrink: 0; }
+.int-extrap { font-size: 8.5px; color: var(--faint); margin-top: 10px; font-style: italic; background: #F9FAFB; padding: 6px 9px; border-radius: 5px; line-height: 1.5; }
+/* store rating badge */
+.store-badge {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 9px;
+  padding: 10px 14px; margin-top: 10px; display: flex; align-items: center; justify-content: space-between;
+}
+.sb-label { font-size: 9.5px; color: var(--muted); }
+.sb-val { font-size: 16px; font-weight: 800; color: var(--ink); }
+.sb-change { font-size: 9.5px; font-weight: 700; color: var(--green); }
+
+.int-bifur-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 11px;
+  padding: 16px 18px;
+}
+.ib-title { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
+.ib-sub { font-size: 9.5px; color: var(--muted); margin-bottom: 14px; }
+.ib-row {
+  display: grid; grid-template-columns: 1fr 90px 90px 100px;
+  align-items: center; gap: 10px; padding: 9px 0;
+  border-bottom: 1px solid #F9FAFB;
+}
+.ib-row:last-child { border-bottom: none; }
+.ib-row.ib-hdr { padding-bottom: 7px; border-bottom: 1px solid var(--border); }
+.ibh { font-size: 8.5px; font-weight: 700; color: var(--faint); text-transform: uppercase; letter-spacing: .5px; }
+.ib-name { font-size: 11px; font-weight: 700; }
+.ib-plain { font-size: 9.5px; color: var(--muted); margin-top: 1px; }
+.ib-nps-cmp { font-size: 9.5px; color: var(--muted); margin-top: 2px; }
+.ib-jan { font-size: 12px; font-weight: 600; font-family: 'JetBrains Mono', monospace; color: var(--muted); }
+.ib-feb { font-size: 14px; font-weight: 800; font-family: 'JetBrains Mono', monospace; }
+.ib-pct { font-size: 9px; font-weight: 600; text-align: center; }
+.ib-chip { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+.ic-up { background: var(--red-bg); color: var(--red); }
+.ic-mod { background: var(--amber-bg); color: var(--amber); }
+.ic-ok { background: var(--green-bg); color: var(--green); }
+.ib-extrap-note { font-size: 9px; color: var(--faint); font-style: italic; margin-top: 10px; background: #F9FAFB; padding: 7px 10px; border-radius: 5px; line-height: 1.5; }
+
+/* ─── SEGMENT ─── */
+.seg-wrap { background: var(--white); border: 1px solid var(--border); border-radius: 11px; overflow: hidden; }
+.seg-hdr {
+  display: grid; grid-template-columns: 170px 1fr 80px 110px 130px;
+  gap: 12px; padding: 9px 18px; background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  font-size: 8.5px; font-weight: 700; color: var(--faint); text-transform: uppercase; letter-spacing: .7px;
+}
+.seg-row {
+  display: grid; grid-template-columns: 170px 1fr 80px 110px 130px;
+  gap: 12px; padding: 11px 18px; border-bottom: 1px solid #F9FAFB;
+  align-items: center;
+}
+.seg-row:last-child { border-bottom: none; }
+.seg-row.seg-highlight { background: #FFFBEB; }
+.sn { font-size: 11.5px; font-weight: 700; }
+.st { font-size: 9px; color: var(--faint); margin-top: 1px; }
+.seg-bar { height: 6px; background: #F3F4F6; border-radius: 3px; overflow: hidden; }
+.seg-fill { height: 100%; border-radius: 3px; }
+.seg-score { font-size: 19px; font-weight: 800; font-family: 'JetBrains Mono', monospace; }
+.seg-delta { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; display: inline-block; }
+.seg-status { font-size: 10px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+.sdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+/* ─── ACTIONS ─── */
+.actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.ac {
+  background: var(--white); border: 1.5px solid var(--border); border-radius: 12px;
+  padding: 16px; display: flex; flex-direction: column;
+}
+.ac.a-now { border-color: var(--red-border); background: var(--red-bg); }
+.ac.a-week { border-color: var(--amber-border); background: var(--amber-bg); }
+.ac-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.ac-badge {
+  font-size: 8px; font-weight: 700; padding: 3px 9px; border-radius: 20px;
+  font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .4px; flex-shrink: 0;
+}
+.ab-now  { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+.ab-week { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+.ab-mon  { background: #F3F4F6; color: var(--muted); border: 1px solid var(--border); }
+.ac-title { font-size: 13px; font-weight: 800; color: var(--ink); margin-bottom: 6px; line-height: 1.3; }
+.ac-body { font-size: 10.5px; color: var(--muted); line-height: 1.65; flex: 1; }
+.ac-body strong { color: var(--ink2); }
+.ac-srcs { display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap; }
+
+/* ─── SPARK CARDS (2×2) ─── */
+.spark-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; }
+.spk-card {
+  background:var(--white); border:1.5px solid var(--border); border-radius:13px;
+  padding:18px 20px 14px; position:relative; overflow:hidden;
+}
+.spk-card::before { content:''; position:absolute; top:0;left:0;right:0;height:3px; }
+.spk-green::before { background:var(--green); }
+.spk-amber::before { background:var(--amber); }
+.spk-red::before   { background:var(--red); }
+.spk-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
+.spk-label { font-size:9.5px; font-weight:700; color:var(--faint); text-transform:uppercase; letter-spacing:.6px; margin-bottom:4px; }
+.spk-val { font-size:34px; font-weight:800; line-height:1; letter-spacing:-1.5px; }
+.spk-meta { font-size:9.5px; color:var(--muted); margin-top:4px; line-height:1.4; }
+.spk-mom { font-size:11px; font-weight:700; margin-bottom:6px; }
+.be-subtle {
+  font-weight:700; color:#047857;
+  background:#ECFDF5; border:1px solid #A7F3D0;
+  padding:1px 6px; border-radius:4px;
+  font-size:9px; font-family:'JetBrains Mono',monospace;
+  letter-spacing:.2px; white-space:nowrap;
+}
+.meta-dot {
+  color:#6B7280; font-weight:700; font-size:11px;
+  margin:0 1px; vertical-align:middle;
+}
+.spk-vol-n {
+  font-size:9px; font-weight:600; color:var(--muted);
+  font-family:'JetBrains Mono',monospace; letter-spacing:.2px;
+}
+.best-ever-badge {
+  display:inline-flex; align-items:center; gap:4px;
+  font-size:10px; font-weight:800; letter-spacing:.4px;
+  font-family:'JetBrains Mono',monospace; text-transform:uppercase;
+  background:linear-gradient(135deg,#ECFDF5,#D1FAE5);
+  color:#059669; border:1.5px solid #6EE7B7;
+  padding:3px 10px; border-radius:5px;
+  box-shadow:0 1px 4px rgba(5,150,105,.15);
+}
+.spk-badge { font-size:8px; font-weight:700; padding:3px 8px; border-radius:4px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.4px; white-space:nowrap; display:inline-block; }
+.spk-svg { width:100%; display:block; margin-top:4px; }
+
+/* ─── COMPACT PROBLEM CARDS ─── */
+/* ─── 4-CARD PROBLEMS (2×2) ─── */
+.prob4-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:4px;
+}
+.p4 {
+  background:var(--white); border:1.5px solid var(--border); border-radius:13px;
+  padding:16px 18px; position:relative; overflow:hidden;
+}
+.p4::before { content:''; position:absolute; top:0;left:0;right:0;height:3px; background:var(--border); }
+.p4-crit { border-color:var(--red-border); }
+.p4-crit::before { background:var(--red); }
+.p4-chrn { border-color:var(--amber-border); }
+.p4-chrn::before { background:var(--amber); }
+.p4-head { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px; }
+.p4-left { display:flex; align-items:flex-start; gap:10px; }
+.p4-icon { font-size:20px; line-height:1; flex-shrink:0; margin-top:1px; }
+.p4-name { font-size:14px; font-weight:800; color:var(--ink); line-height:1.2; margin-bottom:5px; }
+.p4-badges { display:flex; gap:4px; flex-wrap:wrap; }
+/* volume strip */
+.p4-vols {
+  display:flex; align-items:center; gap:0;
+  background:var(--bg); border:1px solid var(--border);
+  border-radius:9px; padding:10px 14px; margin-bottom:10px;
+}
+.p4-vol { flex:1; text-align:center; min-width:0; }
+.p4-vol-wide { flex:1.2; }
+.p4-vol-n {
+  font-size:20px; font-weight:800; line-height:1; letter-spacing:-.5px;
+  font-family:'JetBrains Mono',monospace; color:var(--ink);
+}
+.p4-vol-s {
+  font-size:8.5px; font-weight:600; margin-top:3px; letter-spacing:.2px;
+  text-transform:uppercase;
+}
+.p4-vol-div {
+  width:1px; height:32px; background:var(--border); flex-shrink:0; margin:0 6px;
+}
+.p4-rising { color:var(--red) !important; }
+.p4-rising-amber { color:var(--amber) !important; }
+/* source colour tokens */
+.p4-s-nps { color:var(--blue); }
+.p4-s-app { color:var(--purple); }
+.p4-s-qrf { color:var(--orange); }
+.p4-s-bl  { color:#047857; }
+/* pct row */
+.p4-pcts { font-size:9px; color:var(--muted); display:flex; flex-wrap:wrap; gap:3px; align-items:center; }
+.p4-pct  { font-weight:700; }
+.p4-dot  { color:var(--faint); }
+.prob-subhdr { display:flex; align-items:center; gap:8px; margin:6px 0 10px; }
+.prob-subhdr-label { font-size:10px; font-weight:700; color:var(--ink2); text-transform:uppercase; letter-spacing:.5px; }
+.prob-subhdr-note { font-size:9px; color:var(--faint); }
+.prob2-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:0; }
+.prob2-top { margin-bottom:10px; }
+.prob2-addl { margin-top:10px; }
+.prob-expand-btn {
+  display:flex; align-items:center; gap:8px; width:100%;
+  background:var(--bg); border:1.5px solid var(--border); border-radius:9px;
+  padding:9px 14px; cursor:pointer; font-family:'Sora',sans-serif;
+  transition:background .15s, border-color .15s; text-align:left;
+}
+.prob-expand-btn:hover { background:#F0F4FF; border-color:#BFDBFE; }
+.prob-expand-btn[data-open="true"] { background:#EFF6FF; border-color:var(--blue-border); }
+#prob-expand-icon { font-size:10px; color:var(--muted); flex-shrink:0; transition:transform .2s; font-weight:700; }
+#prob-expand-txt { font-size:10.5px; font-weight:700; color:var(--ink2); flex-shrink:0; }
+.prob-expand-chips { display:flex; gap:5px; flex-wrap:wrap; margin-left:6px; }
+.p2 {
+  background:var(--white); border:1.5px solid var(--border); border-radius:11px;
+  padding:13px 14px;
+}
+.p2.p2-crit { border-color:var(--red-border); background:var(--red-bg); }
+.p2.p2-chrn { border-color:var(--amber-border); background:var(--amber-bg); }
+.p2-top { display:flex; align-items:flex-start; gap:7px; margin-bottom:8px; flex-wrap:wrap; }
+.p2-icon { font-size:16px; line-height:1; flex-shrink:0; }
+.p2-name { font-size:12px; font-weight:800; color:var(--ink); flex:1; line-height:1.25; }
+.p2-badges { display:flex; gap:4px; flex-wrap:wrap; margin-left:auto; }
+.p2-sigs { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:7px; }
+.p2-sig { font-size:9px; font-weight:700; padding:2px 7px; border-radius:12px; font-family:'JetBrains Mono',monospace; white-space:nowrap; }
+.p2-nps { background:var(--blue-bg); color:var(--blue); border:1px solid var(--blue-border); }
+.p2-app { background:var(--purple-bg); color:var(--purple); border:1px solid var(--purple-border); }
+.p2-qrf { background:var(--orange-bg); color:var(--orange); border:1px solid var(--orange-border); }
+.p2-bl  { background:#F0FDF4; color:#15803D; border:1px solid #A7F3D0; }
+.p2-subs { font-size:9px; color:var(--muted); line-height:1.6; }
+.p2-sub { color:var(--ink2); font-weight:600; }
+.p2-dot { color:var(--faint); margin:0 1px; }
+
+
+/* ─── SELLER VOICE ─── */
+.voice-grid {
+  display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
+}
+.voice-card {
+  background:var(--white); border:1px solid var(--border); border-radius:13px;
+  padding:18px 20px; position:relative; overflow:hidden;
+  transition: box-shadow .18s, border-color .18s;
+}
+.voice-card:hover { box-shadow:0 4px 18px rgba(0,0,0,.08); border-color:#CBD5E1; }
+
+.voice-top { margin-bottom:12px; }
+.voice-tag {
+  font-size:9px; font-weight:700; padding:3px 9px; border-radius:5px;
+  font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.4px;
+  display:inline-block;
+}
+.vtag-irrel { background:#FEF2F2; color:var(--red); border:1px solid #FECACA; }
+.vtag-conv  { background:var(--blue-bg); color:var(--blue); border:1px solid var(--blue-border); }
+.vtag-bls   { background:#F3F4F6; color:var(--ink2); border:1px solid var(--border); }
+.vtag-spec  { background:var(--purple-bg); color:var(--purple); border:1px solid var(--purple-border); }
+.voice-quote {
+  font-size:12.5px; color:var(--ink); line-height:1.65; font-weight:500;
+  font-style:italic; letter-spacing:.05px;
+  position:relative; z-index:1;
+}
+.voice-meta {
+  margin-top:12px; font-size:9px; color:var(--faint);
+  font-family:'JetBrains Mono',monospace; font-weight:500;
+  letter-spacing:.3px; text-transform:uppercase;
+}
+
+/* Spark tooltip */
+.tt-month { font-size:9px; font-weight:600; color:#94A3B8; text-transform:uppercase; letter-spacing:.4px; }
+.tt-val   { font-size:13px; font-weight:800; font-family:'JetBrains Mono',monospace; color:#F8FAFC; }
+
+/* ─── SOURCE CHIPS (section header) ─── */
+.src-chip {
+  font-size:9px; font-weight:700; padding:3px 9px; border-radius:5px;
+  font-family:'JetBrains Mono',monospace; letter-spacing:.3px;
+  display:inline-flex; align-items:center; gap:4px; white-space:nowrap;
+}
+.src-chip::before { content:''; width:6px; height:6px; border-radius:50%; display:inline-block; }
+.src-nps { background:var(--blue-bg); color:var(--blue); border:1px solid var(--blue-border); }
+.src-nps::before { background:var(--blue); }
+.src-app { background:var(--purple-bg); color:var(--purple); border:1px solid var(--purple-border); }
+.src-app::before { background:var(--purple); }
+.src-qrf { background:var(--orange-bg); color:var(--orange); border:1px solid var(--orange-border); }
+.src-qrf::before { background:var(--orange); }
+.src-bl  { background:#F0FDF4; color:#15803D; border:1px solid #A7F3D0; }
+.src-bl::before  { background:#15803D; }
+
+
+/* ─── VERTICAL STACKED BAR ─── */
+.vcb-wrap { background:var(--white); border:1px solid var(--border); border-radius:13px; padding:24px 28px 18px; margin-bottom:4px; }
+.vcb-chart-area { position:relative; display:flex; align-items:flex-end; gap:0; height:260px; }
+.vcb-yaxis { position:absolute; left:0; top:0; bottom:30px; display:flex; flex-direction:column; justify-content:space-between; }
+.vcb-yaxis span { font-size:8px; color:var(--faint); font-family:'JetBrains Mono',monospace; width:34px; text-align:right; line-height:1; }
+.vcb-grid { position:absolute; left:42px; right:0; top:0; bottom:30px; display:flex; flex-direction:column; justify-content:space-between; pointer-events:none; }
+.vcb-gridline { border-top:1px dashed #E5E7EB; width:100%; }
+.vcb-bars { display:flex; align-items:flex-end; gap:40px; padding-left:52px; height:100%; flex:1; }
+.vcb-bar-group { display:flex; flex-direction:column; align-items:center; gap:8px; flex:1; max-width:120px; height:100%; }
+.vcb-bar { width:100%; flex:1; display:flex; flex-direction:column; justify-content:flex-end; border-radius:8px 8px 0 0; overflow:visible; }
+.vcb-bar .vcb-seg:first-child { border-radius:8px 8px 0 0; }
+.vcb-seg { width:100%; position:relative; display:flex; align-items:center; justify-content:center; transition:opacity .15s; min-height:18px; }
+.vcb-seg:hover { opacity:.82; }
+.vcb-seg[data-tip]::after {
+  content: attr(data-tip);
+  position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%);
+  background:#1E293B; color:#F8FAFC; font-size:10px; font-weight:600;
+  font-family:'Sora',sans-serif; padding:5px 10px; border-radius:6px;
+  white-space:nowrap; pointer-events:none; opacity:0; transition:opacity .15s; z-index:999;
+}
+.vcb-seg[data-tip]:hover::after { opacity:1; }
+.vcb-lbl { font-size:9.5px; font-weight:700; color:#fff; font-family:'JetBrains Mono',monospace; text-shadow:0 1px 3px rgba(0,0,0,.25); pointer-events:none; }
+.vcb-bar-label { font-size:10px; font-weight:700; color:var(--ink2); text-align:center; line-height:1.4; }
+.vcb-bar-n { font-size:8px; font-weight:400; color:var(--faint); font-family:'JetBrains Mono',monospace; }
+.vcb-legend { display:flex; flex-wrap:wrap; gap:14px; margin-top:16px; padding-top:14px; border-top:1px solid var(--border); }
+.vcb-leg-item { display:flex; align-items:center; gap:5px; font-size:10px; color:var(--ink2); font-weight:500; }
+.vcb-leg-dot { width:10px; height:10px; border-radius:3px; flex-shrink:0; }
+
+
+/* ─── DISPOSITION SUMMARY ROW ─── */
+.dispo-summary-row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:4px; }
+.dsp-chip { background:var(--white); border:1px solid var(--border); border-top:3px solid; border-radius:10px; padding:12px 16px; flex:1; min-width:160px; }
+.dsp-name { font-size:11px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.dsp-vals { display:flex; align-items:center; gap:5px; flex-wrap:wrap; }
+.dsp-jan { font-size:9px; color:var(--muted); font-family:'JetBrains Mono',monospace; }
+.dsp-arrow { font-size:9px; color:var(--faint); }
+.dsp-feb { font-size:10px; font-weight:800; color:var(--ink); font-family:'JetBrains Mono',monospace; }
+.dsp-abs { font-size:8px; color:var(--faint); font-family:'JetBrains Mono',monospace; font-weight:500; }
+.dsp-abs-feb { font-size:8px; color:var(--muted); font-family:'JetBrains Mono',monospace; font-weight:600; }
+.dsp-delta { font-size:9px; font-weight:700; padding:1px 6px; border-radius:4px; font-family:'JetBrains Mono',monospace; }
+
+/* ─── HEATMAP ─── */
+.hmap-wrap { background:var(--white); border:1px solid var(--border); border-radius:13px; overflow:hidden; }
+.hmap-table { width:100%; border-collapse:collapse; }
+.hmap-table thead { background:#F8FAFC; }
+.hmap-th-sub { padding:10px 16px; font-size:9px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.4px; text-align:left; width:200px; border-bottom:1px solid var(--border); }
+.hmap-th-month { padding:10px 12px; font-size:9px; font-weight:700; color:var(--ink2); text-align:center; border-bottom:1px solid var(--border); border-left:1px solid var(--border); min-width:80px; }
+.hmap-th-future { color:var(--faint) !important; font-style:italic; }
+.hmap-th-delta { padding:10px 12px; font-size:9px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.4px; text-align:center; border-bottom:1px solid var(--border); border-left:1px solid var(--border); }
+.hmap-group-hdr td { padding:8px 16px; font-size:10px; font-weight:800; color:var(--gc,#6B7280); background:color-mix(in srgb, var(--gc,#6B7280) 8%, white); border-top:2px solid color-mix(in srgb, var(--gc,#6B7280) 20%, white); border-bottom:1px solid var(--border); letter-spacing:.2px; }
+.hmap-sub-name { padding:10px 10px 10px 28px; font-size:10px; color:var(--ink2); font-weight:500; border-bottom:1px solid #F3F4F6; white-space:nowrap; }
+.hmap-cell {
+  padding:8px 12px; text-align:center; border-left:1px solid #F3F4F6; border-bottom:1px solid #F3F4F6;
+  font-size:10px; font-weight:700; font-family:'JetBrains Mono',monospace; color:var(--ink);
+  background:rgba(var(--base-r,200),var(--base-g,200),var(--base-b,200),calc(var(--v,0) * 0.055));
+  line-height:1.5;
+}
+.hmap-cell.hmap-hot { font-weight:800; }
+.hmap-n { font-size:8px; font-weight:500; color:rgba(0,0,0,.45); display:block; }
+.hmap-future { background:#F9FAFB !important; color:var(--faint); border-left:1px dashed #E5E7EB; }
+.hmap-delta { padding:8px 12px; text-align:center; border-left:1px solid #F3F4F6; border-bottom:1px solid #F3F4F6; font-size:9px; font-weight:700; font-family:'JetBrains Mono',monospace; white-space:nowrap; }
+.hmap-delta-up { color:var(--red); }
+.hmap-delta-dn { color:#059669; }
+.hmap-footer { display:flex; align-items:center; gap:8px; padding:10px 16px; border-top:1px solid var(--border); background:#F8FAFC; }
+.hmap-legend-label { font-size:8.5px; color:var(--muted); font-weight:600; }
+.hmap-legend-bar { width:80px; height:10px; border-radius:4px; background:linear-gradient(to right, rgba(150,150,150,.08), rgba(150,150,150,.55)); border:1px solid var(--border); }
+
+/* ─── TAB SUMMARY BOX ─── */
+.tab-summary {
+  background:#fff; border:1px solid var(--border); border-left:3px solid var(--ink2);
+  border-radius:10px; padding:14px 18px; margin-bottom:4px;
+}
+.tab-summary ul {
+  margin:0; padding:0 0 0 16px; display:flex; flex-direction:column; gap:5px;
+}
+.tab-summary li {
+  font-size:10.5px; color:var(--ink2); line-height:1.5; list-style:disc;
+}
+.tab-summary li strong { color:var(--ink); }
+.tab-summary li .hi-green { color:#059669; font-weight:700; }
+.tab-summary li .hi-red   { color:#DC2626; font-weight:700; }
+.tab-summary li .hi-amber { color:#D97706; font-weight:700; }
+.ts-hdr { font-size:9px; font-weight:800; color:var(--muted); text-transform:uppercase;
+  letter-spacing:.5px; margin-bottom:8px; }
+/* ─── FOOTER ─── */
+.ftr {
+  background: var(--white); border-top: 1px solid var(--border);
+  padding: 10px 36px; display: flex; justify-content: space-between;
+  align-items: center; font-size: 9px; color: var(--faint); gap: 16px; flex-wrap: wrap;
+}
+.ftr-chips { display: flex; gap: 5px; }
+.fc { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; font-family: 'JetBrains Mono', monospace; font-size: 8.5px; }
+
+/* helpers */
+.c-green { color: var(--green); }
+.c-red   { color: var(--red); }
+.c-amber { color: var(--amber); }
+.c-blue  { color: var(--blue); }
+.c-purple{ color: var(--purple); }
+.c-ink   { color: var(--ink); }
+.c-muted { color: var(--muted); }
+.bold    { font-weight: 700; }
+
+/* ─── TABS ─── */
+.tab-nav {
+  background: var(--white); border-bottom: 1px solid var(--border);
+  padding: 0 36px; display: flex; align-items: flex-end; gap: 0;
+}
+.tab-btn {
+  font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 600;
+  padding: 12px 20px; border: none; background: transparent; cursor: pointer;
+  color: var(--faint); border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: all .15s ease; letter-spacing: -.1px;
+}
+.tab-btn:hover { color: var(--ink2); }
+.tab-btn.active { color: var(--ink); border-bottom-color: var(--ink); }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ─── TAB 3 ─── */
+.t3-movers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px; }
+.t3-mover {
+  background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+  padding: 13px 15px; position: relative; overflow: hidden;
+}
+.t3-mover::before { content:''; position:absolute; top:0;left:0;right:0;height:3px; }
+.tm-up::before   { background: var(--green); }
+.tm-dn::before   { background: var(--red); }
+.tm-flat::before { background: var(--amber); }
+.tm-label { font-size:9px; font-weight:700; color:var(--faint); text-transform:uppercase; letter-spacing:.5px; margin-bottom:5px; }
+.tm-name  { font-size:12px; font-weight:800; margin-bottom:3px; }
+.tm-delta { font-size:22px; font-weight:800; letter-spacing:-1px; line-height:1; }
+.tm-ctx   { font-size:9px; color:var(--muted); margin-top:4px; line-height:1.5; }
+.t3-chart-card {
+  background:var(--white); border:1px solid var(--border); border-radius:11px;
+  padding:16px 18px; margin-bottom:10px;
+}
+.t3-cc-hdr { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
+.t3-cc-title { font-size:12px; font-weight:800; }
+.t3-cc-sub   { font-size:9.5px; color:var(--muted); margin-top:2px; }
+.t3-legend { display:flex; gap:12px; flex-wrap:wrap; }
+.tl-item { display:flex; align-items:center; gap:5px; font-size:9px; font-weight:600; color:var(--muted); }
+.tl-line { width:18px; height:2.5px; border-radius:1px; }
+/* Heatmap table */
+.hm-wrap { overflow-x:auto; margin-top:14px; }
+.hm-table { border-collapse:collapse; width:100%; font-size:10px; font-family:'JetBrains Mono',monospace; }
+.hm-table th { background:var(--bg); padding:5px 8px; font-size:8px; text-align:center; color:var(--faint); font-weight:700; text-transform:uppercase; letter-spacing:.4px; border:1px solid var(--border); white-space:nowrap; }
+.hm-table td { padding:5px 8px; text-align:center; border:1px solid rgba(0,0,0,.04); font-weight:600; white-space:nowrap; font-size:9.5px; }
+.hm-table .hm-seg { text-align:left; font-family:'Sora',sans-serif; font-size:10px; font-weight:700; background:var(--white); border:1px solid var(--border); white-space:nowrap; padding:5px 10px; }
+.hm-table .hm-now { font-weight:800; font-size:10px; outline:2px solid #0D1117; outline-offset:-1px; }
+.hm-table th.hm-now { background:var(--ink); color:var(--white); }
+/* dist chart wrapper */
+.dist-t3-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; }
+.dist-t3-card { background:var(--white); border:1px solid var(--border); border-radius:11px; padding:16px 16px 12px; }
+.dt3-title { font-size:11.5px; font-weight:800; margin-bottom:2px; }
+.dt3-sub   { font-size:9px; color:var(--muted); margin-bottom:10px; }
+.dt3-legend { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+.dtl { display:flex; align-items:center; gap:3px; font-size:8px; font-weight:600; }
+.dtl-line { width:14px; height:2px; border-radius:1px; }
+.insight-box { background:var(--bg); border-radius:8px; padding:12px 14px; margin-top:10px; font-size:10.5px; color:var(--ink2); line-height:1.7; }
+.t3-toggle { display:flex; gap:6px; margin-bottom:10px; }
+.tg-btn { font-size:10px; font-weight:600; padding:5px 12px; border-radius:5px; border:1px solid var(--border); background:var(--white); cursor:pointer; color:var(--muted); font-family:'Sora',sans-serif; }
+.tg-btn.active { background:var(--ink); color:var(--white); border-color:var(--ink); }
+
+/* Segment grid — custtype */
+.ct-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.ct-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden;
+}
+.ct-card.ct-watch { border-color: var(--amber-border); }
+.ct-card.ct-alert { border-color: var(--red-border); }
+.ct-card.ct-best  { border-color: var(--green-border); }
+.ct-top { padding: 14px 16px 10px; border-bottom: 1px solid var(--border); }
+.ct-card.ct-watch .ct-top { background: var(--amber-bg); border-bottom-color: var(--amber-border); }
+.ct-card.ct-best  .ct-top { background: var(--green-bg); border-bottom-color: var(--green-border); }
+.ct-row1 { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+.ct-name { font-size: 13px; font-weight: 800; }
+.ct-badge { font-size: 8px; font-weight: 700; padding: 2px 8px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; }
+.cb-best  { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+.cb-watch { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+.cb-ok    { background: #F3F4F6; color: var(--muted); }
+.cb-gap   { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+.ct-score-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.ct-score { font-size: 36px; font-weight: 800; line-height: 1; letter-spacing: -1.5px; }
+.ct-delta { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; }
+.ct-sub { font-size: 9.5px; color: var(--muted); }
+.ct-body { padding: 12px 16px; }
+/* mini sparkline in ct-card */
+.ct-spark { margin-bottom: 10px; }
+.ct-spark-label { display: flex; justify-content: space-between; font-size: 7.5px; color: var(--faint); font-family: 'JetBrains Mono', monospace; margin-top: 2px; }
+/* promoter/detractor bar */
+.pd-bar { display: flex; height: 7px; border-radius: 3px; overflow: hidden; gap: 1px; margin-bottom: 4px; }
+.pd-pro { background: var(--green); }
+.pd-neu { background: #D1D5DB; }
+.pd-det { background: var(--red); }
+.pd-legend { display: flex; gap: 10px; font-size: 8.5px; color: var(--muted); }
+.pdl-item { display: flex; align-items: center; gap: 3px; }
+.pdl-dot { width: 6px; height: 6px; border-radius: 50%; }
+/* insight row */
+.ct-insight { font-size: 10px; color: var(--ink2); line-height: 1.6; margin-top: 8px; padding: 7px 9px; background: var(--bg); border-radius: 6px; }
+
+/* ─── VINTAGE SECTION ─── */
+.vint-layout { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 10px; }
+.vint-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden;
+}
+.vint-card.vt-watch { border-color: var(--amber-border); }
+.vint-top { padding: 14px 16px 12px; border-bottom: 1px solid var(--border); }
+.vint-card.vt-watch .vint-top { background: var(--amber-bg); border-bottom-color: var(--amber-border); }
+.vint-name { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+.vint-desc { font-size: 9.5px; color: var(--muted); line-height: 1.5; }
+.vint-score-row { display: flex; align-items: baseline; gap: 8px; margin-top: 8px; }
+.vint-score { font-size: 32px; font-weight: 800; line-height: 1; letter-spacing: -1px; }
+.vint-delta { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; }
+.vint-body { padding: 12px 16px; }
+.vint-insight { font-size: 10px; color: var(--ink2); line-height: 1.6; padding: 7px 9px; background: var(--bg); border-radius: 6px; }
+
+/* ─── DISTANCE SECTION ─── */
+.dist-intro {
+  background: var(--white); border: 1px solid var(--border); border-radius: 11px;
+  padding: 14px 18px; margin-bottom: 10px;
+}
+.dist-channels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.dist-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden;
+}
+.dist-card.dc-alert { border-color: var(--red-border); }
+.dist-top { padding: 13px 16px 10px; border-bottom: 1px solid var(--border); }
+.dist-card.dc-alert .dist-top { background: var(--red-bg); border-bottom-color: var(--red-border); }
+.dist-ch-name { font-size: 12px; font-weight: 800; margin-bottom: 3px; }
+.dist-ch-sub { font-size: 9px; color: var(--muted); }
+.dist-body { padding: 12px 16px; }
+.dist-row {
+  display: grid; grid-template-columns: 90px 1fr 55px 60px;
+  gap: 8px; align-items: center; margin-bottom: 6px;
+}
+.dist-row:last-child { margin-bottom: 0; }
+.dr-band { font-size: 10px; font-weight: 700; }
+.dr-track { height: 7px; background: #F3F4F6; border-radius: 3px; overflow: hidden; }
+.dr-fill { height: 100%; border-radius: 3px; }
+.dr-rate { font-size: 9.5px; font-weight: 700; font-family: 'JetBrains Mono', monospace; text-align: right; }
+.dr-chg  { font-size: 8.5px; font-weight: 700; font-family: 'JetBrains Mono', monospace; text-align: right; }
+.dist-insight { font-size: 10px; color: var(--ink2); line-height: 1.6; margin-top: 10px; padding: 7px 9px; background: var(--bg); border-radius: 6px; }
+.dist-summary {
+  background: var(--amber-bg); border: 1.5px solid var(--amber-border); border-radius: 11px;
+  padding: 14px 18px; margin-top: 10px;
+}
+.ds-title { font-size: 12px; font-weight: 800; color: var(--amber); margin-bottom: 6px; }
+.ds-body { font-size: 10.5px; color: var(--ink2); line-height: 1.7; }
+
+/* ── Tab 3 chart cards ── */
+.chart-card {
+  background: #fff; border: 1.5px solid var(--border); border-radius: 12px;
+  padding: 14px 16px 12px; cursor: zoom-in; transition: box-shadow .15s, border-color .15s;
+}
+.chart-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.09); border-color: #C7D0DE; }
+.cc-hdr { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; }
+.cc-title { font-size: 11.5px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 6px; }
+.cc-sub   { font-size: 9px; color: var(--muted); margin-top: 2px; }
+.cc-src   { font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+.nps-src  { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+.qrf-src  { background: var(--orange-bg); color: var(--orange); border: 1px solid var(--orange-border); }
+.cc-legend { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+.leg-item  { display: flex; align-items: center; gap: 4px; font-size: 9px; font-weight: 600; color: var(--muted); }
+.leg-sq    { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.leg-hint  { font-size: 8.5px; color: var(--faint); margin-left: 4px; }
+
+/* Segment toggle buttons */
+.seg-toggle-row { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
+.seg-btn {
+  font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 5px;
+  border: 1.5px solid var(--border); background: #fff; color: var(--muted);
+  cursor: pointer; font-family: 'Sora', sans-serif; transition: all .12s;
+}
+.seg-btn:hover  { border-color: #A0AEC0; color: var(--ink2); }
+.seg-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* Rate tooltip */
+.rate-tip { position:relative; display:inline-flex; align-items:center; gap:3px; cursor:help; }
+.rate-tip .tip-icon { width:13px;height:13px;border-radius:50%;background:#E4E7EC;color:#6B7280;font-size:8px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0; }
+.rate-tip .tip-box  { display:none; position:absolute; bottom:calc(100% + 5px); left:50%; transform:translateX(-50%);
+  background:#0D1117; color:#fff; font-size:9.5px; line-height:1.5; font-weight:400; white-space:nowrap;
+  padding:6px 10px; border-radius:7px; z-index:200; box-shadow:0 4px 14px rgba(0,0,0,.25); pointer-events:none;
+  font-family:'Sora',sans-serif; }
+.rate-tip .tip-box::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%);
+  border:5px solid transparent; border-top-color:#0D1117; }
+.rate-tip:hover .tip-box { display:block; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="hdr">
+  <div class="hdr-left">
+    <div class="live-dot"></div>
+    <div>
+      <div class="hdr-title">Seller Pulse — IndiaMART</div>
+      <div class="hdr-sub">Executive seller health dashboard &nbsp;·&nbsp; 4 independent data sources</div>
+    </div>
+  </div>
+  
+</div>
+
+<!-- ═══ TAB NAV ═══ -->
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('tab1',this)">📊 Overview &amp; Problems</button>
+  <button class="tab-btn" onclick="switchTab('tab2',this)">📊 NPS Deep Dive</button>
+  <button class="tab-btn" onclick="switchTab('tab3',this)">🔍 NPS Complaints</button>
+  <button class="tab-btn" onclick="switchTab('tab5',this)">📱 App Complaints</button>
+</div>
+
+<!-- ═══ TAB 1 ═══ -->
+<div id="tab1" class="tab-pane active">
+<div class="pg">
+
+<div class="tab-summary" style="border-left-color:#059669">
+  <div class="ts-hdr">📊 Since Oct '25 — at a glance</div>
+  <ul>
+    <li><strong>NPS</strong> improved <span class="hi-green">+1.84pp</span> (23.6 → 25.4) — best ever recorded</li>
+    <li><strong>QRF Irrelevancy</strong> declined <span class="hi-green">−0.51pp</span> (5.45% → 4.94%) — best ever recorded</li>
+    <li><strong>BL Irrelevancy</strong> declined <span class="hi-green">−1.20pp</span> (5.61% → 4.41%) — steady quarter-on-quarter improvement</li>
+    <li><strong>App Rating</strong> flat at 3.41★ — peaked at 3.54 in Nov, no recovery in subsequent months</li>
+    <li>🔴 <strong>Irrelevant Leads</strong> is the dominant seller problem — confirmed independently across all 4 data sources</li>
+    <li>🟡 <strong>Low Conversion</strong> and <strong>Less BLs</strong> are persistent complaints across NPS and App feedback — unresolved</li>
+  </ul>
+</div>
+
+
+<!-- ═══ SECTION 1: SPARK CARDS ═══ -->
+<div class="sh" style="margin-top:0">
+  <span class="sh-t">At a glance — February 2026</span>
+  <div class="sh-l"></div>
+  <span class="sh-b" style="background:#F0FDF4;color:#15803D;border:1px solid #A7F3D0">★ Best NPS ever</span>
+  <span class="sh-b" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">BLNI/Txn ↓ improving</span>
+</div>
+
+<div class="spark-grid">
+
+  <!-- Card 1: NPS -->
+  <div class="spk-card spk-green">
+    <div class="spk-top">
+      <div>
+        <div class="spk-label">NPS Score</div>
+        <div class="spk-val c-green">25.4</div>
+        <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
+          <span class="best-ever-badge">★ BEST EVER</span>
+          <span class="spk-vol-n">2,138 responses</span>
+        </div>
+        
+      </div>
+      <div style="text-align:right">
+        <div class="spk-mom c-green">+0.8 MoM</div>
+        <div class="spk-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">NPS Survey</div>
+      </div>
+    </div>
+    <svg id="spk-nps" class="spk-svg" viewBox="0 0 560 130"></svg>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
+      <button onclick="document.querySelector('[onclick*=tab2]').click()" style="
+        display:inline-flex;align-items:center;gap:4px;
+        font-size:9px;font-weight:700;font-family:'Sora',sans-serif;
+        color:#059669;background:#ECFDF5;border:1.5px solid #6EE7B7;
+        padding:4px 10px;border-radius:6px;cursor:pointer;
+        letter-spacing:.2px;transition:background .15s,box-shadow .15s;
+      " onmouseover="this.style.background='#D1FAE5';this.style.boxShadow='0 2px 8px rgba(5,150,105,.15)'"
+         onmouseout="this.style.background='#ECFDF5';this.style.boxShadow='none'">
+        NPS Deep Dive →
+      </button>
+      <button onclick="document.querySelector('[onclick*=tab3]').click()" style="
+        display:inline-flex;align-items:center;gap:4px;
+        font-size:9px;font-weight:700;font-family:'Sora',sans-serif;
+        color:var(--blue);background:var(--blue-bg);border:1.5px solid var(--blue-border);
+        padding:4px 10px;border-radius:6px;cursor:pointer;
+        letter-spacing:.2px;transition:background .15s,box-shadow .15s;
+      " onmouseover="this.style.opacity='.8'"
+         onmouseout="this.style.opacity='1'">
+        NPS Complaints →
+      </button>
+    </div>
+  </div>
+
+  <!-- Card 2: Paid Seller App Rating -->
+  <div class="spk-card spk-amber">
+    <div class="spk-top">
+      <div>
+        <div class="spk-label">Paid Seller App Rating</div>
+        <div class="spk-val c-amber">3.41 <span style="font-size:16px;font-weight:500;color:var(--muted)">/ 5</span></div>
+        <div class="spk-vol-n" style="margin-top:5px">5,441 ratings</div>
+        
+      </div>
+      <div style="text-align:right">
+        <div class="spk-mom" style="color:var(--muted)">→ Flat MoM</div>
+        <div class="spk-badge" style="background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)">In-App · Paid only</div>
+      </div>
+    </div>
+    <svg id="spk-app" class="spk-svg" viewBox="0 0 560 130"></svg>
+    <div class="spk-vol-n" style="margin-top:5px">5,441 ratings</div>
+    <div style="display:flex;justify-content:flex-end;margin-top:6px">
+      <button onclick="document.querySelector('[onclick*=tab5]').click()" style="
+        display:inline-flex;align-items:center;gap:4px;
+        font-size:9px;font-weight:700;font-family:'Sora',sans-serif;
+        color:var(--purple);background:var(--purple-bg);border:1.5px solid var(--purple-border);
+        padding:4px 10px;border-radius:6px;cursor:pointer;
+        letter-spacing:.2px;transition:opacity .15s;
+      " onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+        App Complaints →
+      </button>
+    </div>
+  </div>
+
+  <!-- Card 3: QRF ASTBUY Irrelevancy -->
+  <div class="spk-card spk-green">
+    <div class="spk-top">
+      <div>
+        <div class="spk-label">QRF Irrelevancy Rate</div>
+        <div class="spk-val c-green">4.94<span style="font-size:16px;font-weight:500;color:var(--muted)">%</span></div>
+        <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
+          <span class="best-ever-badge">★ BEST EVER</span>
+          <span class="spk-vol-n">491,393 actions</span>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="spk-mom c-green">−1.7% MoM</div>
+        <div class="spk-badge" style="background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-border)">QRF Overall</div>
+      </div>
+    </div>
+    <svg id="spk-qrf" class="spk-svg" viewBox="0 0 560 130"></svg>
+  </div>
+
+  <!-- Card 4: BL Irrelevancy BLNI/Txn -->
+  <div class="spk-card spk-green">
+    <div class="spk-top">
+      <div>
+        <div class="spk-label">BL Irrelevancy (BLNI/Txn)</div>
+        <div class="spk-val c-green">4.41<span style="font-size:16px;font-weight:500;color:var(--muted)">%</span></div>
+        <div class="spk-vol-n" style="margin-top:5px">471,539 NIs</div>
+      </div>
+      <div style="text-align:right">
+        <div class="spk-mom c-green">−2.6% MoM</div>
+        <div class="spk-badge" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">BL Report</div>
+      </div>
+    </div>
+    <svg id="spk-bl" class="spk-svg" viewBox="0 0 560 130"></svg>
+  </div>
+
+</div><!-- /spark-grid -->
+
+<!-- ═══ SECTION 2: SELLER PROBLEMS ═══ -->
+<div class="sh">
+  <span class="sh-t">Seller problems — Feb '26</span>
+  <div class="sh-l"></div>
+  <span class="src-chip src-nps">NPS Feedback</span>
+  <span class="src-chip src-app">Paid Seller App</span>
+  <span class="src-chip src-qrf">QRF Submissions</span>
+  <span class="src-chip src-bl">BLNI Submissions</span>
+</div>
+
+<div class="prob4-grid">
+
+  <!-- P1: Irrelevant Leads -->
+  <div class="p4 p4-crit">
+    <div class="p4-head">
+      <div class="p4-left">
+        <span class="p4-icon">🎯</span>
+        <div>
+          <div class="p4-name">Irrelevant Leads</div>
+          <div class="p4-badges">
+            <span class="pb pb-dual">⚡ 4-source</span>
+            <span class="pb pb-crit pb-tip" data-tip="Confirmed in 4 independent sources — needs immediate action">CRITICAL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p4-vols">
+      <div class="p4-vol">
+        <div class="p4-vol-n p4-s-nps">34%</div>
+        <div class="p4-vol-s p4-s-nps">of NPS Feedback</div>
+      </div>
+      <div class="p4-vol-div"></div>
+      <div class="p4-vol">
+        <div class="p4-vol-n p4-s-app">32%</div>
+        <div class="p4-vol-s p4-s-app">of App Feedback</div>
+      </div>
+      <div class="p4-vol-div"></div>
+      <div class="p4-vol">
+        <div class="p4-vol-n p4-s-bl">34%</div>
+        <div class="p4-vol-s p4-s-bl">of BLNI Submissions</div>
+      </div>
+      <div class="p4-vol-div"></div>
+      <div class="p4-vol">
+        <div class="p4-vol-n p4-s-qrf">19%</div>
+        <div class="p4-vol-s p4-s-qrf">of QRF Submissions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2: Low Conversion -->
+  <div class="p4 p4-chrn">
+    <div class="p4-head">
+      <div class="p4-left">
+        <span class="p4-icon">💸</span>
+        <div>
+          <div class="p4-name">Low Conversion</div>
+        </div>
+      </div>
+    </div>
+    <div class="p4-vols">
+      <div class="p4-vol">
+        <div class="p4-vol-n p4-s-nps">23%</div>
+        <div class="p4-vol-s p4-s-nps">of NPS Feedback</div>
+      </div>
+      <div class="p4-vol-div"></div>
+      <div class="p4-vol">
+        <div class="p4-vol-n p4-s-app">25%</div>
+        <div class="p4-vol-s p4-s-app">of App Feedback ↑</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P3: Less BLs / Enquiries -->
+  <div class="p4">
+    <div class="p4-head">
+      <div class="p4-left">
+        <span class="p4-icon">📉</span>
+        <div>
+          <div class="p4-name">Less BLs / Enquiries</div>
+        </div>
+      </div>
+    </div>
+    <div class="p4-vols">
+      <div class="p4-vol">
+        <div class="p4-vol-n p4-s-nps">21%</div>
+        <div class="p4-vol-s p4-s-nps">of NPS Feedback</div>
+      </div>
+      <div class="p4-vol-div"></div>
+      <div class="p4-vol">
+        <div class="p4-vol-n p4-s-app">20%</div>
+        <div class="p4-vol-s p4-s-app">of App Feedback</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P4: Spec Mismatch -->
+  <div class="p4 p4-chrn">
+    <div class="p4-head">
+      <div class="p4-left">
+        <span class="p4-icon">📋</span>
+        <div>
+          <div class="p4-name">Spec Mismatch</div>
+        </div>
+      </div>
+    </div>
+    <div class="p4-vols">
+      <div class="p4-vol">
+        <div class="p4-vol-n p4-s-bl">22%</div>
+        <div class="p4-vol-s p4-s-bl">of BLNI Submissions</div>
+      </div>
+      <div class="p4-vol-div"></div>
+      <div class="p4-vol">
+        <div class="p4-vol-n p4-s-qrf">18%</div>
+        <div class="p4-vol-s p4-s-qrf">of QRF Submissions</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /prob4-grid -->
+
+<!-- ═══ SECTION 3: SELLER VOICE ═══ -->
+<div class="sh">
+  <span class="sh-t">Seller voice — Feb '26</span>
+  <div class="sh-l"></div>
+  <span style="font-size:9.5px;color:var(--faint)">Paid seller verbatims · selected to represent each key problem</span>
+</div>
+
+<div class="voice-grid">
+
+  <!-- V1: Irrelevant Leads -->
+  <div class="voice-card">
+    <div class="voice-top">
+      <span class="voice-tag vtag-irrel">🎯 Irrelevant Leads</span>
+    </div>
+    <div class="voice-quote">"Regularly showing / receiving irrelevant buy leads which are not related to products added by us. I am regularly on daily basis sharing the screenshot of irrelevant buy leads to my AM — but till date issue is not resolved."</div>
+    <div class="voice-meta">GLID: 3920885</div>
+  </div>
+
+  <!-- V2: Low Conversion -->
+  <div class="voice-card">
+    <div class="voice-top">
+      <span class="voice-tag vtag-conv">💸 Low Conversion</span>
+    </div>
+    <div class="voice-quote">"Not satisfied with buy lead — not a single lead convert in last 3 months."</div>
+    <div class="voice-meta">GLID: 97982728</div>
+  </div>
+
+  <!-- V3: Less BLs -->
+  <div class="voice-card">
+    <div class="voice-top">
+      <span class="voice-tag vtag-bls">📉 Less BLs / Enquiries</span>
+    </div>
+    <div class="voice-quote">"I am not getting leads for my different products. Just Panchmukhi Hanuman is visible on my buy leads panel — please check and I request to get buyleads for all my products listed."</div>
+    <div class="voice-meta">GLID: 4583854</div>
+  </div>
+
+  <!-- V4: Spec Mismatch -->
+  <div class="voice-card">
+    <div class="voice-top">
+      <span class="voice-tag vtag-spec">📋 Spec Mismatch</span>
+    </div>
+    <div class="voice-quote">"Our primary product is White Agarbatti, but most of the inquiries we receive are related to black agarbatti, which does not match our offerings. Due to this mismatch, we are unable to convert the leads."</div>
+    <div class="voice-meta">GLID: 107612289</div>
+  </div>
+
+</div><!-- /voice-grid -->
+
+</div><!-- /pg -->
+</div><!-- /tab1 -->
+
+<!-- ═══ TAB 2 ═══ -->
+<div id="tab2" class="tab-pane">
+<div class="pg">
+
+<div class="tab-summary" style="border-left-color:#059669">
+  <div class="ts-hdr">📊 NPS Deep Dive — Feb '26</div>
+  <ul>
+    <li><strong>STAR</strong> and <strong>LEADER</strong> are the healthiest seller segments — both at their best-ever NPS this month</li>
+    <li><strong>Catalog</strong> trails all other segments by a wide margin — the gap is not closing meaningfully</li>
+    <li><strong>TSCatalog</strong> is the only segment declining — the only one moving against the trend</li>
+    <li><strong>Established sellers</strong> are significantly more satisfied than <strong>new sellers</strong> — the onboarding experience likely remains a pain point</li>
+    <li><strong>New seller</strong> NPS jumped sharply in Feb — too early to confirm as a trend, needs March data</li>
+  </ul>
+</div>
+
+
+<!-- ═══ CUSTTYPE ═══ -->
+<div class="sh" style="margin-top:0">
+  <span class="sh-t">NPS by seller type</span>
+  <div class="sh-l"></div>
+  <span style="font-size:9.5px;color:var(--faint)">Feb '26 · 11-month trend Apr '25 – Feb '26</span>
+  <div class="sh-l"></div>
+  <span class="sh-b" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">NPS Survey</span>
+</div>
+
+<div class="spark-grid">
+
+  <!-- STAR -->
+  <div class="spk-card spk-green">
+    <div class="spk-top">
+      <div>
+        <div class="spk-label">⭐ STAR</div>
+        <div class="spk-val c-green">33.6</div>
+        <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
+          <span class="best-ever-badge">★ BEST EVER</span> <span style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">345 responses</span>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="spk-mom c-green">+5.8 MoM</div>
+        <div class="spk-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">NPS Survey</div>
+      </div>
+    </div>
+    <svg id="spk-ct-star" class="spk-svg" viewBox="0 0 560 130"></svg>
+  </div>
+
+  <!-- LEADER -->
+  <div class="spk-card spk-green">
+    <div class="spk-top">
+      <div>
+        <div class="spk-label">🏆 LEADER</div>
+        <div class="spk-val c-green">30.5</div>
+        <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
+          <span class="best-ever-badge">★ BEST EVER</span> <span style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">174 responses</span>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="spk-mom c-green">+5.9 MoM</div>
+        <div class="spk-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">NPS Survey</div>
+      </div>
+    </div>
+    <svg id="spk-ct-leader" class="spk-svg" viewBox="0 0 560 130"></svg>
+  </div>
+
+  <!-- TSCatalog -->
+  <div class="spk-card spk-amber">
+    <div class="spk-top">
+      <div>
+        <div class="spk-label">📂 TSCatalog</div>
+        <div class="spk-val c-amber">27.1</div>
+        <div style="margin-top:3px"><span style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">1,031 responses</span></div>
+      </div>
+      <div style="text-align:right">
+        <div class="spk-mom" style="color:var(--red)">−3.1 MoM ⚠</div>
+        <div class="spk-badge" style="background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)">NPS Survey</div>
+      </div>
+    </div>
+    <svg id="spk-ct-ts" class="spk-svg" viewBox="0 0 560 130"></svg>
+  </div>
+
+  <!-- Catalog -->
+  <div class="spk-card spk-green">
+    <div class="spk-top">
+      <div>
+        <div class="spk-label">📄 Catalog</div>
+        <div class="spk-val c-green">14.8</div>
+        <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
+          <span class="best-ever-badge">★ BEST EVER</span> <span style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">480 responses</span>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="spk-mom c-green">+2.3 MoM</div>
+        <div class="spk-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">NPS Survey</div>
+      </div>
+    </div>
+    <svg id="spk-ct-cat" class="spk-svg" viewBox="0 0 560 130"></svg>
+  </div>
+
+</div><!-- /spark-grid custtype -->
+
+<!-- ═══ VINTAGE ═══ -->
+<div class="sh">
+  <span class="sh-t">NPS by seller vintage</span>
+  <div class="sh-l"></div>
+  <span style="font-size:9.5px;color:var(--faint)">How satisfied are sellers based on time on platform</span>
+  <div class="sh-l"></div>
+  <span class="sh-b" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">NPS Survey</span>
+</div>
+
+<div class="spark-grid">
+
+  <!-- Established Sellers -->
+  <div class="spk-card spk-green">
+    <div class="spk-top">
+      <div>
+        <div class="spk-label">📅 Established Sellers</div>
+        <div class="spk-val c-green">30.7</div>
+        <div style="margin-top:3px"><span style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">1,282 responses</span></div>
+      </div>
+      <div style="text-align:right">
+        <div class="spk-mom c-green">+4.8 MoM</div>
+        <div class="spk-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">NPS Survey</div>
+      </div>
+    </div>
+    <svg id="spk-vint-est" class="spk-svg" viewBox="0 0 560 130"></svg>
+  </div>
+
+  <!-- New Sellers -->
+  <div class="spk-card spk-amber">
+    <div class="spk-top">
+      <div>
+        <div class="spk-label">🆕 New Sellers</div>
+        <div class="spk-val c-amber">17.4</div>
+        <div style="margin-top:3px"><span style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">856 responses</span></div>
+      </div>
+      <div style="text-align:right">
+        <div class="spk-mom c-green">+9.7 MoM</div>
+        <div class="spk-badge" style="background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)">NPS Survey</div>
+      </div>
+    </div>
+    <svg id="spk-vint-new" class="spk-svg" viewBox="0 0 560 130"></svg>
+  </div>
+
+</div><!-- /spark-grid vintage -->
+
+</div><!-- /pg -->
+</div><!-- /tab2 -->
+
+<!-- ═══ TAB 3 ═══ -->
+<div id="tab3" class="tab-pane">
+<div class="pg">
+
+<div class="tab-summary" style="border-left-color:#EF4444">
+  <div class="ts-hdr">🔍 NPS Complaint Signals — Feb '26</div>
+  <ul>
+    <li><strong>Irrelevant Leads</strong> dominates seller complaints — it is the single biggest pain point in NPS feedback</li>
+    <li><strong>Less BLs</strong> is rising fast — sellers are increasingly feeling undersupplied with enquiries</li>
+    <li><strong>Low Conversion</strong> is a growing concern — sellers are getting leads but struggling to close them</li>
+    <li><strong>Retail Leads</strong> and <strong>Wrong Category</strong> are the most cited reasons under Irrelevant Leads — specificity is improving</li>
+    <li>The sharp rise in total complaints in Feb reflects higher survey participation, not a sudden deterioration</li>
+  </ul>
+</div>
+
+
+<div class="sh" style="margin-top:0">
+  <span class="sh-t">NPS complaint breakdown — Jan vs Feb '26</span>
+  <div class="sh-l"></div>
+  <span class="sh-b" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">NPS Survey</span>
+</div>
+
+<!-- Vertical stacked bar chart -->
+<div class="vcb-wrap">
+  <div class="vcb-chart-area">
+
+    <!-- Y-axis labels -->
+    <div class="vcb-yaxis">
+      <span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span>
+    </div>
+
+    <!-- Grid lines -->
+    <div class="vcb-grid">
+      <div class="vcb-gridline"></div>
+      <div class="vcb-gridline"></div>
+      <div class="vcb-gridline"></div>
+      <div class="vcb-gridline"></div>
+      <div class="vcb-gridline"></div>
+    </div>
+
+    <!-- Bars -->
+    <div class="vcb-bars">
+
+      <!-- JAN -->
+      <div class="vcb-bar-group">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:30.8%;background:#EF4444" data-tip="n=65">
+            <span class="vcb-lbl">30.8%</span>
+          </div>
+          <div class="vcb-seg" style="height:20.4%;background:#3B82F6" data-tip="n=43">
+            <span class="vcb-lbl">20.4%</span>
+          </div>
+          <div class="vcb-seg" style="height:15.2%;background:#8B5CF6" data-tip="n=32">
+            <span class="vcb-lbl">15.2%</span>
+          </div>
+          <div class="vcb-seg" style="height:9.0%;background:#F59E0B" data-tip="n=19">
+            <span class="vcb-lbl">9.0%</span>
+          </div>
+          <div class="vcb-seg" style="height:24.6%;background:#D1D5DB" data-tip="n=52">
+            <span class="vcb-lbl">24.6%</span>
+          </div>
+        </div>
+        <div class="vcb-bar-label">Jan '26<br><span class="vcb-bar-n">n=211</span></div>
+      </div>
+
+      <!-- FEB -->
+      <div class="vcb-bar-group">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:33.7%;background:#EF4444" data-tip="n=214">
+            <span class="vcb-lbl">33.7%</span>
+          </div>
+          <div class="vcb-seg" style="height:23.0%;background:#3B82F6" data-tip="n=146">
+            <span class="vcb-lbl">23.0%</span>
+          </div>
+          <div class="vcb-seg" style="height:20.3%;background:#8B5CF6" data-tip="n=129">
+            <span class="vcb-lbl">20.3%</span>
+          </div>
+          <div class="vcb-seg" style="height:11.3%;background:#F59E0B" data-tip="n=72">
+            <span class="vcb-lbl">11.3%</span>
+          </div>
+          <div class="vcb-seg" style="height:11.7%;background:#D1D5DB" data-tip="n=74">
+            <span class="vcb-lbl">11.7%</span>
+          </div>
+        </div>
+        <div class="vcb-bar-label">Feb '26<br><span class="vcb-bar-n">n=635</span></div>
+      </div>
+
+    </div><!-- /vcb-bars -->
+  </div><!-- /vcb-chart-area -->
+
+  <!-- Legend -->
+  <div class="vcb-legend">
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#EF4444"></span>Irrelevant Leads</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#3B82F6"></span>Low Conversion</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#8B5CF6"></span>Less BLs / Enquiries</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#F59E0B"></span>Issues with Buyer</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#D1D5DB"></span>Others</span>
+  </div>
+</div><!-- /vcb-wrap -->
+
+<!-- ─── Subcategory Heatmap ─── -->
+<div class="sh">
+  <span class="sh-t">Subcategory heat map</span>
+  <div class="sh-l"></div>
+  <span style="font-size:9.5px;color:var(--faint)">Cell = % of all complaint tags · colour intensity = share · scales as months are added</span>
+</div>
+
+<div class="hmap-wrap">
+  <table class="hmap-table">
+    <thead>
+      <tr>
+        <th class="hmap-th-sub">Subcategory</th>
+        <th class="hmap-th-month">Jan '26</th>
+        <th class="hmap-th-month">Feb '26</th>
+        <th class="hmap-th-month hmap-th-future">Mar '26</th>
+        <th class="hmap-th-month hmap-th-future">Apr '26</th>
+        <th class="hmap-th-delta">MoM Δ</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- GROUP: Irrelevant Leads -->
+      
+      <tr class="hmap-group-hdr" style="--gc:#EF4444">
+        <td colspan="6">🎯 Irrelevant Leads</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Wrong Category</td>
+        <td class="hmap-cell" style="--v:9.0;--base-r:239;--base-g:68;--base-b:68">9.0%<br><span class="hmap-n">n=19</span></td>
+        <td class="hmap-cell" style="--v:5.5;--base-r:239;--base-g:68;--base-b:68">5.5%<br><span class="hmap-n">n=35</span></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-dn">−3.5pp ↓</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Retail Leads</td>
+        <td class="hmap-cell" style="--v:7.1;--base-r:239;--base-g:68;--base-b:68">7.1%<br><span class="hmap-n">n=15</span></td>
+        <td class="hmap-cell" style="--v:6.0;--base-r:239;--base-g:68;--base-b:68">6.0%<br><span class="hmap-n">n=38</span></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-dn">−1.1pp ↓</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Wrong Location</td>
+        <td class="hmap-cell" style="--v:5.2;--base-r:239;--base-g:68;--base-b:68">5.2%<br><span class="hmap-n">n=11</span></td>
+        <td class="hmap-cell" style="--v:2.8;--base-r:239;--base-g:68;--base-b:68">2.8%<br><span class="hmap-n">n=18</span></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-dn">−2.4pp ↓</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ No Option Selected</td>
+        <td class="hmap-cell" style="--v:9.5;--base-r:239;--base-g:68;--base-b:68">9.5%<br><span class="hmap-n">n=20</span></td>
+        <td class="hmap-cell hmap-hot" style="--v:17.8;--base-r:239;--base-g:68;--base-b:68">17.8%<br><span class="hmap-n">n=113</span></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-up">+8.3pp ↑</td>
+      </tr>
+      
+      <tr class="hmap-group-hdr" style="--gc:#8B5CF6">
+        <td colspan="6">📉 Less BLs / Enquiries</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Very Less Leads</td>
+        <td class="hmap-cell" style="--v:7.6;--base-r:139;--base-g:92;--base-b:246">7.6%<br><span class="hmap-n">n=16</span></td>
+        <td class="hmap-cell" style="--v:6.5;--base-r:139;--base-g:92;--base-b:246">6.5%<br><span class="hmap-n">n=41</span></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-dn">−1.1pp ↓</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Leads Expire Fast</td>
+        <td class="hmap-cell" style="--v:3.8;--base-r:139;--base-g:92;--base-b:246">3.8%<br><span class="hmap-n">n=8</span></td>
+        <td class="hmap-cell" style="--v:3.3;--base-r:139;--base-g:92;--base-b:246">3.3%<br><span class="hmap-n">n=21</span></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-dn">−0.5pp ↓</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ No Option Selected</td>
+        <td class="hmap-cell" style="--v:3.3;--base-r:139;--base-g:92;--base-b:246">3.3%<br><span class="hmap-n">n=7</span></td>
+        <td class="hmap-cell hmap-hot" style="--v:10.6;--base-r:139;--base-g:92;--base-b:246">10.6%<br><span class="hmap-n">n=67</span></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-up">+7.2pp ↑</td>
+      </tr>
+      <tr class="hmap-group-hdr" style="--gc:#F59E0B">
+        <td colspan="6">🙅 Issues with Buyer</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Buyer Unresponsive</td>
+        <td class="hmap-cell" style="--v:1.9;--base-r:245;--base-g:158;--base-b:11">1.9%<br><span class="hmap-n">n=4</span></td>
+        <td class="hmap-cell" style="--v:3.8;--base-r:245;--base-g:158;--base-b:11">3.8%<br><span class="hmap-n">n=24</span></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-up">+1.9pp ↑</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Denies Requirement</td>
+        <td class="hmap-cell" style="--v:2.4;--base-r:245;--base-g:158;--base-b:11">2.4%<br><span class="hmap-n">n=5</span></td>
+        <td class="hmap-cell" style="--v:3.0;--base-r:245;--base-g:158;--base-b:11">3.0%<br><span class="hmap-n">n=19</span></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-up">+0.6pp ↑</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Req. Already Fulfilled</td>
+        <td class="hmap-cell" style="--v:0.9;--base-r:245;--base-g:158;--base-b:11">0.9%<br><span class="hmap-n">n=2</span></td>
+        <td class="hmap-cell" style="--v:2.5;--base-r:245;--base-g:158;--base-b:11">2.5%<br><span class="hmap-n">n=16</span></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-up">+1.6pp ↑</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ No Option Selected</td>
+        <td class="hmap-cell" style="--v:3.8;--base-r:245;--base-g:158;--base-b:11">3.8%<br><span class="hmap-n">n=8</span></td>
+        <td class="hmap-cell" style="--v:2.0;--base-r:245;--base-g:158;--base-b:11">2.0%<br><span class="hmap-n">n=13</span></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-dn">−1.7pp ↓</td>
+      </tr>
+
+    </tbody>
+  </table>
+  <div class="hmap-footer">
+    <span class="hmap-legend-label">Low</span>
+    <div class="hmap-legend-bar"></div>
+    <span class="hmap-legend-label">High share</span>
+    <span style="margin-left:16px;font-size:8.5px;color:var(--faint)">Greyed columns = awaiting data · MoM Δ = percentage point change vs prior month</span>
+  </div>
+</div>
+
+<div style="background:#F8FAFC;border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:14px;font-size:9.5px;color:var(--muted);line-height:1.6">
+  ⏳ <strong>Trend builds from Mar '26</strong> — Jan '26 is the first month with complaint bifurcation data. New month columns auto-populate; the heat map scales without layout changes.
+</div>
+
+
+</div><!-- /pg -->
+</div><!-- /tab3 -->
+
+<!-- ═══ TAB 5 ═══ -->
+<div id="tab5" class="tab-pane">
+<div class="pg">
+
+<div class="tab-summary" style="border-left-color:#8B5CF6">
+  <div class="ts-hdr">📱 App Complaint Signals — Feb '26</div>
+  <ul>
+    <li><strong>Irrelevant Leads</strong> complaints are gradually declining — an encouraging signal that relevance efforts are being felt</li>
+    <li><strong>Low Conversion</strong> has become the dominant concern on App — sellers are getting leads but not converting them</li>
+    <li><strong>Less BLs</strong> complaints have surged since October — mirrors what sellers are reporting on NPS, a cross-source signal worth acting on</li>
+    <li>Sellers are increasingly selecting specific complaint reasons rather than <strong>Others</strong> — data quality is improving over time</li>
+  </ul>
+</div>
+
+
+<div class="sh" style="margin-top:0">
+  <span class="sh-t">App complaint breakdown — Apr '25 – Feb '26</span>
+  <div class="sh-l"></div>
+  <span style="font-size:9.5px;color:var(--faint)">% of total complaint tags per month</span>
+  <div class="sh-l"></div>
+  <span class="sh-b" style="background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)">Paid Seller App</span>
+</div>
+
+<!-- 11-month vertical stacked bar chart -->
+<div class="vcb-wrap">
+  <div class="vcb-chart-area">
+    <div class="vcb-yaxis">
+      <span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span>
+    </div>
+    <div class="vcb-grid">
+      <div class="vcb-gridline"></div><div class="vcb-gridline"></div>
+      <div class="vcb-gridline"></div><div class="vcb-gridline"></div>
+      <div class="vcb-gridline"></div>
+    </div>
+    <div class="vcb-bars vcb-bars-11">
+
+      <div class="vcb-bar-group">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:37.7%;background:#EF4444" data-tip="n=427"><span class="vcb-lbl">37.7%</span></div>
+          <div class="vcb-seg" style="height:5.1%;background:#3B82F6" data-tip="n=58"><span class="vcb-lbl vcb-lbl-sm">5.1%</span></div>
+          <div class="vcb-seg" style="height:8.6%;background:#8B5CF6" data-tip="n=97"><span class="vcb-lbl vcb-lbl-sm">8.6%</span></div>
+          <div class="vcb-seg" style="height:11.0%;background:#F59E0B" data-tip="n=125"><span class="vcb-lbl vcb-lbl-sm">11%</span></div>
+          <div class="vcb-seg" style="height:37.6%;background:#D1D5DB" data-tip="n=426"><span class="vcb-lbl">37.6%</span></div>
+        </div>
+        <div class="vcb-bar-label">Apr<br><span class="vcb-bar-n">1,133</span></div>
+      </div>
+
+      <div class="vcb-bar-group">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:38.7%;background:#EF4444" data-tip="n=474"><span class="vcb-lbl">38.7%</span></div>
+          <div class="vcb-seg" style="height:5.8%;background:#3B82F6" data-tip="n=71"><span class="vcb-lbl vcb-lbl-sm">5.8%</span></div>
+          <div class="vcb-seg" style="height:5.1%;background:#8B5CF6" data-tip="n=62"><span class="vcb-lbl vcb-lbl-sm">5.1%</span></div>
+          <div class="vcb-seg" style="height:13.2%;background:#F59E0B" data-tip="n=162"><span class="vcb-lbl vcb-lbl-sm">13%</span></div>
+          <div class="vcb-seg" style="height:37.2%;background:#D1D5DB" data-tip="n=455"><span class="vcb-lbl">37.2%</span></div>
+        </div>
+        <div class="vcb-bar-label">May<br><span class="vcb-bar-n">1,224</span></div>
+      </div>
+
+      <div class="vcb-bar-group">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:46.7%;background:#EF4444" data-tip="n=468"><span class="vcb-lbl">46.7%</span></div>
+          <div class="vcb-seg" style="height:5.0%;background:#3B82F6" data-tip="n=50"><span class="vcb-lbl vcb-lbl-sm">5%</span></div>
+          <div class="vcb-seg" style="height:5.5%;background:#8B5CF6" data-tip="n=55"><span class="vcb-lbl vcb-lbl-sm">5.5%</span></div>
+          <div class="vcb-seg" style="height:9.0%;background:#F59E0B" data-tip="n=90"><span class="vcb-lbl vcb-lbl-sm">9%</span></div>
+          <div class="vcb-seg" style="height:33.8%;background:#D1D5DB" data-tip="n=339"><span class="vcb-lbl">33.8%</span></div>
+        </div>
+        <div class="vcb-bar-label">Jun<br><span class="vcb-bar-n">1,002</span></div>
+      </div>
+
+      <div class="vcb-bar-group">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:44.7%;background:#EF4444" data-tip="n=369"><span class="vcb-lbl">44.7%</span></div>
+          <div class="vcb-seg" style="height:4.8%;background:#3B82F6" data-tip="n=40"><span class="vcb-lbl vcb-lbl-sm">4.8%</span></div>
+          <div class="vcb-seg" style="height:5.2%;background:#8B5CF6" data-tip="n=43"><span class="vcb-lbl vcb-lbl-sm">5.2%</span></div>
+          <div class="vcb-seg" style="height:8.5%;background:#F59E0B" data-tip="n=70"><span class="vcb-lbl vcb-lbl-sm">8.5%</span></div>
+          <div class="vcb-seg" style="height:36.7%;background:#D1D5DB" data-tip="n=303"><span class="vcb-lbl">36.7%</span></div>
+        </div>
+        <div class="vcb-bar-label">Jul<br><span class="vcb-bar-n">825</span></div>
+      </div>
+
+      <div class="vcb-bar-group">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:51.0%;background:#EF4444" data-tip="n=736"><span class="vcb-lbl">51.0%</span></div>
+          <div class="vcb-seg" style="height:6.4%;background:#3B82F6" data-tip="n=93"><span class="vcb-lbl vcb-lbl-sm">6.4%</span></div>
+          <div class="vcb-seg" style="height:5.4%;background:#8B5CF6" data-tip="n=78"><span class="vcb-lbl vcb-lbl-sm">5.4%</span></div>
+          <div class="vcb-seg" style="height:8.7%;background:#F59E0B" data-tip="n=125"><span class="vcb-lbl vcb-lbl-sm">8.7%</span></div>
+          <div class="vcb-seg" style="height:28.5%;background:#D1D5DB" data-tip="n=412"><span class="vcb-lbl">28.5%</span></div>
+        </div>
+        <div class="vcb-bar-label">Aug<br><span class="vcb-bar-n">1,444</span></div>
+      </div>
+
+      <div class="vcb-bar-group">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:44.4%;background:#EF4444" data-tip="n=432"><span class="vcb-lbl">44.4%</span></div>
+          <div class="vcb-seg" style="height:6.4%;background:#3B82F6" data-tip="n=62"><span class="vcb-lbl vcb-lbl-sm">6.4%</span></div>
+          <div class="vcb-seg" style="height:4.2%;background:#8B5CF6" data-tip="n=41"><span class="vcb-lbl vcb-lbl-sm">4.2%</span></div>
+          <div class="vcb-seg" style="height:8.7%;background:#F59E0B" data-tip="n=85"><span class="vcb-lbl vcb-lbl-sm">8.7%</span></div>
+          <div class="vcb-seg" style="height:36.3%;background:#D1D5DB" data-tip="n=354"><span class="vcb-lbl">36.3%</span></div>
+        </div>
+        <div class="vcb-bar-label">Sep<br><span class="vcb-bar-n">974</span></div>
+      </div>
+
+      <div class="vcb-bar-group">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:36.7%;background:#EF4444" data-tip="n=256"><span class="vcb-lbl">36.7%</span></div>
+          <div class="vcb-seg" style="height:8.0%;background:#3B82F6" data-tip="n=56"><span class="vcb-lbl vcb-lbl-sm">8%</span></div>
+          <div class="vcb-seg" style="height:8.3%;background:#8B5CF6" data-tip="n=58"><span class="vcb-lbl vcb-lbl-sm">8.3%</span></div>
+          <div class="vcb-seg" style="height:8.9%;background:#F59E0B" data-tip="n=62"><span class="vcb-lbl vcb-lbl-sm">8.9%</span></div>
+          <div class="vcb-seg" style="height:38.1%;background:#D1D5DB" data-tip="n=266"><span class="vcb-lbl">38.1%</span></div>
+        </div>
+        <div class="vcb-bar-label">Oct<br><span class="vcb-bar-n">698</span></div>
+      </div>
+
+      <div class="vcb-bar-group">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:40.8%;background:#EF4444" data-tip="n=248"><span class="vcb-lbl">40.8%</span></div>
+          <div class="vcb-seg" style="height:9.4%;background:#3B82F6" data-tip="n=57"><span class="vcb-lbl vcb-lbl-sm">9.4%</span></div>
+          <div class="vcb-seg" style="height:8.2%;background:#8B5CF6" data-tip="n=50"><span class="vcb-lbl vcb-lbl-sm">8.2%</span></div>
+          <div class="vcb-seg" style="height:5.4%;background:#F59E0B" data-tip="n=33"><span class="vcb-lbl vcb-lbl-sm">5.4%</span></div>
+          <div class="vcb-seg" style="height:36.2%;background:#D1D5DB" data-tip="n=220"><span class="vcb-lbl">36.2%</span></div>
+        </div>
+        <div class="vcb-bar-label">Nov<br><span class="vcb-bar-n">608</span></div>
+      </div>
+
+      <div class="vcb-bar-group">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:42.1%;background:#EF4444" data-tip="n=294"><span class="vcb-lbl">42.1%</span></div>
+          <div class="vcb-seg" style="height:11.6%;background:#3B82F6" data-tip="n=81"><span class="vcb-lbl vcb-lbl-sm">11.6%</span></div>
+          <div class="vcb-seg" style="height:7.0%;background:#8B5CF6" data-tip="n=49"><span class="vcb-lbl vcb-lbl-sm">7%</span></div>
+          <div class="vcb-seg" style="height:6.7%;background:#F59E0B" data-tip="n=47"><span class="vcb-lbl vcb-lbl-sm">6.7%</span></div>
+          <div class="vcb-seg" style="height:32.5%;background:#D1D5DB" data-tip="n=227"><span class="vcb-lbl">32.5%</span></div>
+        </div>
+        <div class="vcb-bar-label">Dec<br><span class="vcb-bar-n">698</span></div>
+      </div>
+
+      <div class="vcb-bar-group vcb-bar-group-jan">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:35.1%;background:#EF4444" data-tip="n=338"><span class="vcb-lbl">35.1%</span></div>
+          <div class="vcb-seg" style="height:22.8%;background:#3B82F6" data-tip="n=220"><span class="vcb-lbl">22.8%</span></div>
+          <div class="vcb-seg" style="height:21.0%;background:#8B5CF6" data-tip="n=202"><span class="vcb-lbl">21.0%</span></div>
+          <div class="vcb-seg" style="height:11.4%;background:#F59E0B" data-tip="n=110"><span class="vcb-lbl vcb-lbl-sm">11.4%</span></div>
+          <div class="vcb-seg" style="height:9.8%;background:#D1D5DB" data-tip="n=94"><span class="vcb-lbl vcb-lbl-sm">9.8%</span></div>
+        </div>
+        <div class="vcb-bar-label">Jan<br><span class="vcb-bar-n">964</span></div>
+      </div>
+
+      <div class="vcb-bar-group vcb-bar-group-feb">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:31.8%;background:#EF4444" data-tip="n=445"><span class="vcb-lbl">31.8%</span></div>
+          <div class="vcb-seg" style="height:24.6%;background:#3B82F6" data-tip="n=345"><span class="vcb-lbl">24.6%</span></div>
+          <div class="vcb-seg" style="height:20.3%;background:#8B5CF6" data-tip="n=284"><span class="vcb-lbl">20.3%</span></div>
+          <div class="vcb-seg" style="height:10.6%;background:#F59E0B" data-tip="n=149"><span class="vcb-lbl vcb-lbl-sm">10.6%</span></div>
+          <div class="vcb-seg" style="height:12.7%;background:#D1D5DB" data-tip="n=178"><span class="vcb-lbl vcb-lbl-sm">12.7%</span></div>
+        </div>
+        <div class="vcb-bar-label"><strong>Feb</strong><br><span class="vcb-bar-n">1,401</span></div>
+      </div>
+
+    </div><!-- /vcb-bars -->
+  </div><!-- /vcb-chart-area -->
+  <div class="vcb-legend">
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#EF4444"></span>Irrelevant Leads</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#3B82F6"></span>Low Conversion</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#8B5CF6"></span>Less BLs / Enquiries</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#F59E0B"></span>Issues with Buyer</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#D1D5DB"></span>Others</span>
+  </div>
+</div><!-- /vcb-wrap -->
+
+<!-- Subcategory heatmap -->
+<div class="sh">
+  <span class="sh-t">Subcategory heat map</span>
+  <div class="sh-l"></div>
+  <span style="font-size:9.5px;color:var(--faint)">Cell = % of all complaint tags · colour intensity = share · scales as months are added</span>
+</div>
+
+<div class="hmap-wrap">
+  <table class="hmap-table">
+    <thead>
+      <tr>
+        <th class="hmap-th-sub">Subcategory</th>
+        <th class="hmap-th-month">Jan '26</th>
+        <th class="hmap-th-month">Feb '26</th>
+        <th class="hmap-th-month hmap-th-future">Mar '26</th>
+        <th class="hmap-th-month hmap-th-future">Apr '26</th>
+        <th class="hmap-th-delta">MoM Δ</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      
+      <tr class="hmap-group-hdr" style="--gc:#EF4444">
+        <td colspan="6">🎯 Irrelevant Leads</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Retail Leads</td>
+        <td class="hmap-cell hmap-hot" style="--v:7.9;--base-r:239;--base-g:68;--base-b:68">7.9%<br><span class="hmap-n">n=76</span></td>
+        <td class="hmap-cell" style="--v:4.7;--base-r:239;--base-g:68;--base-b:68">4.7%<br><span class="hmap-n">n=66</span></td>
+        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-dn">−3.2pp ↓</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Wrong Category</td>
+        <td class="hmap-cell hmap-hot" style="--v:6.1;--base-r:239;--base-g:68;--base-b:68">6.1%<br><span class="hmap-n">n=59</span></td>
+        <td class="hmap-cell" style="--v:5.5;--base-r:239;--base-g:68;--base-b:68">5.5%<br><span class="hmap-n">n=77</span></td>
+        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-dn">−0.6pp ↓</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Wrong Location</td>
+        <td class="hmap-cell" style="--v:3.2;--base-r:239;--base-g:68;--base-b:68">3.2%<br><span class="hmap-n">n=31</span></td>
+        <td class="hmap-cell" style="--v:3.1;--base-r:239;--base-g:68;--base-b:68">3.1%<br><span class="hmap-n">n=43</span></td>
+        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-dn">−0.1pp</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ No Option Selected</td>
+        <td class="hmap-cell" style="--v:17.8;--base-r:239;--base-g:68;--base-b:68">17.8%<br><span class="hmap-n">n=172</span></td>
+        <td class="hmap-cell hmap-hot" style="--v:18.5;--base-r:239;--base-g:68;--base-b:68">18.5%<br><span class="hmap-n">n=259</span></td>
+        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-up">+0.7pp ↑</td>
+      </tr>
+      <tr class="hmap-group-hdr" style="--gc:#3B82F6">
+        <td colspan="6">💸 Low Conversion</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name" colspan="5" style="color:var(--faint);font-style:italic;padding-left:28px">No subcategory breakdown available</td>
+        <td class="hmap-delta">—</td>
+      </tr>
+
+      
+      <tr class="hmap-group-hdr" style="--gc:#8B5CF6">
+        <td colspan="6">📉 Less BLs / Enquiries</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Very Less Leads</td>
+        <td class="hmap-cell hmap-hot" style="--v:6.3;--base-r:139;--base-g:92;--base-b:246">6.3%<br><span class="hmap-n">n=61</span></td>
+        <td class="hmap-cell" style="--v:5.4;--base-r:139;--base-g:92;--base-b:246">5.4%<br><span class="hmap-n">n=76</span></td>
+        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-dn">−0.9pp ↓</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Leads Expire Fast</td>
+        <td class="hmap-cell" style="--v:3.5;--base-r:139;--base-g:92;--base-b:246">3.5%<br><span class="hmap-n">n=34</span></td>
+        <td class="hmap-cell" style="--v:3.6;--base-r:139;--base-g:92;--base-b:246">3.6%<br><span class="hmap-n">n=50</span></td>
+        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-up">+0.1pp</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ No Option Selected</td>
+        <td class="hmap-cell hmap-hot" style="--v:11.1;--base-r:139;--base-g:92;--base-b:246">11.1%<br><span class="hmap-n">n=107</span></td>
+        <td class="hmap-cell hmap-hot" style="--v:11.3;--base-r:139;--base-g:92;--base-b:246">11.3%<br><span class="hmap-n">n=158</span></td>
+        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-up">+0.2pp</td>
+      </tr>
+      
+      <tr class="hmap-group-hdr" style="--gc:#F59E0B">
+        <td colspan="6">🙅 Issues with Buyer</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Buyer Unresponsive</td>
+        <td class="hmap-cell hmap-hot" style="--v:3.2;--base-r:245;--base-g:158;--base-b:11">3.2%<br><span class="hmap-n">n=31</span></td>
+        <td class="hmap-cell" style="--v:2.8;--base-r:245;--base-g:158;--base-b:11">2.8%<br><span class="hmap-n">n=39</span></td>
+        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-dn">−0.4pp ↓</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Denies Requirement</td>
+        <td class="hmap-cell hmap-hot" style="--v:2.6;--base-r:245;--base-g:158;--base-b:11">2.6%<br><span class="hmap-n">n=25</span></td>
+        <td class="hmap-cell" style="--v:2.1;--base-r:245;--base-g:158;--base-b:11">2.1%<br><span class="hmap-n">n=29</span></td>
+        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-dn">−0.5pp ↓</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Req. Already Fulfilled</td>
+        <td class="hmap-cell" style="--v:1.3;--base-r:245;--base-g:158;--base-b:11">1.3%<br><span class="hmap-n">n=13</span></td>
+        <td class="hmap-cell" style="--v:1.3;--base-r:245;--base-g:158;--base-b:11">1.3%<br><span class="hmap-n">n=18</span></td>
+        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta" style="color:var(--muted)">0.0pp</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ No Option Selected</td>
+        <td class="hmap-cell" style="--v:3.3;--base-r:245;--base-g:158;--base-b:11">3.3%<br><span class="hmap-n">n=32</span></td>
+        <td class="hmap-cell hmap-hot" style="--v:4.5;--base-r:245;--base-g:158;--base-b:11">4.5%<br><span class="hmap-n">n=63</span></td>
+        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-up">+1.2pp ↑</td>
+      </tr>
+      </tbody>
+  </table>
+  <div class="hmap-footer">
+    <span class="hmap-legend-label">Low</span>
+    <div class="hmap-legend-bar"></div>
+    <span class="hmap-legend-label">High share</span>
+    <span style="margin-left:16px;font-size:8.5px;color:var(--faint)">Greyed columns = awaiting data · MoM Δ = percentage point change vs prior month</span>
+  </div>
+</div>
+
+<div style="background:#F8FAFC;border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:14px;font-size:9.5px;color:var(--muted);line-height:1.6">
+  ⏳ <strong>Subcategory trend builds from Mar '26</strong> — subcategory data first captured Jan '26. Stacked bar uses full 11-month history for disposition-level trends.
+</div>
+
+</div><!-- /pg -->
+</div><!-- /tab5 -->
+
+
+<style>
+/* ─── 11-BAR CHART ─── */
+.vcb-bars-11 { gap:6px !important; }
+.vcb-bars-11 .vcb-bar-group { max-width:72px !important; }
+.vcb-bars-11 .vcb-lbl { font-size:8px !important; }
+.vcb-lbl-sm { font-size:7.5px !important; }
+.vcb-bar-group-jan .vcb-bar, .vcb-bar-group-feb .vcb-bar { outline:2px solid rgba(0,0,0,.12); border-radius:8px 8px 0 0; }
+.vcb-bar-group-feb .vcb-bar-label { font-weight:800; color:var(--ink); }
+</style>
+<script>
+// ─── TAB SWITCHING ───────────────────────────────────────────────────
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'tab3') renderAllCharts();
+}
+
+// ─── DATA ────────────────────────────────────────────────────────────
+const MONTHS = ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'];
+const MONTHS8 = ['Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'];
+
+const SEG = {
+  'STAR':      { nps:[22.1,10.7,11.5,27.3,27.9,7.8,30.8,26.1,21.3,27.8,33.6], pro:[53.6,43.4,45.3,56.4,58.6,47.0,58.1,54.5,48.9,56.6,59.1], det:[31.5,32.8,33.8,29.1,30.6,39.1,27.4,28.4,27.7,28.8,25.5], c:'#059669' },
+  'LEADER':    { nps:[22.9,35.4,26.4,29.8,22.6,3.7,28.3,19.4,12.9,24.6,30.5], pro:[53.9,59.5,52.8,56.8,50.9,46.3,56.7,50.0,48.4,55.8,58.0], det:[31.0,24.1,26.4,27.0,28.3,42.6,28.4,30.6,35.5,31.3,27.6], c:'#2563EB' },
+  'TSCatalog': { nps:[21.8,17.8,21.6,28.1,31.3,27.0,27.8,28.4,28.1,30.2,27.1], pro:[53.3,51.3,54.1,56.5,59.9,56.9,57.2,58.4,58.0,58.1,55.8], det:[31.5,33.5,32.4,28.4,28.5,29.8,29.3,29.9,29.9,27.9,28.7], c:'#7C3AED' },
+  'Catalog':   { nps:[11.8,-2.3,-7.3,11.7,3.1,1.9,13.4,11.7,8.9,12.5,14.8],   pro:[48.3,40.6,39.4,47.9,45.0,43.3,49.0,47.8,46.7,48.7,49.0], det:[36.5,42.9,46.7,36.1,41.9,41.4,35.6,36.1,37.8,36.1,34.2], c:'#EA580C' },
+  'ExportTS':  { nps:[22.8,24.5,22.4,19.5,23.7,-15.0,16.5,48.4,-23.0,22.6,24.6], pro:[55.4,53.1,55.2,53.4,60.5,37.5,51.2,71.0,28.7,54.8,55.4], det:[32.7,28.6,32.8,33.9,36.8,52.5,34.7,22.6,51.7,32.2,30.8], c:'#D97706' },
+  'Non-Paid':  { nps:[-12.2,-25.0,-38.3,-3.3,-17.1,-33.8,-6.2,-21.9,-50,9.0,18.6], pro:[38.1,32.0,25.2,43.2,37.8,31.1,42.7,34.4,20.0,50.2,51.2], det:[50.3,57.0,63.5,46.5,54.9,64.9,48.9,56.2,70.0,41.2,32.6], c:'#6B7280' }
+};
+const VIN = {
+  '30 Day':    { nps:[0.2,8.4,1.2,3.8,15.5,10.7,13.8,24.0,17.1,7.0,25.1], pro:[42.9,46.3,43.4,43.4,51.4,48.4,49.5,54.7,52.3,47.1,54.2], det:[42.7,39.7,44.8,39.6,35.8,37.7,35.7,30.7,35.2,40.1,29.1], c:'#2563EB' },
+  '60 Day':    { nps:[9.6,7.5,10.6,11.0,18.5,8.7,10.2,15.3,19.6,8.5,9.8],  pro:[47.0,45.7,48.1,49.1,53.8,47.9,48.2,51.7,52.2,48.2,47.2], det:[37.4,38.2,37.5,38.1,35.3,39.2,38.0,36.4,32.6,39.7,37.4], c:'#D97706' },
+  'Quarterly': { nps:[16.6,23.3,23.1,23.2,16.1,11.1,24.4,38.2,5.9,25.9,30.7], pro:[51.0,50.0,46.2,54.2,51.8,50.0,55.2,60.7,41.2,55.8,57.6], det:[34.4,26.7,23.1,31.0,35.7,38.9,30.8,22.5,35.3,29.9,26.9], c:'#059669' }
+};
+const DIST = {
+  astbuy:   { label:'ASTBUY Enquiries',   bands:{ '<50km':{v:[9.75,8.35,8.01,6.92,6.74,7.05,6.96,6.46],c:'#DC2626'}, '51-250km':{v:[7.55,6.84,6.15,5.92,5.99,5.85,5.85,5.85],c:'#F97316'}, '251-500km':{v:[5.96,5.04,5.39,6.22,4.41,3.49,3.49,3.49],c:'#D97706'}, '501-1000km':{v:[6.14,5.36,4.51,5.42,6.21,5.93,5.93,5.93],c:'#2563EB'}, '>1000km':{v:[7.08,6.01,6.19,6.76,6.91,6.91,6.91,6.91],c:'#7C3AED'} } },
+  direct:   { label:'Direct Enquiries',   bands:{ '<50km':{v:[6.41,6.28,6.02,5.83,5.17,5.12,5.12,5.12],c:'#DC2626'}, '51-250km':{v:[7.96,7.81,6.98,6.51,6.39,6.32,6.32,6.32],c:'#F97316'}, '251-500km':{v:[8.04,8.42,7.81,6.97,6.49,6.3,6.3,6.3],c:'#D97706'}, '501-1000km':{v:[9.62,9.43,8.52,7.97,8.12,7.24,7.24,7.24],c:'#2563EB'}, '>1000km':{v:[10.38,9.62,9.02,8.77,8.32,8.21,8.21,8.21],c:'#7C3AED'} } },
+  buyleads: { label:'Buyleads',           bands:{ '<50km':{v:[6.86,6.32,6.26,6.07,5.99,5.72,5.72,5.72],c:'#DC2626'}, '51-250km':{v:[5.31,4.99,4.89,4.86,4.62,4.58,4.58,4.58],c:'#F97316'}, '251-500km':{v:[4.41,3.96,4.06,3.96,3.97,3.99,3.99,3.99],c:'#D97706'}, '501-1000km':{v:[3.88,3.63,3.76,3.56,3.67,3.65,3.65,3.65],c:'#2563EB'}, '>1000km':{v:[4.01,3.8,3.9,3.88,3.91,3.88,3.88,3.88],c:'#7C3AED'} } }
+};
+
+// ─── SEGMENT TOGGLE ──────────────────────────────────────────────────
+let activeSeg = 'STAR';
+function selectSegment(seg, e) {
+  if (e) e.stopPropagation();
+  activeSeg = seg;
+  document.querySelectorAll('.seg-btn').forEach(b => b.classList.toggle('active', b.dataset.seg === seg));
+  const svg = document.getElementById('ct-nps-chart');
+  if (svg) drawStackedBars(svg, SEG[seg], MONTHS, false);
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────────────
+const F = (n, d=1) => parseFloat(n).toFixed(d);
+const nc = nps => nps > 20 ? '#059669' : nps > 0 ? '#D97706' : '#DC2626';
+const MONO = "JetBrains Mono,monospace";
+
+// ─── DRAW: 100% stacked bars (custtype, one segment) ─────────────────
+// LABELS: NPS score above every bar. In large mode also shows Pro%/Det% inside segments.
+function drawStackedBars(svg, d, months, large) {
+  const W=svg.viewBox.baseVal.width, H=svg.viewBox.baseVal.height;
+  const pad = large ? {t:36,r:16,b:26,l:36} : {t:30,r:12,b:20,l:30};
+  const cH=H-pad.t-pad.b, cW=W-pad.l-pad.r, n=months.length;
+  const gW=cW/n, bW=Math.floor(gW*(large?0.70:0.60));
+  let h='';
+
+  // gridlines
+  [0,25,50,75,100].forEach(pct=>{
+    const y=F(pad.t+cH*(1-pct/100));
+    h+=`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="${pct===50?'#E5E7EB':'#F3F4F6'}" stroke-width="${pct===50?1:.5}"/>`;
+    h+=`<text x="${pad.l-3}" y="${F(+y+3)}" text-anchor="end" fill="#C0C8D4" font-size="${large?9:7}" font-family="${MONO}">${pct}</text>`;
+  });
+
+  months.forEach((m,i)=>{
+    const pro=d.pro[i]/100, det=d.det[i]/100, neu=Math.max(0,1-pro-det);
+    const isFeb=(i===n-1);
+    const bX = pad.l + gW*i + (gW-bW)/2;  // left edge of bar
+    const bXm = bX + bW/2;                  // centre x of bar
+    const yBot = pad.t+cH;
+    const yDetTop = yBot - det*cH;
+    const yNeuTop = yBot - (det+neu)*cH;
+    const yProTop = yBot - (det+neu+pro)*cH;
+    const al = isFeb ? 1 : 0.65;
+
+    // bars
+    h+=`<rect x="${F(bX)}" y="${F(yDetTop)}" width="${bW}" height="${F(det*cH)}" fill="#EF4444" opacity="${al}"/>`;
+    h+=`<rect x="${F(bX)}" y="${F(yNeuTop)}" width="${bW}" height="${F(neu*cH)}" fill="#D1D5DB" opacity="${al}"/>`;
+    h+=`<rect x="${F(bX)}" y="${F(yProTop)}" width="${bW}" height="${F(pro*cH)}" fill="#10B981" opacity="${al}" rx="${isFeb?2:1}"/>`;
+    if(isFeb) h+=`<rect x="${F(bX)}" y="${F(yProTop)}" width="${bW}" height="${F(cH)}" fill="none" stroke="#0D1117" stroke-width="1.5" rx="2"/>`;
+
+    // NPS label ABOVE every bar — non-Feb negatives shown in red/amber, not flat grey
+    const nps = d.nps[i];
+    const labelY = Math.max(pad.t+10, yProTop - 5);
+    const lfs = large ? (isFeb?12:9) : (isFeb?10:7.5);
+    // All bars: use nc() for colour. Non-Feb just smaller + lower opacity via separate text attr
+    const lfc = nc(nps);
+    const lop = isFeb ? 1 : 0.55;
+    h+=`<text x="${F(bXm)}" y="${F(labelY)}" text-anchor="middle" fill="${lfc}" font-size="${lfs}" font-family="${MONO}" font-weight="${isFeb?'800':'600'}" opacity="${lop}">${nps>=0?'+':''}${nps}</text>`;
+
+    // In-bar segment % in large mode (only when segment is tall enough)
+    if(large){
+      const cProY = yProTop + pro*cH/2;
+      const cDetY = yDetTop + det*cH/2;
+      if(pro*cH > 16) h+=`<text x="${F(bXm)}" y="${F(cProY+3.5)}" text-anchor="middle" fill="rgba(255,255,255,.75)" font-size="8" font-family="${MONO}" font-weight="600">${F(pro*100,0)}%</text>`;
+      if(det*cH > 16) h+=`<text x="${F(bXm)}" y="${F(cDetY+3.5)}" text-anchor="middle" fill="rgba(255,255,255,.75)" font-size="8" font-family="${MONO}" font-weight="600">${F(det*100,0)}%</text>`;
+    }
+
+    // month label
+    h+=`<text x="${F(bXm)}" y="${H-3}" text-anchor="middle" fill="${isFeb?'#0D1117':'#9CA3AF'}" font-size="${large?9:7}" font-family="${MONO}" font-weight="${isFeb?'700':'400'}">${m}</text>`;
+  });
+  svg.innerHTML=h;
+}
+
+// ─── DRAW: grouped stacked bars (vintage, 3 cohorts per month) ───────
+// LABELS: NPS above every bar group in compact (Feb only), every bar in large.
+function drawVintageGrouped(svg, large) {
+  const segs=Object.entries(VIN);
+  const W=svg.viewBox.baseVal.width, H=svg.viewBox.baseVal.height;
+  const pad = large ? {t:32,r:14,b:24,l:34} : {t:26,r:10,b:20,l:28};
+  const cH=H-pad.t-pad.b, cW=W-pad.l-pad.r, n=MONTHS.length;
+  const gW=cW/n, bW=Math.floor(gW*0.21), bG=Math.max(1,Math.floor(gW*0.04));
+  let h='';
+
+  [0,25,50,75,100].forEach(pct=>{
+    const y=F(pad.t+cH*(1-pct/100));
+    h+=`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="${pct===50?'#E5E7EB':'#F3F4F6'}" stroke-width="${pct===50?1:.5}"/>`;
+    h+=`<text x="${pad.l-3}" y="${F(+y+3)}" text-anchor="end" fill="#C0C8D4" font-size="${large?9:7}" font-family="${MONO}">${pct}</text>`;
+  });
+
+  MONTHS.forEach((m,mi)=>{
+    const isFeb=(mi===n-1), gX=pad.l+gW*mi;
+    const tBW=segs.length*bW+(segs.length-1)*bG, sX=gX+(gW-tBW)/2;
+
+    segs.forEach(([_,d],si)=>{
+      const pro=d.pro[mi]/100, det=d.det[mi]/100, neu=Math.max(0,1-pro-det);
+      const bX = sX+si*(bW+bG), bXm = bX+bW/2;
+      const yBot=pad.t+cH, al=isFeb?1:0.65;
+      const yProTop = yBot-(det+neu+pro)*cH;
+
+      h+=`<rect x="${F(bX)}" y="${F(yBot-det*cH)}" width="${bW}" height="${F(det*cH)}" fill="#EF4444" opacity="${al}"/>`;
+      h+=`<rect x="${F(bX)}" y="${F(yBot-(det+neu)*cH)}" width="${bW}" height="${F(neu*cH)}" fill="#D1D5DB" opacity="${al}"/>`;
+      h+=`<rect x="${F(bX)}" y="${F(yProTop)}" width="${bW}" height="${F(pro*cH)}" fill="${d.c}" opacity="${al}" rx="${isFeb?1.5:.5}"/>`;
+
+      // NPS label INSIDE promoter segment — avoids overlap across 3 bars per group
+      // Works for all months. Negative NPS (red text) is always visible.
+      const nps=d.nps[mi];
+      const proSegH = pro*cH;
+      const npsCY = yProTop + proSegH/2 + 3.5; // vertical centre of promoter band
+      const npsTextCol = nps >= 0 ? 'rgba(255,255,255,.88)' : '#FF6B6B';
+      const npsFSize = large ? (isFeb?8.5:7.5) : (isFeb?7.5:6.5);
+      if(proSegH > 11)
+        h+=`<text x="${F(bXm)}" y="${F(npsCY)}" text-anchor="middle" fill="${npsTextCol}" font-size="${npsFSize}" font-family="${MONO}" font-weight="${isFeb?'800':'600'}">${nps>=0?'+':''}${nps}</text>`;
+
+      // In large mode, also show Pro% below NPS inside the same band
+      if(large && proSegH > 22)
+        h+=`<text x="${F(bXm)}" y="${F(yProTop+proSegH*0.75+3)}" text-anchor="middle" fill="rgba(255,255,255,.55)" font-size="6.5" font-family="${MONO}">${F(pro*100,0)}%P</text>`;
+    });
+
+    if(isFeb){ const tBW2=segs.length*bW+(segs.length-1)*bG; h+=`<rect x="${F(sX)}" y="${pad.t}" width="${tBW2}" height="${cH}" fill="none" stroke="#0D1117" stroke-width="1" rx="2" opacity=".5"/>`; }
+    h+=`<text x="${F(gX+gW/2)}" y="${H-3}" text-anchor="middle" fill="${isFeb?'#0D1117':'#9CA3AF'}" font-size="${large?9:7}" font-family="${MONO}" font-weight="${isFeb?'700':'400'}">${m}</text>`;
+  });
+  svg.innerHTML=h;
+}
+
+// ─── DRAW: grouped bars (distance) ───────────────────────────────────
+// LABELS: compact = Feb only per-band. Large = all months, all bands.
+function drawDistGrouped(svg, ch, large) {
+  const data=DIST[ch], bands=Object.entries(data.bands);
+  const W=svg.viewBox.baseVal.width, H=svg.viewBox.baseVal.height;
+  const pad = large ? {t:22,r:14,b:26,l:38} : {t:16,r:10,b:20,l:32};
+  const cH=H-pad.t-pad.b, cW=W-pad.l-pad.r, n=MONTHS8.length;
+  const gW=cW/n, bW=Math.floor(gW/(bands.length+1.4)), bG=Math.max(1,Math.floor(gW*0.04));
+  const allV=bands.flatMap(([_,b])=>b.v), maxV=Math.ceil(Math.max(...allV)*1.12);
+  const yP=v=>pad.t+cH-(v/maxV)*cH;
+  let h='';
+
+  [0, F(maxV*.5,0)*1, maxV].forEach(v=>{
+    const y=F(yP(v));
+    h+=`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="#F3F4F6" stroke-width=".6"/>`;
+    h+=`<text x="${pad.l-3}" y="${F(+y+3)}" text-anchor="end" fill="#C0C8D4" font-size="${large?9:7}" font-family="${MONO}">${(+v).toFixed(0)}%</text>`;
+  });
+
+  MONTHS8.forEach((m,mi)=>{
+    const isFeb=(mi===n-1), gX=pad.l+gW*mi;
+    const tBW=bands.length*bW+(bands.length-1)*bG, sX=gX+(gW-tBW)/2;
+    bands.forEach(([_,bd],bi)=>{
+      const val=bd.v[mi], barH=val/maxV*cH, bX=sX+bi*(bW+bG), topY=yP(val);
+      h+=`<rect x="${F(bX)}" y="${F(topY)}" width="${bW}" height="${F(barH)}" fill="${bd.c}" opacity="${isFeb?0.92:0.48}" rx="1"/>`;
+      // label above bar
+      const showLabel = large || isFeb;
+      if(showLabel){
+        const lfs = large ? (isFeb?9:7.5) : 7.5;
+        const lfw = isFeb ? '700' : '400';
+        // clamp above top padding
+        const ly = Math.max(pad.t+9, topY-3);
+        h+=`<text x="${F(bX+bW/2)}" y="${F(ly)}" text-anchor="middle" fill="${bd.c}" font-size="${lfs}" font-family="${MONO}" font-weight="${lfw}">${val}%</text>`;
+      }
+    });
+    h+=`<text x="${F(gX+gW/2)}" y="${H-3}" text-anchor="middle" fill="${isFeb?'#0D1117':'#9CA3AF'}" font-size="${large?9:7}" font-family="${MONO}" font-weight="${isFeb?'700':'400'}">${m}</text>`;
+  });
+  svg.innerHTML=h;
+}
+
+
+// ─── MODAL ───────────────────────────────────────────────────────────
+const MODAL_CFG = {
+  custtype: { title:()=>`NPS by Seller Type — ${activeSeg}`, sub:"100% stacked · Green=Promoters · Grey=Neutral · Red=Detractors · NPS labelled above each bar", vb:'0 0 900 280', leg:'<span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:10px;background:#10B981;border-radius:2px;display:inline-block"></span>Promoters</span><span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:10px;background:#D1D5DB;border-radius:2px;display:inline-block"></span>Neutral</span><span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:10px;background:#EF4444;border-radius:2px;display:inline-block"></span>Detractors</span>' },
+  vintage:  { title:()=>'NPS by Vintage — 30-Day · 60-Day · Quarterly+', sub:"Each group = one month · L=30-Day · M=60-Day · R=Quarterly+ · NPS labelled above · Feb outlined", vb:'0 0 900 260', leg:'<span style="color:#2563EB;font-weight:700">30-Day</span> &nbsp; <span style="color:#D97706;font-weight:700">60-Day</span> &nbsp; <span style="color:#059669;font-weight:700">Quarterly+</span>' },
+  astbuy:   { title:()=>'ASTBUY — Irrelevancy Rate by Distance', sub:"Last 8 months · Lower = better · Feb 26 fully opaque with labels", vb:'0 0 900 240', leg:'<span style="color:#DC2626;font-weight:700">&lt;50km</span> &nbsp;<span style="color:#F97316;font-weight:700">51-250km</span> &nbsp;<span style="color:#D97706;font-weight:700">251-500km</span> &nbsp;<span style="color:#2563EB;font-weight:700">501-1000km</span> &nbsp;<span style="color:#7C3AED;font-weight:700">&gt;1000km</span>' },
+  direct:   { title:()=>'Direct Enquiries — Irrelevancy Rate by Distance', sub:"Last 8 months · Lower = better · Feb 26 fully opaque with labels", vb:'0 0 900 240', leg:'<span style="color:#DC2626;font-weight:700">&lt;50km</span> &nbsp;<span style="color:#F97316;font-weight:700">51-250km</span> &nbsp;<span style="color:#D97706;font-weight:700">251-500km</span> &nbsp;<span style="color:#2563EB;font-weight:700">501-1000km</span> &nbsp;<span style="color:#7C3AED;font-weight:700">&gt;1000km</span>' },
+  buyleads: { title:()=>'Buyleads — Irrelevancy Rate by Distance', sub:"Last 8 months · Lower = better · Feb 26 fully opaque with labels", vb:'0 0 900 240', leg:'<span style="color:#DC2626;font-weight:700">&lt;50km</span> &nbsp;<span style="color:#F97316;font-weight:700">51-250km</span> &nbsp;<span style="color:#D97706;font-weight:700">251-500km</span> &nbsp;<span style="color:#2563EB;font-weight:700">501-1000km</span> &nbsp;<span style="color:#7C3AED;font-weight:700">&gt;1000km</span>' },
+};
+function openModal(type) {
+  const cfg=MODAL_CFG[type], modal=document.getElementById('chart-modal'), mSvg=document.getElementById('modal-svg');
+  document.getElementById('modal-title').textContent=cfg.title();
+  document.getElementById('modal-sub').textContent=cfg.sub;
+  document.getElementById('modal-legend').innerHTML=cfg.leg;
+  mSvg.setAttribute('viewBox',cfg.vb);
+  if(type==='custtype') drawStackedBars(mSvg,SEG[activeSeg],MONTHS,true);
+  else if(type==='vintage') drawVintageGrouped(mSvg,true);
+  else drawDistGrouped(mSvg,type,true);
+  modal.style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closeModal(e) {
+  if(e&&e.target!==document.getElementById('chart-modal')) return;
+  document.getElementById('chart-modal').style.display='none';
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getElementById('chart-modal').style.display='none'; document.body.style.overflow=''; }});
+
+// ─── SPARK CARD LINE CHARTS ──────────────────────────────────────────
+(function(){
+  const MONO = "'JetBrains Mono',monospace";
+
+  function linReg(vals) {
+    const n=vals.length, mx=(n-1)/2;
+    const my=vals.reduce((a,b)=>a+b)/n;
+    const num=vals.reduce((s,v,i)=>s+(i-mx)*(v-my),0);
+    const den=vals.reduce((s,_,i)=>s+(i-mx)**2,0);
+    const m=num/den, b=my-m*mx;
+    return {at:x=>m*x+b};
+  }
+
+  function drawSparkLine(svgId, opts) {
+    const svg = document.getElementById(svgId);
+    if(!svg) return;
+    const {vals, months, color, fmt, unit='', allLabels=false} = opts;
+    const VW=560, VH=130;
+    const pad={t:26, r:22, b:36, l:12};
+    const cW=VW-pad.l-pad.r, cH=VH-pad.t-pad.b;
+    const n=vals.length;
+    const minV=Math.min(...vals), maxV=Math.max(...vals);
+    const rng=maxV-minV||1;
+
+    function xAt(i){return pad.l + i*(cW/(n-1));}
+    function yAt(v){return pad.t + (1-(v-minV)/rng)*cH;}
+
+    const reg = linReg(vals);
+    let h='';
+
+    // Area fill
+    const pts = vals.map((_,i)=>`${xAt(i).toFixed(1)},${yAt(vals[i]).toFixed(1)}`).join(' ');
+    const aBottom=`${xAt(n-1).toFixed(1)},${(pad.t+cH).toFixed(1)} ${xAt(0).toFixed(1)},${(pad.t+cH).toFixed(1)}`;
+    const gid=svgId+'g';
+    h+=`<defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${color}" stop-opacity=".13"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>`;
+    h+=`<polygon points="${pts} ${aBottom}" fill="url(#${gid})"/>`;
+
+    // Trend line (dashed)
+    const ty0=yAt(reg.at(0)), ty1=yAt(reg.at(n-1));
+    h+=`<line x1="${xAt(0).toFixed(1)}" y1="${ty0.toFixed(1)}" x2="${xAt(n-1).toFixed(1)}" y2="${ty1.toFixed(1)}" stroke="${color}" stroke-width="1" stroke-dasharray="4,3" opacity=".38"/>`;
+
+    // Main line
+    h+=`<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+    // Dots + data labels + invisible hit areas
+    vals.forEach((v,i)=>{
+      const x=xAt(i), y=yAt(v), isCur=(i===n-1);
+      const fmtd = fmt ? fmt(v) : v.toFixed(1);
+      const pct=(v-minV)/rng;
+      const labelY = pct < 0.25 ? y-7 : y+12;
+      const showLbl = allLabels || n<=6 || (i%2===0) || isCur;
+
+      if(isCur){
+        h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" fill="${color}" stroke="#fff" stroke-width="1.5"/>`;
+        const anch = (i===n-1 && n>7) ? 'end' : 'middle';
+        h+=`<text x="${x.toFixed(1)}" y="${labelY.toFixed(1)}" text-anchor="${anch}" fill="${color}" font-size="9.5" font-weight="700" font-family=${MONO}>${fmtd}${unit}</text>`;
+      } else {
+        h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.8" fill="${color}" opacity=".42"/>`;
+        if(showLbl){
+          h+=`<text x="${x.toFixed(1)}" y="${labelY.toFixed(1)}" text-anchor="middle" fill="${color}" font-size="7.8" font-weight="500" font-family=${MONO} opacity=".72">${fmtd}${unit}</text>`;
+        }
+      }
+
+      // Invisible hit-area circle for tooltip — always present on every point
+      const tipN = (opts.ns && opts.ns[i] != null) ? opts.ns[i].toLocaleString() : null;
+      const tipLabel = tipN ? tipN : (fmtd+unit);
+      h+=`<circle class="spk-hit" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="14" fill="transparent" data-month="${months[i]}" data-val="${tipLabel}" data-isN="${tipN ? 'true' : 'false'}" style="cursor:pointer"/>`;
+    });
+
+    // X-axis month labels — always show all
+    months.forEach((m,i)=>{
+      const x=xAt(i), isCur=(i===n-1);
+      const anchor = i===0 ? 'start' : i===n-1 ? 'end' : 'middle';
+      h+=`<text x="${x.toFixed(1)}" y="${VH-4}" text-anchor="${anchor}" fill="${isCur?color:'#9CA3AF'}" font-size="${isCur?8.5:7.5}" font-weight="${isCur?'700':'400'}" font-family=${MONO}>${m}</text>`;
+    });
+
+    svg.innerHTML=h;
+
+    // Attach tooltip events after setting innerHTML
+    svg.querySelectorAll('.spk-hit').forEach(el=>{
+      el.addEventListener('mousemove', e=>{
+        const tt = document.getElementById('spk-tooltip');
+        if(!tt) return;
+        const prefix = el.dataset.isN === 'true' ? 'n=' : '';
+        tt.innerHTML = `<span class="tt-month">${el.dataset.month}</span><span class="tt-val">${prefix}${el.dataset.val}</span>`;
+        tt.style.display='flex';
+        const ttW = tt.offsetWidth || 90;
+        const ttH = tt.offsetHeight || 34;
+        let lft = e.clientX - ttW/2;
+        let top = e.clientY - ttH - 12;
+        if(lft < 4) lft = 4;
+        if(lft + ttW > window.innerWidth - 4) lft = window.innerWidth - ttW - 4;
+        if(top < 4) top = e.clientY + 16;
+        tt.style.left = lft + 'px';
+        tt.style.top  = top + 'px';
+      });
+      el.addEventListener('mouseleave', ()=>{
+        const tt = document.getElementById('spk-tooltip');
+        if(tt) tt.style.display='none';
+      });
+    });
+  }
+
+  // 1 — NPS: 5 quarterly waypoints only
+  drawSparkLine('spk-nps',{
+    vals:[15.73, 21.97, 23.56, 24.6, 25.4],
+    months:["Apr'25","Jul'25","Oct'25","Jan'26","Feb'26"],
+    ns:[14795,14553,12642,12808,2138],
+    color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+  });
+
+  // 2 — Paid Seller App Rating: full 11 months, all labels
+  drawSparkLine('spk-app',{
+    vals:[3.39,3.42,3.45,3.31,3.46,3.40,3.45,3.54,3.44,3.41,3.41],
+    months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
+    ns:[10217,12965,12823,8035,17855,8698,6840,9192,9710,7201,5441],
+    color:'#D97706', fmt:v=>v.toFixed(2), unit:'★', allLabels:true
+  });
+
+  // 3 — QRF Overall irrel % of total feedback: 11 months, all labels
+  drawSparkLine('spk-qrf',{
+    vals:[8.56,8.74,8.43,7.14,6.50,5.84,5.45,5.20,5.04,5.03,4.94],
+    months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
+    ns:[417777,475630,496117,529731,516477,542698,480249,458638,503348,527998,491393],
+    color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
+  });
+
+  // 4 — BLNI/Txn%: 11 months, all labels
+  drawSparkLine('spk-bl',{
+    vals:[8.37,7.69,7.40,6.94,6.42,6.13,5.61,5.68,5.48,4.52,4.41],
+    months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
+    ns:[828716,831110,784754,797672,697327,666210,558073,608647,627410,526186,471539],
+    color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
+  });
+  // ── Tab 2: Seller type spark lines ─────────────────────────────
+  drawSparkLine('spk-ct-star',{
+    vals:[22.1,27.3,30.8,27.8,33.6],
+    months:['Apr','Jul','Oct','Jan','Feb'],
+    ns:[2306,2355,2129,2204,345],
+    color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+  });
+  drawSparkLine('spk-ct-leader',{
+    vals:[22.9,29.8,28.3,24.6,30.5],
+    months:['Apr','Jul','Oct','Jan','Feb'],
+    ns:[1422,1427,1272,1315,174],
+    color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+  });
+  drawSparkLine('spk-ct-ts',{
+    vals:[21.8,28.1,27.8,30.2,27.1],
+    months:['Apr','Jul','Oct','Jan','Feb'],
+    ns:[6249,6292,5627,5811,1031],
+    color:'#D97706', fmt:v=>v.toFixed(1), allLabels:true
+  });
+  drawSparkLine('spk-ct-cat',{
+    vals:[11.8,11.7,13.4,12.5,14.8],
+    months:['Apr','Jul','Oct','Jan','Feb'],
+    ns:[2578,2914,2826,2953,480],
+    color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+  });
+  // ── Tab 2: Vintage spark lines ───────────────────────────────────
+  drawSparkLine('spk-vint-est',{
+    vals:[16.6,23.2,24.4,25.9,30.7],
+    months:['Apr','Jul','Oct','Jan','Feb'],
+    ns:[13636,13371,11743,11946,1282],
+    color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+  });
+  drawSparkLine('spk-vint-new',{
+    vals:[4.9,7.4,12.0,7.75,17.45],
+    months:['Apr','Jul','Oct','Jan','Feb'],
+    ns:[1159,1182,899,854,856],
+    color:'#D97706', fmt:v=>v.toFixed(1), allLabels:true
+  });
+})();
+
+function renderAllCharts() {
+  const ct=document.getElementById('ct-nps-chart');
+  if(ct) drawStackedBars(ct,SEG[activeSeg],MONTHS,false);
+  const vt=document.getElementById('vt-nps-chart');
+  if(vt) drawVintageGrouped(vt,false);
+  ['astbuy','direct','buyleads'].forEach(ch=>{
+    const s=document.getElementById(`dist-${ch}-chart`);
+    if(s) drawDistGrouped(s,ch,false);
+  });
+}
+
+const QMONO = "JetBrains Mono,monospace";
+const QBIF = {
+  astbuy:{label:"ASTBUY — Rejection Reason Mix (Quarterly)",sub:"Q1 Apr-Jun '25 · Q2 Jul-Sep · Q3 Oct-Dec · Q4 Jan-Feb '26 · 100% stacked · flags: Q1=99.8K Q2=87.0K Q3=54.4K Q4=36.9K",insight:"⚠️ <strong>Retail Req crept up every quarter</strong>: Q1 16.0% → Q2 18.5% → Q3 17.2% → Q4 18.6%. Wrong Category nearly halved (Q1 11.8%→Q4 6.4%). Others and Specs are stable dominant buckets.",months:["Q1\nApr-Jun","Q2\nJul-Sep","Q3\nOct-Dec","Q4\nJan-Feb"],cats:[{l:"Others",c:"#9CA3AF",pct:[23.8,24.4,25.3,25.4]},{l:"Specs Mismatch",c:"#8B5CF6",pct:[19.0,20.0,18.4,18.1]},{l:"Retail Req",c:"#EF4444",pct:[16.0,18.5,17.2,18.6]},{l:"Wrong Contact",c:"#06B6D4",pct:[12.6,13.3,14.1,12.9]},{l:"Single Click",c:"#E2E8F0",pct:[11.5,12.4,13.0,13.8]},{l:"Wrong Category",c:"#3B82F6",pct:[11.8,7.2,6.8,6.4]},{l:"Wrong Loc",c:"#F97316",pct:[5.3,4.2,5.1,4.7]}]},
+  direct:{label:"Direct Enquiries — Rejection Reason Mix (Quarterly)",sub:"Q1 Apr-Jun '25 → Q4 Jan-Feb '26 · 100% stacked · note structural shift Q1→Q2",insight:"🔍 <strong>Structural swap in Q2</strong>: Wrong Loc halved (53.7%→29.5%) as Retail Req surged (23.7%→36.3%). A system change ~Jul '25 likely fixed geography matching but surfaced more retail mis-matches. Stable since Q2.",months:["Q1\nApr-Jun","Q2\nJul-Sep","Q3\nOct-Dec","Q4\nJan-Feb"],cats:[{l:"Wrong Loc",c:"#F97316",pct:[53.7,29.5,27.9,28.4]},{l:"Retail Req",c:"#EF4444",pct:[23.7,36.3,37.1,35.7]},{l:"Others",c:"#9CA3AF",pct:[8.2,12.5,11.9,12.4]},{l:"Single Click",c:"#E2E8F0",pct:[5.6,7.8,8.2,8.9]},{l:"Wrong Contact",c:"#06B6D4",pct:[4.8,7.0,7.2,7.3]},{l:"Specs Mismatch",c:"#8B5CF6",pct:[2.0,3.8,3.8,3.9]},{l:"Wrong Category",c:"#3B82F6",pct:[2.0,3.1,3.8,3.4]}]},
+  buyleads:{label:"Buyleads — Rejection Reason Mix (Quarterly)",sub:"Q1 Apr-Jun '25 → Q4 Jan-Feb '26 · different taxonomy from ASTBUY/Direct",insight:"📌 <strong>Most stable channel</strong> — Req Mismatch at 37–38% all 4 quarters, virtually no drift. Single Click gently rising (14.4%→15.1%), possibly indicating seller fatigue with the feedback UI.",months:["Q1\nApr-Jun","Q2\nJul-Sep","Q3\nOct-Dec","Q4\nJan-Feb"],cats:[{l:"Req Mismatch",c:"#EF4444",pct:[37.6,37.8,38.2,38.3]},{l:"Others",c:"#9CA3AF",pct:[32.5,32.1,31.1,31.0]},{l:"Single Click",c:"#E2E8F0",pct:[14.4,14.2,14.7,15.1]},{l:"Buyer Unreach",c:"#06B6D4",pct:[9.7,10.1,9.8,9.4]},{l:"City Mismatch",c:"#F97316",pct:[5.8,5.8,6.3,6.2]}]},
+  app:{label:"In-App Complaints — Share Mix (Jan vs Feb '26)",sub:"Jan=964 tags · Feb=1,401 tags · % of total complaint tags · multi-select: bars don't sum to 100%",insight:"📱 Only 2 months of data. <strong>Low Conversion gaining share</strong> (22.8%→25%). Irrelevant Leads share falling (35.1%→32%) even though absolute volume rose. 'Others' jumped (9.7%→12.7%). Interpret with caution — feature adoption still growing.",months:["Jan","Feb"],cats:[{l:"Irrelevant Leads",c:"#EF4444",pct:[35.1,31.8]},{l:"Low Conversion",c:"#F97316",pct:[22.8,24.6]},{l:"Less BLs",c:"#3B82F6",pct:[20.9,20.3]},{l:"Issues w/ Buyer",c:"#8B5CF6",pct:[11.4,10.6]},{l:"Others",c:"#9CA3AF",pct:[9.7,12.7]}]},
+  nps_top:{label:"NPS — Top-Level Complaint Categories (Jan vs Feb '26)",sub:"% of commenters selecting each category · Jan n=211 tags · Feb n=635 tags · multi-select allowed",insight:"📋 <strong>Low Conversion grew</strong> (20.4%→23.0%) and Irrelevant Leads also up (30.8%→33.7%). 'Others' collapsed (25%→11.7%) — likely better sub-category capture in Feb. Less BLs jumped (15.2%→20%). <em>Survey bifurcation tracking started Jan '26.</em>",months:["Jan","Feb"],cats:[{l:"Irrelevant Leads",c:"#EF4444",pct:[30.8,33.7]},{l:"Low Conversion",c:"#F97316",pct:[20.4,23.0]},{l:"Less BLs",c:"#3B82F6",pct:[15.2,20.3]},{l:"Issues w/ Buyer",c:"#8B5CF6",pct:[9.0,11.3]},{l:"Others",c:"#9CA3AF",pct:[24.6,11.7]}]},
+  nps_irrel:{label:"Irrelevant Leads — Sub-Reasons (Jan vs Feb '26)",sub:"% of sellers who selected 'Irrelevant Leads' · Jan n=65 · Feb n=214",insight:"⚠️ <strong>'No reason given' dominates and grew</strong> (30.8%→52.8%) — most sellers flag leads as irrelevant without drilling into why. Of those who do specify: Retail Leads (18%) and Wrong Category (16.4%) are near-equal in Feb. Wrong Location eased (16.9%→8.4%).",months:["Jan","Feb"],cats:[{l:"No Reason",c:"#E2E8F0",pct:[30.8,52.8]},{l:"Retail Leads",c:"#EF4444",pct:[23.1,17.8]},{l:"Wrong Category",c:"#3B82F6",pct:[29.2,16.4]},{l:"Wrong Location",c:"#F97316",pct:[16.9,8.4]}]},
+  nps_buyer:{label:"Issues with Buyer — Sub-Reasons (Jan vs Feb '26)",sub:"% of sellers who selected 'Issues with Buyer' · Jan n=19 · Feb n=72",insight:"🙅 <strong>Buyer Unresponsive is #1 in Feb (33.3%)</strong>. 'No Option Selected' fell sharply (42.1%→18.1%) — sellers are now naming the specific buyer behaviour. Requirement Fulfilled rose (10.5%→22.2%), suggesting stale leads reaching sellers after buyer intent has passed.",months:["Jan","Feb"],cats:[{l:"No Option",c:"#E2E8F0",pct:[42.1,18.1]},{l:"Unresponsive",c:"#EF4444",pct:[21.1,33.3]},{l:"Denies Req",c:"#F97316",pct:[26.3,26.4]},{l:"Req Fulfilled",c:"#3B82F6",pct:[10.5,22.2]}]},
+  nps_bls:{label:"Less BLs / Enquiries — Sub-Reasons (Jan vs Feb '26)",sub:"% of sellers who selected 'Less BLs' · Jan n=32 · Feb n=129",insight:"📉 <strong>'Very Less Leads Overall' overtook 'No Option' as #1 sub-reason in Feb</strong>. 'Expire Fast' is stable. More than half of Jan respondents gave no sub-reason — tracking is still maturing into this category.",months:["Jan","Feb"],cats:[{l:"No Option",c:"#E2E8F0",pct:[21.9,51.9]},{l:"Very Less",c:"#EF4444",pct:[50.0,31.8]},{l:"Expire Fast",c:"#F97316",pct:[25.0,16.3]}]}
+};
+
+function drawQrfBars(svg,ch,large){
+  const d=QBIF[ch];
+  const W=svg.viewBox.baseVal.width,H=svg.viewBox.baseVal.height;
+  const pad=large?{t:14,r:14,b:30,l:20}:{t:8,r:8,b:24,l:12};
+  const cH=H-pad.t-pad.b,cW=W-pad.l-pad.r,n=d.months.length;
+  const grouped=(ch==='app'||ch.startsWith('nps'));
+  const gW=cW/n,bW=Math.floor(gW*(large?0.72:grouped?0.6:0.70));
+  let h='';
+  if(!grouped){
+    [25,50,75].forEach(p=>{
+      const y=(pad.t+cH*(1-p/100)).toFixed(1);
+      h+=`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="#F0F1F3" stroke-width=".7"/>`;
+      if(large)h+=`<text x="${pad.l-3}" y="${(+y+3).toFixed(1)}" text-anchor="end" fill="#C8CDD6" font-size="8" font-family="${QMONO}">${p}</text>`;
+    });
+  }
+  d.months.forEach((m,mi)=>{
+    const isCur=(mi===n-1),al=isCur?1:0.72;
+    const bX=pad.l+gW*mi+(gW-bW)/2,bXm=bX+bW/2;
+    if(grouped){
+      const maxPct=Math.max(...d.cats.flatMap(c=>c.pct))*1.15;
+      const nb=d.cats.length,bW2=Math.floor(bW/nb)-1;
+      d.cats.forEach((cat,ci)=>{
+        const bh=cat.pct[mi]/maxPct*cH,bx2=bX+ci*(bW2+1),by2=pad.t+cH-bh;
+        h+=`<rect x="${bx2.toFixed(1)}" y="${by2.toFixed(1)}" width="${bW2}" height="${bh.toFixed(1)}" fill="${cat.c}" opacity="${al}" rx="1"/>`;
+        if((large||isCur)&&bh>10)h+=`<text x="${(bx2+bW2/2).toFixed(1)}" y="${(by2-3).toFixed(1)}" text-anchor="middle" fill="${cat.c}" font-size="${large?8:7}" font-family="${QMONO}" font-weight="${isCur?'700':'500'}">${cat.pct[mi]}%</text>`;
+      });
+    } else {
+      let yBot=pad.t+cH;
+      [...d.cats].reverse().forEach(cat=>{
+        const segH=cat.pct[mi]/100*cH,yTop=yBot-segH;
+        h+=`<rect x="${bX.toFixed(1)}" y="${yTop.toFixed(1)}" width="${bW}" height="${segH.toFixed(1)}" fill="${cat.c}" opacity="${al}"/>`;
+        if((large&&segH>12)||(isCur&&segH>10))h+=`<text x="${bXm.toFixed(1)}" y="${(yTop+segH/2+3.5).toFixed(1)}" text-anchor="middle" fill="rgba(0,0,0,.65)" font-size="${large?8.5:7.5}" font-family="${QMONO}" font-weight="${isCur?'700':'500'}">${cat.pct[mi]}%</text>`;
+        yBot=yTop;
+      });
+      if(isCur)h+=`<rect x="${bX.toFixed(1)}" y="${pad.t}" width="${bW}" height="${cH}" fill="none" stroke="#0D1117" stroke-width="1.5" rx="2"/>`;
+    }
+    const parts=m.split('\n');
+    if(parts.length>1){
+      h+=`<text x="${bXm.toFixed(1)}" y="${H-12}" text-anchor="middle" fill="${isCur?'#0D1117':'#6B7280'}" font-size="${large?10:8.5}" font-family="${QMONO}" font-weight="${isCur?'700':'600'}">${parts[0]}</text>`;
+      h+=`<text x="${bXm.toFixed(1)}" y="${H-2}" text-anchor="middle" fill="${isCur?'#374151':'#9CA3AF'}" font-size="${large?8.5:7}" font-family="${QMONO}">${parts[1]}</text>`;
+    } else {
+      h+=`<text x="${bXm.toFixed(1)}" y="${H-3}" text-anchor="middle" fill="${isCur?'#0D1117':'#9CA3AF'}" font-size="${large?9:8}" font-family="${QMONO}" font-weight="${isCur?'700':'400'}">${m}</text>`;
+    }
+  });
+  svg.innerHTML=h;
+}
+
+function buildQrfLeg(el,ch){
+  el.innerHTML=QBIF[ch].cats.map(c=>`<span style="display:flex;align-items:center;gap:3px"><span style="width:9px;height:9px;border-radius:2px;background:${c.c};flex-shrink:0;display:inline-block"></span><span>${c.l}</span></span>`).join('');
+}
+
+function openQrfModal(ch){
+  const d=QBIF[ch],m=document.getElementById('qrf-modal');
+  document.getElementById('qrf-modal-title').textContent=d.label;
+  document.getElementById('qrf-modal-sub').textContent=d.sub;
+  document.getElementById('qrf-modal-insight').innerHTML=d.insight;
+  const sv=document.getElementById('qrf-modal-svg');
+  const small=(ch==='app'||ch.startsWith('nps'));
+  sv.setAttribute('viewBox',small?'0 0 900 260':'0 0 900 320');
+  drawQrfBars(sv,ch,true);
+  buildQrfLeg(document.getElementById('qrf-modal-leg'),ch);
+  m.style.display='flex';document.body.style.overflow='hidden';
+}
+function closeQrfModal(e){
+  if(e&&e.target!==document.getElementById('qrf-modal'))return;
+  document.getElementById('qrf-modal').style.display='none';document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('qrf-modal').style.display='none';document.body.style.overflow='';}});
+
+function renderTab4(){
+  const map={'astbuy':'qrf-astbuy','direct':'qrf-direct','buyleads':'qrf-buyleads','app':'qrf-app','nps_top':'nps-top','nps_irrel':'nps-irrel','nps_buyer':'nps-buyer','nps_bls':'nps-bls'};
+  Object.entries(map).forEach(([ch,id])=>{
+    const sv=document.getElementById(id+'-chart');
+    const le=document.getElementById(id+'-leg');
+    if(sv)drawQrfBars(sv,ch,false);
+    if(le)buildQrfLeg(le,ch);
+  });
+}
+</script>
+
+
+<div id="spk-tooltip" style="
+  position:fixed;display:none;flex-direction:column;align-items:center;gap:2px;
+  background:#1E293B;color:#F8FAFC;padding:7px 13px;border-radius:8px;
+  pointer-events:none;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.25);
+  font-family:'Sora',sans-serif;
+"></div>
+</body>
+</html>
