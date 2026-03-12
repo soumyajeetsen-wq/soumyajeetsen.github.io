@@ -532,6 +532,7 @@ body {
 /* Spark tooltip */
 .tt-month { font-size:9px; font-weight:600; color:#94A3B8; text-transform:uppercase; letter-spacing:.4px; }
 .tt-val   { font-size:13px; font-weight:800; font-family:'JetBrains Mono',monospace; color:#F5F5F2; }
+.tt-n     { font-size:10px; font-weight:500; font-family:'JetBrains Mono',monospace; color:#F5F5F2; opacity:.75; margin-top:1px; }
 
 /* ─── SOURCE CHIPS (section header) ─── */
 .src-chip {
@@ -2837,9 +2838,9 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
       }
 
       // Invisible hit-area for tooltip
-      const tipN = (opts.ns && opts.ns[i] != null) ? opts.ns[i].toLocaleString() : null;
-      const tipLabel = tipN ? tipN : (fmtd+unit);
-      h+=`<circle class="spk-hit" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="14" fill="transparent" data-month="${months[i]}" data-val="${tipLabel}" data-isN="${tipN ? 'true' : 'false'}" style="cursor:pointer"/>`;
+      const tipNps = fmtd + unit;
+      const tipN   = (opts.ns && opts.ns[i] != null) ? opts.ns[i].toLocaleString() : null;
+      h+=`<circle class="spk-hit" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="14" fill="transparent" data-month="${months[i]}" data-nps="${tipNps}" data-n="${tipN || ''}" style="cursor:pointer"/>`;
     });
 
     // X-axis month labels — show all, sized for legibility
@@ -2859,8 +2860,7 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
       el.addEventListener('mousemove', e=>{
         const tt = document.getElementById('spk-tooltip');
         if(!tt) return;
-        const prefix = el.dataset.isN === 'true' ? 'n=' : '';
-        tt.innerHTML = `<span class="tt-month">${el.dataset.month}</span><span class="tt-val">${prefix}${el.dataset.val}</span>`;
+        tt.innerHTML = `<span class="tt-month">${el.dataset.month}</span><span class="tt-val">${el.dataset.n ? el.dataset.n : el.dataset.nps}</span>`;
         tt.style.display='flex';
         const ttW = tt.offsetWidth || 90;
         const ttH = tt.offsetHeight || 34;
@@ -3894,12 +3894,12 @@ _reg("Jan '26", {
   bl:  { val:4.52, n:526186, mom:-0.96, best:false,
     sv:_BL_FULL.vals.slice(0,10), sm:_BL_FULL.mos.slice(0,10), sn:_BL_FULL.ns.slice(0,10) },
   // Seller types — 4-pt spark (no Feb pt yet)
-  star:   { val:27.8, mom:-3.0,  best:false, n:2204,  sv:[22.1,27.3,30.8,27.8], sm:['Apr','Jul','Oct','Jan'] },
-  leader: { val:24.6, mom:-3.7,  best:false, n:1315,  sv:[22.9,29.8,28.3,24.6], sm:['Apr','Jul','Oct','Jan'] },
-  ts:     { val:30.2, mom:+2.4,  best:true,  n:5811,  sv:[21.8,28.1,27.8,30.2], sm:['Apr','Jul','Oct','Jan'] },
-  cat:    { val:12.5, mom:-0.9,  best:false, n:2953,  sv:[11.8,11.7,13.4,12.5], sm:['Apr','Jul','Oct','Jan'] },
-  est:    { val:25.9, mom:+1.5,  best:false, n:11946, sv:[16.6,23.2,24.4,25.9], sm:['Apr','Jul','Oct','Jan'] },
-  newS:   { val:7.7,  mom:-10.5, best:false, n:854,   sv:[5.5,7.7,11.9,7.7],    sm:['Apr','Jul','Oct','Jan'] },
+  star:   { val:27.8, mom:-3.0,  best:false, n:2204,  sv:[22.1,27.3,30.8,27.8], sm:['Apr','Jul','Oct','Jan'], sn:[2306,2355,2129,2204] },
+  leader: { val:24.6, mom:-3.7,  best:false, n:1315,  sv:[22.9,29.8,28.3,24.6], sm:['Apr','Jul','Oct','Jan'], sn:[1422,1427,1272,1315] },
+  ts:     { val:30.2, mom:+2.4,  best:true,  n:5811,  sv:[21.8,28.1,27.8,30.2], sm:['Apr','Jul','Oct','Jan'], sn:[6249,6292,5627,5811] },
+  cat:    { val:12.5, mom:-0.9,  best:false, n:2953,  sv:[11.8,11.7,13.4,12.5], sm:['Apr','Jul','Oct','Jan'], sn:[2578,2914,2826,2953] },
+  est:    { val:25.9, mom:+1.5,  best:false, n:11946, sv:[16.6,23.2,24.4,25.9], sm:['Apr','Jul','Oct','Jan'], sn:[13636,13371,11743,11946] },
+  newS:   { val:7.7,  mom:-10.5, best:false, n:854,   sv:[5.5,7.7,11.9,7.7],    sm:['Apr','Jul','Oct','Jan'], sn:[1159,1182,899,854] },
   // P4 problem percentages
   p4: { irrel:{nps:31,app:35,bl:34,qrf:19}, conv:{nps:20,app:23}, bls:{nps:15,app:21}, spec:{bl:22,qrf:18} },
   // Complaint bars
@@ -3934,12 +3934,12 @@ _reg("Feb '26", {
     sv:_QRF_FULL.vals, sm:_QRF_FULL.mos, sn:_QRF_FULL.ns },
   bl:  { val:4.41, n:471539, mom:-0.11, best:false,
     sv:_BL_FULL.vals, sm:_BL_FULL.mos, sn:_BL_FULL.ns },
-  star:   { val:33.6, mom:+5.8, best:true,  n:345,   sv:[22.1,27.3,30.8,27.8,33.6], sm:['Apr','Jul','Oct','Jan','Feb'] },
-  leader: { val:30.5, mom:+5.9, best:true,  n:174,   sv:[22.9,29.8,28.3,24.6,30.5], sm:['Apr','Jul','Oct','Jan','Feb'] },
-  ts:     { val:27.1, mom:-3.1, best:false, n:1031,  sv:[21.8,28.1,27.8,30.2,27.1], sm:['Apr','Jul','Oct','Jan','Feb'] },
-  cat:    { val:14.8, mom:+2.3, best:true,  n:480,   sv:[11.8,11.7,13.4,12.5,14.8], sm:['Apr','Jul','Oct','Jan','Feb'] },
-  est:    { val:30.7, mom:+4.8, best:false, n:1282,  sv:[16.6,23.2,24.4,25.9,30.7], sm:['Apr','Jul','Oct','Jan','Feb'] },
-  newS:   { val:17.4, mom:+9.7,  best:false, n:856,   sv:[5.5,7.7,11.9,7.7,17.4],   sm:['Apr','Jul','Oct','Jan','Feb'] },
+  star:   { val:33.6, mom:+5.8, best:true,  n:345,   sv:[22.1,27.3,30.8,27.8,33.6], sm:['Apr','Jul','Oct','Jan','Feb'], sn:[2306,2355,2129,2204,345] },
+  leader: { val:30.5, mom:+5.9, best:true,  n:174,   sv:[22.9,29.8,28.3,24.6,30.5], sm:['Apr','Jul','Oct','Jan','Feb'], sn:[1422,1427,1272,1315,174] },
+  ts:     { val:27.1, mom:-3.1, best:false, n:1031,  sv:[21.8,28.1,27.8,30.2,27.1], sm:['Apr','Jul','Oct','Jan','Feb'], sn:[6249,6292,5627,5811,1031] },
+  cat:    { val:14.8, mom:+2.3, best:true,  n:480,   sv:[11.8,11.7,13.4,12.5,14.8], sm:['Apr','Jul','Oct','Jan','Feb'], sn:[2578,2914,2826,2953,480] },
+  est:    { val:30.7, mom:+4.8, best:false, n:1282,  sv:[16.6,23.2,24.4,25.9,30.7], sm:['Apr','Jul','Oct','Jan','Feb'], sn:[13636,13371,11743,11946,1282] },
+  newS:   { val:17.4, mom:+9.7,  best:false, n:856,   sv:[5.5,7.7,11.9,7.7,17.4],   sm:['Apr','Jul','Oct','Jan','Feb'], sn:[1159,1182,899,854,856] },
   p4: { irrel:{nps:34,app:32,bl:34,qrf:19}, conv:{nps:23,app:25}, bls:{nps:21,app:20}, spec:{bl:22,qrf:18} },
   npsBars: [
     { l:"Jan '26", n:211, s:[65,43,32,19,52]    },
@@ -4072,7 +4072,7 @@ function switchMonth(key) {
   // ── 3. Tab2: seller-type sparks ───────────────────────────────
   const _stCard = (svgId, seg) => {
     const col = seg.val > 20 ? '#2D8A6A' : seg.val > 0 ? '#C07D30' : '#C0444A';
-    dsl(svgId, { vals:seg.sv, months:seg.sm, color:col, fmt:v=>v.toFixed(1), allLabels:true });
+    dsl(svgId, { vals:seg.sv, months:seg.sm, ns:seg.sn, color:col, fmt:v=>v.toFixed(1), allLabels:true });
     const svg = document.getElementById(svgId); if(!svg) return;
     const card = svg.closest('.spk-card'); if(!card) return;
     const q = s => card.querySelector(s);
@@ -4157,7 +4157,7 @@ function _renderNpsBars(bars) {
       const pct = +(v/tot*100).toFixed(1);
       seg.style.height = pct + '%';
       seg.style.background = SEG_COLORS[si];
-      seg.setAttribute('data-tip', 'n='+v+' ('+pct+'%)');
+      seg.setAttribute('data-tip', 'n='+v);
       const lbl = seg.querySelector('.vcb-lbl');
       if(lbl) lbl.textContent = pct + '%';
     });
