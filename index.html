@@ -628,6 +628,120 @@ body {
 .tab-summary li .hi-amber { color:#D97706; font-weight:700; }
 .ts-hdr { font-size:9px; font-weight:800; color:var(--muted); text-transform:uppercase;
   letter-spacing:.5px; margin-bottom:8px; }
+
+/* ═══════════════════════════════════════════════
+   MOBILE RESPONSIVE — breakpoints 768px / 480px
+═══════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* Header */
+  .hdr { padding: 0 16px; flex-wrap: wrap; gap: 0; }
+  .hdr-left { padding: 12px 0 4px; }
+  .hdr-title { font-size: 14px; }
+  .hdr-sub { font-size: 9px; }
+  .hdr-right { display: none; }
+
+  /* Tab bar — scroll horizontally */
+  .tab-bar {
+    padding: 0 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+    gap: 4px;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn { font-size: 10px; padding: 8px 12px; white-space: nowrap; flex-shrink: 0; }
+
+  /* Page padding */
+  .pg { padding: 14px 16px 28px; }
+
+  /* Section headers */
+  .sh { flex-wrap: wrap; gap: 6px; }
+
+  /* 2-col grids → 1 col */
+  .spark-grid,
+  .prob4-grid,
+  .voice-grid { grid-template-columns: 1fr; }
+
+  /* Spark cards */
+  .spk-card { padding: 14px 16px; }
+  .spk-val { font-size: 28px; }
+
+  /* Seller problems vol strip */
+  .p4-vols { flex-wrap: wrap; gap: 6px; }
+
+  /* NPS deep dive — seller type + vintage grids */
+  .spark-grid { grid-template-columns: 1fr; }
+
+  /* Vertical bar chart — shrink height, tighten gaps */
+  .vcb-wrap { padding: 14px 12px 12px; }
+  .vcb-chart-area { height: 180px; }
+  .vcb-bars { gap: 6px !important; padding-left: 38px; }
+  .vcb-bar-group { max-width: 100% !important; }
+  .vcb-lbl { font-size: 7px !important; }
+  .vcb-lbl-sm { font-size: 6.5px !important; }
+  .vcb-yaxis span { font-size: 7px; width: 28px; }
+  .vcb-bar-label { font-size: 8px; }
+  .vcb-bar-n { font-size: 7px; }
+  .vcb-legend { gap: 8px; }
+  .vcb-leg-item { font-size: 9px; }
+
+  /* Heatmap — allow horizontal scroll */
+  .hmap-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .hmap-table { min-width: 520px; }
+  .hmap-th-sub, .hmap-sub-name { min-width: 140px; font-size: 9px; }
+  .hmap-cell { font-size: 9px; padding: 6px 8px; }
+  .hmap-th-month, .hmap-th-delta { font-size: 8px; padding: 8px 8px; min-width: 60px; }
+  .hmap-delta { font-size: 8px; padding: 6px 8px; }
+
+  /* Disposition summary chips — 2 col */
+  .dispo-summary-row { grid-template-columns: 1fr 1fr; display: grid; }
+  .dsp-chip { min-width: unset; }
+
+  /* Voice cards */
+  .voice-card { padding: 12px 14px; }
+
+  /* Tab summary */
+  .tab-summary li { font-size: 10px; }
+
+  /* CTA buttons row */
+  [style*="display:flex;justify-content:space-between"] { gap: 6px; }
+}
+
+@media (max-width: 480px) {
+
+  .hdr-title { font-size: 12px; }
+  .pg { padding: 12px 12px 24px; }
+
+  /* Spark value smaller */
+  .spk-val { font-size: 24px; }
+
+  /* Prob cards — ensure vol strip wraps cleanly */
+  .p4-vols { gap: 4px; }
+  .p4-vol { min-width: 60px; }
+
+  /* Disposition chips stack */
+  .dispo-summary-row { grid-template-columns: 1fr; }
+
+  /* Bar chart further compressed */
+  .vcb-chart-area { height: 150px; }
+  .vcb-bars { gap: 3px !important; }
+
+  /* CTAs stack */
+  [style*="display:flex;justify-content:space-between"] {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  [style*="display:flex;justify-content:space-between"] button {
+    justify-content: center;
+  }
+
+  /* Tab bar */
+  .tab-btn { font-size: 9px; padding: 7px 10px; }
+}
+
 /* ─── FOOTER ─── */
 .ftr {
   background: var(--white); border-top: 1px solid var(--border);
