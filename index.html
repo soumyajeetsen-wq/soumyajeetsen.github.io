@@ -2507,8 +2507,11 @@ function switchTab(id, btn) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
-  // Snap the tab-nav bar so the active button is fully visible
-  btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  // Snap the tab-nav bar so the active button is fully visible.
+  // Always query the real tab-nav button by tab ID (CTA clicks pass the CTA element,
+  // not the tab-nav button, so we can't rely solely on btn).
+  const navBtn = document.querySelector('.tab-btn[onclick*="' + id + '"]') || btn;
+  navBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   if (id === 'tab3' || id === 'tab5') {} // tabs render from static HTML
   // Always scroll to top on tab switch
   window.scrollTo({ top: 0, behavior: 'instant' });
