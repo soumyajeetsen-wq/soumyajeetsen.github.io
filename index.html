@@ -696,8 +696,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     flex-wrap: nowrap;
     gap: 0;
     /* Fade right edge to hint scrollability */
-    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
-    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+
   }
   .tab-nav::-webkit-scrollbar { display: none; }
   .tab-btn {
@@ -736,7 +735,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   .spark-grid { grid-template-columns: 1fr; gap: 10px; }
   .spk-card   { padding: 14px 16px 12px; }
   .spk-label  { font-size: 9.5px; }
-  .spk-val    { font-size: 30px; }
+  .spk-val    { font-size: 36px; }
   .spk-mom    { font-size: 10px; }
   .spk-vol-n  { font-size: 9px; }
   .spk-svg    { height: 60px; }
@@ -839,7 +838,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   .tab-summary li { font-size: 10.5px; }
 
   /* ── Spark cards ── */
-  .spk-val { font-size: 26px; }
+  .spk-val { font-size: 32px; }
   .spk-svg { height: 52px; }
 
   /* ── Prob vol strip — 2-up ── */
@@ -1118,11 +1117,22 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 </div>
 
 <!-- ═══ TAB NAV ═══ -->
-<div class="tab-nav">
+<div style="position:relative; overflow:hidden;">
+<div class="tab-nav" id="tab-nav-el">
   <button class="tab-btn active" onclick="switchTab('tab1',this)">📊 Overview &amp; Problems</button>
   <button class="tab-btn" onclick="switchTab('tab2',this)">📊 NPS Deep Dive</button>
   <button class="tab-btn" onclick="switchTab('tab3',this)">🔍 NPS Complaints</button>
   <button class="tab-btn" onclick="switchTab('tab5',this)">📱 App Complaints</button>
+</div>
+<div id="tab-scroll-hint" style="
+  display:none;
+  position:absolute; right:0; top:0; bottom:0; width:48px;
+  background:linear-gradient(to right, transparent, rgba(255,255,255,.98));
+  pointer-events:none; align-items:center; justify-content:flex-end;
+  padding-right:8px; z-index:10;
+">
+  <span style="font-size:16px; color:#9CA3AF; line-height:1;">›</span>
+</div>
 </div>
 
 <!-- ═══ TAB 1 ═══ -->
@@ -2657,6 +2667,38 @@ function renderTab4(){
     if(le)buildQrfLeg(le,ch);
   });
 }
+
+// ── Tab scroll hint ──────────────────────────────────────────────────
+(function() {
+  var nav = document.getElementById('tab-nav-el');
+  var hint = document.getElementById('tab-scroll-hint');
+  if (!nav || !hint) return;
+
+  function updateHint() {
+    var canScroll = nav.scrollWidth > nav.clientWidth;
+    var atEnd = nav.scrollLeft >= nav.scrollWidth - nav.clientWidth - 4;
+    if (canScroll && !atEnd) {
+      hint.style.display = 'flex';
+    } else {
+      hint.style.display = 'none';
+    }
+  }
+
+  // Show on mobile only
+  function checkMobile() {
+    if (window.innerWidth <= 768) {
+      updateHint();
+    } else {
+      hint.style.display = 'none';
+    }
+  }
+
+  nav.addEventListener('scroll', checkMobile, { passive: true });
+  window.addEventListener('resize', checkMobile);
+  // Initial check after fonts load
+  setTimeout(checkMobile, 100);
+})();
+
 </script>
 
 
