@@ -8,31 +8,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #F7F8FA;
-  --white: #FFFFFF;
-  --border: #E4E7EC;
-  --ink: #0D1117;
-  --ink2: #3D4451;
-  --muted: #6B7280;
-  --faint: #9CA3AF;
-  --green: #059669;
-  --green-bg: #ECFDF5;
-  --green-border: #A7F3D0;
-  --red: #DC2626;
-  --red-bg: #FEF2F2;
-  --red-border: #FECACA;
-  --amber: #D97706;
-  --amber-bg: #FFFBEB;
-  --amber-border: #FDE68A;
-  --blue: #2563EB;
-  --blue-bg: #EFF6FF;
-  --blue-border: #BFDBFE;
-  --orange: #EA580C;
-  --orange-bg: #FFF7ED;
-  --orange-border: #FED7AA;
-  --purple: #7C3AED;
-  --purple-bg: #F5F3FF;
-  --purple-border: #DDD6FE;
+  --bg: #F5F5F2;
+  --white: #FAFAF8;
+  --border: #E8E6E1;
+  --ink: #2C2C35;
+  --ink2: #525566;
+  --muted: #7E8394;
+  --faint: #ABABBA;
+  --green: #2D8A6A;
+  --green-bg: #EEF7F3;
+  --green-border: #B8DFD0;
+  --red: #C0444A;
+  --red-bg: #FAF0F0;
+  --red-border: #F0CECE;
+  --amber: #C07D30;
+  --amber-bg: #FAF6ED;
+  --amber-border: #EDD8A0;
+  --blue: #4270C4;
+  --blue-bg: #EEF2FA;
+  --blue-border: #C4D4F0;
+  --orange: #C46040;
+  --orange-bg: #FAF3EE;
+  --orange-border: #EDD0B8;
+  --purple: #7055B8;
+  --purple-bg: #F2F0FA;
+  --purple-border: #D0CAEC;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 13px; }
@@ -146,7 +146,7 @@ body {
 .pb-tip::after {
   content: attr(data-tip);
   position: absolute; bottom: calc(100% + 7px); left: 50%; transform: translateX(-50%);
-  background: #1E293B; color: #F8FAFC;
+  background: #2C3548; color: #F5F5F2;
   font-size: 10px; font-weight: 500; line-height: 1.45;
   font-family: 'Sora', sans-serif; letter-spacing: 0;
   padding: 7px 11px; border-radius: 7px;
@@ -158,7 +158,7 @@ body {
 .pb-tip::before {
   content: '';
   position: absolute; bottom: calc(100% + 2px); left: 50%; transform: translateX(-50%);
-  border: 5px solid transparent; border-top-color: #1E293B;
+  border: 5px solid transparent; border-top-color: #2C3548;
   pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 999;
 }
 .pb-tip:hover::after, .pb-tip:hover::before { opacity: 1; }
@@ -186,7 +186,7 @@ body {
 .ss-nps { background: var(--blue-border); color: var(--blue); }
 .ss-qrf { background: var(--orange-border); color: var(--orange); }
 .ss-int { background: var(--purple-border); color: var(--purple); }
-.ss-no  { background: #E5E7EB; color: var(--faint); }
+.ss-no  { background: #E4E1DB; color: var(--faint); }
 .sig-body { flex: 1; min-width: 0; }
 .sig-main { font-size: 11px; font-weight: 700; color: var(--ink); line-height: 1.3; }
 .sig-sub  { font-size: 9.5px; color: var(--muted); margin-top: 1px; line-height: 1.4; }
@@ -200,7 +200,7 @@ body {
 .sub-r { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .sub-r:last-child { margin-bottom: 0; }
 .sub-nm  { font-size: 9.5px; color: var(--ink2); min-width: 130px; }
-.sub-trk { flex: 1; height: 4px; background: #F3F4F6; border-radius: 2px; overflow: hidden; }
+.sub-trk { flex: 1; height: 4px; background: #F0EFEC; border-radius: 2px; overflow: hidden; }
 .sub-fill { height: 100%; border-radius: 2px; }
 .sub-v   { font-size: 9.5px; font-weight: 700; color: var(--ink2); font-family: 'JetBrains Mono', monospace; min-width: 20px; text-align: right; }
 /* chronic badge */
@@ -254,19 +254,19 @@ body {
 .qb-row {
   display: grid; grid-template-columns: 1fr 190px 60px 88px;
   align-items: center; gap: 10px; padding: 8px 0;
-  border-bottom: 1px solid #F9FAFB;
+  border-bottom: 1px solid #F5F5F2;
 }
 .qb-row:last-child { border-bottom: none; }
 .qb-name { font-size: 11px; font-weight: 700; }
 .qb-plain { font-size: 9.5px; color: var(--muted); margin-top: 1px; }
 .qb-link { font-size: 8.5px; font-weight: 700; margin-top: 2px; color: #A16207; }
-.qb-track { height: 8px; background: #F3F4F6; border-radius: 4px; overflow: hidden; }
+.qb-track { height: 8px; background: #F0EFEC; border-radius: 4px; overflow: hidden; }
 .qb-fill { height: 100%; border-radius: 4px; }
 .qb-count { font-size: 12px; font-weight: 700; font-family: 'JetBrains Mono', monospace; text-align: right; }
 .qb-chip { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 20px; text-align: center; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
 .qc-up { background: var(--red-bg); color: var(--red); }
 .qc-dn { background: var(--green-bg); color: var(--green); }
-.qc-fl { background: #F3F4F6; color: var(--muted); }
+.qc-fl { background: #F0EFEC; color: var(--muted); }
 
 /* ─── INTERNAL FEEDBACK ─── */
 .int-layout { display: grid; grid-template-columns: 280px 1fr; gap: 10px; }
@@ -280,10 +280,10 @@ body {
 .int-r-sub { font-size: 9.5px; color: var(--muted); margin-top: 2px; }
 .int-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .ibr-star { font-size: 9.5px; font-weight: 600; color: var(--muted); width: 32px; flex-shrink: 0; }
-.ibr-track { flex: 1; height: 7px; background: #F3F4F6; border-radius: 3px; overflow: hidden; }
+.ibr-track { flex: 1; height: 7px; background: #F0EFEC; border-radius: 3px; overflow: hidden; }
 .ibr-fill { height: 100%; border-radius: 3px; }
 .ibr-n { font-size: 9px; font-family: 'JetBrains Mono', monospace; color: var(--muted); width: 36px; text-align: right; flex-shrink: 0; }
-.int-extrap { font-size: 8.5px; color: var(--faint); margin-top: 10px; font-style: italic; background: #F9FAFB; padding: 6px 9px; border-radius: 5px; line-height: 1.5; }
+.int-extrap { font-size: 8.5px; color: var(--faint); margin-top: 10px; font-style: italic; background: #F5F5F2; padding: 6px 9px; border-radius: 5px; line-height: 1.5; }
 /* store rating badge */
 .store-badge {
   background: var(--bg); border: 1px solid var(--border); border-radius: 9px;
@@ -302,7 +302,7 @@ body {
 .ib-row {
   display: grid; grid-template-columns: 1fr 90px 90px 100px;
   align-items: center; gap: 10px; padding: 9px 0;
-  border-bottom: 1px solid #F9FAFB;
+  border-bottom: 1px solid #F5F5F2;
 }
 .ib-row:last-child { border-bottom: none; }
 .ib-row.ib-hdr { padding-bottom: 7px; border-bottom: 1px solid var(--border); }
@@ -317,7 +317,7 @@ body {
 .ic-up { background: var(--red-bg); color: var(--red); }
 .ic-mod { background: var(--amber-bg); color: var(--amber); }
 .ic-ok { background: var(--green-bg); color: var(--green); }
-.ib-extrap-note { font-size: 9px; color: var(--faint); font-style: italic; margin-top: 10px; background: #F9FAFB; padding: 7px 10px; border-radius: 5px; line-height: 1.5; }
+.ib-extrap-note { font-size: 9px; color: var(--faint); font-style: italic; margin-top: 10px; background: #F5F5F2; padding: 7px 10px; border-radius: 5px; line-height: 1.5; }
 
 /* ─── SEGMENT ─── */
 .seg-wrap { background: var(--white); border: 1px solid var(--border); border-radius: 11px; overflow: hidden; }
@@ -329,14 +329,14 @@ body {
 }
 .seg-row {
   display: grid; grid-template-columns: 170px 1fr 80px 110px 130px;
-  gap: 12px; padding: 11px 18px; border-bottom: 1px solid #F9FAFB;
+  gap: 12px; padding: 11px 18px; border-bottom: 1px solid #F5F5F2;
   align-items: center;
 }
 .seg-row:last-child { border-bottom: none; }
 .seg-row.seg-highlight { background: #FFFBEB; }
 .sn { font-size: 11.5px; font-weight: 700; }
 .st { font-size: 9px; color: var(--faint); margin-top: 1px; }
-.seg-bar { height: 6px; background: #F3F4F6; border-radius: 3px; overflow: hidden; }
+.seg-bar { height: 6px; background: #F0EFEC; border-radius: 3px; overflow: hidden; }
 .seg-fill { height: 100%; border-radius: 3px; }
 .seg-score { font-size: 19px; font-weight: 800; font-family: 'JetBrains Mono', monospace; }
 .seg-delta { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; display: inline-block; }
@@ -358,7 +358,7 @@ body {
 }
 .ab-now  { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
 .ab-week { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
-.ab-mon  { background: #F3F4F6; color: var(--muted); border: 1px solid var(--border); }
+.ab-mon  { background: #F0EFEC; color: var(--muted); border: 1px solid var(--border); }
 .ac-title { font-size: 13px; font-weight: 800; color: var(--ink); margin-bottom: 6px; line-height: 1.3; }
 .ac-body { font-size: 10.5px; color: var(--muted); line-height: 1.65; flex: 1; }
 .ac-body strong { color: var(--ink2); }
@@ -380,8 +380,8 @@ body {
 .spk-meta { font-size:9.5px; color:var(--muted); margin-top:4px; line-height:1.4; }
 .spk-mom { font-size:11px; font-weight:700; margin-bottom:6px; }
 .be-subtle {
-  font-weight:700; color:#047857;
-  background:#ECFDF5; border:1px solid #A7F3D0;
+  font-weight:700; color:#2D7A58;
+  background:#EEF7F3; border:1px solid #B8DFD0;
   padding:1px 6px; border-radius:4px;
   font-size:9px; font-family:'JetBrains Mono',monospace;
   letter-spacing:.2px; white-space:nowrap;
@@ -398,8 +398,8 @@ body {
   display:inline-flex; align-items:center; gap:4px;
   font-size:10px; font-weight:800; letter-spacing:.4px;
   font-family:'JetBrains Mono',monospace; text-transform:uppercase;
-  background:linear-gradient(135deg,#ECFDF5,#D1FAE5);
-  color:#059669; border:1.5px solid #6EE7B7;
+  background:linear-gradient(135deg,#EEF7F3,#D1FAE5);
+  color:#2D8A6A; border:1.5px solid #6EE7B7;
   padding:3px 10px; border-radius:5px;
   box-shadow:0 1px 4px rgba(5,150,105,.15);
 }
@@ -450,7 +450,7 @@ body {
 .p4-s-nps { color:var(--blue); }
 .p4-s-app { color:var(--purple); }
 .p4-s-qrf { color:var(--orange); }
-.p4-s-bl  { color:#047857; }
+.p4-s-bl  { color:#2D7A58; }
 /* pct row */
 .p4-pcts { font-size:9px; color:var(--muted); display:flex; flex-wrap:wrap; gap:3px; align-items:center; }
 .p4-pct  { font-weight:700; }
@@ -487,7 +487,7 @@ body {
 .p2-nps { background:var(--blue-bg); color:var(--blue); border:1px solid var(--blue-border); }
 .p2-app { background:var(--purple-bg); color:var(--purple); border:1px solid var(--purple-border); }
 .p2-qrf { background:var(--orange-bg); color:var(--orange); border:1px solid var(--orange-border); }
-.p2-bl  { background:#F0FDF4; color:#15803D; border:1px solid #A7F3D0; }
+.p2-bl  { background:#EEF7F3; color:#2D7A50; border:1px solid #B8DFD0; }
 .p2-subs { font-size:9px; color:var(--muted); line-height:1.6; }
 .p2-sub { color:var(--ink2); font-weight:600; }
 .p2-dot { color:var(--faint); margin:0 1px; }
@@ -516,7 +516,7 @@ body {
 .vtag-spec  { background:#FFF7ED; color:var(--orange); border:1px solid #FED7AA; }
 .vtag-iwb   { background:#FFFBEB; color:var(--amber);  border:1px solid #FDE68A; }
 .vtag-conv  { background:var(--blue-bg); color:var(--blue); border:1px solid var(--blue-border); }
-.vtag-bls   { background:#F3F4F6; color:var(--ink2); border:1px solid var(--border); }
+.vtag-bls   { background:#F0EFEC; color:var(--ink2); border:1px solid var(--border); }
 .vtag-spec  { background:var(--purple-bg); color:var(--purple); border:1px solid var(--purple-border); }
 .voice-quote {
   font-size:12.5px; color:var(--ink); line-height:1.65; font-weight:500;
@@ -531,7 +531,7 @@ body {
 
 /* Spark tooltip */
 .tt-month { font-size:9px; font-weight:600; color:#94A3B8; text-transform:uppercase; letter-spacing:.4px; }
-.tt-val   { font-size:13px; font-weight:800; font-family:'JetBrains Mono',monospace; color:#F8FAFC; }
+.tt-val   { font-size:13px; font-weight:800; font-family:'JetBrains Mono',monospace; color:#F5F5F2; }
 
 /* ─── SOURCE CHIPS (section header) ─── */
 .src-chip {
@@ -546,8 +546,8 @@ body {
 .src-app::before { background:var(--purple); }
 .src-qrf { background:var(--orange-bg); color:var(--orange); border:1px solid var(--orange-border); }
 .src-qrf::before { background:var(--orange); }
-.src-bl  { background:#F0FDF4; color:#15803D; border:1px solid #A7F3D0; }
-.src-bl::before  { background:#15803D; }
+.src-bl  { background:#EEF7F3; color:#2D7A50; border:1px solid #B8DFD0; }
+.src-bl::before  { background:#2D7A50; }
 
 
 /* ─── VERTICAL STACKED BAR ─── */
@@ -556,7 +556,7 @@ body {
 .vcb-yaxis { position:absolute; left:0; top:0; bottom:30px; display:flex; flex-direction:column; justify-content:space-between; }
 .vcb-yaxis span { font-size:8px; color:var(--faint); font-family:'JetBrains Mono',monospace; width:34px; text-align:right; line-height:1; }
 .vcb-grid { position:absolute; left:42px; right:0; top:0; bottom:30px; display:flex; flex-direction:column; justify-content:space-between; pointer-events:none; }
-.vcb-gridline { border-top:1px dashed #E5E7EB; width:100%; }
+.vcb-gridline { border-top:1px dashed #E4E1DB; width:100%; }
 .vcb-bars { display:flex; align-items:flex-end; gap:40px; padding-left:52px; height:100%; flex:1; }
 .vcb-bar-group { display:flex; flex-direction:column; align-items:center; gap:8px; flex:1; max-width:120px; height:100%; }
 .vcb-bar { width:100%; flex:1; display:flex; flex-direction:column; justify-content:flex-end; border-radius:8px 8px 0 0; overflow:visible; }
@@ -566,7 +566,7 @@ body {
 .vcb-seg[data-tip]::after {
   content: attr(data-tip);
   position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%);
-  background:#1E293B; color:#F8FAFC; font-size:10px; font-weight:600;
+  background:#2C3548; color:#F5F5F2; font-size:10px; font-weight:600;
   font-family:'Sora',sans-serif; padding:5px 10px; border-radius:6px;
   white-space:nowrap; pointer-events:none; opacity:0; transition:opacity .15s; z-index:999;
 }
@@ -594,26 +594,26 @@ body {
 /* ─── HEATMAP ─── */
 .hmap-wrap { background:var(--white); border:1px solid var(--border); border-radius:13px; overflow:hidden; }
 .hmap-table { width:100%; border-collapse:collapse; }
-.hmap-table thead { background:#F8FAFC; }
+.hmap-table thead { background:#F5F5F2; }
 .hmap-th-sub { padding:10px 16px; font-size:9px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.4px; text-align:left; width:200px; border-bottom:1px solid var(--border); }
 .hmap-th-month { padding:10px 12px; font-size:9px; font-weight:700; color:var(--ink2); text-align:center; border-bottom:1px solid var(--border); border-left:1px solid var(--border); min-width:80px; }
 .hmap-th-future { color:var(--faint) !important; font-style:italic; }
 .hmap-th-delta { padding:10px 12px; font-size:9px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.4px; text-align:center; border-bottom:1px solid var(--border); border-left:1px solid var(--border); }
 .hmap-group-hdr td { padding:8px 16px; font-size:10px; font-weight:800; color:var(--gc,#6B7280); background:color-mix(in srgb, var(--gc,#6B7280) 8%, white); border-top:2px solid color-mix(in srgb, var(--gc,#6B7280) 20%, white); border-bottom:1px solid var(--border); letter-spacing:.2px; }
-.hmap-sub-name { padding:10px 10px 10px 28px; font-size:10px; color:var(--ink2); font-weight:500; border-bottom:1px solid #F3F4F6; white-space:nowrap; }
+.hmap-sub-name { padding:10px 10px 10px 28px; font-size:10px; color:var(--ink2); font-weight:500; border-bottom:1px solid #F0EFEC; white-space:nowrap; }
 .hmap-cell {
-  padding:8px 12px; text-align:center; border-left:1px solid #F3F4F6; border-bottom:1px solid #F3F4F6;
+  padding:8px 12px; text-align:center; border-left:1px solid #F0EFEC; border-bottom:1px solid #F0EFEC;
   font-size:10px; font-weight:700; font-family:'JetBrains Mono',monospace; color:var(--ink);
   background:rgba(var(--base-r,200),var(--base-g,200),var(--base-b,200),calc(var(--v,0) * 0.055));
   line-height:1.5;
 }
 .hmap-cell.hmap-hot { font-weight:800; }
 .hmap-n { font-size:8px; font-weight:500; color:rgba(0,0,0,.45); display:block; }
-.hmap-future { background:#F9FAFB !important; color:var(--faint); border-left:1px dashed #E5E7EB; }
-.hmap-delta { padding:8px 12px; text-align:center; border-left:1px solid #F3F4F6; border-bottom:1px solid #F3F4F6; font-size:9px; font-weight:700; font-family:'JetBrains Mono',monospace; white-space:nowrap; }
+.hmap-future { background:#F5F5F2 !important; color:var(--faint); border-left:1px dashed #E4E1DB; }
+.hmap-delta { padding:8px 12px; text-align:center; border-left:1px solid #F0EFEC; border-bottom:1px solid #F0EFEC; font-size:9px; font-weight:700; font-family:'JetBrains Mono',monospace; white-space:nowrap; }
 .hmap-delta-up { color:var(--red); }
-.hmap-delta-dn { color:#059669; }
-.hmap-footer { display:flex; align-items:center; gap:8px; padding:10px 16px; border-top:1px solid var(--border); background:#F8FAFC; }
+.hmap-delta-dn { color:#2D8A6A; }
+.hmap-footer { display:flex; align-items:center; gap:8px; padding:10px 16px; border-top:1px solid var(--border); background:#F5F5F2; }
 .hmap-legend-label { font-size:8.5px; color:var(--muted); font-weight:600; }
 .hmap-legend-bar { width:80px; height:10px; border-radius:4px; background:linear-gradient(to right, rgba(150,150,150,.08), rgba(150,150,150,.55)); border:1px solid var(--border); }
 
@@ -629,9 +629,9 @@ body {
   font-size:10.5px; color:var(--ink2); line-height:1.5; list-style:disc;
 }
 .tab-summary li strong { color:var(--ink); }
-.tab-summary li .hi-green { color:#059669; font-weight:700; }
-.tab-summary li .hi-red   { color:#DC2626; font-weight:700; }
-.tab-summary li .hi-amber { color:#D97706; font-weight:700; }
+.tab-summary li .hi-green { color:#2D8A6A; font-weight:700; }
+.tab-summary li .hi-red   { color:#C0444A; font-weight:700; }
+.tab-summary li .hi-amber { color:#C07D30; font-weight:700; }
 .ts-hdr { font-size:9px; font-weight:800; color:var(--muted); text-transform:uppercase;
   letter-spacing:.5px; margin-bottom:8px; }
 
@@ -687,7 +687,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   .hdr-title { font-size: 13px; letter-spacing: -.2px; }
   .hdr-sub   { font-size: 9.5px; margin-top: 1px; }
   .live-dot  { width: 7px; height: 7px; }
-  .hdr-right { display: flex; }
+  .hdr-right { display: flex; margin-left: auto; justify-content: flex-end; }
   #settings-btn .btn-label { display: none; }
   #settings-btn { padding: 8px 9px; min-width: 36px; min-height: 36px; } /* chips hidden on mobile — data is in cards */
 
@@ -983,7 +983,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   transition: border-color .15s, background .15s;
 }
 .sp-input:focus { border-color: var(--ink2); background: #fff; }
-.sp-input.filled { border-color: #86EFAC; background: #F0FDF4; }
+.sp-input.filled { border-color: #86EFAC; background: #EEF7F3; }
 .sp-input.error  { border-color: var(--red-border); background: var(--red-bg); }
 
 .sp-input-hint {
@@ -999,8 +999,8 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   background: var(--bg); user-select: none; -webkit-user-select: none;
   touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
-.sp-file-zone:hover, .sp-file-zone.drag { border-color: var(--ink2); background: #F8FAFC; }
-.sp-file-zone.filled { border-color: #86EFAC; border-style: solid; background: #F0FDF4; }
+.sp-file-zone:hover, .sp-file-zone.drag { border-color: var(--ink2); background: #F5F5F2; }
+.sp-file-zone.filled { border-color: #86EFAC; border-style: solid; background: #EEF7F3; }
 .sp-file-zone.error  { border-color: var(--red-border); border-style: solid; background: var(--red-bg); }
 .sp-file-icon { font-size: 18px; flex-shrink: 0; }
 .sp-file-info { flex: 1; min-width: 0; }
@@ -1022,23 +1022,23 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   display: flex; align-items: center; justify-content: center; gap: 8px;
   transition: background .15s, transform .1s, box-shadow .15s;
 }
-.sp-sync-btn:hover { background: #1E293B; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+.sp-sync-btn:hover { background: #2C3548; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
 .sp-sync-btn:active { transform: scale(.98); }
 .sp-sync-btn:disabled { background: #CBD5E1; cursor: not-allowed; }
-.sp-sync-btn.syncing { background: #2563EB; }
+.sp-sync-btn.syncing { background: #4270C4; }
 
 .sp-status {
   margin-top: 14px; padding: 10px 14px; border-radius: 8px;
   font-size: 10.5px; font-weight: 600; display: none; gap: 8px; align-items: flex-start;
 }
-.sp-status.ok   { display: flex; background: #F0FDF4; color: #166534; border: 1px solid #86EFAC; }
+.sp-status.ok   { display: flex; background: #EEF7F3; color: #166534; border: 1px solid #86EFAC; }
 .sp-status.err  { display: flex; background: var(--red-bg); color: #991B1B; border: 1px solid var(--red-border); }
 .sp-status.info { display: flex; background: var(--blue-bg); color: #1E40AF; border: 1px solid var(--blue-border); }
 
 /* Toast */
 #sp-toast {
   position: fixed; bottom: max(24px, calc(16px + env(safe-area-inset-bottom))); left: 50%; transform: translateX(-50%) translateY(80px);
-  background: #1E293B; color: #F8FAFC; padding: 11px 20px; border-radius: 10px;
+  background: #2C3548; color: #F5F5F2; padding: 11px 20px; border-radius: 10px;
   font-size: 11.5px; font-weight: 600; font-family: 'Sora', sans-serif;
   z-index: 9999; box-shadow: 0 8px 24px rgba(0,0,0,.22);
   transition: transform .3s cubic-bezier(.16,1,.3,1), opacity .3s;
@@ -1047,8 +1047,8 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   max-width: calc(100vw - 32px); text-align: center;
 }
 #sp-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-#sp-toast.toast-err  { background: #DC2626; }
-#sp-toast.toast-ok   { background: #059669; }
+#sp-toast.toast-err  { background: #C0444A; }
+#sp-toast.toast-ok   { background: #2D8A6A; }
 
 /* Last synced badge */
 #sync-badge {
@@ -1173,7 +1173,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 .ct-badge { font-size: 8px; font-weight: 700; padding: 2px 8px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; }
 .cb-best  { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
 .cb-watch { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
-.cb-ok    { background: #F3F4F6; color: var(--muted); }
+.cb-ok    { background: #F0EFEC; color: var(--muted); }
 .cb-gap   { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
 .ct-score-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
 .ct-score { font-size: 36px; font-weight: 800; line-height: 1; letter-spacing: -1.5px; }
@@ -1186,7 +1186,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 /* promoter/detractor bar */
 .pd-bar { display: flex; height: 7px; border-radius: 3px; overflow: hidden; gap: 1px; margin-bottom: 4px; }
 .pd-pro { background: var(--green); }
-.pd-neu { background: #D1D5DB; }
+.pd-neu { background: #C8C8CC; }
 .pd-det { background: var(--red); }
 .pd-legend { display: flex; gap: 10px; font-size: 8.5px; color: var(--muted); }
 .pdl-item { display: flex; align-items: center; gap: 3px; }
@@ -1233,7 +1233,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 }
 .dist-row:last-child { margin-bottom: 0; }
 .dr-band { font-size: 10px; font-weight: 700; }
-.dr-track { height: 7px; background: #F3F4F6; border-radius: 3px; overflow: hidden; }
+.dr-track { height: 7px; background: #F0EFEC; border-radius: 3px; overflow: hidden; }
 .dr-fill { height: 100%; border-radius: 3px; }
 .dr-rate { font-size: 9.5px; font-weight: 700; font-family: 'JetBrains Mono', monospace; text-align: right; }
 .dr-chg  { font-size: 8.5px; font-weight: 700; font-family: 'JetBrains Mono', monospace; text-align: right; }
@@ -1419,7 +1419,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div id="tab1" class="tab-pane active">
 <div class="pg">
 
-<div id="ts-tab1" class="tab-summary" style="border-left-color:#059669">
+<div id="ts-tab1" class="tab-summary" style="border-left-color:#2D8A6A">
   <div class="ts-hdr">📊 Since Oct '25 — at a glance</div>
   <ul>
     <li><strong>NPS</strong> improved <span class="hi-green">+1.84pp</span> (23.6 → 25.4) — best ever recorded</li>
@@ -1436,7 +1436,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div class="sh" style="margin-top:0">
   <span class="sh-t" id="sh-glance">At a glance — February 2026</span>
   <div class="sh-l"></div>
-  <span class="sh-b" style="background:#F0FDF4;color:#15803D;border:1px solid #A7F3D0">★ Best NPS ever</span>
+  <span class="sh-b" style="background:#EEF7F3;color:#2D7A50;border:1px solid #B8DFD0">★ Best NPS ever</span>
   <span class="sh-b" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">BLNI/Txn ↓ improving</span>
 </div>
 
@@ -1464,11 +1464,11 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       <button onclick="document.querySelector('[onclick*=tab2]').click()" style="
         display:inline-flex;align-items:center;gap:4px;
         font-size:9px;font-weight:700;font-family:'Sora',sans-serif;
-        color:#059669;background:#ECFDF5;border:1.5px solid #6EE7B7;
+        color:#2D8A6A;background:#EEF7F3;border:1.5px solid #6EE7B7;
         padding:4px 10px;border-radius:6px;cursor:pointer;
         letter-spacing:.2px;transition:background .15s,box-shadow .15s;
       " onmouseover="this.style.background='#D1FAE5';this.style.boxShadow='0 2px 8px rgba(5,150,105,.15)'"
-         onmouseout="this.style.background='#ECFDF5';this.style.boxShadow='none'">
+         onmouseout="this.style.background='#EEF7F3';this.style.boxShadow='none'">
         NPS Deep Dive →
       </button>
       <button onclick="document.querySelector('[onclick*=tab3]').click()" style="
@@ -1617,7 +1617,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       <div class="p4-vol-div"></div>
       <div class="p4-vol">
         <div class="p4-vol-n p4-s-app" id="p4-conv-app">25%</div>
-        <div class="p4-vol-s p4-s-app">of App Feedback ↑</div>
+        <div class="p4-vol-s p4-s-app">of App Feedback</div>
       </div>
     </div>
   </div>
@@ -1724,7 +1724,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div id="tab2" class="tab-pane">
 <div class="pg">
 
-<div id="ts-tab2" class="tab-summary" style="border-left-color:#059669">
+<div id="ts-tab2" class="tab-summary" style="border-left-color:#2D8A6A">
   <div class="ts-hdr">📊 NPS Deep Dive — Feb '26</div>
   <ul>
     <li><strong>STAR</strong> and <strong>LEADER</strong> are the healthiest seller segments — both at their best-ever NPS this month</li>
@@ -1871,7 +1871,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div id="tab3" class="tab-pane">
 <div class="pg">
 
-<div id="ts-tab3" class="tab-summary" style="border-left-color:#EF4444">
+<div id="ts-tab3" class="tab-summary" style="border-left-color:#D46B6B">
   <div class="ts-hdr">🔍 NPS Complaint Signals — Feb '26</div>
   <ul>
     <li><strong>Irrelevant Leads</strong> dominates seller complaints — it is the single biggest pain point in NPS feedback</li>
@@ -1912,19 +1912,19 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
       <!-- JAN -->
       <div class="vcb-bar-group" id="nps-bar-grp-0">      <div class="vcb-bar">
-          <div class="vcb-seg" style="height:30.8%;background:#EF4444" data-tip="n=65">
+          <div class="vcb-seg" style="height:30.8%;background:#D46B6B" data-tip="n=65">
             <span class="vcb-lbl">30.8%</span>
           </div>
-          <div class="vcb-seg" style="height:20.4%;background:#3B82F6" data-tip="n=43">
+          <div class="vcb-seg" style="height:20.4%;background:#6089C8" data-tip="n=43">
             <span class="vcb-lbl">20.4%</span>
           </div>
-          <div class="vcb-seg" style="height:15.2%;background:#8B5CF6" data-tip="n=32">
+          <div class="vcb-seg" style="height:15.2%;background:#8472C4" data-tip="n=32">
             <span class="vcb-lbl">15.2%</span>
           </div>
-          <div class="vcb-seg" style="height:9.0%;background:#F59E0B" data-tip="n=19">
+          <div class="vcb-seg" style="height:9.0%;background:#CFA050" data-tip="n=19">
             <span class="vcb-lbl">9.0%</span>
           </div>
-          <div class="vcb-seg" style="height:24.6%;background:#D1D5DB" data-tip="n=52">
+          <div class="vcb-seg" style="height:24.6%;background:#C8C8CC" data-tip="n=52">
             <span class="vcb-lbl">24.6%</span>
           </div>
         </div>
@@ -1933,19 +1933,19 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
       <div class="vcb-bar-group" id="nps-bar-grp-1">
         <div class="vcb-bar">
-          <div class="vcb-seg" style="height:33.7%;background:#EF4444" data-tip="n=214">
+          <div class="vcb-seg" style="height:33.7%;background:#D46B6B" data-tip="n=214">
             <span class="vcb-lbl">33.7%</span>
           </div>
-          <div class="vcb-seg" style="height:23.0%;background:#3B82F6" data-tip="n=146">
+          <div class="vcb-seg" style="height:23.0%;background:#6089C8" data-tip="n=146">
             <span class="vcb-lbl">23.0%</span>
           </div>
-          <div class="vcb-seg" style="height:20.3%;background:#8B5CF6" data-tip="n=129">
+          <div class="vcb-seg" style="height:20.3%;background:#8472C4" data-tip="n=129">
             <span class="vcb-lbl">20.3%</span>
           </div>
-          <div class="vcb-seg" style="height:11.3%;background:#F59E0B" data-tip="n=72">
+          <div class="vcb-seg" style="height:11.3%;background:#CFA050" data-tip="n=72">
             <span class="vcb-lbl">11.3%</span>
           </div>
-          <div class="vcb-seg" style="height:11.7%;background:#D1D5DB" data-tip="n=74">
+          <div class="vcb-seg" style="height:11.7%;background:#C8C8CC" data-tip="n=74">
             <span class="vcb-lbl">11.7%</span>
           </div>
         </div>
@@ -1957,11 +1957,11 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
   <!-- Legend -->
   <div class="vcb-legend">
-    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#EF4444"></span>Irrelevant Leads</span>
-    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#3B82F6"></span>Low Conversion</span>
-    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#8B5CF6"></span>Less BLs / Enquiries</span>
-    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#F59E0B"></span>Issues with Buyer</span>
-    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#D1D5DB"></span>Others</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#D46B6B"></span>Irrelevant Leads</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#6089C8"></span>Low Conversion</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#8472C4"></span>Less BLs / Enquiries</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#CFA050"></span>Issues with Buyer</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#C8C8CC"></span>Others</span>
   </div>
 </div><!-- /vcb-wrap -->
 
@@ -1988,7 +1988,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
       <!-- GROUP: Irrelevant Leads -->
       
-      <tr class="hmap-group-hdr" style="--gc:#EF4444">
+      <tr class="hmap-group-hdr" style="--gc:#D46B6B">
         <td colspan="6">🎯 Irrelevant Leads</td>
       </tr>
       <tr>
@@ -2024,7 +2024,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <td class="hmap-delta hmap-delta-up">+8.3pp ↑</td>
       </tr>
       
-      <tr class="hmap-group-hdr" style="--gc:#8B5CF6">
+      <tr class="hmap-group-hdr" style="--gc:#8472C4">
         <td colspan="6">📉 Less BLs / Enquiries</td>
       </tr>
       <tr>
@@ -2051,7 +2051,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <td class="hmap-cell hmap-future"></td>
         <td class="hmap-delta hmap-delta-up">+7.2pp ↑</td>
       </tr>
-      <tr class="hmap-group-hdr" style="--gc:#F59E0B">
+      <tr class="hmap-group-hdr" style="--gc:#CFA050">
         <td colspan="6">🙅 Issues with Buyer</td>
       </tr>
       <tr>
@@ -2097,7 +2097,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   </div>
 </div>
 
-<div style="background:#F8FAFC;border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:14px;font-size:9.5px;color:var(--muted);line-height:1.6">
+<div style="background:#F5F5F2;border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:14px;font-size:9.5px;color:var(--muted);line-height:1.6">
   ⏳ <strong>Trend builds from Mar '26</strong> — Jan '26 is the first month with complaint bifurcation data. New month columns auto-populate; the heat map scales without layout changes.
 </div>
 
@@ -2109,7 +2109,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div id="tab5" class="tab-pane">
 <div class="pg">
 
-<div id="ts-tab5" class="tab-summary" style="border-left-color:#8B5CF6">
+<div id="ts-tab5" class="tab-summary" style="border-left-color:#8472C4">
   <div class="ts-hdr">📱 App Complaint Signals — Feb '26</div>
   <ul>
     <li><strong>Irrelevant Leads</strong> complaints are gradually declining — an encouraging signal that relevance efforts are being felt</li>
@@ -2143,121 +2143,121 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
       <div class="vcb-bar-group">
         <div class="vcb-bar">
-          <div class="vcb-seg" style="height:37.7%;background:#EF4444" data-tip="n=427"><span class="vcb-lbl">37.7%</span></div>
-          <div class="vcb-seg" style="height:5.1%;background:#3B82F6" data-tip="n=58"><span class="vcb-lbl vcb-lbl-sm">5.1%</span></div>
-          <div class="vcb-seg" style="height:8.6%;background:#8B5CF6" data-tip="n=97"><span class="vcb-lbl vcb-lbl-sm">8.6%</span></div>
-          <div class="vcb-seg" style="height:11.0%;background:#F59E0B" data-tip="n=125"><span class="vcb-lbl vcb-lbl-sm">11%</span></div>
-          <div class="vcb-seg" style="height:37.6%;background:#D1D5DB" data-tip="n=426"><span class="vcb-lbl">37.6%</span></div>
+          <div class="vcb-seg" style="height:37.7%;background:#D46B6B" data-tip="n=427"><span class="vcb-lbl">37.7%</span></div>
+          <div class="vcb-seg" style="height:5.1%;background:#6089C8" data-tip="n=58"><span class="vcb-lbl vcb-lbl-sm">5.1%</span></div>
+          <div class="vcb-seg" style="height:8.6%;background:#8472C4" data-tip="n=97"><span class="vcb-lbl vcb-lbl-sm">8.6%</span></div>
+          <div class="vcb-seg" style="height:11.0%;background:#CFA050" data-tip="n=125"><span class="vcb-lbl vcb-lbl-sm">11%</span></div>
+          <div class="vcb-seg" style="height:37.6%;background:#C8C8CC" data-tip="n=426"><span class="vcb-lbl">37.6%</span></div>
         </div>
         <div class="vcb-bar-label">Apr<br><span class="vcb-bar-n">1,133</span></div>
       </div>
 
       <div class="vcb-bar-group">
         <div class="vcb-bar">
-          <div class="vcb-seg" style="height:38.7%;background:#EF4444" data-tip="n=474"><span class="vcb-lbl">38.7%</span></div>
-          <div class="vcb-seg" style="height:5.8%;background:#3B82F6" data-tip="n=71"><span class="vcb-lbl vcb-lbl-sm">5.8%</span></div>
-          <div class="vcb-seg" style="height:5.1%;background:#8B5CF6" data-tip="n=62"><span class="vcb-lbl vcb-lbl-sm">5.1%</span></div>
-          <div class="vcb-seg" style="height:13.2%;background:#F59E0B" data-tip="n=162"><span class="vcb-lbl vcb-lbl-sm">13%</span></div>
-          <div class="vcb-seg" style="height:37.2%;background:#D1D5DB" data-tip="n=455"><span class="vcb-lbl">37.2%</span></div>
+          <div class="vcb-seg" style="height:38.7%;background:#D46B6B" data-tip="n=474"><span class="vcb-lbl">38.7%</span></div>
+          <div class="vcb-seg" style="height:5.8%;background:#6089C8" data-tip="n=71"><span class="vcb-lbl vcb-lbl-sm">5.8%</span></div>
+          <div class="vcb-seg" style="height:5.1%;background:#8472C4" data-tip="n=62"><span class="vcb-lbl vcb-lbl-sm">5.1%</span></div>
+          <div class="vcb-seg" style="height:13.2%;background:#CFA050" data-tip="n=162"><span class="vcb-lbl vcb-lbl-sm">13%</span></div>
+          <div class="vcb-seg" style="height:37.2%;background:#C8C8CC" data-tip="n=455"><span class="vcb-lbl">37.2%</span></div>
         </div>
         <div class="vcb-bar-label">May<br><span class="vcb-bar-n">1,224</span></div>
       </div>
 
       <div class="vcb-bar-group">
         <div class="vcb-bar">
-          <div class="vcb-seg" style="height:46.7%;background:#EF4444" data-tip="n=468"><span class="vcb-lbl">46.7%</span></div>
-          <div class="vcb-seg" style="height:5.0%;background:#3B82F6" data-tip="n=50"><span class="vcb-lbl vcb-lbl-sm">5%</span></div>
-          <div class="vcb-seg" style="height:5.5%;background:#8B5CF6" data-tip="n=55"><span class="vcb-lbl vcb-lbl-sm">5.5%</span></div>
-          <div class="vcb-seg" style="height:9.0%;background:#F59E0B" data-tip="n=90"><span class="vcb-lbl vcb-lbl-sm">9%</span></div>
-          <div class="vcb-seg" style="height:33.8%;background:#D1D5DB" data-tip="n=339"><span class="vcb-lbl">33.8%</span></div>
+          <div class="vcb-seg" style="height:46.7%;background:#D46B6B" data-tip="n=468"><span class="vcb-lbl">46.7%</span></div>
+          <div class="vcb-seg" style="height:5.0%;background:#6089C8" data-tip="n=50"><span class="vcb-lbl vcb-lbl-sm">5%</span></div>
+          <div class="vcb-seg" style="height:5.5%;background:#8472C4" data-tip="n=55"><span class="vcb-lbl vcb-lbl-sm">5.5%</span></div>
+          <div class="vcb-seg" style="height:9.0%;background:#CFA050" data-tip="n=90"><span class="vcb-lbl vcb-lbl-sm">9%</span></div>
+          <div class="vcb-seg" style="height:33.8%;background:#C8C8CC" data-tip="n=339"><span class="vcb-lbl">33.8%</span></div>
         </div>
         <div class="vcb-bar-label">Jun<br><span class="vcb-bar-n">1,002</span></div>
       </div>
 
       <div class="vcb-bar-group">
         <div class="vcb-bar">
-          <div class="vcb-seg" style="height:44.7%;background:#EF4444" data-tip="n=369"><span class="vcb-lbl">44.7%</span></div>
-          <div class="vcb-seg" style="height:4.8%;background:#3B82F6" data-tip="n=40"><span class="vcb-lbl vcb-lbl-sm">4.8%</span></div>
-          <div class="vcb-seg" style="height:5.2%;background:#8B5CF6" data-tip="n=43"><span class="vcb-lbl vcb-lbl-sm">5.2%</span></div>
-          <div class="vcb-seg" style="height:8.5%;background:#F59E0B" data-tip="n=70"><span class="vcb-lbl vcb-lbl-sm">8.5%</span></div>
-          <div class="vcb-seg" style="height:36.7%;background:#D1D5DB" data-tip="n=303"><span class="vcb-lbl">36.7%</span></div>
+          <div class="vcb-seg" style="height:44.7%;background:#D46B6B" data-tip="n=369"><span class="vcb-lbl">44.7%</span></div>
+          <div class="vcb-seg" style="height:4.8%;background:#6089C8" data-tip="n=40"><span class="vcb-lbl vcb-lbl-sm">4.8%</span></div>
+          <div class="vcb-seg" style="height:5.2%;background:#8472C4" data-tip="n=43"><span class="vcb-lbl vcb-lbl-sm">5.2%</span></div>
+          <div class="vcb-seg" style="height:8.5%;background:#CFA050" data-tip="n=70"><span class="vcb-lbl vcb-lbl-sm">8.5%</span></div>
+          <div class="vcb-seg" style="height:36.7%;background:#C8C8CC" data-tip="n=303"><span class="vcb-lbl">36.7%</span></div>
         </div>
         <div class="vcb-bar-label">Jul<br><span class="vcb-bar-n">825</span></div>
       </div>
 
       <div class="vcb-bar-group">
         <div class="vcb-bar">
-          <div class="vcb-seg" style="height:51.0%;background:#EF4444" data-tip="n=736"><span class="vcb-lbl">51.0%</span></div>
-          <div class="vcb-seg" style="height:6.4%;background:#3B82F6" data-tip="n=93"><span class="vcb-lbl vcb-lbl-sm">6.4%</span></div>
-          <div class="vcb-seg" style="height:5.4%;background:#8B5CF6" data-tip="n=78"><span class="vcb-lbl vcb-lbl-sm">5.4%</span></div>
-          <div class="vcb-seg" style="height:8.7%;background:#F59E0B" data-tip="n=125"><span class="vcb-lbl vcb-lbl-sm">8.7%</span></div>
-          <div class="vcb-seg" style="height:28.5%;background:#D1D5DB" data-tip="n=412"><span class="vcb-lbl">28.5%</span></div>
+          <div class="vcb-seg" style="height:51.0%;background:#D46B6B" data-tip="n=736"><span class="vcb-lbl">51.0%</span></div>
+          <div class="vcb-seg" style="height:6.4%;background:#6089C8" data-tip="n=93"><span class="vcb-lbl vcb-lbl-sm">6.4%</span></div>
+          <div class="vcb-seg" style="height:5.4%;background:#8472C4" data-tip="n=78"><span class="vcb-lbl vcb-lbl-sm">5.4%</span></div>
+          <div class="vcb-seg" style="height:8.7%;background:#CFA050" data-tip="n=125"><span class="vcb-lbl vcb-lbl-sm">8.7%</span></div>
+          <div class="vcb-seg" style="height:28.5%;background:#C8C8CC" data-tip="n=412"><span class="vcb-lbl">28.5%</span></div>
         </div>
         <div class="vcb-bar-label">Aug<br><span class="vcb-bar-n">1,444</span></div>
       </div>
 
       <div class="vcb-bar-group">
         <div class="vcb-bar">
-          <div class="vcb-seg" style="height:44.4%;background:#EF4444" data-tip="n=432"><span class="vcb-lbl">44.4%</span></div>
-          <div class="vcb-seg" style="height:6.4%;background:#3B82F6" data-tip="n=62"><span class="vcb-lbl vcb-lbl-sm">6.4%</span></div>
-          <div class="vcb-seg" style="height:4.2%;background:#8B5CF6" data-tip="n=41"><span class="vcb-lbl vcb-lbl-sm">4.2%</span></div>
-          <div class="vcb-seg" style="height:8.7%;background:#F59E0B" data-tip="n=85"><span class="vcb-lbl vcb-lbl-sm">8.7%</span></div>
-          <div class="vcb-seg" style="height:36.3%;background:#D1D5DB" data-tip="n=354"><span class="vcb-lbl">36.3%</span></div>
+          <div class="vcb-seg" style="height:44.4%;background:#D46B6B" data-tip="n=432"><span class="vcb-lbl">44.4%</span></div>
+          <div class="vcb-seg" style="height:6.4%;background:#6089C8" data-tip="n=62"><span class="vcb-lbl vcb-lbl-sm">6.4%</span></div>
+          <div class="vcb-seg" style="height:4.2%;background:#8472C4" data-tip="n=41"><span class="vcb-lbl vcb-lbl-sm">4.2%</span></div>
+          <div class="vcb-seg" style="height:8.7%;background:#CFA050" data-tip="n=85"><span class="vcb-lbl vcb-lbl-sm">8.7%</span></div>
+          <div class="vcb-seg" style="height:36.3%;background:#C8C8CC" data-tip="n=354"><span class="vcb-lbl">36.3%</span></div>
         </div>
         <div class="vcb-bar-label">Sep<br><span class="vcb-bar-n">974</span></div>
       </div>
 
       <div class="vcb-bar-group">
         <div class="vcb-bar">
-          <div class="vcb-seg" style="height:36.7%;background:#EF4444" data-tip="n=256"><span class="vcb-lbl">36.7%</span></div>
-          <div class="vcb-seg" style="height:8.0%;background:#3B82F6" data-tip="n=56"><span class="vcb-lbl vcb-lbl-sm">8%</span></div>
-          <div class="vcb-seg" style="height:8.3%;background:#8B5CF6" data-tip="n=58"><span class="vcb-lbl vcb-lbl-sm">8.3%</span></div>
-          <div class="vcb-seg" style="height:8.9%;background:#F59E0B" data-tip="n=62"><span class="vcb-lbl vcb-lbl-sm">8.9%</span></div>
-          <div class="vcb-seg" style="height:38.1%;background:#D1D5DB" data-tip="n=266"><span class="vcb-lbl">38.1%</span></div>
+          <div class="vcb-seg" style="height:36.7%;background:#D46B6B" data-tip="n=256"><span class="vcb-lbl">36.7%</span></div>
+          <div class="vcb-seg" style="height:8.0%;background:#6089C8" data-tip="n=56"><span class="vcb-lbl vcb-lbl-sm">8%</span></div>
+          <div class="vcb-seg" style="height:8.3%;background:#8472C4" data-tip="n=58"><span class="vcb-lbl vcb-lbl-sm">8.3%</span></div>
+          <div class="vcb-seg" style="height:8.9%;background:#CFA050" data-tip="n=62"><span class="vcb-lbl vcb-lbl-sm">8.9%</span></div>
+          <div class="vcb-seg" style="height:38.1%;background:#C8C8CC" data-tip="n=266"><span class="vcb-lbl">38.1%</span></div>
         </div>
         <div class="vcb-bar-label">Oct<br><span class="vcb-bar-n">698</span></div>
       </div>
 
       <div class="vcb-bar-group">
         <div class="vcb-bar">
-          <div class="vcb-seg" style="height:40.8%;background:#EF4444" data-tip="n=248"><span class="vcb-lbl">40.8%</span></div>
-          <div class="vcb-seg" style="height:9.4%;background:#3B82F6" data-tip="n=57"><span class="vcb-lbl vcb-lbl-sm">9.4%</span></div>
-          <div class="vcb-seg" style="height:8.2%;background:#8B5CF6" data-tip="n=50"><span class="vcb-lbl vcb-lbl-sm">8.2%</span></div>
-          <div class="vcb-seg" style="height:5.4%;background:#F59E0B" data-tip="n=33"><span class="vcb-lbl vcb-lbl-sm">5.4%</span></div>
-          <div class="vcb-seg" style="height:36.2%;background:#D1D5DB" data-tip="n=220"><span class="vcb-lbl">36.2%</span></div>
+          <div class="vcb-seg" style="height:40.8%;background:#D46B6B" data-tip="n=248"><span class="vcb-lbl">40.8%</span></div>
+          <div class="vcb-seg" style="height:9.4%;background:#6089C8" data-tip="n=57"><span class="vcb-lbl vcb-lbl-sm">9.4%</span></div>
+          <div class="vcb-seg" style="height:8.2%;background:#8472C4" data-tip="n=50"><span class="vcb-lbl vcb-lbl-sm">8.2%</span></div>
+          <div class="vcb-seg" style="height:5.4%;background:#CFA050" data-tip="n=33"><span class="vcb-lbl vcb-lbl-sm">5.4%</span></div>
+          <div class="vcb-seg" style="height:36.2%;background:#C8C8CC" data-tip="n=220"><span class="vcb-lbl">36.2%</span></div>
         </div>
         <div class="vcb-bar-label">Nov<br><span class="vcb-bar-n">608</span></div>
       </div>
 
       <div class="vcb-bar-group">
         <div class="vcb-bar">
-          <div class="vcb-seg" style="height:42.1%;background:#EF4444" data-tip="n=294"><span class="vcb-lbl">42.1%</span></div>
-          <div class="vcb-seg" style="height:11.6%;background:#3B82F6" data-tip="n=81"><span class="vcb-lbl vcb-lbl-sm">11.6%</span></div>
-          <div class="vcb-seg" style="height:7.0%;background:#8B5CF6" data-tip="n=49"><span class="vcb-lbl vcb-lbl-sm">7%</span></div>
-          <div class="vcb-seg" style="height:6.7%;background:#F59E0B" data-tip="n=47"><span class="vcb-lbl vcb-lbl-sm">6.7%</span></div>
-          <div class="vcb-seg" style="height:32.5%;background:#D1D5DB" data-tip="n=227"><span class="vcb-lbl">32.5%</span></div>
+          <div class="vcb-seg" style="height:42.1%;background:#D46B6B" data-tip="n=294"><span class="vcb-lbl">42.1%</span></div>
+          <div class="vcb-seg" style="height:11.6%;background:#6089C8" data-tip="n=81"><span class="vcb-lbl vcb-lbl-sm">11.6%</span></div>
+          <div class="vcb-seg" style="height:7.0%;background:#8472C4" data-tip="n=49"><span class="vcb-lbl vcb-lbl-sm">7%</span></div>
+          <div class="vcb-seg" style="height:6.7%;background:#CFA050" data-tip="n=47"><span class="vcb-lbl vcb-lbl-sm">6.7%</span></div>
+          <div class="vcb-seg" style="height:32.5%;background:#C8C8CC" data-tip="n=227"><span class="vcb-lbl">32.5%</span></div>
         </div>
         <div class="vcb-bar-label">Dec<br><span class="vcb-bar-n">698</span></div>
       </div>
 
       <div class="vcb-bar-group vcb-bar-group-jan">
         <div class="vcb-bar">
-          <div class="vcb-seg" style="height:35.1%;background:#EF4444" data-tip="n=338"><span class="vcb-lbl">35.1%</span></div>
-          <div class="vcb-seg" style="height:22.8%;background:#3B82F6" data-tip="n=220"><span class="vcb-lbl">22.8%</span></div>
-          <div class="vcb-seg" style="height:21.0%;background:#8B5CF6" data-tip="n=202"><span class="vcb-lbl">21.0%</span></div>
-          <div class="vcb-seg" style="height:11.4%;background:#F59E0B" data-tip="n=110"><span class="vcb-lbl vcb-lbl-sm">11.4%</span></div>
-          <div class="vcb-seg" style="height:9.8%;background:#D1D5DB" data-tip="n=94"><span class="vcb-lbl vcb-lbl-sm">9.8%</span></div>
+          <div class="vcb-seg" style="height:35.1%;background:#D46B6B" data-tip="n=338"><span class="vcb-lbl">35.1%</span></div>
+          <div class="vcb-seg" style="height:22.8%;background:#6089C8" data-tip="n=220"><span class="vcb-lbl">22.8%</span></div>
+          <div class="vcb-seg" style="height:21.0%;background:#8472C4" data-tip="n=202"><span class="vcb-lbl">21.0%</span></div>
+          <div class="vcb-seg" style="height:11.4%;background:#CFA050" data-tip="n=110"><span class="vcb-lbl vcb-lbl-sm">11.4%</span></div>
+          <div class="vcb-seg" style="height:9.8%;background:#C8C8CC" data-tip="n=94"><span class="vcb-lbl vcb-lbl-sm">9.8%</span></div>
         </div>
         <div class="vcb-bar-label">Jan<br><span class="vcb-bar-n">964</span></div>
       </div>
 
       <div class="vcb-bar-group vcb-bar-group-feb">
         <div class="vcb-bar">
-          <div class="vcb-seg" style="height:31.8%;background:#EF4444" data-tip="n=445"><span class="vcb-lbl">31.8%</span></div>
-          <div class="vcb-seg" style="height:24.6%;background:#3B82F6" data-tip="n=345"><span class="vcb-lbl">24.6%</span></div>
-          <div class="vcb-seg" style="height:20.3%;background:#8B5CF6" data-tip="n=284"><span class="vcb-lbl">20.3%</span></div>
-          <div class="vcb-seg" style="height:10.6%;background:#F59E0B" data-tip="n=149"><span class="vcb-lbl vcb-lbl-sm">10.6%</span></div>
-          <div class="vcb-seg" style="height:12.7%;background:#D1D5DB" data-tip="n=178"><span class="vcb-lbl vcb-lbl-sm">12.7%</span></div>
+          <div class="vcb-seg" style="height:31.8%;background:#D46B6B" data-tip="n=445"><span class="vcb-lbl">31.8%</span></div>
+          <div class="vcb-seg" style="height:24.6%;background:#6089C8" data-tip="n=345"><span class="vcb-lbl">24.6%</span></div>
+          <div class="vcb-seg" style="height:20.3%;background:#8472C4" data-tip="n=284"><span class="vcb-lbl">20.3%</span></div>
+          <div class="vcb-seg" style="height:10.6%;background:#CFA050" data-tip="n=149"><span class="vcb-lbl vcb-lbl-sm">10.6%</span></div>
+          <div class="vcb-seg" style="height:12.7%;background:#C8C8CC" data-tip="n=178"><span class="vcb-lbl vcb-lbl-sm">12.7%</span></div>
         </div>
         <div class="vcb-bar-label" id="app-bar-feb-lbl"><strong>Feb</strong><br><span class="vcb-bar-n" id="app-bar-feb-n">1,401</span></div>
       </div>
@@ -2265,11 +2265,11 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     </div><!-- /vcb-bars -->
   </div><!-- /vcb-chart-area -->
   <div class="vcb-legend">
-    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#EF4444"></span>Irrelevant Leads</span>
-    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#3B82F6"></span>Low Conversion</span>
-    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#8B5CF6"></span>Less BLs / Enquiries</span>
-    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#F59E0B"></span>Issues with Buyer</span>
-    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#D1D5DB"></span>Others</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#D46B6B"></span>Irrelevant Leads</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#6089C8"></span>Low Conversion</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#8472C4"></span>Less BLs / Enquiries</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#CFA050"></span>Issues with Buyer</span>
+    <span class="vcb-leg-item"><span class="vcb-leg-dot" style="background:#C8C8CC"></span>Others</span>
   </div>
 </div><!-- /vcb-wrap -->
 
@@ -2295,7 +2295,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <tbody>
 
       
-      <tr class="hmap-group-hdr" style="--gc:#EF4444">
+      <tr class="hmap-group-hdr" style="--gc:#D46B6B">
         <td colspan="6">🎯 Irrelevant Leads</td>
       </tr>
       <tr>
@@ -2326,7 +2326,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
         <td class="hmap-delta hmap-delta-up">+0.7pp ↑</td>
       </tr>
-      <tr class="hmap-group-hdr" style="--gc:#3B82F6">
+      <tr class="hmap-group-hdr" style="--gc:#6089C8">
         <td colspan="6">💸 Low Conversion</td>
       </tr>
       <tr>
@@ -2335,7 +2335,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       </tr>
 
       
-      <tr class="hmap-group-hdr" style="--gc:#8B5CF6">
+      <tr class="hmap-group-hdr" style="--gc:#8472C4">
         <td colspan="6">📉 Less BLs / Enquiries</td>
       </tr>
       <tr>
@@ -2360,7 +2360,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <td class="hmap-delta hmap-delta-up">+0.2pp</td>
       </tr>
       
-      <tr class="hmap-group-hdr" style="--gc:#F59E0B">
+      <tr class="hmap-group-hdr" style="--gc:#CFA050">
         <td colspan="6">🙅 Issues with Buyer</td>
       </tr>
       <tr>
@@ -2401,7 +2401,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   </div>
 </div>
 
-<div style="background:#F8FAFC;border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:14px;font-size:9.5px;color:var(--muted);line-height:1.6">
+<div style="background:#F5F5F2;border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:14px;font-size:9.5px;color:var(--muted);line-height:1.6">
   ⏳ <strong>Subcategory trend builds from Mar '26</strong> — subcategory data first captured Jan '26. Stacked bar uses full 11-month history for disposition-level trends.
 </div>
 
@@ -2457,7 +2457,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 .sp-sum-block:last-child { border-bottom: none; margin-bottom: 0; }
 .sp-sum-hdr {
   display: flex; align-items: center; gap: 8px;
-  border-left: 3px solid #059669; padding-left: 10px;
+  border-left: 3px solid #2D8A6A; padding-left: 10px;
   margin-bottom: 10px;
 }
 .sp-sum-lbl {
@@ -2508,6 +2508,14 @@ function switchTab(id, btn) {
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
   if (id === 'tab3' || id === 'tab5') {} // tabs render from static HTML
+  // Always scroll to top on tab switch
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  // Push history state so Android/iOS back button navigates between tabs
+  // Wrapped in try/catch — blocked in iframe previews but works when hosted
+  try {
+    if (!(history.state && history.state.tab === id))
+      history.pushState({ tab: id }, '');
+  } catch(_) {}
 }
 
 // ─── DATA ────────────────────────────────────────────────────────────
@@ -2515,22 +2523,22 @@ const MONTHS = ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb
 const MONTHS8 = ['Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'];
 
 const SEG = {
-  'STAR':      { nps:[22.1,10.7,11.5,27.3,27.9,7.8,30.8,26.1,21.3,27.8,33.6], pro:[53.6,43.4,45.3,56.4,58.6,47.0,58.1,54.5,48.9,56.6,59.1], det:[31.5,32.8,33.8,29.1,30.6,39.1,27.4,28.4,27.7,28.8,25.5], c:'#059669' },
-  'LEADER':    { nps:[22.9,35.4,26.4,29.8,22.6,3.7,28.3,19.4,12.9,24.6,30.5], pro:[53.9,59.5,52.8,56.8,50.9,46.3,56.7,50.0,48.4,55.8,58.0], det:[31.0,24.1,26.4,27.0,28.3,42.6,28.4,30.6,35.5,31.3,27.6], c:'#2563EB' },
-  'TSCatalog': { nps:[21.8,17.8,21.6,28.1,31.3,27.0,27.8,28.4,28.1,30.2,27.1], pro:[53.3,51.3,54.1,56.5,59.9,56.9,57.2,58.4,58.0,58.1,55.8], det:[31.5,33.5,32.4,28.4,28.5,29.8,29.3,29.9,29.9,27.9,28.7], c:'#7C3AED' },
-  'Catalog':   { nps:[11.8,-2.3,-7.3,11.7,3.1,1.9,13.4,11.7,8.9,12.5,14.8],   pro:[48.3,40.6,39.4,47.9,45.0,43.3,49.0,47.8,46.7,48.7,49.0], det:[36.5,42.9,46.7,36.1,41.9,41.4,35.6,36.1,37.8,36.1,34.2], c:'#EA580C' },
-  'ExportTS':  { nps:[22.8,24.5,22.4,19.5,23.7,-15.0,16.5,48.4,-23.0,22.6,24.6], pro:[55.4,53.1,55.2,53.4,60.5,37.5,51.2,71.0,28.7,54.8,55.4], det:[32.7,28.6,32.8,33.9,36.8,52.5,34.7,22.6,51.7,32.2,30.8], c:'#D97706' },
+  'STAR':      { nps:[22.1,10.7,11.5,27.3,27.9,7.8,30.8,26.1,21.3,27.8,33.6], pro:[53.6,43.4,45.3,56.4,58.6,47.0,58.1,54.5,48.9,56.6,59.1], det:[31.5,32.8,33.8,29.1,30.6,39.1,27.4,28.4,27.7,28.8,25.5], c:'#2D8A6A' },
+  'LEADER':    { nps:[22.9,35.4,26.4,29.8,22.6,3.7,28.3,19.4,12.9,24.6,30.5], pro:[53.9,59.5,52.8,56.8,50.9,46.3,56.7,50.0,48.4,55.8,58.0], det:[31.0,24.1,26.4,27.0,28.3,42.6,28.4,30.6,35.5,31.3,27.6], c:'#4270C4' },
+  'TSCatalog': { nps:[21.8,17.8,21.6,28.1,31.3,27.0,27.8,28.4,28.1,30.2,27.1], pro:[53.3,51.3,54.1,56.5,59.9,56.9,57.2,58.4,58.0,58.1,55.8], det:[31.5,33.5,32.4,28.4,28.5,29.8,29.3,29.9,29.9,27.9,28.7], c:'#7055B8' },
+  'Catalog':   { nps:[11.8,-2.3,-7.3,11.7,3.1,1.9,13.4,11.7,8.9,12.5,14.8],   pro:[48.3,40.6,39.4,47.9,45.0,43.3,49.0,47.8,46.7,48.7,49.0], det:[36.5,42.9,46.7,36.1,41.9,41.4,35.6,36.1,37.8,36.1,34.2], c:'#C46040' },
+  'ExportTS':  { nps:[22.8,24.5,22.4,19.5,23.7,-15.0,16.5,48.4,-23.0,22.6,24.6], pro:[55.4,53.1,55.2,53.4,60.5,37.5,51.2,71.0,28.7,54.8,55.4], det:[32.7,28.6,32.8,33.9,36.8,52.5,34.7,22.6,51.7,32.2,30.8], c:'#C07D30' },
   'Non-Paid':  { nps:[-12.2,-25.0,-38.3,-3.3,-17.1,-33.8,-6.2,-21.9,-50,9.0,18.6], pro:[38.1,32.0,25.2,43.2,37.8,31.1,42.7,34.4,20.0,50.2,51.2], det:[50.3,57.0,63.5,46.5,54.9,64.9,48.9,56.2,70.0,41.2,32.6], c:'#6B7280' }
 };
 const VIN = {
-  '30 Day':    { nps:[0.2,8.4,1.2,3.8,15.5,10.7,13.8,24.0,17.1,7.0,25.1], pro:[42.9,46.3,43.4,43.4,51.4,48.4,49.5,54.7,52.3,47.1,54.2], det:[42.7,39.7,44.8,39.6,35.8,37.7,35.7,30.7,35.2,40.1,29.1], c:'#2563EB' },
-  '60 Day':    { nps:[9.6,7.5,10.6,11.0,18.5,8.7,10.2,15.3,19.6,8.5,9.8],  pro:[47.0,45.7,48.1,49.1,53.8,47.9,48.2,51.7,52.2,48.2,47.2], det:[37.4,38.2,37.5,38.1,35.3,39.2,38.0,36.4,32.6,39.7,37.4], c:'#D97706' },
-  'Quarterly': { nps:[16.6,23.3,23.1,23.2,16.1,11.1,24.4,38.2,5.9,25.9,30.7], pro:[51.0,50.0,46.2,54.2,51.8,50.0,55.2,60.7,41.2,55.8,57.6], det:[34.4,26.7,23.1,31.0,35.7,38.9,30.8,22.5,35.3,29.9,26.9], c:'#059669' }
+  '30 Day':    { nps:[0.2,8.4,1.2,3.8,15.5,10.7,13.8,24.0,17.1,7.0,25.1], pro:[42.9,46.3,43.4,43.4,51.4,48.4,49.5,54.7,52.3,47.1,54.2], det:[42.7,39.7,44.8,39.6,35.8,37.7,35.7,30.7,35.2,40.1,29.1], c:'#4270C4' },
+  '60 Day':    { nps:[9.6,7.5,10.6,11.0,18.5,8.7,10.2,15.3,19.6,8.5,9.8],  pro:[47.0,45.7,48.1,49.1,53.8,47.9,48.2,51.7,52.2,48.2,47.2], det:[37.4,38.2,37.5,38.1,35.3,39.2,38.0,36.4,32.6,39.7,37.4], c:'#C07D30' },
+  'Quarterly': { nps:[16.6,23.3,23.1,23.2,16.1,11.1,24.4,38.2,5.9,25.9,30.7], pro:[51.0,50.0,46.2,54.2,51.8,50.0,55.2,60.7,41.2,55.8,57.6], det:[34.4,26.7,23.1,31.0,35.7,38.9,30.8,22.5,35.3,29.9,26.9], c:'#2D8A6A' }
 };
 const DIST = {
-  astbuy:   { label:'ASTBUY Enquiries',   bands:{ '<50km':{v:[9.75,8.35,8.01,6.92,6.74,7.05,6.96,6.46],c:'#DC2626'}, '51-250km':{v:[7.55,6.84,6.15,5.92,5.99,5.85,5.85,5.85],c:'#F97316'}, '251-500km':{v:[5.96,5.04,5.39,6.22,4.41,3.49,3.49,3.49],c:'#D97706'}, '501-1000km':{v:[6.14,5.36,4.51,5.42,6.21,5.93,5.93,5.93],c:'#2563EB'}, '>1000km':{v:[7.08,6.01,6.19,6.76,6.91,6.91,6.91,6.91],c:'#7C3AED'} } },
-  direct:   { label:'Direct Enquiries',   bands:{ '<50km':{v:[6.41,6.28,6.02,5.83,5.17,5.12,5.12,5.12],c:'#DC2626'}, '51-250km':{v:[7.96,7.81,6.98,6.51,6.39,6.32,6.32,6.32],c:'#F97316'}, '251-500km':{v:[8.04,8.42,7.81,6.97,6.49,6.3,6.3,6.3],c:'#D97706'}, '501-1000km':{v:[9.62,9.43,8.52,7.97,8.12,7.24,7.24,7.24],c:'#2563EB'}, '>1000km':{v:[10.38,9.62,9.02,8.77,8.32,8.21,8.21,8.21],c:'#7C3AED'} } },
-  buyleads: { label:'Buyleads',           bands:{ '<50km':{v:[6.86,6.32,6.26,6.07,5.99,5.72,5.72,5.72],c:'#DC2626'}, '51-250km':{v:[5.31,4.99,4.89,4.86,4.62,4.58,4.58,4.58],c:'#F97316'}, '251-500km':{v:[4.41,3.96,4.06,3.96,3.97,3.99,3.99,3.99],c:'#D97706'}, '501-1000km':{v:[3.88,3.63,3.76,3.56,3.67,3.65,3.65,3.65],c:'#2563EB'}, '>1000km':{v:[4.01,3.8,3.9,3.88,3.91,3.88,3.88,3.88],c:'#7C3AED'} } }
+  astbuy:   { label:'ASTBUY Enquiries',   bands:{ '<50km':{v:[9.75,8.35,8.01,6.92,6.74,7.05,6.96,6.46],c:'#C0444A'}, '51-250km':{v:[7.55,6.84,6.15,5.92,5.99,5.85,5.85,5.85],c:'#D4784A'}, '251-500km':{v:[5.96,5.04,5.39,6.22,4.41,3.49,3.49,3.49],c:'#C07D30'}, '501-1000km':{v:[6.14,5.36,4.51,5.42,6.21,5.93,5.93,5.93],c:'#4270C4'}, '>1000km':{v:[7.08,6.01,6.19,6.76,6.91,6.91,6.91,6.91],c:'#7055B8'} } },
+  direct:   { label:'Direct Enquiries',   bands:{ '<50km':{v:[6.41,6.28,6.02,5.83,5.17,5.12,5.12,5.12],c:'#C0444A'}, '51-250km':{v:[7.96,7.81,6.98,6.51,6.39,6.32,6.32,6.32],c:'#D4784A'}, '251-500km':{v:[8.04,8.42,7.81,6.97,6.49,6.3,6.3,6.3],c:'#C07D30'}, '501-1000km':{v:[9.62,9.43,8.52,7.97,8.12,7.24,7.24,7.24],c:'#4270C4'}, '>1000km':{v:[10.38,9.62,9.02,8.77,8.32,8.21,8.21,8.21],c:'#7055B8'} } },
+  buyleads: { label:'Buyleads',           bands:{ '<50km':{v:[6.86,6.32,6.26,6.07,5.99,5.72,5.72,5.72],c:'#C0444A'}, '51-250km':{v:[5.31,4.99,4.89,4.86,4.62,4.58,4.58,4.58],c:'#D4784A'}, '251-500km':{v:[4.41,3.96,4.06,3.96,3.97,3.99,3.99,3.99],c:'#C07D30'}, '501-1000km':{v:[3.88,3.63,3.76,3.56,3.67,3.65,3.65,3.65],c:'#4270C4'}, '>1000km':{v:[4.01,3.8,3.9,3.88,3.91,3.88,3.88,3.88],c:'#7055B8'} } }
 };
 
 // ─── SEGMENT TOGGLE ──────────────────────────────────────────────────
@@ -2545,7 +2553,7 @@ function selectSegment(seg, e) {
 
 // ─── HELPERS ─────────────────────────────────────────────────────────
 const F = (n, d=1) => parseFloat(n).toFixed(d);
-const nc = nps => nps > 20 ? '#059669' : nps > 0 ? '#D97706' : '#DC2626';
+const nc = nps => nps > 20 ? '#2D8A6A' : nps > 0 ? '#C07D30' : '#C0444A';
 const MONO = "JetBrains Mono,monospace";
 
 // ─── DRAW: 100% stacked bars (custtype, one segment) ─────────────────
@@ -2560,7 +2568,7 @@ function drawStackedBars(svg, d, months, large) {
   // gridlines
   [0,25,50,75,100].forEach(pct=>{
     const y=F(pad.t+cH*(1-pct/100));
-    h+=`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="${pct===50?'#E5E7EB':'#F3F4F6'}" stroke-width="${pct===50?1:.5}"/>`;
+    h+=`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="${pct===50?'#E4E1DB':'#F0EFEC'}" stroke-width="${pct===50?1:.5}"/>`;
     h+=`<text x="${pad.l-3}" y="${F(+y+3)}" text-anchor="end" fill="#C0C8D4" font-size="${large?9:7}" font-family="${MONO}">${pct}</text>`;
   });
 
@@ -2576,8 +2584,8 @@ function drawStackedBars(svg, d, months, large) {
     const al = isFeb ? 1 : 0.65;
 
     // bars
-    h+=`<rect x="${F(bX)}" y="${F(yDetTop)}" width="${bW}" height="${F(det*cH)}" fill="#EF4444" opacity="${al}"/>`;
-    h+=`<rect x="${F(bX)}" y="${F(yNeuTop)}" width="${bW}" height="${F(neu*cH)}" fill="#D1D5DB" opacity="${al}"/>`;
+    h+=`<rect x="${F(bX)}" y="${F(yDetTop)}" width="${bW}" height="${F(det*cH)}" fill="#D46B6B" opacity="${al}"/>`;
+    h+=`<rect x="${F(bX)}" y="${F(yNeuTop)}" width="${bW}" height="${F(neu*cH)}" fill="#C8C8CC" opacity="${al}"/>`;
     h+=`<rect x="${F(bX)}" y="${F(yProTop)}" width="${bW}" height="${F(pro*cH)}" fill="#10B981" opacity="${al}" rx="${isFeb?2:1}"/>`;
     if(isFeb) h+=`<rect x="${F(bX)}" y="${F(yProTop)}" width="${bW}" height="${F(cH)}" fill="none" stroke="#0D1117" stroke-width="1.5" rx="2"/>`;
 
@@ -2616,7 +2624,7 @@ function drawVintageGrouped(svg, large) {
 
   [0,25,50,75,100].forEach(pct=>{
     const y=F(pad.t+cH*(1-pct/100));
-    h+=`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="${pct===50?'#E5E7EB':'#F3F4F6'}" stroke-width="${pct===50?1:.5}"/>`;
+    h+=`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="${pct===50?'#E4E1DB':'#F0EFEC'}" stroke-width="${pct===50?1:.5}"/>`;
     h+=`<text x="${pad.l-3}" y="${F(+y+3)}" text-anchor="end" fill="#C0C8D4" font-size="${large?9:7}" font-family="${MONO}">${pct}</text>`;
   });
 
@@ -2630,8 +2638,8 @@ function drawVintageGrouped(svg, large) {
       const yBot=pad.t+cH, al=isFeb?1:0.65;
       const yProTop = yBot-(det+neu+pro)*cH;
 
-      h+=`<rect x="${F(bX)}" y="${F(yBot-det*cH)}" width="${bW}" height="${F(det*cH)}" fill="#EF4444" opacity="${al}"/>`;
-      h+=`<rect x="${F(bX)}" y="${F(yBot-(det+neu)*cH)}" width="${bW}" height="${F(neu*cH)}" fill="#D1D5DB" opacity="${al}"/>`;
+      h+=`<rect x="${F(bX)}" y="${F(yBot-det*cH)}" width="${bW}" height="${F(det*cH)}" fill="#D46B6B" opacity="${al}"/>`;
+      h+=`<rect x="${F(bX)}" y="${F(yBot-(det+neu)*cH)}" width="${bW}" height="${F(neu*cH)}" fill="#C8C8CC" opacity="${al}"/>`;
       h+=`<rect x="${F(bX)}" y="${F(yProTop)}" width="${bW}" height="${F(pro*cH)}" fill="${d.c}" opacity="${al}" rx="${isFeb?1.5:.5}"/>`;
 
       // NPS label INSIDE promoter segment — avoids overlap across 3 bars per group
@@ -2669,7 +2677,7 @@ function drawDistGrouped(svg, ch, large) {
 
   [0, F(maxV*.5,0)*1, maxV].forEach(v=>{
     const y=F(yP(v));
-    h+=`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="#F3F4F6" stroke-width=".6"/>`;
+    h+=`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="#F0EFEC" stroke-width=".6"/>`;
     h+=`<text x="${pad.l-3}" y="${F(+y+3)}" text-anchor="end" fill="#C0C8D4" font-size="${large?9:7}" font-family="${MONO}">${(+v).toFixed(0)}%</text>`;
   });
 
@@ -2697,11 +2705,11 @@ function drawDistGrouped(svg, ch, large) {
 
 // ─── MODAL ───────────────────────────────────────────────────────────
 const MODAL_CFG = {
-  custtype: { title:()=>`NPS by Seller Type — ${activeSeg}`, sub:"100% stacked · Green=Promoters · Grey=Neutral · Red=Detractors · NPS labelled above each bar", vb:'0 0 900 280', leg:'<span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:10px;background:#10B981;border-radius:2px;display:inline-block"></span>Promoters</span><span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:10px;background:#D1D5DB;border-radius:2px;display:inline-block"></span>Neutral</span><span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:10px;background:#EF4444;border-radius:2px;display:inline-block"></span>Detractors</span>' },
-  vintage:  { title:()=>'NPS by Vintage — 30-Day · 60-Day · Quarterly+', sub:"Each group = one month · L=30-Day · M=60-Day · R=Quarterly+ · NPS labelled above · Feb outlined", vb:'0 0 900 260', leg:'<span style="color:#2563EB;font-weight:700">30-Day</span> &nbsp; <span style="color:#D97706;font-weight:700">60-Day</span> &nbsp; <span style="color:#059669;font-weight:700">Quarterly+</span>' },
-  astbuy:   { title:()=>'ASTBUY — Irrelevancy Rate by Distance', sub:"Last 8 months · Lower = better · Feb 26 fully opaque with labels", vb:'0 0 900 240', leg:'<span style="color:#DC2626;font-weight:700">&lt;50km</span> &nbsp;<span style="color:#F97316;font-weight:700">51-250km</span> &nbsp;<span style="color:#D97706;font-weight:700">251-500km</span> &nbsp;<span style="color:#2563EB;font-weight:700">501-1000km</span> &nbsp;<span style="color:#7C3AED;font-weight:700">&gt;1000km</span>' },
-  direct:   { title:()=>'Direct Enquiries — Irrelevancy Rate by Distance', sub:"Last 8 months · Lower = better · Feb 26 fully opaque with labels", vb:'0 0 900 240', leg:'<span style="color:#DC2626;font-weight:700">&lt;50km</span> &nbsp;<span style="color:#F97316;font-weight:700">51-250km</span> &nbsp;<span style="color:#D97706;font-weight:700">251-500km</span> &nbsp;<span style="color:#2563EB;font-weight:700">501-1000km</span> &nbsp;<span style="color:#7C3AED;font-weight:700">&gt;1000km</span>' },
-  buyleads: { title:()=>'Buyleads — Irrelevancy Rate by Distance', sub:"Last 8 months · Lower = better · Feb 26 fully opaque with labels", vb:'0 0 900 240', leg:'<span style="color:#DC2626;font-weight:700">&lt;50km</span> &nbsp;<span style="color:#F97316;font-weight:700">51-250km</span> &nbsp;<span style="color:#D97706;font-weight:700">251-500km</span> &nbsp;<span style="color:#2563EB;font-weight:700">501-1000km</span> &nbsp;<span style="color:#7C3AED;font-weight:700">&gt;1000km</span>' },
+  custtype: { title:()=>`NPS by Seller Type — ${activeSeg}`, sub:"100% stacked · Green=Promoters · Grey=Neutral · Red=Detractors · NPS labelled above each bar", vb:'0 0 900 280', leg:'<span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:10px;background:#10B981;border-radius:2px;display:inline-block"></span>Promoters</span><span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:10px;background:#C8C8CC;border-radius:2px;display:inline-block"></span>Neutral</span><span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:10px;background:#D46B6B;border-radius:2px;display:inline-block"></span>Detractors</span>' },
+  vintage:  { title:()=>'NPS by Vintage — 30-Day · 60-Day · Quarterly+', sub:"Each group = one month · L=30-Day · M=60-Day · R=Quarterly+ · NPS labelled above · Feb outlined", vb:'0 0 900 260', leg:'<span style="color:#4270C4;font-weight:700">30-Day</span> &nbsp; <span style="color:#C07D30;font-weight:700">60-Day</span> &nbsp; <span style="color:#2D8A6A;font-weight:700">Quarterly+</span>' },
+  astbuy:   { title:()=>'ASTBUY — Irrelevancy Rate by Distance', sub:"Last 8 months · Lower = better · Feb 26 fully opaque with labels", vb:'0 0 900 240', leg:'<span style="color:#C0444A;font-weight:700">&lt;50km</span> &nbsp;<span style="color:#D4784A;font-weight:700">51-250km</span> &nbsp;<span style="color:#C07D30;font-weight:700">251-500km</span> &nbsp;<span style="color:#4270C4;font-weight:700">501-1000km</span> &nbsp;<span style="color:#7055B8;font-weight:700">&gt;1000km</span>' },
+  direct:   { title:()=>'Direct Enquiries — Irrelevancy Rate by Distance', sub:"Last 8 months · Lower = better · Feb 26 fully opaque with labels", vb:'0 0 900 240', leg:'<span style="color:#C0444A;font-weight:700">&lt;50km</span> &nbsp;<span style="color:#D4784A;font-weight:700">51-250km</span> &nbsp;<span style="color:#C07D30;font-weight:700">251-500km</span> &nbsp;<span style="color:#4270C4;font-weight:700">501-1000km</span> &nbsp;<span style="color:#7055B8;font-weight:700">&gt;1000km</span>' },
+  buyleads: { title:()=>'Buyleads — Irrelevancy Rate by Distance', sub:"Last 8 months · Lower = better · Feb 26 fully opaque with labels", vb:'0 0 900 240', leg:'<span style="color:#C0444A;font-weight:700">&lt;50km</span> &nbsp;<span style="color:#D4784A;font-weight:700">51-250km</span> &nbsp;<span style="color:#C07D30;font-weight:700">251-500km</span> &nbsp;<span style="color:#4270C4;font-weight:700">501-1000km</span> &nbsp;<span style="color:#7055B8;font-weight:700">&gt;1000km</span>' },
 };
 function openModal(type) {
   const cfg=MODAL_CFG[type], modal=document.getElementById('chart-modal'), mSvg=document.getElementById('modal-svg');
@@ -2871,7 +2879,7 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
     vals:[15.73, 21.97, 23.56, 24.6, 25.4],
     months:["Apr'25","Jul'25","Oct'25","Jan'26","Feb'26"],
     ns:[14795,14553,12642,12808,2138],
-    color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+    color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
   });
 
   // 2 — Paid Seller App Rating: full 11 months, all labels
@@ -2879,7 +2887,7 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
     vals:[3.39,3.42,3.45,3.31,3.46,3.40,3.45,3.54,3.44,3.41,3.41],
     months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
     ns:[10217,12965,12823,8035,17855,8698,6840,9192,9710,7201,5441],
-    color:'#D97706', fmt:v=>v.toFixed(2), unit:'★', allLabels:true
+    color:'#C07D30', fmt:v=>v.toFixed(2), unit:'★', allLabels:true
   });
 
   // 3 — QRF Overall irrel % of total feedback: 11 months, all labels
@@ -2887,7 +2895,7 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
     vals:[8.56,8.74,8.43,7.14,6.50,5.84,5.45,5.20,5.04,5.03,4.94],
     months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
     ns:[417777,475630,496117,529731,516477,542698,480249,458638,503348,527998,491393],
-    color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
+    color:'#2D8A6A', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
   });
 
   // 4 — BLNI/Txn%: 11 months, all labels
@@ -2895,45 +2903,45 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
     vals:[8.37,7.69,7.40,6.94,6.42,6.13,5.61,5.68,5.48,4.52,4.41],
     months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
     ns:[828716,831110,784754,797672,697327,666210,558073,608647,627410,526186,471539],
-    color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
+    color:'#2D8A6A', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
   });
   // ── Tab 2: Seller type spark lines ─────────────────────────────
   drawSparkLine('spk-ct-star',{
     vals:[22.1,27.3,30.8,27.8,33.6],
     months:['Apr','Jul','Oct','Jan','Feb'],
     ns:[2306,2355,2129,2204,345],
-    color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+    color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
   });
   drawSparkLine('spk-ct-leader',{
     vals:[22.9,29.8,28.3,24.6,30.5],
     months:['Apr','Jul','Oct','Jan','Feb'],
     ns:[1422,1427,1272,1315,174],
-    color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+    color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
   });
   drawSparkLine('spk-ct-ts',{
     vals:[21.8,28.1,27.8,30.2,27.1],
     months:['Apr','Jul','Oct','Jan','Feb'],
     ns:[6249,6292,5627,5811,1031],
-    color:'#D97706', fmt:v=>v.toFixed(1), allLabels:true
+    color:'#C07D30', fmt:v=>v.toFixed(1), allLabels:true
   });
   drawSparkLine('spk-ct-cat',{
     vals:[11.8,11.7,13.4,12.5,14.8],
     months:['Apr','Jul','Oct','Jan','Feb'],
     ns:[2578,2914,2826,2953,480],
-    color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+    color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
   });
   // ── Tab 2: Vintage spark lines ───────────────────────────────────
   drawSparkLine('spk-vint-est',{
     vals:[16.6,23.2,24.4,25.9,30.7],
     months:['Apr','Jul','Oct','Jan','Feb'],
     ns:[13636,13371,11743,11946,1282],
-    color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+    color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
   });
   drawSparkLine('spk-vint-new',{
     vals:[4.9,7.4,12.0,7.75,17.45],
     months:['Apr','Jul','Oct','Jan','Feb'],
     ns:[1159,1182,899,854,856],
-    color:'#D97706', fmt:v=>v.toFixed(1), allLabels:true
+    color:'#C07D30', fmt:v=>v.toFixed(1), allLabels:true
   });
 
   // Expose to outer scope so applyDashboardData and resize handler can call them
@@ -2946,49 +2954,49 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
       vals:[15.73, 21.97, 23.56, 24.6, 25.4],
       months:["Apr'25","Jul'25","Oct'25","Jan'26","Feb'26"],
       ns:[14795,14553,12642,12808,2138],
-      color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+      color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
     });
     drawSparkLine('spk-app',{
       vals:[3.39,3.42,3.45,3.31,3.46,3.40,3.45,3.54,3.44,3.41,3.41],
       months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
       ns:[10217,12965,12823,8035,17855,8698,6840,9192,9710,7201,5441],
-      color:'#D97706', fmt:v=>v.toFixed(2), unit:'★', allLabels:true
+      color:'#C07D30', fmt:v=>v.toFixed(2), unit:'★', allLabels:true
     });
     drawSparkLine('spk-qrf',{
       vals:[8.56,8.74,8.43,7.14,6.50,5.84,5.45,5.20,5.04,5.03,4.94],
       months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
       ns:[417777,475630,496117,529731,516477,542698,480249,458638,503348,527998,491393],
-      color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
+      color:'#2D8A6A', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
     });
     drawSparkLine('spk-bl',{
       vals:[8.37,7.69,7.40,6.94,6.42,6.13,5.61,5.68,5.48,4.52,4.41],
       months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
       ns:[828716,831110,784754,797672,697327,666210,558073,608647,627410,526186,471539],
-      color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
+      color:'#2D8A6A', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
     });
     drawSparkLine('spk-ct-star',{
       vals:[22.1,27.3,30.8,27.8,33.6], months:['Apr','Jul','Oct','Jan','Feb'],
-      ns:[2306,2355,2129,2204,345], color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+      ns:[2306,2355,2129,2204,345], color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
     });
     drawSparkLine('spk-ct-leader',{
       vals:[22.9,29.8,28.3,24.6,30.5], months:['Apr','Jul','Oct','Jan','Feb'],
-      ns:[1422,1427,1272,1315,174], color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+      ns:[1422,1427,1272,1315,174], color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
     });
     drawSparkLine('spk-ct-ts',{
       vals:[21.8,28.1,27.8,30.2,27.1], months:['Apr','Jul','Oct','Jan','Feb'],
-      ns:[6249,6292,5627,5811,1031], color:'#D97706', fmt:v=>v.toFixed(1), allLabels:true
+      ns:[6249,6292,5627,5811,1031], color:'#C07D30', fmt:v=>v.toFixed(1), allLabels:true
     });
     drawSparkLine('spk-ct-cat',{
       vals:[11.8,11.7,13.4,12.5,14.8], months:['Apr','Jul','Oct','Jan','Feb'],
-      ns:[2578,2914,2826,2953,480], color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+      ns:[2578,2914,2826,2953,480], color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
     });
     drawSparkLine('spk-vint-est',{
       vals:[16.6,23.2,24.4,25.9,30.7], months:['Apr','Jul','Oct','Jan','Feb'],
-      ns:[13636,13371,11743,11946,1282], color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+      ns:[13636,13371,11743,11946,1282], color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
     });
     drawSparkLine('spk-vint-new',{
       vals:[4.9,7.4,12.0,7.75,17.45], months:['Apr','Jul','Oct','Jan','Feb'],
-      ns:[1159,1182,899,854,856], color:'#D97706', fmt:v=>v.toFixed(1), allLabels:true
+      ns:[1159,1182,899,854,856], color:'#C07D30', fmt:v=>v.toFixed(1), allLabels:true
     });
   };
 })();
@@ -2996,14 +3004,14 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
 
 const QMONO = "JetBrains Mono,monospace";
 const QBIF = {
-  astbuy:{label:"ASTBUY — Rejection Reason Mix (Quarterly)",sub:"Q1 Apr-Jun '25 · Q2 Jul-Sep · Q3 Oct-Dec · Q4 Jan-Feb '26 · 100% stacked · flags: Q1=99.8K Q2=87.0K Q3=54.4K Q4=36.9K",insight:"⚠️ <strong>Retail Req crept up every quarter</strong>: Q1 16.0% → Q2 18.5% → Q3 17.2% → Q4 18.6%. Wrong Category nearly halved (Q1 11.8%→Q4 6.4%). Others and Specs are stable dominant buckets.",months:["Q1\nApr-Jun","Q2\nJul-Sep","Q3\nOct-Dec","Q4\nJan-Feb"],cats:[{l:"Others",c:"#9CA3AF",pct:[23.8,24.4,25.3,25.4]},{l:"Specs Mismatch",c:"#8B5CF6",pct:[19.0,20.0,18.4,18.1]},{l:"Retail Req",c:"#EF4444",pct:[16.0,18.5,17.2,18.6]},{l:"Wrong Contact",c:"#06B6D4",pct:[12.6,13.3,14.1,12.9]},{l:"Single Click",c:"#E2E8F0",pct:[11.5,12.4,13.0,13.8]},{l:"Wrong Category",c:"#3B82F6",pct:[11.8,7.2,6.8,6.4]},{l:"Wrong Loc",c:"#F97316",pct:[5.3,4.2,5.1,4.7]}]},
-  direct:{label:"Direct Enquiries — Rejection Reason Mix (Quarterly)",sub:"Q1 Apr-Jun '25 → Q4 Jan-Feb '26 · 100% stacked · note structural shift Q1→Q2",insight:"🔍 <strong>Structural swap in Q2</strong>: Wrong Loc halved (53.7%→29.5%) as Retail Req surged (23.7%→36.3%). A system change ~Jul '25 likely fixed geography matching but surfaced more retail mis-matches. Stable since Q2.",months:["Q1\nApr-Jun","Q2\nJul-Sep","Q3\nOct-Dec","Q4\nJan-Feb"],cats:[{l:"Wrong Loc",c:"#F97316",pct:[53.7,29.5,27.9,28.4]},{l:"Retail Req",c:"#EF4444",pct:[23.7,36.3,37.1,35.7]},{l:"Others",c:"#9CA3AF",pct:[8.2,12.5,11.9,12.4]},{l:"Single Click",c:"#E2E8F0",pct:[5.6,7.8,8.2,8.9]},{l:"Wrong Contact",c:"#06B6D4",pct:[4.8,7.0,7.2,7.3]},{l:"Specs Mismatch",c:"#8B5CF6",pct:[2.0,3.8,3.8,3.9]},{l:"Wrong Category",c:"#3B82F6",pct:[2.0,3.1,3.8,3.4]}]},
-  buyleads:{label:"Buyleads — Rejection Reason Mix (Quarterly)",sub:"Q1 Apr-Jun '25 → Q4 Jan-Feb '26 · different taxonomy from ASTBUY/Direct",insight:"📌 <strong>Most stable channel</strong> — Req Mismatch at 37–38% all 4 quarters, virtually no drift. Single Click gently rising (14.4%→15.1%), possibly indicating seller fatigue with the feedback UI.",months:["Q1\nApr-Jun","Q2\nJul-Sep","Q3\nOct-Dec","Q4\nJan-Feb"],cats:[{l:"Req Mismatch",c:"#EF4444",pct:[37.6,37.8,38.2,38.3]},{l:"Others",c:"#9CA3AF",pct:[32.5,32.1,31.1,31.0]},{l:"Single Click",c:"#E2E8F0",pct:[14.4,14.2,14.7,15.1]},{l:"Buyer Unreach",c:"#06B6D4",pct:[9.7,10.1,9.8,9.4]},{l:"City Mismatch",c:"#F97316",pct:[5.8,5.8,6.3,6.2]}]},
-  app:{label:"In-App Complaints — Share Mix (Jan vs Feb '26)",sub:"Jan=964 tags · Feb=1,401 tags · % of total complaint tags · multi-select: bars don't sum to 100%",insight:"📱 Only 2 months of data. <strong>Low Conversion gaining share</strong> (22.8%→25%). Irrelevant Leads share falling (35.1%→32%) even though absolute volume rose. 'Others' jumped (9.7%→12.7%). Interpret with caution — feature adoption still growing.",months:["Jan","Feb"],cats:[{l:"Irrelevant Leads",c:"#EF4444",pct:[35.1,31.8]},{l:"Low Conversion",c:"#F97316",pct:[22.8,24.6]},{l:"Less BLs",c:"#3B82F6",pct:[20.9,20.3]},{l:"Issues w/ Buyer",c:"#8B5CF6",pct:[11.4,10.6]},{l:"Others",c:"#9CA3AF",pct:[9.7,12.7]}]},
-  nps_top:{label:"NPS — Top-Level Complaint Categories (Jan vs Feb '26)",sub:"% of commenters selecting each category · Jan n=211 tags · Feb n=635 tags · multi-select allowed",insight:"📋 <strong>Low Conversion grew</strong> (20.4%→23.0%) and Irrelevant Leads also up (30.8%→33.7%). 'Others' collapsed (25%→11.7%) — likely better sub-category capture in Feb. Less BLs jumped (15.2%→20%). <em>Survey bifurcation tracking started Jan '26.</em>",months:["Jan","Feb"],cats:[{l:"Irrelevant Leads",c:"#EF4444",pct:[30.8,33.7]},{l:"Low Conversion",c:"#F97316",pct:[20.4,23.0]},{l:"Less BLs",c:"#3B82F6",pct:[15.2,20.3]},{l:"Issues w/ Buyer",c:"#8B5CF6",pct:[9.0,11.3]},{l:"Others",c:"#9CA3AF",pct:[24.6,11.7]}]},
-  nps_irrel:{label:"Irrelevant Leads — Sub-Reasons (Jan vs Feb '26)",sub:"% of sellers who selected 'Irrelevant Leads' · Jan n=65 · Feb n=214",insight:"⚠️ <strong>'No reason given' dominates and grew</strong> (30.8%→52.8%) — most sellers flag leads as irrelevant without drilling into why. Of those who do specify: Retail Leads (18%) and Wrong Category (16.4%) are near-equal in Feb. Wrong Location eased (16.9%→8.4%).",months:["Jan","Feb"],cats:[{l:"No Reason",c:"#E2E8F0",pct:[30.8,52.8]},{l:"Retail Leads",c:"#EF4444",pct:[23.1,17.8]},{l:"Wrong Category",c:"#3B82F6",pct:[29.2,16.4]},{l:"Wrong Location",c:"#F97316",pct:[16.9,8.4]}]},
-  nps_buyer:{label:"Issues with Buyer — Sub-Reasons (Jan vs Feb '26)",sub:"% of sellers who selected 'Issues with Buyer' · Jan n=19 · Feb n=72",insight:"🙅 <strong>Buyer Unresponsive is #1 in Feb (33.3%)</strong>. 'No Option Selected' fell sharply (42.1%→18.1%) — sellers are now naming the specific buyer behaviour. Requirement Fulfilled rose (10.5%→22.2%), suggesting stale leads reaching sellers after buyer intent has passed.",months:["Jan","Feb"],cats:[{l:"No Option",c:"#E2E8F0",pct:[42.1,18.1]},{l:"Unresponsive",c:"#EF4444",pct:[21.1,33.3]},{l:"Denies Req",c:"#F97316",pct:[26.3,26.4]},{l:"Req Fulfilled",c:"#3B82F6",pct:[10.5,22.2]}]},
-  nps_bls:{label:"Less BLs / Enquiries — Sub-Reasons (Jan vs Feb '26)",sub:"% of sellers who selected 'Less BLs' · Jan n=32 · Feb n=129",insight:"📉 <strong>'Very Less Leads Overall' overtook 'No Option' as #1 sub-reason in Feb</strong>. 'Expire Fast' is stable. More than half of Jan respondents gave no sub-reason — tracking is still maturing into this category.",months:["Jan","Feb"],cats:[{l:"No Option",c:"#E2E8F0",pct:[21.9,51.9]},{l:"Very Less",c:"#EF4444",pct:[50.0,31.8]},{l:"Expire Fast",c:"#F97316",pct:[25.0,16.3]}]}
+  astbuy:{label:"ASTBUY — Rejection Reason Mix (Quarterly)",sub:"Q1 Apr-Jun '25 · Q2 Jul-Sep · Q3 Oct-Dec · Q4 Jan-Feb '26 · 100% stacked · flags: Q1=99.8K Q2=87.0K Q3=54.4K Q4=36.9K",insight:"⚠️ <strong>Retail Req crept up every quarter</strong>: Q1 16.0% → Q2 18.5% → Q3 17.2% → Q4 18.6%. Wrong Category nearly halved (Q1 11.8%→Q4 6.4%). Others and Specs are stable dominant buckets.",months:["Q1\nApr-Jun","Q2\nJul-Sep","Q3\nOct-Dec","Q4\nJan-Feb"],cats:[{l:"Others",c:"#9CA3AF",pct:[23.8,24.4,25.3,25.4]},{l:"Specs Mismatch",c:"#8472C4",pct:[19.0,20.0,18.4,18.1]},{l:"Retail Req",c:"#D46B6B",pct:[16.0,18.5,17.2,18.6]},{l:"Wrong Contact",c:"#06B6D4",pct:[12.6,13.3,14.1,12.9]},{l:"Single Click",c:"#E0DDD8",pct:[11.5,12.4,13.0,13.8]},{l:"Wrong Category",c:"#6089C8",pct:[11.8,7.2,6.8,6.4]},{l:"Wrong Loc",c:"#D4784A",pct:[5.3,4.2,5.1,4.7]}]},
+  direct:{label:"Direct Enquiries — Rejection Reason Mix (Quarterly)",sub:"Q1 Apr-Jun '25 → Q4 Jan-Feb '26 · 100% stacked · note structural shift Q1→Q2",insight:"🔍 <strong>Structural swap in Q2</strong>: Wrong Loc halved (53.7%→29.5%) as Retail Req surged (23.7%→36.3%). A system change ~Jul '25 likely fixed geography matching but surfaced more retail mis-matches. Stable since Q2.",months:["Q1\nApr-Jun","Q2\nJul-Sep","Q3\nOct-Dec","Q4\nJan-Feb"],cats:[{l:"Wrong Loc",c:"#D4784A",pct:[53.7,29.5,27.9,28.4]},{l:"Retail Req",c:"#D46B6B",pct:[23.7,36.3,37.1,35.7]},{l:"Others",c:"#9CA3AF",pct:[8.2,12.5,11.9,12.4]},{l:"Single Click",c:"#E0DDD8",pct:[5.6,7.8,8.2,8.9]},{l:"Wrong Contact",c:"#06B6D4",pct:[4.8,7.0,7.2,7.3]},{l:"Specs Mismatch",c:"#8472C4",pct:[2.0,3.8,3.8,3.9]},{l:"Wrong Category",c:"#6089C8",pct:[2.0,3.1,3.8,3.4]}]},
+  buyleads:{label:"Buyleads — Rejection Reason Mix (Quarterly)",sub:"Q1 Apr-Jun '25 → Q4 Jan-Feb '26 · different taxonomy from ASTBUY/Direct",insight:"📌 <strong>Most stable channel</strong> — Req Mismatch at 37–38% all 4 quarters, virtually no drift. Single Click gently rising (14.4%→15.1%), possibly indicating seller fatigue with the feedback UI.",months:["Q1\nApr-Jun","Q2\nJul-Sep","Q3\nOct-Dec","Q4\nJan-Feb"],cats:[{l:"Req Mismatch",c:"#D46B6B",pct:[37.6,37.8,38.2,38.3]},{l:"Others",c:"#9CA3AF",pct:[32.5,32.1,31.1,31.0]},{l:"Single Click",c:"#E0DDD8",pct:[14.4,14.2,14.7,15.1]},{l:"Buyer Unreach",c:"#06B6D4",pct:[9.7,10.1,9.8,9.4]},{l:"City Mismatch",c:"#D4784A",pct:[5.8,5.8,6.3,6.2]}]},
+  app:{label:"In-App Complaints — Share Mix (Jan vs Feb '26)",sub:"Jan=964 tags · Feb=1,401 tags · % of total complaint tags · multi-select: bars don't sum to 100%",insight:"📱 Only 2 months of data. <strong>Low Conversion gaining share</strong> (22.8%→25%). Irrelevant Leads share falling (35.1%→32%) even though absolute volume rose. 'Others' jumped (9.7%→12.7%). Interpret with caution — feature adoption still growing.",months:["Jan","Feb"],cats:[{l:"Irrelevant Leads",c:"#D46B6B",pct:[35.1,31.8]},{l:"Low Conversion",c:"#D4784A",pct:[22.8,24.6]},{l:"Less BLs",c:"#6089C8",pct:[20.9,20.3]},{l:"Issues w/ Buyer",c:"#8472C4",pct:[11.4,10.6]},{l:"Others",c:"#9CA3AF",pct:[9.7,12.7]}]},
+  nps_top:{label:"NPS — Top-Level Complaint Categories (Jan vs Feb '26)",sub:"% of commenters selecting each category · Jan n=211 tags · Feb n=635 tags · multi-select allowed",insight:"📋 <strong>Low Conversion grew</strong> (20.4%→23.0%) and Irrelevant Leads also up (30.8%→33.7%). 'Others' collapsed (25%→11.7%) — likely better sub-category capture in Feb. Less BLs jumped (15.2%→20%). <em>Survey bifurcation tracking started Jan '26.</em>",months:["Jan","Feb"],cats:[{l:"Irrelevant Leads",c:"#D46B6B",pct:[30.8,33.7]},{l:"Low Conversion",c:"#D4784A",pct:[20.4,23.0]},{l:"Less BLs",c:"#6089C8",pct:[15.2,20.3]},{l:"Issues w/ Buyer",c:"#8472C4",pct:[9.0,11.3]},{l:"Others",c:"#9CA3AF",pct:[24.6,11.7]}]},
+  nps_irrel:{label:"Irrelevant Leads — Sub-Reasons (Jan vs Feb '26)",sub:"% of sellers who selected 'Irrelevant Leads' · Jan n=65 · Feb n=214",insight:"⚠️ <strong>'No reason given' dominates and grew</strong> (30.8%→52.8%) — most sellers flag leads as irrelevant without drilling into why. Of those who do specify: Retail Leads (18%) and Wrong Category (16.4%) are near-equal in Feb. Wrong Location eased (16.9%→8.4%).",months:["Jan","Feb"],cats:[{l:"No Reason",c:"#E0DDD8",pct:[30.8,52.8]},{l:"Retail Leads",c:"#D46B6B",pct:[23.1,17.8]},{l:"Wrong Category",c:"#6089C8",pct:[29.2,16.4]},{l:"Wrong Location",c:"#D4784A",pct:[16.9,8.4]}]},
+  nps_buyer:{label:"Issues with Buyer — Sub-Reasons (Jan vs Feb '26)",sub:"% of sellers who selected 'Issues with Buyer' · Jan n=19 · Feb n=72",insight:"🙅 <strong>Buyer Unresponsive is #1 in Feb (33.3%)</strong>. 'No Option Selected' fell sharply (42.1%→18.1%) — sellers are now naming the specific buyer behaviour. Requirement Fulfilled rose (10.5%→22.2%), suggesting stale leads reaching sellers after buyer intent has passed.",months:["Jan","Feb"],cats:[{l:"No Option",c:"#E0DDD8",pct:[42.1,18.1]},{l:"Unresponsive",c:"#D46B6B",pct:[21.1,33.3]},{l:"Denies Req",c:"#D4784A",pct:[26.3,26.4]},{l:"Req Fulfilled",c:"#6089C8",pct:[10.5,22.2]}]},
+  nps_bls:{label:"Less BLs / Enquiries — Sub-Reasons (Jan vs Feb '26)",sub:"% of sellers who selected 'Less BLs' · Jan n=32 · Feb n=129",insight:"📉 <strong>'Very Less Leads Overall' overtook 'No Option' as #1 sub-reason in Feb</strong>. 'Expire Fast' is stable. More than half of Jan respondents gave no sub-reason — tracking is still maturing into this category.",months:["Jan","Feb"],cats:[{l:"No Option",c:"#E0DDD8",pct:[21.9,51.9]},{l:"Very Less",c:"#D46B6B",pct:[50.0,31.8]},{l:"Expire Fast",c:"#D4784A",pct:[25.0,16.3]}]}
 };
 
 function drawQrfBars(svg,ch,large){
@@ -3528,19 +3536,19 @@ function applyDashboardData(nps, app, qrf, bl) {
     vals:   nIdx.map(i=>nps.npsVals[i]),
     months: nIdx.map(i=>nMos[i]),
     ns:     nIdx.map(i=>nps.totalN[i]),
-    color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+    color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
   });
   _dsl('spk-app', {
     vals:app.ratings, months:app.months, ns:app.totalN,
-    color:'#D97706', fmt:v=>v.toFixed(2), unit:'★', allLabels:true
+    color:'#C07D30', fmt:v=>v.toFixed(2), unit:'★', allLabels:true
   });
   _dsl('spk-qrf', {
     vals:qrf.irrelPct, months:qrf.months, ns:qrf.totalN,
-    color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
+    color:'#2D8A6A', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
   });
   _dsl('spk-bl', {
     vals:bl.blniPct, months:bl.months, ns:bl.totalN,
-    color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
+    color:'#2D8A6A', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
   });
 
   // ── Update spk-card values ─────────────────────────────
@@ -3599,12 +3607,12 @@ function applyDashboardData(nps, app, qrf, bl) {
       color, fmt:v=>v.toFixed(1), allLabels:true
     });
   }
-    drawType('spk-ct-star',   nps.star,      '#059669');
-    drawType('spk-ct-leader', nps.leader,    '#059669');
-    drawType('spk-ct-ts',     nps.tsCat,     '#D97706');
-    drawType('spk-ct-cat',    nps.catalog,   '#059669');
-    drawType('spk-vint-est',  nps.quarterly, '#059669');
-    drawType('spk-vint-new',  nps.day30,     '#D97706');
+    drawType('spk-ct-star',   nps.star,      '#2D8A6A');
+    drawType('spk-ct-leader', nps.leader,    '#2D8A6A');
+    drawType('spk-ct-ts',     nps.tsCat,     '#C07D30');
+    drawType('spk-ct-cat',    nps.catalog,   '#2D8A6A');
+    drawType('spk-vint-est',  nps.quarterly, '#2D8A6A');
+    drawType('spk-vint-new',  nps.day30,     '#C07D30');
 
   function updType(id, data) {
     if (!data) return;
@@ -3646,7 +3654,7 @@ function applyDashboardData(nps, app, qrf, bl) {
 function rebuildNPSBars(nps) {
   const nJan=nps.totalComplaints.jan||211, nFeb=nps.totalComplaints.feb||635;
   const cats=['irrel','lowConv','lessBL','iwb','others'];
-  const colors=['#EF4444','#8B5CF6','#3B82F6','#F59E0B','#D1D5DB'];
+  const colors=['#D46B6B','#8472C4','#6089C8','#CFA050','#C8C8CC'];
   const labels=['Irrelevant Leads','Less BLs/Enquiries','Low Conversion','Issues with Buyer','Others'];
   const bars = [
     { label:"Jan '26", n:nJan, vals:[nps.irrel,nps.lessBL,nps.lowConv,nps.iwb,nps.others].map(x=>x?x.jan:0) },
@@ -3993,14 +4001,14 @@ function switchMonth(key) {
   // ── 2. Overview spark cards ───────────────────────────────────
   // NPS
   dsl('spk-nps', { vals:d.nps.sv, months:d.nps.sm, ns:d.nps.sn,
-    color:'#059669', fmt:v=>v.toFixed(1), allLabels:true });
+    color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true });
   _updCard('spk-nps', d.nps.val.toFixed(1),
     _sign(+d.nps.mom.toFixed(1)) + ' MoM', d.nps.mom >= 0,
     d.nps.n.toLocaleString() + ' responses', d.nps.best);
 
   // App
   dsl('spk-app', { vals:d.app.sv, months:d.app.sm, ns:d.app.sn,
-    color:'#D97706', fmt:v=>v.toFixed(2), unit:'★', allLabels:true });
+    color:'#C07D30', fmt:v=>v.toFixed(2), unit:'★', allLabels:true });
   const appMomTxt = Math.abs(d.app.mom) < 0.005
     ? '→ Flat MoM'
     : _sign(+d.app.mom.toFixed(2)) + '★ MoM';
@@ -4010,21 +4018,21 @@ function switchMonth(key) {
 
   // QRF (lower = better)
   dsl('spk-qrf', { vals:d.qrf.sv, months:d.qrf.sm, ns:d.qrf.sn,
-    color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true });
+    color:'#2D8A6A', fmt:v=>v.toFixed(2), unit:'%', allLabels:true });
   _updCard('spk-qrf', d.qrf.val.toFixed(2) + '%',
     _sign(+d.qrf.mom.toFixed(2)) + '% MoM', d.qrf.mom <= 0,
     d.qrf.n.toLocaleString() + ' actions', d.qrf.best);
 
   // BL (lower = better)
   dsl('spk-bl', { vals:d.bl.sv, months:d.bl.sm, ns:d.bl.sn,
-    color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true });
+    color:'#2D8A6A', fmt:v=>v.toFixed(2), unit:'%', allLabels:true });
   _updCard('spk-bl', d.bl.val.toFixed(2) + '%',
     _sign(+d.bl.mom.toFixed(2)) + '% MoM', d.bl.mom <= 0,
     d.bl.n.toLocaleString() + ' NIs', d.bl.best);
 
   // ── 3. Tab2: seller-type sparks ───────────────────────────────
   const _stCard = (svgId, seg) => {
-    const col = seg.val > 20 ? '#059669' : seg.val > 0 ? '#D97706' : '#DC2626';
+    const col = seg.val > 20 ? '#2D8A6A' : seg.val > 0 ? '#C07D30' : '#C0444A';
     dsl(svgId, { vals:seg.sv, months:seg.sm, color:col, fmt:v=>v.toFixed(1), allLabels:true });
     const svg = document.getElementById(svgId); if(!svg) return;
     const card = svg.closest('.spk-card'); if(!card) return;
@@ -4086,7 +4094,7 @@ function _renderNpsBars(bars) {
   const tab3 = document.getElementById('tab3'); if(!tab3) return;
   const barsEl = tab3.querySelector('.vcb-bars'); if(!barsEl) return;
   const grps = barsEl.querySelectorAll('.vcb-bar-group');
-  const SEG_COLORS = ['#EF4444','#3B82F6','#8B5CF6','#F59E0B','#D1D5DB'];
+  const SEG_COLORS = ['#D46B6B','#6089C8','#8472C4','#CFA050','#C8C8CC'];
 
   grps.forEach((g, i) => { g.style.display = i < bars.length ? '' : 'none'; });
 
@@ -4123,7 +4131,7 @@ function _renderAppBars(bars) {
   const tab5 = document.getElementById('tab5'); if(!tab5) return;
   const barsEl = tab5.querySelector('.vcb-bars-11'); if(!barsEl) return;
   const grps = barsEl.querySelectorAll('[class*="vcb-bar-group"]');
-  const SEG_COLORS = ['#EF4444','#3B82F6','#8B5CF6','#F59E0B','#D1D5DB'];
+  const SEG_COLORS = ['#D46B6B','#6089C8','#8472C4','#CFA050','#C8C8CC'];
 
   grps.forEach((g, i) => { g.style.display = i < bars.length ? '' : 'none'; });
 
@@ -4592,7 +4600,7 @@ async function saveSummaries() {
   if (gasUrl && gasUrl.startsWith('http')) {
     statusEl.textContent = '⏳ Publishing to GAS…';
     statusEl.style.display = 'block';
-    statusEl.style.background = '#F8FAFC';
+    statusEl.style.background = '#F5F5F2';
     statusEl.style.color = 'var(--muted)';
     try {
       const res = await fetch(gasUrl, {
@@ -4602,8 +4610,8 @@ async function saveSummaries() {
       });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       statusEl.textContent = '✓ Published — all viewers will see updated summaries on next load';
-      statusEl.style.background = '#F0FDF4';
-      statusEl.style.color = '#15803D';
+      statusEl.style.background = '#EEF7F3';
+      statusEl.style.color = '#2D7A50';
     } catch (err) {
       statusEl.textContent = '⚠ GAS push failed (' + err.message + ') — summaries updated locally only';
       statusEl.style.background = '#FFF7ED';
@@ -4760,7 +4768,7 @@ async function saveVoice() {
   if (gasUrl && gasUrl.startsWith('http')) {
     statusEl.textContent = '⏳ Publishing to GAS…';
     statusEl.style.display = 'block';
-    statusEl.style.background = '#F8FAFC';
+    statusEl.style.background = '#F5F5F2';
     statusEl.style.color = 'var(--muted)';
     try {
       const res = await fetch(gasUrl, {
@@ -4770,8 +4778,8 @@ async function saveVoice() {
       });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       statusEl.textContent = '✓ Published — all viewers will see updated verbatims on next load';
-      statusEl.style.background = '#F0FDF4';
-      statusEl.style.color = '#15803D';
+      statusEl.style.background = '#EEF7F3';
+      statusEl.style.color = '#2D7A50';
     } catch (err) {
       statusEl.textContent = '⚠ GAS push failed (' + err.message + ') — verbatims updated locally only';
       statusEl.style.background = '#FFF7ED';
@@ -4892,6 +4900,42 @@ if (document.readyState === 'loading') {
   window.saveVoice = async function() { _saveUrls(); return orig.apply(this, arguments); };
 })();
 
+// ─── BACK BUTTON NAVIGATION ──────────────────────────────────────────
+// Push initial state on load so the first back press goes to tab1
+// instead of closing the page/WebView.
+(function initHistory() {
+  var startTab = 'tab1'; // always start on tab1 (hash nav not used in sandbox)
+  // Replace current history entry (not push) so we have a base state
+  try { history.replaceState({ tab: startTab }, ''); } catch(_) {}
+
+  // If URL had a valid tab hash, activate it silently (no scroll/push)
+  if (startTab !== 'tab1') {
+    var pane = document.getElementById(startTab);
+    var btn  = document.querySelector('[onclick*=' + startTab + ']');
+    if (pane && btn) {
+      document.querySelectorAll('.tab-pane').forEach(function(p){ p.classList.remove('active'); });
+      document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+      pane.classList.add('active');
+      btn.classList.add('active');
+    }
+  }
+})();
+
+// Listen for back/forward presses
+window.addEventListener('popstate', function(e) {
+  var tabId = (e.state && e.state.tab) ? e.state.tab : 'tab1';
+  var pane  = document.getElementById(tabId);
+  var btn   = document.querySelector('[onclick*=' + tabId + ']');
+  if (!pane || !btn) return;
+  document.querySelectorAll('.tab-pane').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  pane.classList.add('active');
+  btn.classList.add('active');
+  // Close any open dropdowns/panels
+  closeMonthDD && closeMonthDD();
+  window.scrollTo({ top: 0, behavior: 'instant' });
+});
+
 </script>
 
 
@@ -4929,22 +4973,22 @@ if (document.readyState === 'loading') {
 
         <div class="sp-section">
           <div class="sp-input-row">
-            <div class="sp-input-lbl"><span class="sp-dot" style="background:#059669"></span>NPS Report</div>
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#2D8A6A"></span>NPS Report</div>
             <input class="sp-input" id="link-nps" type="url" placeholder="https://script.google.com/macros/s/…/exec" oninput="markFilled(this)">
             <div class="sp-input-hint">Paste the deployed GAS web app URL for the NPS monthly sheet</div>
           </div>
           <div class="sp-input-row">
-            <div class="sp-input-lbl"><span class="sp-dot" style="background:#D97706"></span>App Ratings Report</div>
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#C07D30"></span>App Ratings Report</div>
             <input class="sp-input" id="link-app" type="url" placeholder="https://script.google.com/macros/s/…/exec" oninput="markFilled(this)">
             <div class="sp-input-hint">Paste the deployed GAS web app URL for the App ratings sheet</div>
           </div>
           <div class="sp-input-row">
-            <div class="sp-input-lbl"><span class="sp-dot" style="background:#EA580C"></span>QRF Irrelevancy Report</div>
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#C46040"></span>QRF Irrelevancy Report</div>
             <input class="sp-input" id="link-qrf" type="url" placeholder="https://script.google.com/macros/s/…/exec" oninput="markFilled(this)">
             <div class="sp-input-hint">Paste the deployed GAS web app URL for the QRF monthly sheet</div>
           </div>
           <div class="sp-input-row">
-            <div class="sp-input-lbl"><span class="sp-dot" style="background:#047857"></span>BL Irrelevancy Report</div>
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#2D7A58"></span>BL Irrelevancy Report</div>
             <input class="sp-input" id="link-bl" type="url" placeholder="https://script.google.com/macros/s/…/exec" oninput="markFilled(this)">
             <div class="sp-input-hint">Paste the deployed GAS web app URL for the BL NI monthly sheet</div>
           </div>
@@ -4965,7 +5009,7 @@ if (document.readyState === 'loading') {
 
         <div class="sp-section">
           <div class="sp-input-row">
-            <div class="sp-input-lbl"><span class="sp-dot" style="background:#059669"></span>NPS Report (.xlsx)</div>
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#2D8A6A"></span>NPS Report (.xlsx)</div>
             <div class="sp-file-zone" id="zone-nps" onclick="document.getElementById('file-nps').click()" ondragover="dragOver(event,this)" ondragleave="dragLeave(this)" ondrop="dropFile(event,'nps',this)">
               <span class="sp-file-icon">📊</span>
               <div class="sp-file-info">
@@ -4978,7 +5022,7 @@ if (document.readyState === 'loading') {
           </div>
 
           <div class="sp-input-row">
-            <div class="sp-input-lbl"><span class="sp-dot" style="background:#D97706"></span>App Ratings Report (.xlsx)</div>
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#C07D30"></span>App Ratings Report (.xlsx)</div>
             <div class="sp-file-zone" id="zone-app" onclick="document.getElementById('file-app').click()" ondragover="dragOver(event,this)" ondragleave="dragLeave(this)" ondrop="dropFile(event,'app',this)">
               <span class="sp-file-icon">📱</span>
               <div class="sp-file-info">
@@ -4991,7 +5035,7 @@ if (document.readyState === 'loading') {
           </div>
 
           <div class="sp-input-row">
-            <div class="sp-input-lbl"><span class="sp-dot" style="background:#EA580C"></span>QRF Irrelevancy Report (.xlsx)</div>
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#C46040"></span>QRF Irrelevancy Report (.xlsx)</div>
             <div class="sp-file-zone" id="zone-qrf" onclick="document.getElementById('file-qrf').click()" ondragover="dragOver(event,this)" ondragleave="dragLeave(this)" ondrop="dropFile(event,'qrf',this)">
               <span class="sp-file-icon">📋</span>
               <div class="sp-file-info">
@@ -5004,7 +5048,7 @@ if (document.readyState === 'loading') {
           </div>
 
           <div class="sp-input-row">
-            <div class="sp-input-lbl"><span class="sp-dot" style="background:#047857"></span>BLNI Report (.xlsx)</div>
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#2D7A58"></span>BLNI Report (.xlsx)</div>
             <div class="sp-file-zone" id="zone-bl" onclick="document.getElementById('file-bl').click()" ondragover="dragOver(event,this)" ondragleave="dragLeave(this)" ondrop="dropFile(event,'bl',this)">
               <span class="sp-file-icon">📈</span>
               <div class="sp-file-info">
@@ -5036,7 +5080,7 @@ if (document.readyState === 'loading') {
           </div>
 
           <div class="sp-sum-block">
-            <div class="sp-sum-hdr" style="border-left-color:#059669">
+            <div class="sp-sum-hdr" style="border-left-color:#2D8A6A">
               <span class="sp-sum-lbl">📊 Overview & Problems</span>
             </div>
             <div class="sp-input-hint" style="margin-bottom:6px">Title shown in the summary header</div>
@@ -5052,7 +5096,7 @@ App Rating flat at 3.41★ — peaked at 3.54 in Nov, no recovery in subsequent 
 🟡 Low Conversion and Less BLs are persistent complaints across NPS and App feedback — unresolved</textarea>
           </div>
           <div class="sp-sum-block">
-            <div class="sp-sum-hdr" style="border-left-color:#059669">
+            <div class="sp-sum-hdr" style="border-left-color:#2D8A6A">
               <span class="sp-sum-lbl">📊 NPS Deep Dive</span>
             </div>
             <div class="sp-input-hint" style="margin-bottom:6px">Title shown in the summary header</div>
@@ -5067,7 +5111,7 @@ Established sellers are significantly more satisfied than new sellers — the on
 New seller NPS jumped sharply in Feb — too early to confirm as a trend, needs March data</textarea>
           </div>
           <div class="sp-sum-block">
-            <div class="sp-sum-hdr" style="border-left-color:#EF4444">
+            <div class="sp-sum-hdr" style="border-left-color:#D46B6B">
               <span class="sp-sum-lbl">🔍 NPS Complaints</span>
             </div>
             <div class="sp-input-hint" style="margin-bottom:6px">Title shown in the summary header</div>
@@ -5082,7 +5126,7 @@ Retail Leads and Wrong Category are the most cited reasons under Irrelevant Lead
 The sharp rise in total complaints in Feb reflects higher survey participation, not a sudden deterioration</textarea>
           </div>
           <div class="sp-sum-block">
-            <div class="sp-sum-hdr" style="border-left-color:#8B5CF6">
+            <div class="sp-sum-hdr" style="border-left-color:#8472C4">
               <span class="sp-sum-lbl">📱 App Complaints</span>
             </div>
             <div class="sp-input-hint" style="margin-bottom:6px">Title shown in the summary header</div>
@@ -5223,7 +5267,7 @@ Sellers are increasingly selecting specific complaint reasons rather than Others
 
 <div id="spk-tooltip" style="
   position:fixed;display:none;flex-direction:column;align-items:center;gap:2px;
-  background:#1E293B;color:#F8FAFC;padding:7px 13px;border-radius:8px;
+  background:#2C3548;color:#F5F5F2;padding:7px 13px;border-radius:8px;
   pointer-events:none;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.25);
   font-family:'Sora',sans-serif;
 "></div>
