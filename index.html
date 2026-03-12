@@ -2507,6 +2507,8 @@ function switchTab(id, btn) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
+  // Snap the tab-nav bar so the active button is fully visible
+  btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   if (id === 'tab3' || id === 'tab5') {} // tabs render from static HTML
   // Always scroll to top on tab switch
   window.scrollTo({ top: 0, behavior: 'instant' });
@@ -2873,6 +2875,40 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
       });
     });
   }
+
+  // ── Touch handler for vcb-seg bar segments (mobile) ──────────────
+  // CSS ::after tooltip is clipped when the top bar is near the chart edge.
+  // Use the fixed-position #spk-tooltip instead on touch devices.
+  (function attachBarTouchTips() {
+    let _activeTouchTip = null;
+    document.addEventListener('touchstart', function(e) {
+      const seg = e.target.closest('.vcb-seg[data-tip]');
+      const tt  = document.getElementById('spk-tooltip');
+      if (!tt) return;
+      if (!seg) { tt.style.display = 'none'; _activeTouchTip = null; return; }
+      e.preventDefault();
+      const tip = seg.getAttribute('data-tip');
+      tt.innerHTML = `<span style="font-size:11px;font-weight:600;">${tip}</span>`;
+      tt.style.display = 'flex';
+      const r   = seg.getBoundingClientRect();
+      const ttW = tt.offsetWidth  || 70;
+      const ttH = tt.offsetHeight || 34;
+      // Prefer above; fall back to below if too close to top
+      let top = r.top - ttH - 10;
+      if (top < 6) top = r.bottom + 10;
+      let lft = r.left + r.width / 2 - ttW / 2;
+      if (lft < 6) lft = 6;
+      if (lft + ttW > window.innerWidth - 6) lft = window.innerWidth - ttW - 6;
+      tt.style.top  = top  + 'px';
+      tt.style.left = lft  + 'px';
+      _activeTouchTip = seg;
+    }, { passive: false });
+    document.addEventListener('touchend', function() {
+      const tt = document.getElementById('spk-tooltip');
+      if (tt) setTimeout(() => { tt.style.display = 'none'; }, 1200);
+      _activeTouchTip = null;
+    });
+  })();
 
   // 1 — NPS: 5 quarterly waypoints only
   drawSparkLine('spk-nps',{
