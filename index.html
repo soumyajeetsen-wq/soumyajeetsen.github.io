@@ -738,7 +738,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   .spk-val    { font-size: 36px; }
   .spk-mom    { font-size: 10px; }
   .spk-vol-n  { font-size: 9px; }
-  .spk-svg    { height: 60px; }
+  /* spk-svg height auto — controlled by viewBox aspect ratio */
 
   /* CTA buttons inside spark cards — full row, larger touch target */
   .spk-card [style*="justify-content:space-between"] {
@@ -839,7 +839,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
   /* ── Spark cards ── */
   .spk-val { font-size: 32px; }
-  .spk-svg { height: 52px; }
+  /* spk-svg height auto — controlled by viewBox aspect ratio */
 
   /* ── Prob vol strip — 2-up ── */
   .p4-vols { gap: 5px; }
@@ -2409,8 +2409,16 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
     const svg = document.getElementById(svgId);
     if(!svg) return;
     const {vals, months, color, fmt, unit='', allLabels=false} = opts;
-    const VW=560, VH=130;
-    const pad={t:26, r:22, b:36, l:12};
+
+    const isMobile = window.innerWidth <= 768;
+
+    // Mobile uses a taller viewBox to give labels room above and below the line
+    const VW = 560;
+    const VH = isMobile ? 175 : 130;
+    const pad = isMobile
+      ? {t:38, r:26, b:42, l:14}
+      : {t:26, r:22, b:36, l:12};
+
     const cW=VW-pad.l-pad.r, cH=VH-pad.t-pad.b;
     const n=vals.length;
     const minV=Math.min(...vals), maxV=Math.max(...vals);
@@ -2418,6 +2426,9 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
 
     function xAt(i){return pad.l + i*(cW/(n-1));}
     function yAt(v){return pad.t + (1-(v-minV)/rng)*cH;}
+
+    // Update the SVG viewBox dynamically
+    svg.setAttribute('viewBox', `0 0 ${VW} ${VH}`);
 
     const reg = linReg(vals);
     let h='';
@@ -2434,38 +2445,68 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
     h+=`<line x1="${xAt(0).toFixed(1)}" y1="${ty0.toFixed(1)}" x2="${xAt(n-1).toFixed(1)}" y2="${ty1.toFixed(1)}" stroke="${color}" stroke-width="1" stroke-dasharray="4,3" opacity=".38"/>`;
 
     // Main line
-    h+=`<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+    h+=`<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="${isMobile?2.5:2}" stroke-linecap="round" stroke-linejoin="round"/>`;
 
-    // Dots + data labels + invisible hit areas
+    // ── Label placement strategy ─────────────────────────────────────
+    // Desktop: above if value in lower 25%, else below
+    // Mobile: STAGGER — alternating above/below per index to prevent overlap.
+    //   Also respect chart edges: force above if too close to bottom, below if too close to top.
+    const curFontSize   = isMobile ? 12 : 9.5;
+    const otherFontSize = isMobile ? 10 : 7.8;
+    const curDotR   = isMobile ? 5.5 : 5;
+    const otherDotR = isMobile ? 3.2 : 2.8;
+    const ABOVE_OFF = isMobile ? -11 : -8;   // px above the dot
+    const BELOW_OFF = isMobile ?  14 : 12;   // px below the dot (to baseline)
+
     vals.forEach((v,i)=>{
-      const x=xAt(i), y=yAt(v), isCur=(i===n-1);
+      const x=xAt(i), y=yAt(v);
+      const isCur=(i===n-1);
       const fmtd = fmt ? fmt(v) : v.toFixed(1);
-      const pct=(v-minV)/rng;
-      const labelY = pct < 0.25 ? y-7 : y+12;
-      const showLbl = allLabels || n<=6 || (i%2===0) || isCur;
+      const pct=(v-minV)/rng; // 0=bottom of chart, 1=top
+
+      // ── Stagger logic (mobile) ───────────────────────────────────
+      // Default stagger: even index → above, odd → below
+      // Override: if point is in top 20% of chart area, always go below
+      //           if point is in bottom 20%, always go above
+      let placeAbove;
+      if(isMobile){
+        if(pct > 0.80)       placeAbove = false; // near top → label below
+        else if(pct < 0.20)  placeAbove = true;  // near bottom → label above
+        else                 placeAbove = (i % 2 === 0); // stagger
+      } else {
+        placeAbove = pct < 0.25;
+      }
+
+      const labelY = placeAbove ? y + ABOVE_OFF : y + BELOW_OFF;
+
+      // Text anchor: first point left-align, last right-align, rest centre
+      const anch = i===0 ? 'start' : (i===n-1 ? 'end' : 'middle');
 
       if(isCur){
-        h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" fill="${color}" stroke="#fff" stroke-width="1.5"/>`;
-        const anch = (i===n-1 && n>7) ? 'end' : 'middle';
-        h+=`<text x="${x.toFixed(1)}" y="${labelY.toFixed(1)}" text-anchor="${anch}" fill="${color}" font-size="9.5" font-weight="700" font-family=${MONO}>${fmtd}${unit}</text>`;
+        h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${curDotR}" fill="${color}" stroke="#fff" stroke-width="1.5"/>`;
+        h+=`<text x="${x.toFixed(1)}" y="${labelY.toFixed(1)}" text-anchor="${anch}" fill="${color}" font-size="${curFontSize}" font-weight="800" font-family=${MONO}>${fmtd}${unit}</text>`;
       } else {
-        h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.8" fill="${color}" opacity=".42"/>`;
+        h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${otherDotR}" fill="${color}" opacity="${isMobile?.60:.42}"/>`;
+        const showLbl = allLabels || n<=6 || (i%2===0) || isCur;
         if(showLbl){
-          h+=`<text x="${x.toFixed(1)}" y="${labelY.toFixed(1)}" text-anchor="middle" fill="${color}" font-size="7.8" font-weight="500" font-family=${MONO} opacity=".72">${fmtd}${unit}</text>`;
+          h+=`<text x="${x.toFixed(1)}" y="${labelY.toFixed(1)}" text-anchor="${anch}" fill="${color}" font-size="${otherFontSize}" font-weight="${isMobile?600:500}" font-family=${MONO} opacity="${isMobile?.88:.72}">${fmtd}${unit}</text>`;
         }
       }
 
-      // Invisible hit-area circle for tooltip — always present on every point
+      // Invisible hit-area for tooltip
       const tipN = (opts.ns && opts.ns[i] != null) ? opts.ns[i].toLocaleString() : null;
       const tipLabel = tipN ? tipN : (fmtd+unit);
       h+=`<circle class="spk-hit" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="14" fill="transparent" data-month="${months[i]}" data-val="${tipLabel}" data-isN="${tipN ? 'true' : 'false'}" style="cursor:pointer"/>`;
     });
 
-    // X-axis month labels — always show all
+    // X-axis month labels — show all, sized for legibility
     months.forEach((m,i)=>{
       const x=xAt(i), isCur=(i===n-1);
       const anchor = i===0 ? 'start' : i===n-1 ? 'end' : 'middle';
-      h+=`<text x="${x.toFixed(1)}" y="${VH-4}" text-anchor="${anchor}" fill="${isCur?color:'#9CA3AF'}" font-size="${isCur?8.5:7.5}" font-weight="${isCur?'700':'400'}" font-family=${MONO}>${m}</text>`;
+      const fs = isMobile ? (isCur ? 10 : 9) : (isCur ? 8.5 : 7.5);
+      const fill = isCur ? color : '#9CA3AF';
+      const fw = isCur ? '700' : '400';
+      h+=`<text x="${x.toFixed(1)}" y="${VH-5}" text-anchor="${anchor}" fill="${fill}" font-size="${fs}" font-weight="${fw}" font-family=${MONO}>${m}</text>`;
     });
 
     svg.innerHTML=h;
@@ -2667,6 +2708,22 @@ function renderTab4(){
     if(le)buildQrfLeg(le,ch);
   });
 }
+
+// ── Re-draw sparklines on orientation change / resize ───────────────
+(function(){
+  var lastW = window.innerWidth;
+  window.addEventListener('resize', function(){
+    var newW = window.innerWidth;
+    // Only redraw if we crossed the 768 breakpoint (mobile↔desktop)
+    var crossedBreakpoint = (lastW <= 768) !== (newW <= 768);
+    lastW = newW;
+    if(crossedBreakpoint){
+      // Re-run all drawSparkLine calls by reloading the page's spark init
+      // Simplest: reload just the spark block
+      window.location.reload();
+    }
+  });
+})();
 
 // ── Tab scroll hint ──────────────────────────────────────────────────
 (function() {
