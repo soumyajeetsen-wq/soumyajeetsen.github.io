@@ -1754,7 +1754,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <div class="spk-label">⭐ STAR</div>
         <div class="spk-val c-green">33.6</div>
         <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
-          <span class="best-ever-badge">★ BEST EVER</span> <span style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">345 responses</span>
+          <span class="best-ever-badge">★ BEST EVER</span> <span id="n-ct-star" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">345 responses</span>
         </div>
       </div>
       <div style="text-align:right">
@@ -1772,7 +1772,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <div class="spk-label">🏆 LEADER</div>
         <div class="spk-val c-green">30.5</div>
         <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
-          <span class="best-ever-badge">★ BEST EVER</span> <span style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">174 responses</span>
+          <span class="best-ever-badge">★ BEST EVER</span> <span id="n-ct-leader" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">174 responses</span>
         </div>
       </div>
       <div style="text-align:right">
@@ -1789,10 +1789,10 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       <div>
         <div class="spk-label">📂 TSCatalog</div>
         <div class="spk-val c-amber">27.1</div>
-        <div style="margin-top:3px"><span style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">1,031 responses</span></div>
+        <div style="margin-top:3px"><span id="n-ct-ts" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">1,031 responses</span></div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom" style="color:var(--red)">−3.1 MoM ⚠</div>
+        <div class="spk-mom c-red">−3.1 MoM</div>
         <div class="spk-badge" style="background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)">NPS Survey</div>
       </div>
     </div>
@@ -1806,7 +1806,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <div class="spk-label">📄 Catalog</div>
         <div class="spk-val c-green">14.8</div>
         <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
-          <span class="best-ever-badge">★ BEST EVER</span> <span style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">480 responses</span>
+          <span class="best-ever-badge">★ BEST EVER</span> <span id="n-ct-cat" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">480 responses</span>
         </div>
       </div>
       <div style="text-align:right">
@@ -1836,7 +1836,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       <div>
         <div class="spk-label">📅 Established Sellers</div>
         <div class="spk-val c-green">30.7</div>
-        <div style="margin-top:3px"><span style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">1,282 responses</span></div>
+        <div style="margin-top:3px"><span id="n-vint-est" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">1,282 responses</span></div>
       </div>
       <div style="text-align:right">
         <div class="spk-mom c-green">+4.8 MoM</div>
@@ -1852,7 +1852,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       <div>
         <div class="spk-label">🆕 New Sellers</div>
         <div class="spk-val c-amber">17.4</div>
-        <div style="margin-top:3px"><span style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">856 responses</span></div>
+        <div style="margin-top:3px"><span id="n-vint-new" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">856 responses</span></div>
       </div>
       <div style="text-align:right">
         <div class="spk-mom c-green">+9.7 MoM</div>
@@ -3855,12 +3855,12 @@ _reg("Jan '26", {
   bl:  { val:4.52, n:526186, mom:-0.96, best:false,
     sv:_BL_FULL.vals.slice(0,10), sm:_BL_FULL.mos.slice(0,10), sn:_BL_FULL.ns.slice(0,10) },
   // Seller types — 4-pt spark (no Feb pt yet)
-  star:   { val:27.8, mom:-3.0,  best:false, sv:[22.1,27.3,30.8,27.8], sm:['Apr','Jul','Oct','Jan'] },
-  leader: { val:24.6, mom:-3.7,  best:false, sv:[22.9,29.8,28.3,24.6], sm:['Apr','Jul','Oct','Jan'] },
-  ts:     { val:30.2, mom:+2.4,  best:true,  sv:[21.8,28.1,27.8,30.2], sm:['Apr','Jul','Oct','Jan'] },
-  cat:    { val:12.5, mom:-0.9,  best:false, sv:[11.8,11.7,13.4,12.5], sm:['Apr','Jul','Oct','Jan'] },
-  est:    { val:25.9, mom:+1.5,  best:false, sv:[16.6,23.2,24.4,25.9], sm:['Apr','Jul','Oct','Jan'] },
-  newS:   { val:7.75, mom:-4.25, best:false, sv:[4.9,7.4,12.0,7.75],   sm:['Apr','Jul','Oct','Jan'] },
+  star:   { val:27.8, mom:-3.0,  best:false, n:2204,  sv:[22.1,27.3,30.8,27.8], sm:['Apr','Jul','Oct','Jan'] },
+  leader: { val:24.6, mom:-3.7,  best:false, n:1315,  sv:[22.9,29.8,28.3,24.6], sm:['Apr','Jul','Oct','Jan'] },
+  ts:     { val:30.2, mom:+2.4,  best:true,  n:5811,  sv:[21.8,28.1,27.8,30.2], sm:['Apr','Jul','Oct','Jan'] },
+  cat:    { val:12.5, mom:-0.9,  best:false, n:2953,  sv:[11.8,11.7,13.4,12.5], sm:['Apr','Jul','Oct','Jan'] },
+  est:    { val:25.9, mom:+1.5,  best:false, n:11946, sv:[16.6,23.2,24.4,25.9], sm:['Apr','Jul','Oct','Jan'] },
+  newS:   { val:7.7,  mom:-10.5, best:false, n:854,   sv:[5.5,7.7,11.9,7.7],    sm:['Apr','Jul','Oct','Jan'] },
   // P4 problem percentages
   p4: { irrel:{nps:31,app:35,bl:34,qrf:19}, conv:{nps:20,app:23}, bls:{nps:15,app:21}, spec:{bl:22,qrf:18} },
   // Complaint bars
@@ -3895,12 +3895,12 @@ _reg("Feb '26", {
     sv:_QRF_FULL.vals, sm:_QRF_FULL.mos, sn:_QRF_FULL.ns },
   bl:  { val:4.41, n:471539, mom:-0.11, best:false,
     sv:_BL_FULL.vals, sm:_BL_FULL.mos, sn:_BL_FULL.ns },
-  star:   { val:33.6, mom:+5.8, best:true,  sv:[22.1,27.3,30.8,27.8,33.6], sm:['Apr','Jul','Oct','Jan','Feb'] },
-  leader: { val:30.5, mom:+5.9, best:true,  sv:[22.9,29.8,28.3,24.6,30.5], sm:['Apr','Jul','Oct','Jan','Feb'] },
-  ts:     { val:27.1, mom:-3.1, best:false, sv:[21.8,28.1,27.8,30.2,27.1], sm:['Apr','Jul','Oct','Jan','Feb'] },
-  cat:    { val:14.8, mom:+2.3, best:true,  sv:[11.8,11.7,13.4,12.5,14.8], sm:['Apr','Jul','Oct','Jan','Feb'] },
-  est:    { val:30.7, mom:+4.8, best:false, sv:[16.6,23.2,24.4,25.9,30.7], sm:['Apr','Jul','Oct','Jan','Feb'] },
-  newS:   { val:17.45,mom:+9.7, best:false, sv:[4.9,7.4,12.0,7.75,17.45],  sm:['Apr','Jul','Oct','Jan','Feb'] },
+  star:   { val:33.6, mom:+5.8, best:true,  n:345,   sv:[22.1,27.3,30.8,27.8,33.6], sm:['Apr','Jul','Oct','Jan','Feb'] },
+  leader: { val:30.5, mom:+5.9, best:true,  n:174,   sv:[22.9,29.8,28.3,24.6,30.5], sm:['Apr','Jul','Oct','Jan','Feb'] },
+  ts:     { val:27.1, mom:-3.1, best:false, n:1031,  sv:[21.8,28.1,27.8,30.2,27.1], sm:['Apr','Jul','Oct','Jan','Feb'] },
+  cat:    { val:14.8, mom:+2.3, best:true,  n:480,   sv:[11.8,11.7,13.4,12.5,14.8], sm:['Apr','Jul','Oct','Jan','Feb'] },
+  est:    { val:30.7, mom:+4.8, best:false, n:1282,  sv:[16.6,23.2,24.4,25.9,30.7], sm:['Apr','Jul','Oct','Jan','Feb'] },
+  newS:   { val:17.4, mom:+9.7,  best:false, n:856,   sv:[5.5,7.7,11.9,7.7,17.4],   sm:['Apr','Jul','Oct','Jan','Feb'] },
   p4: { irrel:{nps:34,app:32,bl:34,qrf:19}, conv:{nps:23,app:25}, bls:{nps:21,app:20}, spec:{bl:22,qrf:18} },
   npsBars: [
     { l:"Jan '26", n:211, s:[65,43,32,19,52]    },
@@ -4037,13 +4037,21 @@ function switchMonth(key) {
     const svg = document.getElementById(svgId); if(!svg) return;
     const card = svg.closest('.spk-card'); if(!card) return;
     const q = s => card.querySelector(s);
-    if(q('.spk-val')) q('.spk-val').textContent = seg.val.toFixed(1);
+    if(q('.spk-val')) { q('.spk-val').textContent = seg.val.toFixed(1);
+      q('.spk-val').className = 'spk-val ' + (seg.val >= 20 ? 'c-green' : seg.val >= 0 ? 'c-amber' : 'c-red'); }
     if(q('.spk-mom')) {
       q('.spk-mom').textContent = _sign(+seg.mom.toFixed(1)) + ' MoM';
+      q('.spk-mom').style.color = '';
       q('.spk-mom').className = 'spk-mom ' + (seg.mom >= 0 ? 'c-green' : 'c-red');
     }
     const be = card.querySelector('.best-ever-badge');
     if(be) be.style.display = seg.best ? '' : 'none';
+    // Update response count — span id mirrors svg id: spk-ct-star → n-ct-star
+    if (seg.n != null) {
+      const nId = svgId.replace('spk-', 'n-');
+      const nEl = document.getElementById(nId);
+      if (nEl) nEl.textContent = seg.n.toLocaleString() + ' responses';
+    }
   };
   _stCard('spk-ct-star',   d.star);
   _stCard('spk-ct-leader', d.leader);
@@ -4083,6 +4091,7 @@ function _updCard(svgId, valTxt, momTxt, momGood, volTxt, isBest) {
   const q = s => card.querySelector(s);
   if(q('.spk-val'))   q('.spk-val').textContent  = valTxt;
   if(q('.spk-mom'))  { q('.spk-mom').textContent = momTxt;
+                       q('.spk-mom').style.color = '';
                        q('.spk-mom').className = 'spk-mom ' + (momGood ? 'c-green' : 'c-red'); }
   if(q('.spk-vol-n')) q('.spk-vol-n').textContent = volTxt;
   const be = q('.best-ever-badge');
