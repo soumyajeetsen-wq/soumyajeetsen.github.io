@@ -760,11 +760,36 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   /* ── Seller Problems grid → single column ── */
   .prob4-grid { grid-template-columns: 1fr; gap: 10px; }
   .p4 { padding: 14px 16px; }
-  .p4-head { font-size: 12px; }
-  .p4-vols { flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-  .p4-vol  { min-width: 0; flex: 1 1 calc(50% - 6px); }
-  .p4-vol-s{ font-size: 8px; }
-  .p4-vol-n{ font-size: 10px; }
+  .p4-head { font-size: 13px; }
+
+  /* Vol strip: vertical stack with horizontal separators */
+  .p4-vols {
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    margin-top: 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .p4-vol {
+    flex: unset;
+    width: 100%;
+    min-width: 0;
+    text-align: center;
+    padding: 11px 14px;
+  }
+  .p4-vol-n { font-size: 18px; }
+  .p4-vol-s { font-size: 9px; margin-top: 2px; }
+
+  /* Vertical dividers → horizontal separators */
+  .p4-vol-div {
+    width: 100% !important;
+    height: 1px !important;
+    margin: 0 !important;
+    background: var(--border);
+  }
 
   /* ── Voice cards ── */
   .voice-grid { grid-template-columns: 1fr; gap: 10px; }
@@ -841,9 +866,9 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   .spk-val { font-size: 32px; }
   /* spk-svg height auto — controlled by viewBox aspect ratio */
 
-  /* ── Prob vol strip — 2-up ── */
-  .p4-vols { gap: 5px; }
-  .p4-vol  { flex: 1 1 calc(50% - 5px); min-width: 0; }
+  /* ── Prob vol strip — keep vertical on small phones ── */
+  .p4-vol { padding: 9px 12px; }
+  .p4-vol-n { font-size: 16px; }
 
   /* ── Bar chart ── */
   .vcb-chart-area { height: 170px; }
@@ -1262,7 +1287,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       </div>
       <div style="text-align:right">
         <div class="spk-mom c-green">−2.6% MoM</div>
-        <div class="spk-badge" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">BL Report</div>
+        <div class="spk-badge" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">BLNI Report</div>
       </div>
     </div>
     <svg id="spk-bl" class="spk-svg" viewBox="0 0 560 130"></svg>
