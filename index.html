@@ -765,10 +765,11 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   /* Vol strip: vertical stack with horizontal separators */
   .p4-vols {
     flex-direction: column;
+    align-items: stretch;
     gap: 0;
     padding: 0;
     margin-top: 12px;
-    background: var(--bg);
+    background: var(--white);
     border: 1px solid var(--border);
     border-radius: 10px;
     overflow: hidden;
@@ -779,16 +780,22 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     min-width: 0;
     text-align: center;
     padding: 11px 14px;
+    background: var(--white);
   }
   .p4-vol-n { font-size: 18px; }
   .p4-vol-s { font-size: 9px; margin-top: 2px; }
 
-  /* Vertical dividers → horizontal separators */
+  /* Vertical dividers → full-width horizontal separators */
   .p4-vol-div {
-    width: 100% !important;
+    display: block !important;
+    width: auto !important;
     height: 1px !important;
+    min-height: 1px !important;
     margin: 0 !important;
-    background: var(--border);
+    padding: 0 !important;
+    background: var(--border) !important;
+    flex-shrink: 0;
+    align-self: stretch;
   }
 
   /* ── Voice cards ── */
