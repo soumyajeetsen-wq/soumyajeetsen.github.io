@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#FFFFFF">
 <title>Seller Pulse v7 — February 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -40,6 +41,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   line-height: 1.5;
+  overscroll-behavior-y: none;
 }
 /* ─── HEADER ─── */
 .hdr {
@@ -629,117 +631,236 @@ body {
 .ts-hdr { font-size:9px; font-weight:800; color:var(--muted); text-transform:uppercase;
   letter-spacing:.5px; margin-bottom:8px; }
 
-/* ═══════════════════════════════════════════════
-   MOBILE RESPONSIVE — breakpoints 768px / 480px
-═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE & MOBILE UX — global standards
+   Breakpoints: 1024 · 768 · 480
+═══════════════════════════════════════════════════ */
 
+/* ─ Base touch & scroll improvements (all screens) ─ */
+* { -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+
+/* Safe area support for notched phones */
+.hdr    { padding-left:  max(36px, env(safe-area-inset-left)); padding-right:  max(36px, env(safe-area-inset-right)); }
+.tab-nav{ padding-left:  max(36px, env(safe-area-inset-left)); padding-right:  max(36px, env(safe-area-inset-right)); }
+.pg     { padding-left:  max(36px, env(safe-area-inset-left)); padding-right:  max(36px, env(safe-area-inset-right)); }
+
+/* Scrollable containers — unified momentum scroll */
+.hmap-wrap,
+.vcb-scroll-outer { -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
+
+/* Focus ring — keyboard accessibility */
+button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* ─────────────────────────────────────────────────
+   TABLET  ≤ 1024px
+───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .hdr { padding: 0 24px; }
+  .pg  { padding: 16px 24px 32px; max-width: 100%; }
+  .tab-nav { padding: 0 24px; }
+}
+
+/* ─────────────────────────────────────────────────
+   MOBILE  ≤ 768px
+───────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
-  /* Header */
-  .hdr { padding: 0 16px; flex-wrap: wrap; gap: 0; }
-  .hdr-left { padding: 12px 0 4px; }
-  .hdr-title { font-size: 14px; }
-  .hdr-sub { font-size: 9px; }
-  .hdr-right { display: none; }
+  /* ── Global ── */
+  html { font-size: 13px; }
 
-  /* Tab bar — scroll horizontally */
-  .tab-bar {
-    padding: 0 16px;
+  /* ── Header ── */
+  .hdr {
+    height: auto;
+    padding: 12px 16px;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+  }
+  .hdr-left  { gap: 10px; }
+  .hdr-title { font-size: 13px; letter-spacing: -.2px; }
+  .hdr-sub   { font-size: 9.5px; margin-top: 1px; }
+  .live-dot  { width: 7px; height: 7px; }
+  .hdr-right { display: none; } /* chips hidden on mobile — data is in cards */
+
+  /* ── Tab navigation ── */
+  .tab-nav {
+    padding: 0 0 0 16px;
+    padding-left: max(16px, env(safe-area-inset-left));
     overflow-x: auto;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     flex-wrap: nowrap;
-    gap: 4px;
+    gap: 0;
+    /* Fade right edge to hint scrollability */
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
   }
-  .tab-bar::-webkit-scrollbar { display: none; }
-  .tab-btn { font-size: 10px; padding: 8px 12px; white-space: nowrap; flex-shrink: 0; }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    font-size: 10.5px;
+    padding: 10px 14px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-height: 44px; /* touch target */
+    display: inline-flex; align-items: center;
+  }
+  .tab-btn.active { font-weight: 700; }
 
-  /* Page padding */
-  .pg { padding: 14px 16px 28px; }
+  /* ── Page ── */
+  .pg {
+    padding: 16px 16px 32px;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+    padding-bottom: max(32px, env(safe-area-inset-bottom));
+  }
 
-  /* Section headers */
-  .sh { flex-wrap: wrap; gap: 6px; }
+  /* ── Summary box ── */
+  .tab-summary {
+    padding: 12px 14px;
+    margin-bottom: 18px;
+  }
+  .tab-summary ul { gap: 7px; }
+  .tab-summary li { font-size: 11px; line-height: 1.55; }
+  .ts-hdr { font-size: 9.5px; margin-bottom: 10px; }
 
-  /* 2-col grids → 1 col */
-  .spark-grid,
-  .prob4-grid,
-  .voice-grid { grid-template-columns: 1fr; }
+  /* ── Section headers ── */
+  .sh { flex-wrap: wrap; gap: 6px; margin-top: 22px; margin-bottom: 10px; }
+  .sh-t { font-size: 10px; }
+  .sh-l { display: none; } /* remove the line on mobile — too noisy */
 
-  /* Spark cards */
-  .spk-card { padding: 14px 16px; }
-  .spk-val { font-size: 28px; }
+  /* ── Spark cards grid → single column ── */
+  .spark-grid { grid-template-columns: 1fr; gap: 10px; }
+  .spk-card   { padding: 14px 16px 12px; }
+  .spk-label  { font-size: 9.5px; }
+  .spk-val    { font-size: 30px; }
+  .spk-mom    { font-size: 10px; }
+  .spk-vol-n  { font-size: 9px; }
+  .spk-svg    { height: 60px; }
 
-  /* Seller problems vol strip */
-  .p4-vols { flex-wrap: wrap; gap: 6px; }
+  /* CTA buttons inside spark cards — full row, larger touch target */
+  .spk-card [style*="justify-content:space-between"] {
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
+    gap: 6px !important;
+  }
+  .spk-card button {
+    min-height: 36px !important;
+    padding: 6px 14px !important;
+    font-size: 10px !important;
+    border-radius: 8px !important;
+  }
 
-  /* NPS deep dive — seller type + vintage grids */
-  .spark-grid { grid-template-columns: 1fr; }
+  /* Source chips */
+  .src-row { gap: 5px; }
+  .src-chip { font-size: 9px; padding: 3px 8px; }
 
-  /* Vertical bar chart — shrink height, tighten gaps */
-  .vcb-wrap { padding: 14px 12px 12px; }
-  .vcb-chart-area { height: 180px; }
-  .vcb-bars { gap: 6px !important; padding-left: 38px; }
-  .vcb-bar-group { max-width: 100% !important; }
-  .vcb-lbl { font-size: 7px !important; }
-  .vcb-lbl-sm { font-size: 6.5px !important; }
-  .vcb-yaxis span { font-size: 7px; width: 28px; }
-  .vcb-bar-label { font-size: 8px; }
-  .vcb-bar-n { font-size: 7px; }
-  .vcb-legend { gap: 8px; }
-  .vcb-leg-item { font-size: 9px; }
+  /* ── Seller Problems grid → single column ── */
+  .prob4-grid { grid-template-columns: 1fr; gap: 10px; }
+  .p4 { padding: 14px 16px; }
+  .p4-head { font-size: 12px; }
+  .p4-vols { flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .p4-vol  { min-width: 0; flex: 1 1 calc(50% - 6px); }
+  .p4-vol-s{ font-size: 8px; }
+  .p4-vol-n{ font-size: 10px; }
 
-  /* Heatmap — allow horizontal scroll */
-  .hmap-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .hmap-table { min-width: 520px; }
-  .hmap-th-sub, .hmap-sub-name { min-width: 140px; font-size: 9px; }
-  .hmap-cell { font-size: 9px; padding: 6px 8px; }
-  .hmap-th-month, .hmap-th-delta { font-size: 8px; padding: 8px 8px; min-width: 60px; }
-  .hmap-delta { font-size: 8px; padding: 6px 8px; }
+  /* ── Voice cards ── */
+  .voice-grid { grid-template-columns: 1fr; gap: 10px; }
+  .voice-card { padding: 14px 16px; }
+  .voice-quote { font-size: 11.5px; line-height: 1.6; }
 
-  /* Disposition summary chips — 2 col */
-  .dispo-summary-row { grid-template-columns: 1fr 1fr; display: grid; }
-  .dsp-chip { min-width: unset; }
+  /* ── Vertical bar chart ── */
+  .vcb-wrap        { padding: 12px 12px 10px; border-radius: 12px; }
+  .vcb-chart-area  { height: 200px; }
+  .vcb-bars        { gap: 8px !important; padding-left: 40px; }
+  .vcb-bar-group   { max-width: none !important; flex: 1; }
+  .vcb-lbl         { font-size: 7.5px !important; }
+  .vcb-lbl-sm      { font-size: 6.5px !important; }
+  .vcb-yaxis span  { font-size: 7px; width: 30px; }
+  .vcb-bar-label   { font-size: 8.5px; }
+  .vcb-bar-n       { font-size: 7.5px; }
+  .vcb-legend      { flex-wrap: wrap; gap: 8px 14px; }
+  .vcb-leg-item    { font-size: 9px; }
+  .vcb-leg-dot     { width: 9px; height: 9px; }
 
-  /* Voice cards */
-  .voice-card { padding: 12px 14px; }
+  /* Bar chart 11-month: enable horizontal scroll with scroll hint */
+  .vcb-bars.vcb-bars-11 {
+    gap: 5px !important;
+    min-width: max-content;
+  }
+  .vcb-chart-area { overflow-x: auto; overflow-y: visible; }
 
-  /* Tab summary */
-  .tab-summary li { font-size: 10px; }
+  /* ── Heatmap — horizontal scroll with sticky label column ── */
+  .hmap-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 12px;
+    /* Fade right edge */
+    -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+    mask-image: linear-gradient(to right, black 90%, transparent 100%);
+  }
+  .hmap-table { min-width: 480px; }
+  .hmap-th-sub    { font-size: 8.5px; padding: 8px 10px; min-width: 130px; }
+  .hmap-sub-name  { font-size: 9.5px; padding: 9px 10px 9px 22px; min-width: 130px; }
+  .hmap-cell      { font-size: 9.5px; padding: 7px 10px; min-width: 64px; }
+  .hmap-th-month  { font-size: 8px; padding: 8px 10px; min-width: 64px; }
+  .hmap-th-delta  { font-size: 8px; padding: 8px 10px; }
+  .hmap-delta     { font-size: 8.5px; padding: 7px 10px; }
+  .hmap-n         { font-size: 7.5px; }
+  .hmap-group-hdr td { font-size: 9.5px; padding: 7px 12px; }
+  .hmap-footer    { padding: 8px 12px; }
 
-  /* CTA buttons row */
-  [style*="display:flex;justify-content:space-between"] { gap: 6px; }
+  /* ── Best-ever badge ── */
+  .best-ever-badge { font-size: 9px; padding: 2px 8px; }
+
+  /* ── NPS stacked bar (2 bars) — better proportion ── */
+  .vcb-bars-2 .vcb-bar-group { max-width: none; flex: 1; }
 }
 
+/* ─────────────────────────────────────────────────
+   SMALL PHONE  ≤ 480px
+───────────────────────────────────────────────── */
 @media (max-width: 480px) {
 
+  /* ── Header ── */
   .hdr-title { font-size: 12px; }
-  .pg { padding: 12px 12px 24px; }
+  .hdr-sub   { font-size: 9px; }
 
-  /* Spark value smaller */
-  .spk-val { font-size: 24px; }
+  /* ── Page ── */
+  .pg { padding: 12px 14px 28px; }
 
-  /* Prob cards — ensure vol strip wraps cleanly */
-  .p4-vols { gap: 4px; }
-  .p4-vol { min-width: 60px; }
+  /* ── Tab nav ── */
+  .tab-btn { font-size: 10px; padding: 9px 12px; }
 
-  /* Disposition chips stack */
-  .dispo-summary-row { grid-template-columns: 1fr; }
+  /* ── Summary ── */
+  .tab-summary li { font-size: 10.5px; }
 
-  /* Bar chart further compressed */
-  .vcb-chart-area { height: 150px; }
-  .vcb-bars { gap: 3px !important; }
+  /* ── Spark cards ── */
+  .spk-val { font-size: 26px; }
+  .spk-svg { height: 52px; }
 
-  /* CTAs stack */
-  [style*="display:flex;justify-content:space-between"] {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  [style*="display:flex;justify-content:space-between"] button {
-    justify-content: center;
-  }
+  /* ── Prob vol strip — 2-up ── */
+  .p4-vols { gap: 5px; }
+  .p4-vol  { flex: 1 1 calc(50% - 5px); min-width: 0; }
 
-  /* Tab bar */
-  .tab-btn { font-size: 9px; padding: 7px 10px; }
+  /* ── Bar chart ── */
+  .vcb-chart-area { height: 170px; }
+  .vcb-bars       { gap: 5px !important; }
+  .vcb-lbl        { font-size: 6.5px !important; }
+  .vcb-bar-label  { font-size: 7.5px; }
+  .vcb-bar-n      { font-size: 6.5px; }
+
+  /* ── Heatmap ── */
+  .hmap-th-sub    { min-width: 110px; }
+  .hmap-sub-name  { min-width: 110px; font-size: 9px; }
+  .hmap-cell      { font-size: 9px; padding: 6px 8px; min-width: 56px; }
+
+  /* ── Section heading ── */
+  .sh { margin-top: 18px; }
+  .sh-t { font-size: 9.5px; }
 }
 
 /* ─── FOOTER ─── */
@@ -765,7 +886,9 @@ body {
 .tab-nav {
   background: var(--white); border-bottom: 1px solid var(--border);
   padding: 0 36px; display: flex; align-items: flex-end; gap: 0;
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
 }
+.tab-nav::-webkit-scrollbar { display: none; }
 .tab-btn {
   font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 600;
   padding: 12px 20px; border: none; background: transparent; cursor: pointer;
@@ -948,6 +1071,36 @@ body {
 .rate-tip .tip-box::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%);
   border:5px solid transparent; border-top-color:#0D1117; }
 .rate-tip:hover .tip-box { display:block; }
+
+/* ─── Touch active states (mobile tactile feedback) ─── */
+.tab-btn:active       { opacity: .7; transform: scale(.97); }
+.spk-card button:active { transform: scale(.97); opacity: .85; }
+.p4:active, .spk-card:active, .voice-card:active { transform: scale(.995); }
+.vcb-seg:active       { opacity: .65; }
+
+/* ─── Scrollable container scroll-snap (bar chart bars) ─── */
+@media (max-width: 768px) {
+  /* Subtle scroll shadow hint on hmap-wrap */
+  .hmap-wrap {
+    box-shadow: inset -8px 0 12px -4px rgba(0,0,0,.06);
+  }
+  /* Tab-nav: ensure right padding so last tab fully visible after scroll */
+  .tab-nav::after {
+    content: '';
+    display: block;
+    min-width: 24px;
+    flex-shrink: 0;
+  }
+  /* Larger touch target for tab buttons */
+  .tab-btn { position: relative; }
+  /* Better section margin rhythm on mobile */
+  .sh:first-of-type { margin-top: 0; }
+  /* Spark card hover → tap state */
+  .spk-card { transition: box-shadow .15s, transform .1s; }
+  /* P4 card tap feedback */
+  .p4 { transition: box-shadow .15s, transform .1s; }
+}
+
 </style>
 </head>
 <body>
@@ -1976,6 +2129,36 @@ body {
 .vcb-lbl-sm { font-size:7.5px !important; }
 .vcb-bar-group-jan .vcb-bar, .vcb-bar-group-feb .vcb-bar { outline:2px solid rgba(0,0,0,.12); border-radius:8px 8px 0 0; }
 .vcb-bar-group-feb .vcb-bar-label { font-weight:800; color:var(--ink); }
+
+/* ─── Touch active states (mobile tactile feedback) ─── */
+.tab-btn:active       { opacity: .7; transform: scale(.97); }
+.spk-card button:active { transform: scale(.97); opacity: .85; }
+.p4:active, .spk-card:active, .voice-card:active { transform: scale(.995); }
+.vcb-seg:active       { opacity: .65; }
+
+/* ─── Scrollable container scroll-snap (bar chart bars) ─── */
+@media (max-width: 768px) {
+  /* Subtle scroll shadow hint on hmap-wrap */
+  .hmap-wrap {
+    box-shadow: inset -8px 0 12px -4px rgba(0,0,0,.06);
+  }
+  /* Tab-nav: ensure right padding so last tab fully visible after scroll */
+  .tab-nav::after {
+    content: '';
+    display: block;
+    min-width: 24px;
+    flex-shrink: 0;
+  }
+  /* Larger touch target for tab buttons */
+  .tab-btn { position: relative; }
+  /* Better section margin rhythm on mobile */
+  .sh:first-of-type { margin-top: 0; }
+  /* Spark card hover → tap state */
+  .spk-card { transition: box-shadow .15s, transform .1s; }
+  /* P4 card tap feedback */
+  .p4 { transition: box-shadow .15s, transform .1s; }
+}
+
 </style>
 <script>
 // ─── TAB SWITCHING ───────────────────────────────────────────────────
