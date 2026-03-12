@@ -948,9 +948,11 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 .sp-tabs {
   display: flex; border-bottom: 1px solid var(--border); flex-shrink: 0;
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
 }
+.sp-tabs::-webkit-scrollbar { display: none; }
 .sp-tab {
-  flex: 1; padding: 11px 0; font-size: 11px; font-weight: 600;
+  flex: 1; padding: 11px 6px; font-size: 10px; font-weight: 600; white-space: nowrap;
   color: var(--muted); background: none; border: none; cursor: pointer;
   border-bottom: 2px solid transparent; transition: color .15s, border-color .15s;
 }
@@ -1929,7 +1931,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <div class="vcb-bar-label" id="nps-bar-prev-lbl">Jan '26<br><span class="vcb-bar-n" id="nps-bar-prev-n">n=211</span></div>
       </div>
 
-      <!-<div class="vcb-bar-group" id="nps-bar-grp-1">b-bar-group">
+      <div class="vcb-bar-group" id="nps-bar-grp-1">
         <div class="vcb-bar">
           <div class="vcb-seg" style="height:33.7%;background:#EF4444" data-tip="n=214">
             <span class="vcb-lbl">33.7%</span>
@@ -2991,16 +2993,6 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
   };
 })();
 
-function renderAllCharts() {
-  const ct=document.getElementById('ct-nps-chart');
-  if(ct) drawStackedBars(ct,SEG[activeSeg],MONTHS,false);
-  const vt=document.getElementById('vt-nps-chart');
-  if(vt) drawVintageGrouped(vt,false);
-  ['astbuy','direct','buyleads'].forEach(ch=>{
-    const s=document.getElementById(`dist-${ch}-chart`);
-    if(s) drawDistGrouped(s,ch,false);
-  });
-}
 
 const QMONO = "JetBrains Mono,monospace";
 const QBIF = {
@@ -4761,9 +4753,9 @@ async function saveVoice() {
   applyVoice(data);
 
   // Push to GAS — try summary URL first, then NPS URL
-  const gasUrl = (document.getElementById('link-sum') || {}).value
-              || (document.getElementById('link-nps') || {}).value
-              || '';
+  // Use the dedicated GAS summaries/voice URL (link-sum) only.
+  // The data report endpoints cannot handle voice POST actions.
+  const gasUrl = ((document.getElementById('link-sum') || {}).value || '').trim();
 
   if (gasUrl && gasUrl.startsWith('http')) {
     statusEl.textContent = '⏳ Publishing to GAS…';
@@ -4834,6 +4826,71 @@ if (document.readyState === 'loading') {
 } else {
   fetchVoice();
 }
+
+// ═══════════════════════════════════════════════════════════════════
+// GAS URL PERSISTENCE — save/restore across sessions via localStorage
+// ═══════════════════════════════════════════════════════════════════
+var _URL_KEYS = ['link-nps','link-app','link-qrf','link-bl','link-sum'];
+
+function _saveUrls() {
+  try {
+    _URL_KEYS.forEach(function(k) {
+      var el = document.getElementById(k);
+      if (el && el.value.trim()) {
+        localStorage.setItem('sp_url_' + k, el.value.trim());
+      }
+    });
+  } catch(_) {}
+}
+
+function _restoreUrls() {
+  try {
+    _URL_KEYS.forEach(function(k) {
+      var saved = localStorage.getItem('sp_url_' + k);
+      if (saved) {
+        var el = document.getElementById(k);
+        if (el) {
+          el.value = saved;
+          markFilled(el);
+        }
+      }
+    });
+  } catch(_) {}
+}
+
+// Restore URLs as early as possible so fetchSummaries/fetchVoice have them
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', _restoreUrls);
+} else {
+  _restoreUrls();
+}
+
+// Patch syncLinks to save URLs before syncing
+(function _patchSyncLinks() {
+  var orig = window.syncLinks;
+  if (!orig) return;
+  window.syncLinks = function() { _saveUrls(); orig.apply(this, arguments); };
+})();
+
+// Patch syncFiles to save URLs before syncing
+(function _patchSyncFiles() {
+  var orig = window.syncFiles;
+  if (!orig) return;
+  window.syncFiles = function() { _saveUrls(); orig.apply(this, arguments); };
+})();
+
+// Also save when saveSummaries or saveVoice is called
+(function _patchSaveSummaries() {
+  var orig = window.saveSummaries;
+  if (!orig) return;
+  window.saveSummaries = async function() { _saveUrls(); return orig.apply(this, arguments); };
+})();
+
+(function _patchSaveVoice() {
+  var orig = window.saveVoice;
+  if (!orig) return;
+  window.saveVoice = async function() { _saveUrls(); return orig.apply(this, arguments); };
+})();
 
 </script>
 
