@@ -510,7 +510,11 @@ body {
   font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.4px;
   display:inline-block;
 }
-.vtag-irrel { background:#FEF2F2; color:var(--red); border:1px solid #FECACA; }
+.vtag-irrel { background:#FEF2F2; color:var(--red);    border:1px solid #FECACA; }
+.vtag-conv  { background:#EFF6FF; color:var(--blue);   border:1px solid #BFDBFE; }
+.vtag-bls   { background:#F5F3FF; color:var(--purple); border:1px solid #DDD6FE; }
+.vtag-spec  { background:#FFF7ED; color:var(--orange); border:1px solid #FED7AA; }
+.vtag-iwb   { background:#FFFBEB; color:var(--amber);  border:1px solid #FDE68A; }
 .vtag-conv  { background:var(--blue-bg); color:var(--blue); border:1px solid var(--blue-border); }
 .vtag-bls   { background:#F3F4F6; color:var(--ink2); border:1px solid var(--border); }
 .vtag-spec  { background:var(--purple-bg); color:var(--purple); border:1px solid var(--purple-border); }
@@ -683,7 +687,9 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   .hdr-title { font-size: 13px; letter-spacing: -.2px; }
   .hdr-sub   { font-size: 9.5px; margin-top: 1px; }
   .live-dot  { width: 7px; height: 7px; }
-  .hdr-right { display: none; } /* chips hidden on mobile — data is in cards */
+  .hdr-right { display: flex; }
+  #settings-btn .btn-label { display: none; }
+  #settings-btn { padding: 8px 9px; min-width: 36px; min-height: 36px; } /* chips hidden on mobile — data is in cards */
 
   /* ── Tab navigation ── */
   .tab-nav {
@@ -892,6 +898,178 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   /* ── Section heading ── */
   .sh { margin-top: 18px; }
   .sh-t { font-size: 9.5px; }
+
+  /* ── CTA buttons in spark cards: bigger touch targets on small phones ── */
+  .spk-card button[onclick*="tab"] {
+    padding: 8px 12px !important;
+    min-height: 36px !important;
+    font-size: 10px !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════
+   SETTINGS PANEL
+════════════════════════════════════════════════ */
+#settings-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(13,17,23,.45); backdrop-filter: blur(3px);
+  z-index: 1000; align-items: flex-start; justify-content: flex-end;
+}
+#settings-overlay.open { display: flex; }
+
+#settings-panel {
+  width: 420px; max-width: 100vw; height: 100vh; height: 100dvh;
+  background: #fff; border-left: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  box-shadow: -8px 0 32px rgba(0,0,0,.12);
+  animation: slideIn .22s cubic-bezier(.16,1,.3,1);
+  overflow: hidden;
+}
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+.sp-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 20px 14px; border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.sp-title { font-size: 13px; font-weight: 700; color: var(--ink); letter-spacing: -.2px; }
+.sp-sub   { font-size: 10px; color: var(--muted); margin-top: 1px; }
+.sp-close {
+  background: none; border: 1px solid var(--border); border-radius: 7px;
+  width: 30px; height: 30px; cursor: pointer; display: flex;
+  align-items: center; justify-content: center; color: var(--muted);
+  transition: background .12s;
+}
+.sp-close:hover { background: var(--bg); }
+
+.sp-tabs {
+  display: flex; border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.sp-tab {
+  flex: 1; padding: 11px 0; font-size: 11px; font-weight: 600;
+  color: var(--muted); background: none; border: none; cursor: pointer;
+  border-bottom: 2px solid transparent; transition: color .15s, border-color .15s;
+}
+.sp-tab.active { color: var(--ink); border-bottom-color: var(--ink); }
+
+.sp-body { flex: 1; overflow-y: auto; padding: 20px; -webkit-overflow-scrolling: touch; }
+
+.sp-section { margin-bottom: 22px; }
+.sp-label {
+  font-size: 9.5px; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: .5px; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sp-label::after { content:''; flex:1; height:1px; background:var(--border); }
+
+.sp-input-row { margin-bottom: 14px; }
+.sp-input-lbl {
+  font-size: 10px; font-weight: 600; color: var(--ink2);
+  margin-bottom: 5px; display: flex; align-items: center; gap: 6px;
+}
+.sp-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.sp-input {
+  width: 100%; padding: 9px 12px; border: 1.5px solid var(--border);
+  border-radius: 8px; font-size: 11px; font-family: 'Sora', sans-serif;
+  color: var(--ink); background: var(--bg); outline: none;
+  transition: border-color .15s, background .15s;
+}
+.sp-input:focus { border-color: var(--ink2); background: #fff; }
+.sp-input.filled { border-color: #86EFAC; background: #F0FDF4; }
+.sp-input.error  { border-color: var(--red-border); background: var(--red-bg); }
+
+.sp-input-hint {
+  font-size: 10px; color: var(--faint); margin-top: 3px;
+  line-height: 1.4;
+}
+
+/* File upload drop zone */
+.sp-file-zone {
+  border: 1.5px dashed var(--border); border-radius: 9px;
+  padding: 10px 14px; cursor: pointer; transition: all .15s;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg); user-select: none; -webkit-user-select: none;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.sp-file-zone:hover, .sp-file-zone.drag { border-color: var(--ink2); background: #F8FAFC; }
+.sp-file-zone.filled { border-color: #86EFAC; border-style: solid; background: #F0FDF4; }
+.sp-file-zone.error  { border-color: var(--red-border); border-style: solid; background: var(--red-bg); }
+.sp-file-icon { font-size: 18px; flex-shrink: 0; }
+.sp-file-info { flex: 1; min-width: 0; }
+.sp-file-name { font-size: 10.5px; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sp-file-size { font-size: 9px; color: var(--muted); margin-top: 1px; }
+.sp-file-input { display: none; }
+.sp-file-clear {
+  background: none; border: none; cursor: pointer;
+  color: var(--faint); font-size: 14px; padding: 2px 4px;
+  border-radius: 4px; transition: color .12s;
+}
+.sp-file-clear:hover { color: var(--red); }
+
+.sp-sync-btn {
+  width: 100%; padding: 12px; border-radius: 10px; border: none; cursor: pointer;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  font-size: 12px; font-weight: 700; font-family: 'Sora', sans-serif;
+  background: var(--ink); color: #fff; margin-top: 8px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background .15s, transform .1s, box-shadow .15s;
+}
+.sp-sync-btn:hover { background: #1E293B; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+.sp-sync-btn:active { transform: scale(.98); }
+.sp-sync-btn:disabled { background: #CBD5E1; cursor: not-allowed; }
+.sp-sync-btn.syncing { background: #2563EB; }
+
+.sp-status {
+  margin-top: 14px; padding: 10px 14px; border-radius: 8px;
+  font-size: 10.5px; font-weight: 600; display: none; gap: 8px; align-items: flex-start;
+}
+.sp-status.ok   { display: flex; background: #F0FDF4; color: #166534; border: 1px solid #86EFAC; }
+.sp-status.err  { display: flex; background: var(--red-bg); color: #991B1B; border: 1px solid var(--red-border); }
+.sp-status.info { display: flex; background: var(--blue-bg); color: #1E40AF; border: 1px solid var(--blue-border); }
+
+/* Toast */
+#sp-toast {
+  position: fixed; bottom: max(24px, calc(16px + env(safe-area-inset-bottom))); left: 50%; transform: translateX(-50%) translateY(80px);
+  background: #1E293B; color: #F8FAFC; padding: 11px 20px; border-radius: 10px;
+  font-size: 11.5px; font-weight: 600; font-family: 'Sora', sans-serif;
+  z-index: 9999; box-shadow: 0 8px 24px rgba(0,0,0,.22);
+  transition: transform .3s cubic-bezier(.16,1,.3,1), opacity .3s;
+  opacity: 0; pointer-events: none; white-space: normal;
+  display: flex; align-items: center; gap: 8px;
+  max-width: calc(100vw - 32px); text-align: center;
+}
+#sp-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+#sp-toast.toast-err  { background: #DC2626; }
+#sp-toast.toast-ok   { background: #059669; }
+
+/* Last synced badge */
+#sync-badge {
+  font-size: 9px; font-family: 'JetBrains Mono', monospace;
+  font-weight: 600; color: var(--muted); display: none;
+  align-items: center; gap: 4px; margin-top: 10px;
+}
+#sync-badge .sb-dot { width: 6px; height: 6px; border-radius: 50%; background: #22C55E; }
+
+/* Mobile settings */
+@media (max-width: 768px) {
+  #settings-panel { width: 100vw; }
+  .sp-body { padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+  .sp-input { font-size: 16px; } /* Prevent iOS zoom on focus */
+  .sp-input-hint { font-size: 10.5px; }
+  .sp-input-lbl { font-size: 11px; }
+  .sp-label { font-size: 10px; }
+  .sp-title { font-size: 14px; }
+  .sp-file-name { font-size: 11px; }
+  .sp-sync-btn { padding: 14px; font-size: 13px; min-height: 48px; }
+  .sp-file-zone { min-height: 52px; padding: 12px 14px; }
+  .sp-tab { font-size: 12px; padding: 13px 0; min-height: 44px; }
+  .sp-close { width: 36px; height: 36px; }
 }
 
 /* ─── FOOTER ─── */
@@ -1131,8 +1309,33 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   /* P4 card tap feedback */
   .p4 { transition: box-shadow .15s, transform .1s; }
 }
+/* ── Month Selector Dropdown ─────────────────────────────── */
+.mdd-item {
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;padding:7px 10px;border:none;background:transparent;
+  border-radius:6px;cursor:pointer;gap:8px;
+  font-family:'Sora',sans-serif;font-size:11px;font-weight:600;
+  text-align:left;transition:background .1s;
+}
+.mdd-item.mdd-available        { color:var(--ink); }
+.mdd-item.mdd-available:hover  { background:var(--bg); }
+.mdd-item.mdd-active           { background:var(--ink);color:#fff; }
+.mdd-item.mdd-active:hover     { background:var(--ink); }
+.mdd-item.mdd-inactive         { color:var(--faint);cursor:default; }
+.mdd-item .mdd-dot {
+  width:6px;height:6px;border-radius:50%;flex-shrink:0;
+  background:currentColor;opacity:.5;
+}
+.mdd-item.mdd-active .mdd-dot  { background:#fff;opacity:.7; }
+.mdd-item.mdd-inactive .mdd-dot{ background:var(--border);opacity:1; }
+@media (max-width:480px) {
+  #month-dd-panel { right:auto;left:0; }
+  #month-dd-btn .btn-label { display:inline; }
+}
+
 
 </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -1145,7 +1348,50 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       <div class="hdr-sub">Executive seller health dashboard &nbsp;·&nbsp; 4 independent data sources</div>
     </div>
   </div>
-  
+  <div class="hdr-right">
+
+    <!-- Month Selector Dropdown -->
+    <div id="month-selector" style="position:relative;">
+      <button id="month-dd-btn" onclick="toggleMonthDD(event)" style="
+        display:flex;align-items:center;gap:7px;
+        background:var(--white);border:1.5px solid var(--border);border-radius:8px;
+        padding:0 11px;height:36px;cursor:pointer;
+        font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:var(--ink2);
+        transition:border-color .15s,background .15s;white-space:nowrap;
+      " onmouseover="this.style.borderColor='var(--muted)';this.style.background='var(--bg)'"
+         onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--white)'">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span class="btn-label" id="month-dd-label">Feb '26</span>
+        <svg id="month-dd-caret" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div id="month-dd-panel" style="
+        display:none;position:absolute;top:calc(100% + 6px);right:0;
+        background:var(--white);border:1.5px solid var(--border);border-radius:10px;
+        box-shadow:0 8px 24px rgba(0,0,0,.10);padding:6px;
+        min-width:160px;z-index:9999;
+      ">
+        <div style="font-size:8.5px;font-weight:700;color:var(--muted);
+          text-transform:uppercase;letter-spacing:.5px;padding:4px 8px 6px;
+          border-bottom:1px solid var(--border);margin-bottom:4px;">
+          Select month
+        </div>
+        <div id="month-dd-list"></div>
+      </div>
+    </div>
+
+    <button id="settings-btn" onclick="openSettings()" title="Data Settings" style="
+      background:none; border:1.5px solid var(--border); border-radius:8px;
+      padding:7px 9px; cursor:pointer; display:flex; align-items:center; gap:6px;
+      font-size:11px; font-weight:600; color:var(--ink2); font-family:'Sora',sans-serif;
+      transition:background .15s, border-color .15s;
+    " onmouseover="this.style.background='var(--bg)';this.style.borderColor='var(--muted)'"
+       onmouseout="this.style.background='none';this.style.borderColor='var(--border)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+      <span class="btn-label">Data Source</span>
+    </button>
+  </div>
 </div>
 
 <!-- ═══ TAB NAV ═══ -->
@@ -1171,7 +1417,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div id="tab1" class="tab-pane active">
 <div class="pg">
 
-<div class="tab-summary" style="border-left-color:#059669">
+<div id="ts-tab1" class="tab-summary" style="border-left-color:#059669">
   <div class="ts-hdr">📊 Since Oct '25 — at a glance</div>
   <ul>
     <li><strong>NPS</strong> improved <span class="hi-green">+1.84pp</span> (23.6 → 25.4) — best ever recorded</li>
@@ -1186,7 +1432,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 <!-- ═══ SECTION 1: SPARK CARDS ═══ -->
 <div class="sh" style="margin-top:0">
-  <span class="sh-t">At a glance — February 2026</span>
+  <span class="sh-t" id="sh-glance">At a glance — February 2026</span>
   <div class="sh-l"></div>
   <span class="sh-b" style="background:#F0FDF4;color:#15803D;border:1px solid #A7F3D0">★ Best NPS ever</span>
   <span class="sh-b" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">BLNI/Txn ↓ improving</span>
@@ -1304,7 +1550,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 <!-- ═══ SECTION 2: SELLER PROBLEMS ═══ -->
 <div class="sh">
-  <span class="sh-t">Seller problems — Feb '26</span>
+  <span class="sh-t" id="sh-problems">Seller problems — Feb '26</span>
   <div class="sh-l"></div>
   <span class="src-chip src-nps">NPS Feedback</span>
   <span class="src-chip src-app">Paid Seller App</span>
@@ -1330,22 +1576,22 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     </div>
     <div class="p4-vols">
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-nps">34%</div>
+        <div class="p4-vol-n p4-s-nps" id="p4-irrel-nps">34%</div>
         <div class="p4-vol-s p4-s-nps">of NPS Feedback</div>
       </div>
       <div class="p4-vol-div"></div>
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-app">32%</div>
+        <div class="p4-vol-n p4-s-app" id="p4-irrel-app">32%</div>
         <div class="p4-vol-s p4-s-app">of App Feedback</div>
       </div>
       <div class="p4-vol-div"></div>
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-bl">34%</div>
+        <div class="p4-vol-n p4-s-bl" id="p4-irrel-bl">34%</div>
         <div class="p4-vol-s p4-s-bl">of BLNI Submissions</div>
       </div>
       <div class="p4-vol-div"></div>
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-qrf">19%</div>
+        <div class="p4-vol-n p4-s-qrf" id="p4-irrel-qrf">19%</div>
         <div class="p4-vol-s p4-s-qrf">of QRF Submissions</div>
       </div>
     </div>
@@ -1363,12 +1609,12 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     </div>
     <div class="p4-vols">
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-nps">23%</div>
+        <div class="p4-vol-n p4-s-nps" id="p4-conv-nps">23%</div>
         <div class="p4-vol-s p4-s-nps">of NPS Feedback</div>
       </div>
       <div class="p4-vol-div"></div>
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-app">25%</div>
+        <div class="p4-vol-n p4-s-app" id="p4-conv-app">25%</div>
         <div class="p4-vol-s p4-s-app">of App Feedback ↑</div>
       </div>
     </div>
@@ -1386,12 +1632,12 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     </div>
     <div class="p4-vols">
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-nps">21%</div>
+        <div class="p4-vol-n p4-s-nps" id="p4-bls-nps">21%</div>
         <div class="p4-vol-s p4-s-nps">of NPS Feedback</div>
       </div>
       <div class="p4-vol-div"></div>
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-app">20%</div>
+        <div class="p4-vol-n p4-s-app" id="p4-bls-app">20%</div>
         <div class="p4-vol-s p4-s-app">of App Feedback</div>
       </div>
     </div>
@@ -1409,12 +1655,12 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     </div>
     <div class="p4-vols">
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-bl">22%</div>
+        <div class="p4-vol-n p4-s-bl" id="p4-spec-bl">22%</div>
         <div class="p4-vol-s p4-s-bl">of BLNI Submissions</div>
       </div>
       <div class="p4-vol-div"></div>
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-qrf">18%</div>
+        <div class="p4-vol-n p4-s-qrf" id="p4-spec-qrf">18%</div>
         <div class="p4-vol-s p4-s-qrf">of QRF Submissions</div>
       </div>
     </div>
@@ -1424,47 +1670,47 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 <!-- ═══ SECTION 3: SELLER VOICE ═══ -->
 <div class="sh">
-  <span class="sh-t">Seller voice — Feb '26</span>
+  <span class="sh-t" id="sh-voice">Seller voice — Feb '26</span>
   <div class="sh-l"></div>
   <span style="font-size:9.5px;color:var(--faint)">Paid seller verbatims · selected to represent each key problem</span>
 </div>
 
-<div class="voice-grid">
+<div class="voice-grid" id="voice-grid">
 
   <!-- V1: Irrelevant Leads -->
-  <div class="voice-card">
+  <div class="voice-card" id="voice-card-1">
     <div class="voice-top">
-      <span class="voice-tag vtag-irrel">🎯 Irrelevant Leads</span>
+      <span class="voice-tag vtag-irrel" id="voice-tag-1">🎯 Irrelevant Leads</span>
     </div>
-    <div class="voice-quote">"Regularly showing / receiving irrelevant buy leads which are not related to products added by us. I am regularly on daily basis sharing the screenshot of irrelevant buy leads to my AM — but till date issue is not resolved."</div>
-    <div class="voice-meta">GLID: 3920885</div>
+    <div class="voice-quote" id="voice-quote-1">"Regularly showing / receiving irrelevant buy leads which are not related to products added by us. I am regularly on daily basis sharing the screenshot of irrelevant buy leads to my AM — but till date issue is not resolved."</div>
+    <div class="voice-meta" id="voice-meta-1">GLID: 3920885</div>
   </div>
 
   <!-- V2: Low Conversion -->
-  <div class="voice-card">
+  <div class="voice-card" id="voice-card-2">
     <div class="voice-top">
-      <span class="voice-tag vtag-conv">💸 Low Conversion</span>
+      <span class="voice-tag vtag-conv" id="voice-tag-2">💸 Low Conversion</span>
     </div>
-    <div class="voice-quote">"Not satisfied with buy lead — not a single lead convert in last 3 months."</div>
-    <div class="voice-meta">GLID: 97982728</div>
+    <div class="voice-quote" id="voice-quote-2">"Not satisfied with buy lead — not a single lead convert in last 3 months."</div>
+    <div class="voice-meta" id="voice-meta-2">GLID: 97982728</div>
   </div>
 
   <!-- V3: Less BLs -->
-  <div class="voice-card">
+  <div class="voice-card" id="voice-card-3">
     <div class="voice-top">
-      <span class="voice-tag vtag-bls">📉 Less BLs / Enquiries</span>
+      <span class="voice-tag vtag-bls" id="voice-tag-3">📉 Less BLs / Enquiries</span>
     </div>
-    <div class="voice-quote">"I am not getting leads for my different products. Just Panchmukhi Hanuman is visible on my buy leads panel — please check and I request to get buyleads for all my products listed."</div>
-    <div class="voice-meta">GLID: 4583854</div>
+    <div class="voice-quote" id="voice-quote-3">"I am not getting leads for my different products. Just Panchmukhi Hanuman is visible on my buy leads panel — please check and I request to get buyleads for all my products listed."</div>
+    <div class="voice-meta" id="voice-meta-3">GLID: 4583854</div>
   </div>
 
   <!-- V4: Spec Mismatch -->
-  <div class="voice-card">
+  <div class="voice-card" id="voice-card-4">
     <div class="voice-top">
-      <span class="voice-tag vtag-spec">📋 Spec Mismatch</span>
+      <span class="voice-tag vtag-spec" id="voice-tag-4">📋 Spec Mismatch</span>
     </div>
-    <div class="voice-quote">"Our primary product is White Agarbatti, but most of the inquiries we receive are related to black agarbatti, which does not match our offerings. Due to this mismatch, we are unable to convert the leads."</div>
-    <div class="voice-meta">GLID: 107612289</div>
+    <div class="voice-quote" id="voice-quote-4">"Our primary product is White Agarbatti, but most of the inquiries we receive are related to black agarbatti, which does not match our offerings. Due to this mismatch, we are unable to convert the leads."</div>
+    <div class="voice-meta" id="voice-meta-4">GLID: 107612289</div>
   </div>
 
 </div><!-- /voice-grid -->
@@ -1476,7 +1722,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div id="tab2" class="tab-pane">
 <div class="pg">
 
-<div class="tab-summary" style="border-left-color:#059669">
+<div id="ts-tab2" class="tab-summary" style="border-left-color:#059669">
   <div class="ts-hdr">📊 NPS Deep Dive — Feb '26</div>
   <ul>
     <li><strong>STAR</strong> and <strong>LEADER</strong> are the healthiest seller segments — both at their best-ever NPS this month</li>
@@ -1623,7 +1869,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div id="tab3" class="tab-pane">
 <div class="pg">
 
-<div class="tab-summary" style="border-left-color:#EF4444">
+<div id="ts-tab3" class="tab-summary" style="border-left-color:#EF4444">
   <div class="ts-hdr">🔍 NPS Complaint Signals — Feb '26</div>
   <ul>
     <li><strong>Irrelevant Leads</strong> dominates seller complaints — it is the single biggest pain point in NPS feedback</li>
@@ -1636,7 +1882,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 
 <div class="sh" style="margin-top:0">
-  <span class="sh-t">NPS complaint breakdown — Jan vs Feb '26</span>
+  <span class="sh-t" id="sh-nps-complaints">NPS complaint breakdown — Jan vs Feb '26</span>
   <div class="sh-l"></div>
   <span class="sh-b" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">NPS Survey</span>
 </div>
@@ -1663,8 +1909,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <div class="vcb-bars">
 
       <!-- JAN -->
-      <div class="vcb-bar-group">
-        <div class="vcb-bar">
+      <div class="vcb-bar-group" id="nps-bar-grp-0">      <div class="vcb-bar">
           <div class="vcb-seg" style="height:30.8%;background:#EF4444" data-tip="n=65">
             <span class="vcb-lbl">30.8%</span>
           </div>
@@ -1681,11 +1926,10 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
             <span class="vcb-lbl">24.6%</span>
           </div>
         </div>
-        <div class="vcb-bar-label">Jan '26<br><span class="vcb-bar-n">n=211</span></div>
+        <div class="vcb-bar-label" id="nps-bar-prev-lbl">Jan '26<br><span class="vcb-bar-n" id="nps-bar-prev-n">n=211</span></div>
       </div>
 
-      <!-- FEB -->
-      <div class="vcb-bar-group">
+      <!-<div class="vcb-bar-group" id="nps-bar-grp-1">b-bar-group">
         <div class="vcb-bar">
           <div class="vcb-seg" style="height:33.7%;background:#EF4444" data-tip="n=214">
             <span class="vcb-lbl">33.7%</span>
@@ -1703,7 +1947,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
             <span class="vcb-lbl">11.7%</span>
           </div>
         </div>
-        <div class="vcb-bar-label">Feb '26<br><span class="vcb-bar-n">n=635</span></div>
+        <div class="vcb-bar-label" id="nps-bar-cur-lbl">Feb '26<br><span class="vcb-bar-n" id="nps-bar-cur-n">n=635</span></div>
       </div>
 
     </div><!-- /vcb-bars -->
@@ -1731,10 +1975,10 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <thead>
       <tr>
         <th class="hmap-th-sub">Subcategory</th>
-        <th class="hmap-th-month">Jan '26</th>
-        <th class="hmap-th-month">Feb '26</th>
-        <th class="hmap-th-month hmap-th-future">Mar '26</th>
-        <th class="hmap-th-month hmap-th-future">Apr '26</th>
+        <th class="hmap-th-month" id="nps-hmap-th-prev">Jan '26</th>
+        <th class="hmap-th-month" id="nps-hmap-th-cur">Feb '26</th>
+        <th class="hmap-th-month hmap-th-future" id="nps-hmap-th-fut1">Mar '26</th>
+        <th class="hmap-th-month hmap-th-future" id="nps-hmap-th-fut2">Apr '26</th>
         <th class="hmap-th-delta">MoM Δ</th>
       </tr>
     </thead>
@@ -1863,7 +2107,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div id="tab5" class="tab-pane">
 <div class="pg">
 
-<div class="tab-summary" style="border-left-color:#8B5CF6">
+<div id="ts-tab5" class="tab-summary" style="border-left-color:#8B5CF6">
   <div class="ts-hdr">📱 App Complaint Signals — Feb '26</div>
   <ul>
     <li><strong>Irrelevant Leads</strong> complaints are gradually declining — an encouraging signal that relevance efforts are being felt</li>
@@ -1875,7 +2119,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 
 <div class="sh" style="margin-top:0">
-  <span class="sh-t">App complaint breakdown — Apr '25 – Feb '26</span>
+  <span class="sh-t" id="sh-app-complaints">App complaint breakdown — Apr '25 – Feb '26</span>
   <div class="sh-l"></div>
   <span style="font-size:9.5px;color:var(--faint)">% of total complaint tags per month</span>
   <div class="sh-l"></div>
@@ -2013,7 +2257,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
           <div class="vcb-seg" style="height:10.6%;background:#F59E0B" data-tip="n=149"><span class="vcb-lbl vcb-lbl-sm">10.6%</span></div>
           <div class="vcb-seg" style="height:12.7%;background:#D1D5DB" data-tip="n=178"><span class="vcb-lbl vcb-lbl-sm">12.7%</span></div>
         </div>
-        <div class="vcb-bar-label"><strong>Feb</strong><br><span class="vcb-bar-n">1,401</span></div>
+        <div class="vcb-bar-label" id="app-bar-feb-lbl"><strong>Feb</strong><br><span class="vcb-bar-n" id="app-bar-feb-n">1,401</span></div>
       </div>
 
     </div><!-- /vcb-bars -->
@@ -2039,10 +2283,10 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <thead>
       <tr>
         <th class="hmap-th-sub">Subcategory</th>
-        <th class="hmap-th-month">Jan '26</th>
-        <th class="hmap-th-month">Feb '26</th>
-        <th class="hmap-th-month hmap-th-future">Mar '26</th>
-        <th class="hmap-th-month hmap-th-future">Apr '26</th>
+        <th class="hmap-th-month" id="app-hmap-th-prev">Jan '26</th>
+        <th class="hmap-th-month" id="app-hmap-th-cur">Feb '26</th>
+        <th class="hmap-th-month hmap-th-future" id="app-hmap-th-fut1">Mar '26</th>
+        <th class="hmap-th-month hmap-th-future" id="app-hmap-th-fut2">Apr '26</th>
         <th class="hmap-th-delta">MoM Δ</th>
       </tr>
     </thead>
@@ -2201,6 +2445,58 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   .p4 { transition: box-shadow .15s, transform .1s; }
 }
 
+
+/* ── Settings Summary Tab ────────────────────────────────── */
+.sp-sum-block {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.sp-sum-block:last-child { border-bottom: none; margin-bottom: 0; }
+.sp-sum-hdr {
+  display: flex; align-items: center; gap: 8px;
+  border-left: 3px solid #059669; padding-left: 10px;
+  margin-bottom: 10px;
+}
+.sp-sum-lbl {
+  font-size: 11px; font-weight: 700; color: var(--ink);
+  font-family: 'Sora', sans-serif;
+}
+.sp-sum-title {
+  margin-bottom: 0 !important;
+  font-size: 11px !important;
+}
+.sp-sum-ta {
+  width: 100%; padding: 9px 12px;
+  border: 1.5px solid var(--border); border-radius: 8px;
+  font-family: 'Sora', sans-serif; font-size: 10.5px;
+  color: var(--ink); line-height: 1.65; resize: vertical;
+  background: var(--white); outline: none;
+  transition: border-color .15s;
+  box-sizing: border-box;
+}
+.sp-sum-ta:focus { border-color: var(--ink2); }
+
+/* ── Settings Verbatims Tab ──────────────────────────────── */
+.sp-voice-block {
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+.sp-voice-block:last-child { border-bottom: none; margin-bottom: 0; }
+.sp-voice-block-hdr {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.sp-voice-num {
+  font-size: 10px; font-weight: 800; color: var(--ink2);
+  text-transform: uppercase; letter-spacing: .4px;
+  font-family: 'Sora', sans-serif;
+}
+.sp-voice-select {
+  margin-bottom: 0 !important;
+  cursor: pointer !important;
+}
 </style>
 <script>
 // ─── TAB SWITCHING ───────────────────────────────────────────────────
@@ -2209,7 +2505,7 @@ function switchTab(id, btn) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
-  if (id === 'tab3') renderAllCharts();
+  if (id === 'tab3' || id === 'tab5') {} // tabs render from static HTML
 }
 
 // ─── DATA ────────────────────────────────────────────────────────────
@@ -2637,6 +2933,62 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
     ns:[1159,1182,899,854,856],
     color:'#D97706', fmt:v=>v.toFixed(1), allLabels:true
   });
+
+  // Expose to outer scope so applyDashboardData and resize handler can call them
+  window._drawSparkLine = drawSparkLine;
+  window._linReg        = linReg;
+
+  // Re-draw all default (hardcoded) sparklines — called on orientation change
+  window.reDrawDefaultSparks = function() {
+    drawSparkLine('spk-nps',{
+      vals:[15.73, 21.97, 23.56, 24.6, 25.4],
+      months:["Apr'25","Jul'25","Oct'25","Jan'26","Feb'26"],
+      ns:[14795,14553,12642,12808,2138],
+      color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+    });
+    drawSparkLine('spk-app',{
+      vals:[3.39,3.42,3.45,3.31,3.46,3.40,3.45,3.54,3.44,3.41,3.41],
+      months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
+      ns:[10217,12965,12823,8035,17855,8698,6840,9192,9710,7201,5441],
+      color:'#D97706', fmt:v=>v.toFixed(2), unit:'★', allLabels:true
+    });
+    drawSparkLine('spk-qrf',{
+      vals:[8.56,8.74,8.43,7.14,6.50,5.84,5.45,5.20,5.04,5.03,4.94],
+      months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
+      ns:[417777,475630,496117,529731,516477,542698,480249,458638,503348,527998,491393],
+      color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
+    });
+    drawSparkLine('spk-bl',{
+      vals:[8.37,7.69,7.40,6.94,6.42,6.13,5.61,5.68,5.48,4.52,4.41],
+      months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
+      ns:[828716,831110,784754,797672,697327,666210,558073,608647,627410,526186,471539],
+      color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
+    });
+    drawSparkLine('spk-ct-star',{
+      vals:[22.1,27.3,30.8,27.8,33.6], months:['Apr','Jul','Oct','Jan','Feb'],
+      ns:[2306,2355,2129,2204,345], color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+    });
+    drawSparkLine('spk-ct-leader',{
+      vals:[22.9,29.8,28.3,24.6,30.5], months:['Apr','Jul','Oct','Jan','Feb'],
+      ns:[1422,1427,1272,1315,174], color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+    });
+    drawSparkLine('spk-ct-ts',{
+      vals:[21.8,28.1,27.8,30.2,27.1], months:['Apr','Jul','Oct','Jan','Feb'],
+      ns:[6249,6292,5627,5811,1031], color:'#D97706', fmt:v=>v.toFixed(1), allLabels:true
+    });
+    drawSparkLine('spk-ct-cat',{
+      vals:[11.8,11.7,13.4,12.5,14.8], months:['Apr','Jul','Oct','Jan','Feb'],
+      ns:[2578,2914,2826,2953,480], color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+    });
+    drawSparkLine('spk-vint-est',{
+      vals:[16.6,23.2,24.4,25.9,30.7], months:['Apr','Jul','Oct','Jan','Feb'],
+      ns:[13636,13371,11743,11946,1282], color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+    });
+    drawSparkLine('spk-vint-new',{
+      vals:[4.9,7.4,12.0,7.75,17.45], months:['Apr','Jul','Oct','Jan','Feb'],
+      ns:[1159,1182,899,854,856], color:'#D97706', fmt:v=>v.toFixed(1), allLabels:true
+    });
+  };
 })();
 
 function renderAllCharts() {
@@ -2750,9 +3102,8 @@ function renderTab4(){
     var crossedBreakpoint = (lastW <= 768) !== (newW <= 768);
     lastW = newW;
     if(crossedBreakpoint){
-      // Re-run all drawSparkLine calls by reloading the page's spark init
-      // Simplest: reload just the spark block
-      window.location.reload();
+      // Re-draw sparklines for the new viewport without losing uploaded data
+      if (window.reDrawDefaultSparks) window.reDrawDefaultSparks();
     }
   });
 })();
@@ -2788,7 +3139,2029 @@ function renderTab4(){
   setTimeout(checkMobile, 100);
 })();
 
+
+// ════════════════════════════════════════════════════════
+//  SETTINGS PANEL — open/close/tabs/toast/file UI
+// ════════════════════════════════════════════════════════
+
+const _FILES = { nps: null, app: null, qrf: null, bl: null };
+
+function openSettings()  { document.getElementById('settings-overlay').classList.add('open'); }
+function closeSettings() { document.getElementById('settings-overlay').classList.remove('open'); }
+
+function switchSpTab(tab, btn) {
+  document.getElementById('sp-tab-link').style.display    = tab === 'link'    ? 'block' : 'none';
+  document.getElementById('sp-tab-file').style.display    = tab === 'file'    ? 'block' : 'none';
+  document.getElementById('sp-tab-summary').style.display = tab === 'summary' ? 'block' : 'none';
+  document.getElementById('sp-tab-voice').style.display   = tab === 'voice'   ? 'block' : 'none';
+  document.querySelectorAll('.sp-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// Toast
+let _toastTmr;
+function showToast(msg, type) {
+  const t = document.getElementById('sp-toast');
+  t.innerHTML = msg;
+  t.className = 'show' + (type ? ' toast-' + type : '');
+  clearTimeout(_toastTmr);
+  _toastTmr = setTimeout(() => { t.className = ''; }, 3500);
+}
+
+function markFilled(inp) {
+  const ok = inp.value.trim().length > 10;
+  inp.classList.toggle('filled', ok);
+  inp.classList.remove('error');
+}
+
+function setStatus(id, type, msg) {
+  const el = document.getElementById(id);
+  el.className = 'sp-status ' + type;
+  el.textContent = msg;
+}
+
+// ── File zones ────────────────────────────────────────────
+function dragOver(e, zone)  { e.preventDefault(); zone.classList.add('drag'); }
+function dragLeave(zone)    { zone.classList.remove('drag'); }
+function dropFile(e, key, zone) {
+  e.preventDefault(); zone.classList.remove('drag');
+  if (e.dataTransfer.files[0]) applyFile(key, e.dataTransfer.files[0]);
+}
+function fileSelected(key, inp) {
+  if (inp.files[0]) applyFile(key, inp.files[0]);
+}
+function applyFile(key, file) {
+  _FILES[key] = file;
+  const hints = { nps:'NPS_Report_NPS_Monthly.xlsx', app:'App_Ratings_and_Review_Report.xlsx',
+                  qrf:'QRF_Irrelevancy_Report_Monthly.xlsx', bl:'BL_NI_Weekly_Monthly_Report.xlsx' };
+  document.getElementById('fname-' + key).textContent = file.name;
+  document.getElementById('fsize-' + key).textContent = (file.size / 1024).toFixed(0) + ' KB';
+  const zone = document.getElementById('zone-' + key);
+  zone.classList.add('filled'); zone.classList.remove('error', 'drag');
+  document.getElementById('fclear-' + key).style.display = 'inline-flex';
+  document.getElementById('file-status').className = 'sp-status';
+}
+function clearFile(e, key) {
+  e.stopPropagation();
+  _FILES[key] = null;
+  const hints = { nps:'NPS_Report_NPS_Monthly.xlsx', app:'App_Ratings_and_Review_Report.xlsx',
+                  qrf:'QRF_Irrelevancy_Report_Monthly.xlsx', bl:'BL_NI_Weekly_Monthly_Report.xlsx' };
+  document.getElementById('fname-' + key).textContent = 'Click or drag to upload';
+  document.getElementById('fsize-' + key).textContent = hints[key];
+  document.getElementById('zone-' + key).classList.remove('filled','error');
+  document.getElementById('fclear-' + key).style.display = 'none';
+  document.getElementById('file-' + key).value = '';
+}
+
+// ── Validation ────────────────────────────────────────────
+function validateLinks() {
+  let ok = true;
+  ['link-nps','link-app','link-qrf','link-bl'].forEach(id => {
+    const inp = document.getElementById(id);
+    const v = inp.value.trim();
+    if (!v || !v.startsWith('http')) { inp.classList.add('error'); ok = false; }
+  });
+  if (!ok) showToast('⚠ Please add all 4 Script Links before syncing', 'err');
+  return ok;
+}
+function validateFiles() {
+  let ok = true;
+  ['nps','app','qrf','bl'].forEach(k => {
+    if (!_FILES[k]) { document.getElementById('zone-' + k).classList.add('error'); ok = false; }
+  });
+  if (!ok) showToast('⚠ Please upload all 4 files before syncing', 'err');
+  return ok;
+}
+
+// ── Script link sync ──────────────────────────────────────
+function syncLinks() {
+  if (!validateLinks()) return;
+  const btn = document.querySelector('#sp-tab-link .sp-sync-btn');
+  btn.disabled = true; btn.classList.add('syncing');
+  btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Syncing…';
+  setStatus('link-status','info','⏳ Fetching from scripts…');
+  const urls = {
+    nps: document.getElementById('link-nps').value.trim(),
+    app: document.getElementById('link-app').value.trim(),
+    qrf: document.getElementById('link-qrf').value.trim(),
+    bl:  document.getElementById('link-bl').value.trim(),
+  };
+  Promise.all(Object.entries(urls).map(([k,url]) => fetch(url).then(r=>r.json()).then(d=>[k,d])))
+    .then(res => {
+      const d = Object.fromEntries(res);
+      applyDashboardData(d.nps, d.app, d.qrf, d.bl);
+      setStatus('link-status','ok','✓ Dashboard synced from scripts');
+      showToast('✓ Dashboard updated successfully', 'ok');
+      btn.disabled = false; btn.classList.remove('syncing');
+      btn.innerHTML = '↺ Sync from Scripts';
+      closeSettings();
+    })
+    .catch(err => {
+      setStatus('link-status','err','✗ Fetch failed: ' + err.message);
+      showToast('✗ Sync failed — check CORS on your GAS endpoint', 'err');
+      btn.disabled = false; btn.classList.remove('syncing');
+      btn.innerHTML = '↺ Sync from Scripts';
+    });
+}
+
+// ── File sync ─────────────────────────────────────────────
+function syncFiles() {
+  if (!validateFiles()) return;
+  const btn = document.querySelector('#sp-tab-file .sp-sync-btn');
+  btn.disabled = true; btn.classList.add('syncing');
+  btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Parsing…';
+  setStatus('file-status','info','⏳ Reading and parsing all 4 files…');
+  Promise.all([
+    readXlsx(_FILES.nps).then(parseNPS),
+    readXlsx(_FILES.app).then(parseAPP),
+    readXlsx(_FILES.qrf).then(parseQRF),
+    readXlsx(_FILES.bl).then(parseBL),
+  ]).then(([nps, app, qrf, bl]) => {
+    applyDashboardData(nps, app, qrf, bl);
+    setStatus('file-status','ok','✓ Dashboard updated from files');
+    showToast('✓ Dashboard updated from files', 'ok');
+    btn.disabled = false; btn.classList.remove('syncing');
+    btn.innerHTML = '↺ Sync from Files';
+    closeSettings();
+  }).catch(err => {
+    console.error(err);
+    setStatus('file-status','err','✗ Parse error: ' + err.message);
+    showToast('✗ Could not parse — verify correct files are uploaded', 'err');
+    btn.disabled = false; btn.classList.remove('syncing');
+    btn.innerHTML = '↺ Sync from Files';
+  });
+}
+
+// ── XLSX read util ────────────────────────────────────────
+function readXlsx(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = e => {
+      try { res(XLSX.read(new Uint8Array(e.target.result), { type:'array', cellDates:true })); }
+      catch(err) { rej(err); }
+    };
+    r.onerror = rej;
+    r.readAsArrayBuffer(file);
+  });
+}
+
+// ── Shared helpers ────────────────────────────────────────
+function _rows(wb, name) {
+  const ws = wb.Sheets[name] || wb.Sheets[wb.SheetNames[0]];
+  return XLSX.utils.sheet_to_json(ws, { header:1, defval:null });
+}
+function _findApr25(hdr) {
+  for (let i=0;i<hdr.length;i++) {
+    const v = hdr[i];
+    if (v instanceof Date && v.getFullYear()===2025 && v.getMonth()===3) return i;
+    if (typeof v==='string' && /apr/i.test(v) && v.includes('25')) return i;
+  }
+  return -1;
+}
+function _lbl(dt) {
+  if (!dt) return '';
+  if (dt instanceof Date) {
+    const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return m[dt.getMonth()]+"'"+(String(dt.getFullYear()).slice(2));
+  }
+  return String(dt).replace(/'/g,"'");
+}
+function _n(v)   { return typeof v==='number' ? Math.round(v) : null; }
+function _f1(v)  { return typeof v==='number' ? +v.toFixed(1) : null; }
+function _pct(v) { return typeof v==='number' ? +(v*100).toFixed(2) : null; }
+function _slice(rows, ri, from, to) { return (rows[ri]||[]).slice(from, to+1); }
+
+// ── NPS Parser ────────────────────────────────────────────
+function parseNPS(wb) {
+  const rows = _rows(wb, 'NPS Monthly');
+  const hdr  = rows[0] || [];
+  const apr  = _findApr25(hdr);
+  if (apr < 0) throw new Error('NPS: Cannot find Apr\'25 column');
+
+  // Find end col (last non-summary month)
+  let endC = apr;
+  for (let c=apr; c<hdr.length; c++) {
+    const v = hdr[c]; if (!v) break;
+    if (typeof v==='string' && (v.includes('Change')||v.includes('+/-')||v.includes('%'))) break;
+    if (v instanceof Date || typeof v==='string') endC = c;
+  }
+
+  const months = [];
+  for (let c=apr; c<=endC; c++) months.push(_lbl(hdr[c]));
+  const sl = ri => _slice(rows,ri,apr,endC);
+
+  const totalN  = sl(1).map(_n);
+  const npsVals = sl(2).map(_f1);
+  const momChg  = _f1(rows[2] && rows[2][endC+1]);
+
+  function _findRow(label) {
+    return rows.findIndex(r => r && r[0] && String(r[0]).trim().toLowerCase().startsWith(label.toLowerCase()));
+  }
+  function typeData(ri) {
+    if (ri<0) return null;
+    return { n: sl(ri).map(_n), vals: sl(ri+4).map(_f1) };
+  }
+  function bifPair(label) {
+    const ri = _findRow(label.toLowerCase());
+    if (ri<0) return null;
+    return { jan: _n(rows[ri][endC-1]), feb: _n(rows[ri][endC]) };
+  }
+
+  // total comment respondents row ~54 (label 'Total')
+  let totRow = rows.findIndex(r => r && r[0]==='Total' && r[endC] > 100);
+  const totJan = totRow>=0 ? _n(rows[totRow][endC-1]) : 211;
+  const totFeb = totRow>=0 ? _n(rows[totRow][endC])   : 635;
+
+  return {
+    months, totalN, npsVals, momChg,
+    bestEver: Math.max(...npsVals.filter(Boolean)),
+    star:     typeData(_findRow('STAR')),
+    leader:   typeData(_findRow('LEADER')),
+    tsCat:    typeData(_findRow('TSCatalog')),
+    catalog:  typeData(_findRow('Catalog')),
+    quarterly:typeData(_findRow('Quarterly')),
+    day30:    typeData(_findRow('30 Day')),
+    totalComplaints: { jan:totJan, feb:totFeb },
+    irrel:    bifPair('Irrelevant Buyer'),
+    lessBL:   bifPair('Less BLs'),
+    lowConv:  bifPair('Low Conversion'),
+    iwb:      bifPair('Issues with Buyer'),
+    others:   bifPair('Others'),
+    irrelSubs: {
+      retail: bifPair('Retail leads'),
+      wrongCat: bifPair('Wrong Category'),
+      wrongLoc: bifPair('Wrong location'),
+      noOpt: (() => {
+        // First "No Option Selected" after Irrelevant Buyer block
+        let irIdx = _findRow('Irrelevant Buyer');
+        if (irIdx<0) return null;
+        for (let r=irIdx+1;r<irIdx+8;r++) {
+          if (rows[r] && String(rows[r][0]||'').includes('No Option')) return {jan:_n(rows[r][endC-1]),feb:_n(rows[r][endC])};
+        }
+        return null;
+      })()
+    },
+    lessBLSubs: {
+      expire: bifPair('Leads expire'),
+      veryLess: bifPair('Very less leads'),
+      noOpt: (() => {
+        let idx = _findRow('Less BLs'); if(idx<0) return null;
+        for(let r=idx+1;r<idx+6;r++) if(rows[r]&&String(rows[r][0]||'').includes('No Option')) return {jan:_n(rows[r][endC-1]),feb:_n(rows[r][endC])};
+        return null;
+      })()
+    },
+    iwbSubs: {
+      denies:    bifPair('Buyer denies'),
+      unresp:    bifPair('Buyer unresponsive'),
+      fulfilled: bifPair('Requirement already'),
+      noOpt: (() => {
+        let idx = _findRow('Issues with Buyer'); if(idx<0) return null;
+        for(let r=idx+1;r<idx+8;r++) if(rows[r]&&String(rows[r][0]||'').includes('No Option')) return {jan:_n(rows[r][endC-1]),feb:_n(rows[r][endC])};
+        return null;
+      })()
+    },
+  };
+}
+
+// ── APP Parser ────────────────────────────────────────────
+function parseAPP(wb) {
+  const rows = _rows(wb, 'New Monthly Report V2');
+  const hdr  = rows[1] || [];
+  // Headers start at col index 3 (Apr'25) per file structure
+  const apr=3, endC=13; // 11 months Apr'25–Feb'26
+  const months = [];
+  for (let c=apr;c<=endC;c++) months.push(_lbl(hdr[c]));
+
+  const sl  = ri => _slice(rows,ri,apr,endC);
+  const slN = ri => sl(ri).map(_n);
+  const slF = ri => sl(ri).map(v => typeof v==='number' ? +v.toFixed(2) : null);
+
+  const ratings = slF(53);
+  const star5=slN(54),star4=slN(55),star3=slN(56),star2=slN(57),star1=slN(58);
+  const totalN = star5.map((_,i)=>(star5[i]||0)+(star4[i]||0)+(star3[i]||0)+(star2[i]||0)+(star1[i]||0));
+
+  const bifFull = ri => sl(ri).map(v => typeof v==='number'?_n(v):null);
+
+  function bifPair(ri) {
+    const row = rows[ri]||[];
+    return { full: bifFull(ri), jan: _n(row[12]), feb: _n(row[13]) };
+  }
+  function subPair(ri) {
+    const row = rows[ri]||[];
+    return { jan: _n(row[12]), feb: _n(row[13]) };
+  }
+
+  return {
+    months, ratings, totalN,
+    momChg: typeof (rows[53]||[])[14]==='number' ? +((rows[53]||[])[14]).toFixed(3) : null,
+    bestEver: Math.max(...ratings.filter(Boolean)),
+    irrel:   bifPair(86),
+    lessBL:  bifPair(94),
+    lowConv: bifPair(101),
+    iwb:     bifPair(104),
+    others:  bifPair(112),
+    totalComplaints: bifPair(114),
+    irrelSubs: { retail:subPair(89), wrongCat:subPair(90), wrongLoc:subPair(91), noOpt:subPair(92) },
+    lessBLSubs:{ expire:subPair(97), veryLess:subPair(98), noOpt:subPair(99) },
+    iwbSubs:   { denies:subPair(107),unresp:subPair(108),fulfilled:subPair(109),noOpt:subPair(110) },
+  };
+}
+
+// ── QRF Parser ────────────────────────────────────────────
+function parseQRF(wb) {
+  const rows = _rows(wb, 'New_Monthly_Overall_QRF');
+  const hdr  = rows[0]||[];
+  const apr  = _findApr25(hdr);
+  if (apr<0) throw new Error('QRF: Cannot find Apr\'25 column');
+  let endC=apr;
+  for(let c=apr;c<hdr.length;c++){
+    const v=hdr[c]; if(!v) break;
+    if(typeof v==='string'&&(v.includes('+/-')||v.includes('CHANGE'))) break;
+    endC=c;
+  }
+  const months=[];
+  for(let c=apr;c<=endC;c++) months.push(_lbl(hdr[c]));
+  const sl=ri=>_slice(rows,ri,apr,endC);
+  return {
+    months,
+    totalN:   sl(2).map(_n),
+    irrelPct: sl(6).map(_pct),
+    momChg:   _pct(rows[6]&&rows[6][endC+1]),
+    bestEver: Math.min(...sl(6).map(_pct).filter(Boolean)),
+  };
+}
+
+// ── BL Parser ─────────────────────────────────────────────
+function parseBL(wb) {
+  const rows = _rows(wb, 'Total NI-Monthly');
+  const hdr  = rows[0]||[];
+  const apr  = _findApr25(hdr);
+  if (apr<0) throw new Error('BL: Cannot find Apr\'25 column');
+  let endC=apr;
+  for(let c=apr;c<hdr.length;c++){
+    const v=hdr[c]; if(!v) break;
+    if(typeof v==='string'&&v.includes('+/-')) break;
+    endC=c;
+  }
+  const months=[];
+  for(let c=apr;c<=endC;c++) months.push(_lbl(hdr[c]));
+  const sl=ri=>_slice(rows,ri,apr,endC);
+  return {
+    months,
+    totalN:   sl(5).map(_n),
+    blniPct:  sl(8).map(_pct),
+    momChg:   _pct(rows[8]&&rows[8][endC+1]),
+    bestEver: Math.min(...sl(8).map(_pct).filter(Boolean)),
+  };
+}
+
+// ── Apply data to dashboard ───────────────────────────────
+function applyDashboardData(nps, app, qrf, bl) {
+  const L = arr => arr && arr.length ? arr[arr.length-1] : null;
+  const P = arr => arr && arr.length > 1 ? arr[arr.length-2] : null;
+  const fmtMom = (v,dec,pos,suf) => {
+    if (v===null||v===undefined) return '—';
+    const d = typeof v==='number' ? v : 0;
+    const s = (d>=0?'+':'')+d.toFixed(dec)+(suf||'');
+    return s + ' MoM';
+  };
+
+  // ── Overview sparks ────────────────────────────────────
+  // NPS: sparse 5 points
+  const nMos=nps.months, nLen=nMos.length;
+  const nIdx = [0, Math.round(nLen*0.25), Math.round(nLen*0.5), Math.round(nLen*0.75), nLen-1]
+    .filter((v,i,a)=>v<nLen&&a.indexOf(v)===i);
+  const _dsl = window._drawSparkLine || function(){};
+  _dsl('spk-nps', {
+    vals:   nIdx.map(i=>nps.npsVals[i]),
+    months: nIdx.map(i=>nMos[i]),
+    ns:     nIdx.map(i=>nps.totalN[i]),
+    color:'#059669', fmt:v=>v.toFixed(1), allLabels:true
+  });
+  _dsl('spk-app', {
+    vals:app.ratings, months:app.months, ns:app.totalN,
+    color:'#D97706', fmt:v=>v.toFixed(2), unit:'★', allLabels:true
+  });
+  _dsl('spk-qrf', {
+    vals:qrf.irrelPct, months:qrf.months, ns:qrf.totalN,
+    color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
+  });
+  _dsl('spk-bl', {
+    vals:bl.blniPct, months:bl.months, ns:bl.totalN,
+    color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
+  });
+
+  // ── Update spk-card values ─────────────────────────────
+  function updCard(svgId, valTxt, momTxt, momIsGood, volTxt, isBest) {
+    const svg = document.getElementById(svgId); if(!svg) return;
+    const card = svg.closest('.spk-card'); if(!card) return;
+    const q = s => card.querySelector(s);
+    if(q('.spk-val'))  q('.spk-val').textContent  = valTxt;
+    if(q('.spk-mom'))  { q('.spk-mom').textContent = momTxt; q('.spk-mom').className='spk-mom '+(momIsGood?'c-green':'c-red'); }
+    if(q('.spk-vol-n')) q('.spk-vol-n').textContent = volTxt;
+    const be=q('.best-ever-badge'), bs=q('.be-subtle');
+    if(be) be.style.display = isBest?'':'none';
+    if(bs) bs.style.display = isBest?'':'none';
+  }
+
+  updCard('spk-nps',
+    (L(nps.npsVals)||0).toFixed(1),
+    fmtMom(nps.momChg,1,(nps.momChg||0)>=0),
+    (nps.momChg||0)>=0,
+    ((L(nps.totalN))||0).toLocaleString()+' responses',
+    L(nps.npsVals)>=nps.bestEver
+  );
+  updCard('spk-app',
+    (L(app.ratings)||0).toFixed(2)+'★',
+    fmtMom(app.momChg,2,(app.momChg||0)>=0,'★'),
+    (app.momChg||0)>=0,
+    (L(app.totalN)||0).toLocaleString()+' ratings',
+    L(app.ratings)>=app.bestEver
+  );
+  updCard('spk-qrf',
+    (L(qrf.irrelPct)||0).toFixed(2)+'%',
+    fmtMom(qrf.momChg,2,(qrf.momChg||0)<=0,'%'),
+    (qrf.momChg||0)<=0,
+    (L(qrf.totalN)||0).toLocaleString()+' actions',
+    L(qrf.irrelPct)<=qrf.bestEver
+  );
+  updCard('spk-bl',
+    (L(bl.blniPct)||0).toFixed(2)+'%',
+    fmtMom(bl.momChg,2,(bl.momChg||0)<=0,'%'),
+    (bl.momChg||0)<=0,
+    (L(bl.totalN)||0).toLocaleString()+' NIs',
+    L(bl.blniPct)<=bl.bestEver
+  );
+
+  // ── Deep-dive seller type sparks ──────────────────────
+  function drawType(id, data, color) {
+    if (!data||!data.vals) return;
+    if (!window._drawSparkLine) return; // guard: IIFE not yet run
+    const n=data.vals.length;
+    const idx=[0,Math.round(n*0.25),Math.round(n*0.5),Math.round(n*0.75),n-1]
+      .filter((v,i,a)=>v<n&&a.indexOf(v)===i);
+    window._drawSparkLine(id, {
+      vals:   idx.map(i=>data.vals[i]),
+      months: idx.map(i=>nps.months[i]||''),
+      ns:     idx.map(i=>data.n[i]),
+      color, fmt:v=>v.toFixed(1), allLabels:true
+    });
+  }
+    drawType('spk-ct-star',   nps.star,      '#059669');
+    drawType('spk-ct-leader', nps.leader,    '#059669');
+    drawType('spk-ct-ts',     nps.tsCat,     '#D97706');
+    drawType('spk-ct-cat',    nps.catalog,   '#059669');
+    drawType('spk-vint-est',  nps.quarterly, '#059669');
+    drawType('spk-vint-new',  nps.day30,     '#D97706');
+
+  function updType(id, data) {
+    if (!data) return;
+    const el=document.getElementById(id); if(!el) return;
+    const card=el.closest('.spk-card'); if(!card) return;
+    const q=s=>card.querySelector(s);
+    const last=L(data.vals), prev=P(data.vals);
+    if(q('.spk-val')) q('.spk-val').textContent = last!==null?last.toFixed(1):'—';
+    if(q('.spk-mom')&&prev!==null&&last!==null){
+      const d=+(last-prev).toFixed(1);
+      q('.spk-mom').textContent=(d>=0?'+':'')+d+' MoM';
+      q('.spk-mom').className='spk-mom '+(d>=0?'c-green':'c-red');
+    }
+    if(q('.spk-vol-n')&&data.n) q('.spk-vol-n').textContent=(L(data.n)||0).toLocaleString()+' responses';
+    const mx=data.vals?Math.max(...data.vals.filter(Boolean)):0;
+    const be=q('.best-ever-badge');
+    if(be) be.style.display=(last!==null&&last>=mx)?'':'none';
+  }
+  updType('spk-ct-star',   nps.star);
+  updType('spk-ct-leader', nps.leader);
+  updType('spk-ct-ts',     nps.tsCat);
+  updType('spk-ct-cat',    nps.catalog);
+  updType('spk-vint-est',  nps.quarterly);
+  updType('spk-vint-new',  nps.day30);
+
+  // ── Rebuild NPS complaints bar chart ──────────────────
+  rebuildNPSBars(nps);
+
+  // ── Rebuild App complaints bar chart ─────────────────
+  rebuildAppBars(app);
+
+  // ── Rebuild heatmaps ──────────────────────────────────
+  rebuildHeatmaps(nps, app);
+
+  console.log('✓ applyDashboardData complete');
+}
+
+// ── Rebuild NPS vertical bar chart ───────────────────────
+function rebuildNPSBars(nps) {
+  const nJan=nps.totalComplaints.jan||211, nFeb=nps.totalComplaints.feb||635;
+  const cats=['irrel','lowConv','lessBL','iwb','others'];
+  const colors=['#EF4444','#8B5CF6','#3B82F6','#F59E0B','#D1D5DB'];
+  const labels=['Irrelevant Leads','Less BLs/Enquiries','Low Conversion','Issues with Buyer','Others'];
+  const bars = [
+    { label:"Jan '26", n:nJan, vals:[nps.irrel,nps.lessBL,nps.lowConv,nps.iwb,nps.others].map(x=>x?x.jan:0) },
+    { label:"Feb '26", n:nFeb, vals:[nps.irrel,nps.lessBL,nps.lowConv,nps.iwb,nps.others].map(x=>x?x.feb:0) },
+  ];
+  // Find the NPS vcb-bars container (tab3)
+  const tab3 = document.getElementById('tab3');
+  if (!tab3) return;
+  const barsEl = tab3.querySelector('.vcb-bars');
+  if (!barsEl) return;
+  bars.forEach((bar, bi) => {
+    const grp = barsEl.querySelectorAll('.vcb-bar-group')[bi];
+    if (!grp) return;
+    const barEl = grp.querySelector('.vcb-bar');
+    if (!barEl) return;
+    const total = bar.vals.reduce((a,b)=>(a||0)+(b||0),0)||1;
+    const segs = barEl.querySelectorAll('.vcb-seg');
+    segs.forEach((seg, si) => {
+      const v = bar.vals[si]||0;
+      seg.style.flex = (v/total);
+      const tip = `n=${v} (${(v/bar.n*100).toFixed(1)}%)`;
+      seg.setAttribute('data-tip', tip);
+    });
+    const nEl = grp.querySelector('.vcb-bar-n');
+    if (nEl) nEl.textContent = 'n='+bar.n.toLocaleString();
+  });
+}
+
+// ── Rebuild App complaints bar chart ─────────────────────
+function rebuildAppBars(app) {
+  const tab5 = document.getElementById('tab5');
+  if (!tab5) return;
+  const barsEl = tab5.querySelector('.vcb-bars-11');
+  if (!barsEl) return;
+  const grps = barsEl.querySelectorAll('.vcb-bar-group');
+  const monthData = [
+    app.irrel.full, app.lowConv.full, app.lessBL.full, app.iwb.full, app.others.full
+  ];
+  grps.forEach((grp, mi) => {
+    const totN = app.totalComplaints.full[mi]||1;
+    const barEl = grp.querySelector('.vcb-bar');
+    if (!barEl) return;
+    const segs = barEl.querySelectorAll('.vcb-seg');
+    segs.forEach((seg, si) => {
+      const v = (monthData[si]||[])[mi]||0;
+      seg.style.flex = v/totN;
+      seg.setAttribute('data-tip','n='+v);
+    });
+    const nEl = grp.querySelector('.vcb-bar-n');
+    if (nEl) nEl.textContent = 'n='+(app.totalComplaints.full[mi]||0).toLocaleString();
+  });
+}
+
+// ── Rebuild heatmap cells ─────────────────────────────────
+function bPct(cnt, t) { return t ? +(cnt/t*100).toFixed(1) : 0; }
+
+function rebuildHeatmaps(nps, app) {
+  function setCell(cell, pct, cnt) {
+    if (!cell) return;
+    const txt = pct!==null&&pct!==undefined ? pct.toFixed(1)+'%' : '—';
+    // First text node
+    let set=false;
+    cell.childNodes.forEach(nd=>{ if(!set&&nd.nodeType===3){nd.nodeValue=txt;set=true;} });
+    const nEl=cell.querySelector('.hmap-n');
+    if (nEl) nEl.textContent='n='+(cnt||0);
+    if (pct!==null) cell.style.setProperty('--v', pct.toFixed(1));
+    const hot = pct>20; cell.classList.toggle('hmap-hot', hot);
+  }
+  // NPS heatmap cells — query by data-hmap-key attributes we'll use
+  // Instead update by position: scan rows, match sub-name text
+  const nJan=nps.totalComplaints.jan||211, nFeb=nps.totalComplaints.feb||635;
+  const aJan=app.totalComplaints.jan||964, aFeb=app.totalComplaints.feb||1401;
+
+  function updateHmap(tabEl, groupText, subText, janPct, febPct, janN, febN) {
+    const tbls = tabEl ? tabEl.querySelectorAll('.hmap-table') : document.querySelectorAll('.hmap-table');
+    tbls.forEach(tbl => {
+      let inGrp=false;
+      tbl.querySelectorAll('tr').forEach(tr => {
+        const ghdr=tr.querySelector('.hmap-group-hdr');
+        if (ghdr) { inGrp=ghdr.textContent.toLowerCase().includes(groupText.toLowerCase()); return; }
+        if (!inGrp) return;
+        const snEl=tr.querySelector('.hmap-sub-name');
+        if (!snEl||!snEl.textContent.toLowerCase().includes(subText.toLowerCase())) return;
+        const cells=tr.querySelectorAll('.hmap-cell:not(.hmap-future)');
+        setCell(cells[0], janPct, janN);
+        setCell(cells[1], febPct, febN);
+      });
+    });
+  }
+
+  // NPS heatmaps
+  const nIrrelSubs = nps.irrelSubs;
+  if (nIrrelSubs.retail)   updateHmap(null,'Irrelevant','Retail',   bPct(nIrrelSubs.retail.jan,nJan),   bPct(nIrrelSubs.retail.feb,nFeb),   nIrrelSubs.retail.jan,   nIrrelSubs.retail.feb);
+  if (nIrrelSubs.wrongCat) updateHmap(null,'Irrelevant','Wrong Cat',bPct(nIrrelSubs.wrongCat.jan,nJan), bPct(nIrrelSubs.wrongCat.feb,nFeb), nIrrelSubs.wrongCat.jan, nIrrelSubs.wrongCat.feb);
+  if (nIrrelSubs.wrongLoc) updateHmap(null,'Irrelevant','Wrong loc',bPct(nIrrelSubs.wrongLoc.jan,nJan), bPct(nIrrelSubs.wrongLoc.feb,nFeb), nIrrelSubs.wrongLoc.jan, nIrrelSubs.wrongLoc.feb);
+  if (nIrrelSubs.noOpt)    updateHmap(null,'Irrelevant','No Option',bPct(nIrrelSubs.noOpt.jan,nJan),    bPct(nIrrelSubs.noOpt.feb,nFeb),    nIrrelSubs.noOpt.jan,    nIrrelSubs.noOpt.feb);
+
+  const nBLSubs=nps.lessBLSubs;
+  if (nBLSubs.expire)   updateHmap(null,'Less BL','Leads expire',  bPct(nBLSubs.expire.jan,nJan),   bPct(nBLSubs.expire.feb,nFeb),   nBLSubs.expire.jan,   nBLSubs.expire.feb);
+  if (nBLSubs.veryLess) updateHmap(null,'Less BL','Very less',     bPct(nBLSubs.veryLess.jan,nJan), bPct(nBLSubs.veryLess.feb,nFeb), nBLSubs.veryLess.jan, nBLSubs.veryLess.feb);
+  if (nBLSubs.noOpt)    updateHmap(null,'Less BL','No Option',     bPct(nBLSubs.noOpt.jan,nJan),    bPct(nBLSubs.noOpt.feb,nFeb),    nBLSubs.noOpt.jan,    nBLSubs.noOpt.feb);
+
+  const nIWBSubs=nps.iwbSubs;
+  if (nIWBSubs.denies)    updateHmap(null,'Buyer','Denies',        bPct(nIWBSubs.denies.jan,nJan),    bPct(nIWBSubs.denies.feb,nFeb),    nIWBSubs.denies.jan,    nIWBSubs.denies.feb);
+  if (nIWBSubs.unresp)    updateHmap(null,'Buyer','Buyer unresp',   bPct(nIWBSubs.unresp.jan,nJan),    bPct(nIWBSubs.unresp.feb,nFeb),    nIWBSubs.unresp.jan,    nIWBSubs.unresp.feb);
+  if (nIWBSubs.fulfilled) updateHmap(null,'Buyer','Req. Already',   bPct(nIWBSubs.fulfilled.jan,nJan), bPct(nIWBSubs.fulfilled.feb,nFeb), nIWBSubs.fulfilled.jan, nIWBSubs.fulfilled.feb);
+  if (nIWBSubs.noOpt)     updateHmap(null,'Buyer','No Option',      bPct(nIWBSubs.noOpt.jan,nJan),     bPct(nIWBSubs.noOpt.feb,nFeb),     nIWBSubs.noOpt.jan,     nIWBSubs.noOpt.feb);
+
+  // App heatmaps
+  const aIrrelSubs=app.irrelSubs;
+  if (aIrrelSubs.retail)   updateHmap(null,'Irrelevant','Retail',   bPct(aIrrelSubs.retail.jan,aJan),   bPct(aIrrelSubs.retail.feb,aFeb),   aIrrelSubs.retail.jan,   aIrrelSubs.retail.feb);
+  if (aIrrelSubs.wrongCat) updateHmap(null,'Irrelevant','Wrong Cat',bPct(aIrrelSubs.wrongCat.jan,aJan), bPct(aIrrelSubs.wrongCat.feb,aFeb), aIrrelSubs.wrongCat.jan, aIrrelSubs.wrongCat.feb);
+  if (aIrrelSubs.wrongLoc) updateHmap(null,'Irrelevant','Wrong loc',bPct(aIrrelSubs.wrongLoc.jan,aJan), bPct(aIrrelSubs.wrongLoc.feb,aFeb), aIrrelSubs.wrongLoc.jan, aIrrelSubs.wrongLoc.feb);
+  if (aIrrelSubs.noOpt)    updateHmap(null,'Irrelevant','No Option',bPct(aIrrelSubs.noOpt.jan,aJan),    bPct(aIrrelSubs.noOpt.feb,aFeb),    aIrrelSubs.noOpt.jan,    aIrrelSubs.noOpt.feb);
+
+  const aBLSubs=app.lessBLSubs;
+  if (aBLSubs.expire)   updateHmap(null,'Less BL','Leads expire',   bPct(aBLSubs.expire.jan,aJan),   bPct(aBLSubs.expire.feb,aFeb),   aBLSubs.expire.jan,   aBLSubs.expire.feb);
+  if (aBLSubs.veryLess) updateHmap(null,'Less BL','Very less',      bPct(aBLSubs.veryLess.jan,aJan), bPct(aBLSubs.veryLess.feb,aFeb), aBLSubs.veryLess.jan, aBLSubs.veryLess.feb);
+  if (aBLSubs.noOpt)    updateHmap(null,'Less BL','No Option',      bPct(aBLSubs.noOpt.jan,aJan),    bPct(aBLSubs.noOpt.feb,aFeb),    aBLSubs.noOpt.jan,    aBLSubs.noOpt.feb);
+
+  const aIWBSubs=app.iwbSubs;
+  if (aIWBSubs.denies)    updateHmap(null,'Buyer','Denies',        bPct(aIWBSubs.denies.jan,aJan),    bPct(aIWBSubs.denies.feb,aFeb),    aIWBSubs.denies.jan,    aIWBSubs.denies.feb);
+  if (aIWBSubs.unresp)    updateHmap(null,'Buyer','Buyer unresp',   bPct(aIWBSubs.unresp.jan,aJan),    bPct(aIWBSubs.unresp.feb,aFeb),    aIWBSubs.unresp.jan,    aIWBSubs.unresp.feb);
+  if (aIWBSubs.fulfilled) updateHmap(null,'Buyer','Req. Already',   bPct(aIWBSubs.fulfilled.jan,aJan), bPct(aIWBSubs.fulfilled.feb,aFeb), aIWBSubs.fulfilled.jan, aIWBSubs.fulfilled.feb);
+  if (aIWBSubs.noOpt)     updateHmap(null,'Buyer','No Option',      bPct(aIWBSubs.noOpt.jan,aJan),     bPct(aIWBSubs.noOpt.feb,aFeb),     aIWBSubs.noOpt.jan,     aIWBSubs.noOpt.feb);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// MONTH SELECTOR ENGINE
+// ═══════════════════════════════════════════════════════════════════
+
+// ── Per-month data registry ─────────────────────────────────────────
+// Each key is e.g. "Jan '26". Values hold everything needed to fully
+// re-render the dashboard for that month.
+const MONTH_CFG = {};
+
+function _reg(key, d) { MONTH_CFG[key] = Object.assign({ key }, d); }
+
+// ── NPS 11-month full series (for spark re-slicing) ────────────────
+const _NPS_FULL = {
+  vals:   [null,null,null,null,null,null,null,null,null,24.6,25.4],
+  ns:     [null,null,null,null,null,null,null,null,null,12808,2138],
+  // seller types (11 mo, from SEG constant)
+  star:   [22.1,10.7,11.5,27.3,27.9,7.8,30.8,26.1,21.3,27.8,33.6],
+  leader: [22.9,35.4,26.4,29.8,22.6,3.7,28.3,19.4,12.9,24.6,30.5],
+  ts:     [21.8,17.8,21.6,28.1,31.3,27.0,27.8,28.4,28.1,30.2,27.1],
+  cat:    [11.8,-2.3,-7.3,11.7,3.1,1.9,13.4,11.7,8.9,12.5,14.8],
+  est:    [16.6,23.3,23.1,23.2,16.1,11.1,24.4,38.2,5.9,25.9,30.7],
+  newS:   [0.2,8.4,1.2,3.8,15.5,10.7,13.8,24.0,17.1,7.0,25.1],
+  mos:    ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
+  // 5-pt quarterly NPS spark
+  nps5v:  [15.73,21.97,23.56,24.6,25.4],
+  nps5m:  ["Apr'25","Jul'25","Oct'25","Jan'26","Feb'26"],
+  nps5n:  [14795,14553,12642,12808,2138],
+};
+
+// App 11-month full series
+const _APP_FULL = {
+  vals: [3.39,3.42,3.45,3.31,3.46,3.40,3.45,3.54,3.44,3.41,3.41],
+  ns:   [10217,12965,12823,8035,17855,8698,6840,9192,9710,7201,5441],
+  mos:  ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
+};
+const _QRF_FULL = {
+  vals: [8.56,8.74,8.43,7.14,6.50,5.84,5.45,5.20,5.04,5.03,4.94],
+  ns:   [417777,475630,496117,529731,516477,542698,480249,458638,503348,527998,491393],
+  mos:  ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
+};
+const _BL_FULL = {
+  vals: [8.37,7.69,7.40,6.94,6.42,6.13,5.61,5.68,5.48,4.52,4.41],
+  ns:   [828716,831110,784754,797672,697327,666210,558073,608647,627410,526186,471539],
+  mos:  ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
+};
+
+// App complaint bars (Apr–Feb, 11 months)
+const _APP_BARS_FULL = [
+  {l:'Apr',n:1133, s:[427,58,97,125,426]},
+  {l:'May',n:1224, s:[474,71,62,162,455]},
+  {l:'Jun',n:1002, s:[468,50,55,90,339]},
+  {l:'Jul',n:825,  s:[369,40,43,70,303]},
+  {l:'Aug',n:1444, s:[736,93,78,125,412]},
+  {l:'Sep',n:974,  s:[432,62,41,85,354]},
+  {l:'Oct',n:698,  s:[256,56,58,62,266]},
+  {l:'Nov',n:608,  s:[248,57,50,33,220]},
+  {l:'Dec',n:698,  s:[294,81,49,47,227]},
+  {l:'Jan',n:964,  s:[338,220,202,110,94]},
+  {l:'Feb',n:1401, s:[445,345,284,149,178]},
+];
+
+// ── Jan '26 config ─────────────────────────────────────────────────
+_reg("Jan '26", {
+  // Overview metrics (idx=9 in full series)
+  nps: { val:24.6, n:12808, mom:+1.0, best:false,
+    sv:[15.73,21.97,23.56,24.6], sm:["Apr'25","Jul'25","Oct'25","Jan'26"], sn:[14795,14553,12642,12808] },
+  app: { val:3.41, n:7201,  mom:-0.03, best:false,
+    sv:_APP_FULL.vals.slice(0,10), sm:_APP_FULL.mos.slice(0,10), sn:_APP_FULL.ns.slice(0,10) },
+  qrf: { val:5.03, n:527998, mom:-0.01, best:false,
+    sv:_QRF_FULL.vals.slice(0,10), sm:_QRF_FULL.mos.slice(0,10), sn:_QRF_FULL.ns.slice(0,10) },
+  bl:  { val:4.52, n:526186, mom:-0.96, best:false,
+    sv:_BL_FULL.vals.slice(0,10), sm:_BL_FULL.mos.slice(0,10), sn:_BL_FULL.ns.slice(0,10) },
+  // Seller types — 4-pt spark (no Feb pt yet)
+  star:   { val:27.8, mom:-3.0,  best:false, sv:[22.1,27.3,30.8,27.8], sm:['Apr','Jul','Oct','Jan'] },
+  leader: { val:24.6, mom:-3.7,  best:false, sv:[22.9,29.8,28.3,24.6], sm:['Apr','Jul','Oct','Jan'] },
+  ts:     { val:30.2, mom:+2.4,  best:true,  sv:[21.8,28.1,27.8,30.2], sm:['Apr','Jul','Oct','Jan'] },
+  cat:    { val:12.5, mom:-0.9,  best:false, sv:[11.8,11.7,13.4,12.5], sm:['Apr','Jul','Oct','Jan'] },
+  est:    { val:25.9, mom:+1.5,  best:false, sv:[16.6,23.2,24.4,25.9], sm:['Apr','Jul','Oct','Jan'] },
+  newS:   { val:7.75, mom:-4.25, best:false, sv:[4.9,7.4,12.0,7.75],   sm:['Apr','Jul','Oct','Jan'] },
+  // P4 problem percentages
+  p4: { irrel:{nps:31,app:35,bl:34,qrf:19}, conv:{nps:20,app:23}, bls:{nps:15,app:21}, spec:{bl:22,qrf:18} },
+  // Complaint bars
+  npsBars: [
+    { l:"Jan '26", n:211, s:[65,43,32,19,52] },
+  ],
+  appBars: _APP_BARS_FULL.slice(0,10),
+  // Heatmap
+  hmap: {
+    prevLbl:null, curLbl:"Jan '26", fut1:"Feb '26", fut2:"Mar '26",
+    nps: { pN:null, cN:211,  rows:{
+      wrongCat:{p:null,c:19}, retail:{p:null,c:15}, wrongLoc:{p:null,c:11}, irrelNo:{p:null,c:20},
+      veryLess:{p:null,c:16}, expire:{p:null,c:8},  blsNo:{p:null,c:7},
+      unresp:{p:null,c:4},    denies:{p:null,c:5},  fulfilled:{p:null,c:2}, iwbNo:{p:null,c:8},
+    }},
+    app: { pN:null, cN:964, rows:{
+      retail:{p:null,c:76},   wrongCat:{p:null,c:59}, wrongLoc:{p:null,c:31}, irrelNo:{p:null,c:172},
+      veryLess:{p:null,c:61}, expire:{p:null,c:34},   blsNo:{p:null,c:107},
+      unresp:{p:null,c:31},   denies:{p:null,c:25},   fulfilled:{p:null,c:13}, iwbNo:{p:null,c:32},
+    }},
+  },
+});
+
+// ── Feb '26 config ─────────────────────────────────────────────────
+_reg("Feb '26", {
+  nps: { val:25.4, n:2138, mom:+0.8, best:true,
+    sv:[15.73,21.97,23.56,24.6,25.4], sm:["Apr'25","Jul'25","Oct'25","Jan'26","Feb'26"],
+    sn:[14795,14553,12642,12808,2138] },
+  app: { val:3.41, n:5441, mom:0.00, best:false,
+    sv:_APP_FULL.vals, sm:_APP_FULL.mos, sn:_APP_FULL.ns },
+  qrf: { val:4.94, n:491393, mom:-0.09, best:true,
+    sv:_QRF_FULL.vals, sm:_QRF_FULL.mos, sn:_QRF_FULL.ns },
+  bl:  { val:4.41, n:471539, mom:-0.11, best:false,
+    sv:_BL_FULL.vals, sm:_BL_FULL.mos, sn:_BL_FULL.ns },
+  star:   { val:33.6, mom:+5.8, best:true,  sv:[22.1,27.3,30.8,27.8,33.6], sm:['Apr','Jul','Oct','Jan','Feb'] },
+  leader: { val:30.5, mom:+5.9, best:true,  sv:[22.9,29.8,28.3,24.6,30.5], sm:['Apr','Jul','Oct','Jan','Feb'] },
+  ts:     { val:27.1, mom:-3.1, best:false, sv:[21.8,28.1,27.8,30.2,27.1], sm:['Apr','Jul','Oct','Jan','Feb'] },
+  cat:    { val:14.8, mom:+2.3, best:true,  sv:[11.8,11.7,13.4,12.5,14.8], sm:['Apr','Jul','Oct','Jan','Feb'] },
+  est:    { val:30.7, mom:+4.8, best:false, sv:[16.6,23.2,24.4,25.9,30.7], sm:['Apr','Jul','Oct','Jan','Feb'] },
+  newS:   { val:17.45,mom:+9.7, best:false, sv:[4.9,7.4,12.0,7.75,17.45],  sm:['Apr','Jul','Oct','Jan','Feb'] },
+  p4: { irrel:{nps:34,app:32,bl:34,qrf:19}, conv:{nps:23,app:25}, bls:{nps:21,app:20}, spec:{bl:22,qrf:18} },
+  npsBars: [
+    { l:"Jan '26", n:211, s:[65,43,32,19,52]    },
+    { l:"Feb '26", n:635, s:[214,146,129,72,74] },
+  ],
+  appBars: _APP_BARS_FULL,
+  hmap: {
+    prevLbl:"Jan '26", curLbl:"Feb '26", fut1:"Mar '26", fut2:"Apr '26",
+    nps: { pN:211, cN:635, rows:{
+      wrongCat:{p:19,c:35}, retail:{p:15,c:38},   wrongLoc:{p:11,c:18}, irrelNo:{p:20,c:113},
+      veryLess:{p:16,c:41}, expire:{p:8,c:21},    blsNo:{p:7,c:67},
+      unresp:{p:4,c:24},    denies:{p:5,c:19},    fulfilled:{p:2,c:16}, iwbNo:{p:8,c:13},
+    }},
+    app: { pN:964, cN:1401, rows:{
+      retail:{p:76,c:66},   wrongCat:{p:59,c:77}, wrongLoc:{p:31,c:43}, irrelNo:{p:172,c:259},
+      veryLess:{p:61,c:76}, expire:{p:34,c:50},   blsNo:{p:107,c:158},
+      unresp:{p:31,c:39},   denies:{p:25,c:29},   fulfilled:{p:13,c:18}, iwbNo:{p:32,c:63},
+    }},
+  },
+});
+
+// ── Currently selected month ────────────────────────────────────────
+let _CUR_MO = "Feb '26";
+
+// ── All months in calendar year order (2026) ───────────────────────
+const _ALL_MONTHS = [
+  "Jan '26","Feb '26","Mar '26","Apr '26","May '26","Jun '26",
+  "Jul '26","Aug '26","Sep '26","Oct '26","Nov '26","Dec '26"
+];
+
+// ── Build / rebuild month dropdown ──────────────────────────────────
+function _buildPills() {
+  const list = document.getElementById('month-dd-list');
+  if (!list) return;
+  list.innerHTML = '';
+  _ALL_MONTHS.forEach(key => {
+    const avail = !!MONTH_CFG[key];
+    const isActive = key === _CUR_MO;
+    const btn = document.createElement('button');
+    btn.className = 'mdd-item ' + (isActive ? 'mdd-active' : avail ? 'mdd-available' : 'mdd-inactive');
+    btn.disabled = !avail;
+    btn.innerHTML = '<span>' + key + '</span><span class="mdd-dot"></span>';
+    if (avail) btn.onclick = () => { switchMonth(key); closeMonthDD(); };
+    list.appendChild(btn);
+  });
+}
+
+// ── Dropdown open/close ──────────────────────────────────────────────
+function toggleMonthDD(e) {
+  e.stopPropagation();
+  const panel = document.getElementById('month-dd-panel');
+  const caret = document.getElementById('month-dd-caret');
+  const open  = panel.style.display === 'block';
+  panel.style.display = open ? 'none' : 'block';
+  if (caret) caret.style.transform = open ? '' : 'rotate(180deg)';
+}
+function closeMonthDD() {
+  const panel = document.getElementById('month-dd-panel');
+  const caret = document.getElementById('month-dd-caret');
+  if (panel) panel.style.display = 'none';
+  if (caret) caret.style.transform = '';
+}
+document.addEventListener('click', function(e) {
+  const sel = document.getElementById('month-selector');
+  if (sel && !sel.contains(e.target)) closeMonthDD();
+});
+
+// ── Main month switch ───────────────────────────────────────────────
+function switchMonth(key) {
+  const d = MONTH_CFG[key];
+  if (!d) return;
+  _CUR_MO = key;
+
+  // Update dropdown label + item states
+  const lbl = document.getElementById('month-dd-label');
+  if (lbl) lbl.textContent = key;
+  document.querySelectorAll('.mdd-item').forEach(btn => {
+    const k = btn.querySelector('span') ? btn.querySelector('span').textContent : '';
+    btn.className = 'mdd-item ' + (k === key ? 'mdd-active' : MONTH_CFG[k] ? 'mdd-available' : 'mdd-inactive');
+  });
+
+  const dsl = window._drawSparkLine || function(){};
+  const _txt = (id, v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
+  const _sign = v => (v > 0 ? '+' : '') + v;
+
+  // ── 1. Section headings ───────────────────────────────────────
+  const moLong = key === "Jan '26" ? 'January 2026' : key === "Feb '26" ? 'February 2026' : key;
+  _txt('sh-glance',    'At a glance — ' + moLong);
+  _txt('sh-problems',  "Seller problems — " + key);
+  _txt('sh-voice',     "Seller voice — " + key);
+  const nBars = d.npsBars.length;
+  const nBarTxt = nBars > 1
+    ? 'NPS complaint breakdown — ' + d.npsBars[0].l + ' vs ' + d.npsBars[nBars-1].l
+    : 'NPS complaint breakdown — ' + d.npsBars[0].l;
+  _txt('sh-nps-complaints', nBarTxt);
+  _txt('sh-app-complaints', "App complaint breakdown — Apr '25 – " + key);
+
+  // ── 2. Overview spark cards ───────────────────────────────────
+  // NPS
+  dsl('spk-nps', { vals:d.nps.sv, months:d.nps.sm, ns:d.nps.sn,
+    color:'#059669', fmt:v=>v.toFixed(1), allLabels:true });
+  _updCard('spk-nps', d.nps.val.toFixed(1),
+    _sign(+d.nps.mom.toFixed(1)) + ' MoM', d.nps.mom >= 0,
+    d.nps.n.toLocaleString() + ' responses', d.nps.best);
+
+  // App
+  dsl('spk-app', { vals:d.app.sv, months:d.app.sm, ns:d.app.sn,
+    color:'#D97706', fmt:v=>v.toFixed(2), unit:'★', allLabels:true });
+  const appMomTxt = Math.abs(d.app.mom) < 0.005
+    ? '→ Flat MoM'
+    : _sign(+d.app.mom.toFixed(2)) + '★ MoM';
+  _updCard('spk-app', d.app.val.toFixed(2) + '★',
+    appMomTxt, d.app.mom >= -0.01,
+    d.app.n.toLocaleString() + ' ratings', d.app.best);
+
+  // QRF (lower = better)
+  dsl('spk-qrf', { vals:d.qrf.sv, months:d.qrf.sm, ns:d.qrf.sn,
+    color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true });
+  _updCard('spk-qrf', d.qrf.val.toFixed(2) + '%',
+    _sign(+d.qrf.mom.toFixed(2)) + '% MoM', d.qrf.mom <= 0,
+    d.qrf.n.toLocaleString() + ' actions', d.qrf.best);
+
+  // BL (lower = better)
+  dsl('spk-bl', { vals:d.bl.sv, months:d.bl.sm, ns:d.bl.sn,
+    color:'#059669', fmt:v=>v.toFixed(2), unit:'%', allLabels:true });
+  _updCard('spk-bl', d.bl.val.toFixed(2) + '%',
+    _sign(+d.bl.mom.toFixed(2)) + '% MoM', d.bl.mom <= 0,
+    d.bl.n.toLocaleString() + ' NIs', d.bl.best);
+
+  // ── 3. Tab2: seller-type sparks ───────────────────────────────
+  const _stCard = (svgId, seg) => {
+    const col = seg.val > 20 ? '#059669' : seg.val > 0 ? '#D97706' : '#DC2626';
+    dsl(svgId, { vals:seg.sv, months:seg.sm, color:col, fmt:v=>v.toFixed(1), allLabels:true });
+    const svg = document.getElementById(svgId); if(!svg) return;
+    const card = svg.closest('.spk-card'); if(!card) return;
+    const q = s => card.querySelector(s);
+    if(q('.spk-val')) q('.spk-val').textContent = seg.val.toFixed(1);
+    if(q('.spk-mom')) {
+      q('.spk-mom').textContent = _sign(+seg.mom.toFixed(1)) + ' MoM';
+      q('.spk-mom').className = 'spk-mom ' + (seg.mom >= 0 ? 'c-green' : 'c-red');
+    }
+    const be = card.querySelector('.best-ever-badge');
+    if(be) be.style.display = seg.best ? '' : 'none';
+  };
+  _stCard('spk-ct-star',   d.star);
+  _stCard('spk-ct-leader', d.leader);
+  _stCard('spk-ct-ts',     d.ts);
+  _stCard('spk-ct-cat',    d.cat);
+  _stCard('spk-vint-est',  d.est);
+  _stCard('spk-vint-new',  d.newS);
+
+  // ── 4. P4 problem %s ──────────────────────────────────────────
+  const _p4 = (id, v) => _txt(id, v != null ? v + '%' : '—');
+  _p4('p4-irrel-nps', d.p4.irrel.nps);
+  _p4('p4-irrel-app', d.p4.irrel.app);
+  _p4('p4-irrel-bl',  d.p4.irrel.bl);
+  _p4('p4-irrel-qrf', d.p4.irrel.qrf);
+  _p4('p4-conv-nps',  d.p4.conv.nps);
+  _p4('p4-conv-app',  d.p4.conv.app);
+  _p4('p4-bls-nps',   d.p4.bls.nps);
+  _p4('p4-bls-app',   d.p4.bls.app);
+  _p4('p4-spec-bl',   d.p4.spec.bl);
+  _p4('p4-spec-qrf',  d.p4.spec.qrf);
+
+  // ── 5. NPS complaint bars ─────────────────────────────────────
+  _renderNpsBars(d.npsBars);
+
+  // ── 6. App complaint bars ─────────────────────────────────────
+  _renderAppBars(d.appBars);
+
+  // ── 7. Heatmaps ───────────────────────────────────────────────
+  _renderHmaps(d.hmap);
+
+}
+
+// ── Update overview spark card text ────────────────────────────────
+function _updCard(svgId, valTxt, momTxt, momGood, volTxt, isBest) {
+  const svg = document.getElementById(svgId); if(!svg) return;
+  const card = svg.closest('.spk-card'); if(!card) return;
+  const q = s => card.querySelector(s);
+  if(q('.spk-val'))   q('.spk-val').textContent  = valTxt;
+  if(q('.spk-mom'))  { q('.spk-mom').textContent = momTxt;
+                       q('.spk-mom').className = 'spk-mom ' + (momGood ? 'c-green' : 'c-red'); }
+  if(q('.spk-vol-n')) q('.spk-vol-n').textContent = volTxt;
+  const be = q('.best-ever-badge');
+  if(be) be.style.display = isBest ? '' : 'none';
+}
+
+// ── Render NPS complaint bars ───────────────────────────────────────
+function _renderNpsBars(bars) {
+  const tab3 = document.getElementById('tab3'); if(!tab3) return;
+  const barsEl = tab3.querySelector('.vcb-bars'); if(!barsEl) return;
+  const grps = barsEl.querySelectorAll('.vcb-bar-group');
+  const SEG_COLORS = ['#EF4444','#3B82F6','#8B5CF6','#F59E0B','#D1D5DB'];
+
+  grps.forEach((g, i) => { g.style.display = i < bars.length ? '' : 'none'; });
+
+  bars.forEach((bar, bi) => {
+    const grp = grps[bi]; if(!grp) return;
+    grp.style.display = '';
+    const barEl = grp.querySelector('.vcb-bar'); if(!barEl) return;
+    const segs = barEl.querySelectorAll('.vcb-seg');
+    const tot = bar.s.reduce((a,b)=>a+b,0) || 1;
+    segs.forEach((seg, si) => {
+      const v = bar.s[si] || 0;
+      const pct = +(v/tot*100).toFixed(1);
+      seg.style.height = pct + '%';
+      seg.style.background = SEG_COLORS[si];
+      seg.setAttribute('data-tip', 'n='+v+' ('+pct+'%)');
+      const lbl = seg.querySelector('.vcb-lbl');
+      if(lbl) lbl.textContent = pct + '%';
+    });
+    // Update label + n
+    const lblEl = grp.querySelector('.vcb-bar-label');
+    if(lblEl) {
+      // First text node holds the label
+      for(let nd of lblEl.childNodes) {
+        if(nd.nodeType === 3) { nd.nodeValue = bar.l; break; }
+      }
+      const nEl = lblEl.querySelector('.vcb-bar-n');
+      if(nEl) nEl.textContent = 'n=' + bar.n.toLocaleString();
+    }
+  });
+}
+
+// ── Render App complaint bars ───────────────────────────────────────
+function _renderAppBars(bars) {
+  const tab5 = document.getElementById('tab5'); if(!tab5) return;
+  const barsEl = tab5.querySelector('.vcb-bars-11'); if(!barsEl) return;
+  const grps = barsEl.querySelectorAll('[class*="vcb-bar-group"]');
+  const SEG_COLORS = ['#EF4444','#3B82F6','#8B5CF6','#F59E0B','#D1D5DB'];
+
+  grps.forEach((g, i) => { g.style.display = i < bars.length ? '' : 'none'; });
+
+  bars.forEach((bar, bi) => {
+    const grp = grps[bi]; if(!grp) return;
+    grp.style.display = '';
+    const barEl = grp.querySelector('.vcb-bar'); if(!barEl) return;
+    const segs = barEl.querySelectorAll('.vcb-seg');
+    const tot = bar.n || 1;
+    segs.forEach((seg, si) => {
+      const v = bar.s[si] || 0;
+      const pct = +(v/tot*100).toFixed(1);
+      seg.style.height = pct + '%';
+      seg.style.background = SEG_COLORS[si];
+      seg.setAttribute('data-tip', 'n='+v);
+      const lbl = seg.querySelector('.vcb-lbl, .vcb-lbl-sm');
+      if(lbl) lbl.textContent = pct + '%';
+    });
+    const lblEl = grp.querySelector('.vcb-bar-label');
+    if(lblEl) {
+      for(let nd of lblEl.childNodes) {
+        // handle <strong>Feb</strong> pattern
+        if(nd.nodeType === 3 && nd.nodeValue.trim()) { nd.nodeValue = bar.l; break; }
+        if(nd.nodeName === 'STRONG') { nd.textContent = bar.l; break; }
+      }
+      const nEl = lblEl.querySelector('.vcb-bar-n');
+      if(nEl) nEl.textContent = bar.n.toLocaleString();
+    }
+  });
+}
+
+// ── Render heatmaps ─────────────────────────────────────────────────
+function _renderHmaps(hmap) {
+  const _th = (id, txt, future) => {
+    const el = document.getElementById(id); if(!el) return;
+    el.textContent = txt || '';
+    el.classList.toggle('hmap-th-future', !!future);
+  };
+  // Column headers
+  _th('nps-hmap-th-prev', hmap.prevLbl || '—');
+  _th('nps-hmap-th-cur',  hmap.curLbl);
+  _th('nps-hmap-th-fut1', hmap.fut1, true);
+  _th('nps-hmap-th-fut2', hmap.fut2, true);
+  _th('app-hmap-th-prev', hmap.prevLbl || '—');
+  _th('app-hmap-th-cur',  hmap.curLbl);
+  _th('app-hmap-th-fut1', hmap.fut1, true);
+  _th('app-hmap-th-fut2', hmap.fut2, true);
+
+  // Row-key → substring that identifies a hmap-sub-name cell
+  // We use group context to disambiguate 3 "No Option Selected" rows
+  const ROW_SUBS = {
+    wrongCat:'wrong cat', retail:'retail',     wrongLoc:'wrong loc',
+    irrelNo:'no option',  veryLess:'very less', expire:'leads expire',
+    blsNo:'no option',    unresp:'unrespons',   denies:'denies',
+    fulfilled:'already',  iwbNo:'no option',
+  };
+  // Which group does each "No Option" row belong to?
+  const NO_OPT_GROUP = { irrelNo:'irrelevant', blsNo:'less bl', iwbNo:'buyer' };
+
+  [
+    { tabId:'tab3', hmapCfg:hmap.nps },
+    { tabId:'tab5', hmapCfg:hmap.app },
+  ].forEach(({ tabId, hmapCfg }) => {
+    const tab = document.getElementById(tabId); if(!tab) return;
+    const tbl = tab.querySelector('.hmap-table'); if(!tbl) return;
+    const pN = hmapCfg.pN, cN = hmapCfg.cN;
+
+    let curGroup = '';
+    tbl.querySelectorAll('tr').forEach(tr => {
+      const gh = tr.querySelector('.hmap-group-hdr');
+      if(gh) { curGroup = gh.textContent.toLowerCase(); return; }
+      const sn = tr.querySelector('.hmap-sub-name'); if(!sn) return;
+      const snTxt = sn.textContent.toLowerCase();
+
+      // Find matching row key
+      let rowKey = null;
+      for(const [k, match] of Object.entries(ROW_SUBS)) {
+        if(!snTxt.includes(match)) continue;
+        if(match === 'no option') {
+          const expG = NO_OPT_GROUP[k];
+          if(expG && !curGroup.includes(expG)) continue;
+        }
+        rowKey = k; break;
+      }
+      if(!rowKey) return;
+      const row = hmapCfg.rows[rowKey]; if(!row) return;
+
+      // Get the two active (non-future) cells
+      const cells = Array.from(tr.querySelectorAll('.hmap-cell:not(.hmap-future)'));
+      if(cells.length < 2) return;
+      _setHCell(cells[0], row.p, pN);
+      _setHCell(cells[1], row.c, cN);
+
+      // MoM delta
+      const dEl = tr.querySelector('.hmap-delta');
+      if(dEl) {
+        if(row.p != null && row.c != null && pN && cN) {
+          const pp = +(row.p/pN*100).toFixed(1);
+          const cp = +(row.c/cN*100).toFixed(1);
+          const diff = +(cp - pp).toFixed(1);
+          dEl.textContent = (diff>0?'+':'') + diff + 'pp ' + (diff>0?'↑':'↓');
+          dEl.className = 'hmap-delta ' + (diff>0?'hmap-delta-up':'hmap-delta-dn');
+        } else {
+          dEl.textContent = '—';
+          dEl.className = 'hmap-delta';
+        }
+      }
+    });
+  });
+}
+
+function _setHCell(cell, count, totalN) {
+  if(!cell) return;
+  const isNull = count == null || !totalN;
+  const pct = isNull ? null : +(count/totalN*100).toFixed(1);
+  const txt = isNull ? '—' : pct.toFixed(1) + '%';
+  // Update first text node
+  let set = false;
+  cell.childNodes.forEach(nd => {
+    if(!set && nd.nodeType === 3) { nd.nodeValue = txt; set = true; }
+  });
+  if(!set) cell.insertBefore(document.createTextNode(txt), cell.firstChild);
+  const nEl = cell.querySelector('.hmap-n');
+  if(nEl) nEl.textContent = pct != null ? 'n='+count : '';
+  if(pct != null) cell.style.setProperty('--v', pct.toFixed(1));
+  cell.classList.toggle('hmap-hot', pct != null && pct > 20);
+}
+
+// ── Rule-based summary generator ───────────────────────────────────
+function _renderSummaries(d, key) {
+  const fS = v => (v > 0 ? '+' : '') + v;
+  const fN = n => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? Math.round(n/1e3)+'K' : n;
+  const hi = (cls, txt) => `<span style="font-weight:700;color:var(--${cls})">${txt}</span>`;
+
+  // ── Tab 1: Executive overview ──────────────────────────────────
+  let t1Lines = [];
+
+  // NPS
+  if(d.nps.best) {
+    t1Lines.push('NPS ' + hi('green', d.nps.val.toFixed(1) + ' — ★ best ever recorded') +
+      ' · n=' + fN(d.nps.n) + ' responses');
+  } else {
+    const c = d.nps.mom >= 0 ? 'green' : 'red';
+    t1Lines.push('NPS ' + hi(c, d.nps.val.toFixed(1) + ' (' + fS(+d.nps.mom.toFixed(1)) + 'pp MoM)') +
+      ' · n=' + fN(d.nps.n));
+  }
+
+  // App
+  const appFlat = Math.abs(d.app.mom) < 0.005;
+  const appC = appFlat ? 'muted' : d.app.mom > 0 ? 'green' : 'red';
+  const appTxt = appFlat ? 'flat MoM' : fS(+d.app.mom.toFixed(2)) + '★ MoM';
+  t1Lines.push('App rating ' + hi(appC, d.app.val.toFixed(2) + '★ — ' + appTxt) +
+    ' · n=' + fN(d.app.n));
+
+  // QRF
+  const qBestBadge = d.qrf.best ? ' · ★ best ever' : '';
+  t1Lines.push('QRF irrelevancy ' + hi('green', d.qrf.val.toFixed(2) + '% (' + fS(+d.qrf.mom.toFixed(2)) + '% MoM)') + qBestBadge);
+
+  // BL
+  const bBestBadge = d.bl.best ? ' · ★ best ever' : '';
+  t1Lines.push('BLNI/Txn ' + hi('green', d.bl.val.toFixed(2) + '% (' + fS(+d.bl.mom.toFixed(2)) + '% MoM)') + bBestBadge);
+
+  // Top problem
+  t1Lines.push('🔴 Irrelevant Leads: top pain point — ' +
+    hi('red', d.p4.irrel.nps + '% NPS · ' + d.p4.irrel.app + '% App'));
+
+  _setSummary('ts-tab1', '📊', 'At a glance — ' + key, t1Lines);
+
+  // ── Tab 2: NPS deep dive ───────────────────────────────────────
+  const types = [
+    {name:'STAR',      seg:d.star},
+    {name:'LEADER',    seg:d.leader},
+    {name:'TSCatalog', seg:d.ts},
+    {name:'Catalog',   seg:d.cat},
+  ];
+  const bests    = types.filter(t => t.seg.best).map(t => t.name + ' (' + t.seg.val.toFixed(1) + ')');
+  const declining= types.filter(t => t.seg.mom < 0).map(t => t.name + ' ' + fS(+t.seg.mom.toFixed(1)) + 'pp');
+  const gainers  = types.filter(t => t.seg.mom > 0).sort((a,b)=>b.seg.mom-a.seg.mom)
+                        .map(t => t.name + ' ' + fS(+t.seg.mom.toFixed(1)) + 'pp');
+
+  let t2Lines = [];
+  if(bests.length)     t2Lines.push(hi('green', '★ Best-ever NPS: ') + bests.join(', '));
+  if(gainers.length)   t2Lines.push('Gainers: ' + hi('green', gainers.slice(0,3).join(', ')));
+  if(declining.length) t2Lines.push('⚠ Watch — declining: ' + hi('amber', declining.join(', ')));
+  else                 t2Lines.push(hi('green', 'All seller types trending up this month'));
+  t2Lines.push('New sellers: ' + hi(d.newS.mom > 3 ? 'green' : d.newS.mom < -3 ? 'red' : 'ink2',
+    d.newS.val.toFixed(1) + ' (' + fS(+d.newS.mom.toFixed(1)) + 'pp MoM)') +
+    ' · Established: ' + d.est.val.toFixed(1) + ' (' + fS(+d.est.mom.toFixed(1)) + 'pp)');
+
+  _setSummary('ts-tab2', '📈', 'NPS deep dive — ' + key, t2Lines);
+
+  // ── Tab 3: NPS complaints ──────────────────────────────────────
+  const curBar = d.npsBars[d.npsBars.length - 1];
+  const prevBar = d.npsBars.length > 1 ? d.npsBars[d.npsBars.length - 2] : null;
+  const CAT_NAMES = ['Irrelevant Leads','Low Conversion','Less BLs / Enquiries','Issues w/ Buyer','Others'];
+  const curPcts = curBar.s.map(v => +(v/curBar.n*100).toFixed(1));
+  const ranked  = curPcts.map((p,i) => ({name:CAT_NAMES[i], pct:p})).sort((a,b)=>b.pct-a.pct);
+
+  let t3Lines = [];
+  t3Lines.push(curBar.l + ' · n=' + curBar.n.toLocaleString() + ' respondents');
+  t3Lines.push('Top: ' + hi('red', ranked[0].name + ' ' + ranked[0].pct + '%') +
+    ' · ' + ranked[1].name + ' ' + ranked[1].pct + '% · ' + ranked[2].name + ' ' + ranked[2].pct + '%');
+  if(prevBar) {
+    const prevPcts = prevBar.s.map(v => +(v/prevBar.n*100).toFixed(1));
+    const dI = +(curPcts[0] - prevPcts[0]).toFixed(1);
+    const dC = +(curPcts[1] - prevPcts[1]).toFixed(1);
+    t3Lines.push('Irrelevant Leads MoM: ' + hi(dI > 1 ? 'red' : dI < -1 ? 'green' : 'ink2',
+      fS(dI) + 'pp') + ' · Low Conversion: ' + hi(dC > 1 ? 'red' : dC < -1 ? 'green' : 'ink2', fS(dC) + 'pp'));
+  }
+  _setSummary('ts-tab3', '🔍', 'NPS complaint signals — ' + key, t3Lines);
+
+  // ── Tab 5: App complaints ──────────────────────────────────────
+  const curApp  = d.appBars[d.appBars.length - 1];
+  const prevApp = d.appBars.length > 1 ? d.appBars[d.appBars.length - 2] : null;
+  const curAppP = curApp.s.map(v => +(v/curApp.n*100).toFixed(1));
+  const rankApp = curAppP.map((p,i) => ({name:CAT_NAMES[i],pct:p})).sort((a,b)=>b.pct-a.pct);
+
+  let t5Lines = [];
+  t5Lines.push(curApp.l + ' · n=' + curApp.n.toLocaleString() + ' App complaint reviews');
+  t5Lines.push('Top: ' + hi('red', rankApp[0].name + ' ' + rankApp[0].pct + '%') +
+    ' · ' + rankApp[1].name + ' ' + rankApp[1].pct + '% · ' + rankApp[2].name + ' ' + rankApp[2].pct + '%');
+  if(prevApp) {
+    const prevAppP = prevApp.s.map(v => +(v/prevApp.n*100).toFixed(1));
+    const dI2 = +(curAppP[0] - prevAppP[0]).toFixed(1);
+    t5Lines.push('Irrelevant Leads MoM: ' + hi(dI2 > 1 ? 'red' : dI2 < -1 ? 'green' : 'ink2',
+      fS(dI2) + 'pp vs ' + prevApp.l));
+  }
+  _setSummary('ts-tab5', '📱', 'App complaint signals — ' + key, t5Lines);
+}
+
+function _setSummary(id, icon, title, lines) {
+  const el = document.getElementById(id); if(!el) return;
+  el.querySelector('.ts-hdr').textContent = icon + ' ' + title;
+  const ul = el.querySelector('ul'); if(!ul) return;
+  ul.innerHTML = lines.map(l => '<li>' + l + '</li>').join('');
+}
+
+// ── Hook into applyDashboardData to register uploaded month ─────────
+(function() {
+  const _orig = window.applyDashboardData;
+  if(typeof _orig !== 'function') return;
+  window.applyDashboardData = function(nps, app, qrf, bl) {
+    _orig(nps, app, qrf, bl);
+    _registerUploadedMonth(nps, app, qrf, bl);
+  };
+})();
+
+function _registerUploadedMonth(nps, app, qrf, bl) {
+  if(!nps||!nps.months||!nps.months.length) return;
+  // Determine month label from last entry
+  const lastMo = nps.months[nps.months.length - 1];
+  const lastYr  = "'26";
+  const newKey  = lastMo + ' ' + lastYr;
+  if(MONTH_CFG[newKey]) { _buildPills(); switchMonth(newKey); return; }
+
+  const N = nps.npsVals.length;
+  const AN = app.ratings ? app.ratings.length : 0;
+  const QN = qrf.irrelPct ? qrf.irrelPct.length : 0;
+  const BN = bl.blniPct ? bl.blniPct.length : 0;
+
+  // Complaint totals
+  const cN  = nps.totalComplaints ? (nps.totalComplaints.feb || nps.totalComplaints.jan || 0) : 0;
+  const pN  = nps.totalComplaints ? (nps.totalComplaints.jan || 0) : 0;
+  const aN  = app.totalComplaints ? (typeof app.totalComplaints.full==='object' ? (app.totalComplaints.full[app.totalComplaints.full.length-1]||0) : 0) : 0;
+
+  function _last(series) { return series && series.length ? series[series.length-1] : 0; }
+  function _prev(series) { return series && series.length > 1 ? series[series.length-2] : _last(series); }
+  function _pick(obj, field) { return obj && obj[field] != null ? obj[field] : null; }
+
+  // Rebuild appBars from full series
+  const prevCfg = Object.values(MONTH_CFG).slice(-1)[0];
+  const appBarsNew = (app.totalComplaints && app.totalComplaints.full)
+    ? app.totalComplaints.full.map((n, i) => ({
+        l: (app.months||[])[i] || '',
+        n,
+        s: [
+          (app.irrel&&app.irrel.full||[])[i]||0,
+          (app.lowConv&&app.lowConv.full||[])[i]||0,
+          (app.lessBL&&app.lessBL.full||[])[i]||0,
+          (app.iwb&&app.iwb.full||[])[i]||0,
+          (app.others&&app.others.full||[])[i]||0,
+        ],
+      }))
+    : (prevCfg ? prevCfg.appBars : []);
+
+  // Build NPS complaint bars
+  const prevNpsBars = prevCfg ? prevCfg.npsBars.slice(-1) : [];
+  const curNpsSegs = [
+    _pick(nps.irrel,'feb')||_pick(nps.irrel,'jan')||0,
+    _pick(nps.lowConv,'feb')||_pick(nps.lowConv,'jan')||0,
+    _pick(nps.lessBL,'feb')||_pick(nps.lessBL,'jan')||0,
+    _pick(nps.iwb,'feb')||_pick(nps.iwb,'jan')||0,
+    _pick(nps.others,'feb')||_pick(nps.others,'jan')||0,
+  ];
+  const npsBarsNew = cN > 0
+    ? [...prevNpsBars, { l: newKey, n: cN, s: curNpsSegs }]
+    : prevNpsBars;
+
+  // Helper: get typeData last val
+  function _tval(t) { return t&&t.vals ? _last(t.vals) : 0; }
+  function _tmom(t) { return t&&t.vals&&t.vals.length>1 ? +(_last(t.vals)-_prev(t.vals)).toFixed(1) : 0; }
+  function _tbest(t) { return t&&t.vals ? _tval(t) >= Math.max(...t.vals.filter(Boolean)) : false; }
+  function _tsv(t)   { return t&&t.vals ? t.vals : []; }
+  function _tsm(t)   { return t ? nps.months : []; }
+
+  _reg(newKey, {
+    nps: { val:_last(nps.npsVals), n:_last(nps.totalN),
+           mom:+(_last(nps.npsVals)-_prev(nps.npsVals)).toFixed(1),
+           best:_last(nps.npsVals)>=Math.max(...nps.npsVals.filter(Boolean)),
+           sv:nps.npsVals, sm:nps.months, sn:nps.totalN },
+    app: { val:_last(app.ratings), n:_last(app.totalN),
+           mom:+(_last(app.ratings)-_prev(app.ratings)).toFixed(2),
+           best:_last(app.ratings)>=Math.max(...app.ratings.filter(Boolean)),
+           sv:app.ratings, sm:app.months||[], sn:app.totalN },
+    qrf: { val:_last(qrf.irrelPct), n:_last(qrf.totalN),
+           mom:+(_last(qrf.irrelPct)-_prev(qrf.irrelPct)).toFixed(2),
+           best:_last(qrf.irrelPct)<=Math.min(...qrf.irrelPct.filter(Boolean)),
+           sv:qrf.irrelPct, sm:qrf.months||[], sn:qrf.totalN },
+    bl:  { val:_last(bl.blniPct), n:_last(bl.totalN),
+           mom:+(_last(bl.blniPct)-_prev(bl.blniPct)).toFixed(2),
+           best:_last(bl.blniPct)<=Math.min(...bl.blniPct.filter(Boolean)),
+           sv:bl.blniPct, sm:bl.months||[], sn:bl.totalN },
+    star:   { val:_tval(nps.star),    mom:_tmom(nps.star),    best:_tbest(nps.star),    sv:_tsv(nps.star),    sm:_tsm(nps.star)   },
+    leader: { val:_tval(nps.leader),  mom:_tmom(nps.leader),  best:_tbest(nps.leader),  sv:_tsv(nps.leader),  sm:_tsm(nps.leader) },
+    ts:     { val:_tval(nps.tsCat),   mom:_tmom(nps.tsCat),   best:_tbest(nps.tsCat),   sv:_tsv(nps.tsCat),   sm:_tsm(nps.tsCat)  },
+    cat:    { val:_tval(nps.catalog), mom:_tmom(nps.catalog), best:_tbest(nps.catalog), sv:_tsv(nps.catalog), sm:_tsm(nps.catalog)},
+    est:    { val:_tval(nps.quarterly),mom:_tmom(nps.quarterly),best:_tbest(nps.quarterly),sv:_tsv(nps.quarterly),sm:_tsm(nps.quarterly)},
+    newS:   { val:_tval(nps.day30),   mom:_tmom(nps.day30),   best:_tbest(nps.day30),   sv:_tsv(nps.day30),   sm:_tsm(nps.day30)  },
+    p4: {
+      irrel: { nps: cN ? Math.round((_pick(nps.irrel,'feb')||_pick(nps.irrel,'jan')||0)/cN*100) : null,
+               app: aN ? Math.round((app.irrel&&app.irrel.full?_last(app.irrel.full):0)/aN*100) : null,
+               bl:34, qrf:19 },
+      conv:  { nps: cN ? Math.round((_pick(nps.lowConv,'feb')||_pick(nps.lowConv,'jan')||0)/cN*100) : null,
+               app: aN ? Math.round((app.lowConv&&app.lowConv.full?_last(app.lowConv.full):0)/aN*100) : null },
+      bls:   { nps: cN ? Math.round((_pick(nps.lessBL,'feb')||_pick(nps.lessBL,'jan')||0)/cN*100) : null,
+               app: aN ? Math.round((app.lessBL&&app.lessBL.full?_last(app.lessBL.full):0)/aN*100) : null },
+      spec:  { bl:22, qrf:18 },
+    },
+    npsBars: npsBarsNew,
+    appBars: appBarsNew,
+    hmap: {
+      prevLbl: prevCfg ? prevCfg.hmap.curLbl : null,
+      curLbl: newKey,
+      fut1: "Apr '26", fut2: "May '26",
+      nps: { pN: pN||null, cN: cN||null, rows: {
+        wrongCat:{p:_pick(nps.irrelSubs&&nps.irrelSubs.wrongCat,'jan'),  c:_pick(nps.irrelSubs&&nps.irrelSubs.wrongCat,'feb')},
+        retail:  {p:_pick(nps.irrelSubs&&nps.irrelSubs.retail,'jan'),   c:_pick(nps.irrelSubs&&nps.irrelSubs.retail,'feb')},
+        wrongLoc:{p:_pick(nps.irrelSubs&&nps.irrelSubs.wrongLoc,'jan'), c:_pick(nps.irrelSubs&&nps.irrelSubs.wrongLoc,'feb')},
+        irrelNo: {p:_pick(nps.irrelSubs&&nps.irrelSubs.noOpt,'jan'),    c:_pick(nps.irrelSubs&&nps.irrelSubs.noOpt,'feb')},
+        veryLess:{p:_pick(nps.lessBLSubs&&nps.lessBLSubs.veryLess,'jan'),c:_pick(nps.lessBLSubs&&nps.lessBLSubs.veryLess,'feb')},
+        expire:  {p:_pick(nps.lessBLSubs&&nps.lessBLSubs.expire,'jan'), c:_pick(nps.lessBLSubs&&nps.lessBLSubs.expire,'feb')},
+        blsNo:   {p:_pick(nps.lessBLSubs&&nps.lessBLSubs.noOpt,'jan'),  c:_pick(nps.lessBLSubs&&nps.lessBLSubs.noOpt,'feb')},
+        unresp:  {p:_pick(nps.iwbSubs&&nps.iwbSubs.unresp,'jan'),       c:_pick(nps.iwbSubs&&nps.iwbSubs.unresp,'feb')},
+        denies:  {p:_pick(nps.iwbSubs&&nps.iwbSubs.denies,'jan'),       c:_pick(nps.iwbSubs&&nps.iwbSubs.denies,'feb')},
+        fulfilled:{p:_pick(nps.iwbSubs&&nps.iwbSubs.fulfilled,'jan'),   c:_pick(nps.iwbSubs&&nps.iwbSubs.fulfilled,'feb')},
+        iwbNo:   {p:_pick(nps.iwbSubs&&nps.iwbSubs.noOpt,'jan'),        c:_pick(nps.iwbSubs&&nps.iwbSubs.noOpt,'feb')},
+      }},
+      app: { pN: null, cN: aN||null, rows: {
+        retail:  {p:null,c:_pick(app.irrelSubs&&app.irrelSubs.retail,'feb')},
+        wrongCat:{p:null,c:_pick(app.irrelSubs&&app.irrelSubs.wrongCat,'feb')},
+        wrongLoc:{p:null,c:_pick(app.irrelSubs&&app.irrelSubs.wrongLoc,'feb')},
+        irrelNo: {p:null,c:_pick(app.irrelSubs&&app.irrelSubs.noOpt,'feb')},
+        veryLess:{p:null,c:_pick(app.lessBLSubs&&app.lessBLSubs.veryLess,'feb')},
+        expire:  {p:null,c:_pick(app.lessBLSubs&&app.lessBLSubs.expire,'feb')},
+        blsNo:   {p:null,c:_pick(app.lessBLSubs&&app.lessBLSubs.noOpt,'feb')},
+        unresp:  {p:null,c:_pick(app.iwbSubs&&app.iwbSubs.unresp,'feb')},
+        denies:  {p:null,c:_pick(app.iwbSubs&&app.iwbSubs.denies,'feb')},
+        fulfilled:{p:null,c:_pick(app.iwbSubs&&app.iwbSubs.fulfilled,'feb')},
+        iwbNo:   {p:null,c:_pick(app.iwbSubs&&app.iwbSubs.noOpt,'feb')},
+      }},
+    },
+  });
+
+  _buildPills();
+  switchMonth(newKey);
+}
+
+// ── Init ────────────────────────────────────────────────────────────
+function _initMonthSelector() {
+  _buildPills();
+  switchMonth(_CUR_MO);
+}
+if(document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', _initMonthSelector);
+} else {
+  _initMonthSelector();
+}
+
+
+// ═══════════════════════════════════════════════════════════════════
+// SUMMARY MANAGEMENT
+// ═══════════════════════════════════════════════════════════════════
+
+const SUMMARY_IDS = ['ts-tab1','ts-tab2','ts-tab3','ts-tab5'];
+
+// Convert plain bullet lines → HTML <ul><li>...</li></ul>
+function _bulletToHTML(text) {
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  if (!lines.length) return '';
+  return '<ul>\n' + lines.map(l => '    <li>' + l + '</li>').join('\n') + '\n  </ul>';
+}
+
+// Convert <ul><li>...</li></ul> → plain text lines (strip HTML tags)
+function _htmlToBullet(html) {
+  return (html.match(/<li>([\s\S]*?)<\/li>/g) || [])
+    .map(li => li.replace(/<[^>]+>/g, '').trim())
+    .join('\n');
+}
+
+// Apply a summaries object { 'ts-tab1': { title, body }, ... } to the DOM
+function applySummaries(data) {
+  SUMMARY_IDS.forEach(id => {
+    if (!data[id]) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    // Update header
+    const hdr = el.querySelector('.ts-hdr');
+    if (hdr && data[id].title) hdr.textContent = data[id].title;
+    // Replace ul
+    const existingUl = el.querySelector('ul');
+    const newHTML = _bulletToHTML(data[id].body);
+    if (newHTML) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = newHTML;
+      const newUl = tmp.querySelector('ul');
+      if (existingUl && newUl) existingUl.replaceWith(newUl);
+      else if (newUl) el.appendChild(newUl);
+    }
+  });
+}
+
+// Read current DOM summaries into the textarea inputs
+function _populateSumInputs() {
+  SUMMARY_IDS.forEach(id => {
+    const el = document.getElementById(id); if (!el) return;
+    const titleInp = document.getElementById('sum-title-' + id);
+    const bodyTa   = document.getElementById('sum-body-' + id);
+    const hdr = el.querySelector('.ts-hdr');
+    const ul  = el.querySelector('ul');
+    if (titleInp && hdr) titleInp.value = hdr.textContent.trim();
+    if (bodyTa && ul)    bodyTa.value   = _htmlToBullet(ul.innerHTML);
+  });
+}
+
+// Save: update DOM, then push to GAS if URL is set
+async function saveSummaries() {
+  const statusEl = document.getElementById('sum-status');
+  statusEl.style.display = 'none';
+
+  // 1. Build data object from inputs
+  const data = {};
+  SUMMARY_IDS.forEach(id => {
+    const titleInp = document.getElementById('sum-title-' + id);
+    const bodyTa   = document.getElementById('sum-body-' + id);
+    data[id] = {
+      title: titleInp ? titleInp.value.trim() : '',
+      body:  bodyTa   ? bodyTa.value.trim()   : '',
+    };
+  });
+
+  // 2. Apply to DOM immediately (local preview)
+  applySummaries(data);
+
+  // 3. Push to GAS if URL provided
+  const gasUrl = (document.getElementById('link-sum') || {}).value || '';
+  if (gasUrl && gasUrl.startsWith('http')) {
+    statusEl.textContent = '⏳ Publishing to GAS…';
+    statusEl.style.display = 'block';
+    statusEl.style.background = '#F8FAFC';
+    statusEl.style.color = 'var(--muted)';
+    try {
+      const res = await fetch(gasUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'setSummaries', data }),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      statusEl.textContent = '✓ Published — all viewers will see updated summaries on next load';
+      statusEl.style.background = '#F0FDF4';
+      statusEl.style.color = '#15803D';
+    } catch (err) {
+      statusEl.textContent = '⚠ GAS push failed (' + err.message + ') — summaries updated locally only';
+      statusEl.style.background = '#FFF7ED';
+      statusEl.style.color = '#C2410C';
+    }
+  } else {
+    statusEl.textContent = '✓ Updated locally — add a GAS URL above to publish company-wide';
+    statusEl.style.background = '#EFF6FF';
+    statusEl.style.color = '#1D4ED8';
+    statusEl.style.display = 'block';
+  }
+
+  showToast('Summaries saved', 'success');
+}
+
+// Fetch summaries from GAS on page load
+async function fetchSummaries() {
+  // Try each of the 4 GAS data URLs first (they share a deployment)
+  // then try the dedicated summary URL
+  const candidates = [
+    (document.getElementById('link-sum')  || {}).value,
+    (document.getElementById('link-nps')  || {}).value,
+  ].filter(u => u && u.startsWith('http'));
+
+  // If no URLs stored, nothing to fetch
+  if (!candidates.length) return;
+
+  for (const base of candidates) {
+    try {
+      // Append route param — GAS doGet checks this
+      const url = base.includes('?') ? base + '&route=summaries' : base + '?route=summaries';
+      const res = await fetch(url);
+      if (!res.ok) continue;
+      const json = await res.json();
+      if (json && json['ts-tab1']) {
+        applySummaries(json);
+        _populateSumInputs(); // keep textarea in sync
+        return;
+      }
+    } catch (_) { /* try next */ }
+  }
+}
+
+// Populate textareas when settings panel opens (so they reflect current DOM state)
+const _origOpenSettings = typeof openSettings === 'function' ? openSettings : null;
+(function patchOpenSettings() {
+  const orig = window.openSettings;
+  if (!orig) return;
+  window.openSettings = function() {
+    orig();
+    _populateSumInputs();
+  };
+})();
+
+// Fetch on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', fetchSummaries);
+} else {
+  fetchSummaries();
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// VERBATIM / SELLER VOICE MANAGEMENT
+// ═══════════════════════════════════════════════════════════════════
+
+// Tag class → label map
+const VTAG_MAP = {
+  'vtag-irrel': '🎯 Irrelevant Leads',
+  'vtag-conv':  '💸 Low Conversion',
+  'vtag-bls':   '📉 Less BLs / Enquiries',
+  'vtag-spec':  '📋 Spec Mismatch',
+  'vtag-iwb':   '🙅 Issues with Buyer',
+};
+
+// Apply a voice data object to the DOM
+// data = { 1: {tagCls, quote, glid}, 2: {...}, 3: {...}, 4: {...} }
+function applyVoice(data) {
+  [1,2,3,4].forEach(n => {
+    const d = data[n]; if (!d) return;
+
+    // Tag span
+    const tagEl = document.getElementById('voice-tag-' + n);
+    if (tagEl) {
+      // Remove all vtag- classes, add the new one
+      tagEl.className = tagEl.className.replace(/vtag-\S+/g, '').trim() + ' ' + (d.tagCls || 'vtag-irrel');
+      tagEl.textContent = VTAG_MAP[d.tagCls] || d.tagCls;
+    }
+
+    // Quote — wrap in curly quotes if not already
+    const quoteEl = document.getElementById('voice-quote-' + n);
+    if (quoteEl) {
+      const q = (d.quote || '').trim();
+      quoteEl.textContent = (q.startsWith('\u201c') ? '' : '\u201c') + q + (q.endsWith('\u201d') ? '' : '\u201d');
+    }
+
+    // Meta (GLID)
+    const metaEl = document.getElementById('voice-meta-' + n);
+    if (metaEl) {
+      const g = (d.glid || '').replace(/^GLID:\s*/i, '');
+      metaEl.textContent = 'GLID: ' + g;
+    }
+  });
+}
+
+// Populate settings inputs from current DOM state
+function _populateVoiceInputs() {
+  [1,2,3,4].forEach(n => {
+    const tagEl   = document.getElementById('voice-tag-' + n);
+    const quoteEl = document.getElementById('voice-quote-' + n);
+    const metaEl  = document.getElementById('voice-meta-' + n);
+
+    const selEl   = document.getElementById('voice-tag-sel-' + n);
+    const quoteIn = document.getElementById('voice-quote-inp-' + n);
+    const glidIn  = document.getElementById('voice-glid-inp-' + n);
+
+    if (tagEl && selEl) {
+      // Find current vtag class
+      const cls = (tagEl.className.match(/vtag-\S+/) || ['vtag-irrel'])[0];
+      selEl.value = cls;
+    }
+    if (quoteEl && quoteIn) {
+      // Strip curly quotes for textarea
+      quoteIn.value = quoteEl.textContent.replace(/^[\u201c\u201d\u201e]+|[\u201c\u201d\u201f]+$/g, '').trim();
+    }
+    if (metaEl && glidIn) {
+      glidIn.value = metaEl.textContent.replace(/^GLID:\s*/i, '').trim();
+    }
+  });
+}
+
+// Save voice: update DOM + push to GAS
+async function saveVoice() {
+  const statusEl = document.getElementById('voice-status');
+  statusEl.style.display = 'none';
+
+  // Build data from inputs
+  const data = {};
+  [1,2,3,4].forEach(n => {
+    data[n] = {
+      tagCls: (document.getElementById('voice-tag-sel-' + n) || {}).value || 'vtag-irrel',
+      quote:  ((document.getElementById('voice-quote-inp-' + n) || {}).value || '').trim(),
+      glid:   ((document.getElementById('voice-glid-inp-' + n) || {}).value || '').trim(),
+    };
+  });
+
+  // Apply to DOM
+  applyVoice(data);
+
+  // Push to GAS — try summary URL first, then NPS URL
+  const gasUrl = (document.getElementById('link-sum') || {}).value
+              || (document.getElementById('link-nps') || {}).value
+              || '';
+
+  if (gasUrl && gasUrl.startsWith('http')) {
+    statusEl.textContent = '⏳ Publishing to GAS…';
+    statusEl.style.display = 'block';
+    statusEl.style.background = '#F8FAFC';
+    statusEl.style.color = 'var(--muted)';
+    try {
+      const res = await fetch(gasUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'setVoice', data }),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      statusEl.textContent = '✓ Published — all viewers will see updated verbatims on next load';
+      statusEl.style.background = '#F0FDF4';
+      statusEl.style.color = '#15803D';
+    } catch (err) {
+      statusEl.textContent = '⚠ GAS push failed (' + err.message + ') — verbatims updated locally only';
+      statusEl.style.background = '#FFF7ED';
+      statusEl.style.color = '#C2410C';
+    }
+  } else {
+    statusEl.textContent = '✓ Updated locally — add a GAS URL in Script Links to publish company-wide';
+    statusEl.style.background = '#EFF6FF';
+    statusEl.style.color = '#1D4ED8';
+    statusEl.style.display = 'block';
+  }
+
+  showToast('Verbatims saved', 'success');
+}
+
+// Fetch voice data from GAS on load
+async function fetchVoice() {
+  const candidates = [
+    (document.getElementById('link-sum') || {}).value,
+    (document.getElementById('link-nps') || {}).value,
+  ].filter(u => u && u.startsWith('http'));
+  if (!candidates.length) return;
+
+  for (const base of candidates) {
+    try {
+      const url = base.includes('?') ? base + '&route=voice' : base + '?route=voice';
+      const res = await fetch(url);
+      if (!res.ok) continue;
+      const json = await res.json();
+      if (json && json[1]) {
+        applyVoice(json);
+        _populateVoiceInputs();
+        return;
+      }
+    } catch (_) { /* try next */ }
+  }
+}
+
+// Patch openSettings to also populate voice inputs
+(function patchOpenSettingsForVoice() {
+  const orig = window.openSettings;
+  if (!orig) return;
+  window.openSettings = function() {
+    orig();
+    _populateVoiceInputs();
+  };
+})();
+
+// Fetch on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', fetchVoice);
+} else {
+  fetchVoice();
+}
+
 </script>
+
+
+<!-- ════════════════════════════════════════════════
+     SETTINGS OVERLAY
+════════════════════════════════════════════════ -->
+<div id="settings-overlay" onclick="if(event.target===this)closeSettings()">
+  <div id="settings-panel">
+
+    <!-- Header -->
+    <div class="sp-head">
+      <div>
+        <div class="sp-title">⚙ Data Source</div>
+        <div class="sp-sub">Connect live reports to auto-populate the dashboard</div>
+      </div>
+      <button class="sp-close" onclick="closeSettings()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <!-- Tabs -->
+    <div class="sp-tabs">
+      <button class="sp-tab active" onclick="switchSpTab('link',this)">🔗 Script Links</button>
+      <button class="sp-tab" onclick="switchSpTab('file',this)">📁 File Upload</button>
+      <button class="sp-tab" onclick="switchSpTab('summary',this)">✏️ Summaries</button>
+      <button class="sp-tab" onclick="switchSpTab('voice',this)">💬 Verbatims</button>
+    </div>
+
+    <!-- Body -->
+    <div class="sp-body">
+
+      <!-- ── SCRIPT LINKS TAB ── -->
+      <div id="sp-tab-link">
+        <div class="sp-label">Google Apps Script URLs</div>
+
+        <div class="sp-section">
+          <div class="sp-input-row">
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#059669"></span>NPS Report</div>
+            <input class="sp-input" id="link-nps" type="url" placeholder="https://script.google.com/macros/s/…/exec" oninput="markFilled(this)">
+            <div class="sp-input-hint">Paste the deployed GAS web app URL for the NPS monthly sheet</div>
+          </div>
+          <div class="sp-input-row">
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#D97706"></span>App Ratings Report</div>
+            <input class="sp-input" id="link-app" type="url" placeholder="https://script.google.com/macros/s/…/exec" oninput="markFilled(this)">
+            <div class="sp-input-hint">Paste the deployed GAS web app URL for the App ratings sheet</div>
+          </div>
+          <div class="sp-input-row">
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#EA580C"></span>QRF Irrelevancy Report</div>
+            <input class="sp-input" id="link-qrf" type="url" placeholder="https://script.google.com/macros/s/…/exec" oninput="markFilled(this)">
+            <div class="sp-input-hint">Paste the deployed GAS web app URL for the QRF monthly sheet</div>
+          </div>
+          <div class="sp-input-row">
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#047857"></span>BL Irrelevancy Report</div>
+            <input class="sp-input" id="link-bl" type="url" placeholder="https://script.google.com/macros/s/…/exec" oninput="markFilled(this)">
+            <div class="sp-input-hint">Paste the deployed GAS web app URL for the BL NI monthly sheet</div>
+          </div>
+        </div>
+
+        <div id="link-status" class="sp-status"></div>
+        <div id="sync-badge-link" style="display:none;font-size:9px;font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--muted);margin-top:10px;gap:4px;align-items:center;" class="sp-status ok"></div>
+
+        <button class="sp-sync-btn" onclick="syncLinks()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          Sync from Scripts
+        </button>
+      </div>
+
+      <!-- ── FILE UPLOAD TAB ── -->
+      <div id="sp-tab-file" style="display:none">
+        <div class="sp-label">Upload Excel Reports</div>
+
+        <div class="sp-section">
+          <div class="sp-input-row">
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#059669"></span>NPS Report (.xlsx)</div>
+            <div class="sp-file-zone" id="zone-nps" onclick="document.getElementById('file-nps').click()" ondragover="dragOver(event,this)" ondragleave="dragLeave(this)" ondrop="dropFile(event,'nps',this)">
+              <span class="sp-file-icon">📊</span>
+              <div class="sp-file-info">
+                <div class="sp-file-name" id="fname-nps">Click or drag to upload</div>
+                <div class="sp-file-size" id="fsize-nps">NPS_Report_NPS_Monthly.xlsx</div>
+              </div>
+              <button class="sp-file-clear" id="fclear-nps" style="display:none" onclick="clearFile(event,'nps')">×</button>
+            </div>
+            <input type="file" class="sp-file-input" id="file-nps" accept=".xlsx,.xls" onchange="fileSelected('nps',this)">
+          </div>
+
+          <div class="sp-input-row">
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#D97706"></span>App Ratings Report (.xlsx)</div>
+            <div class="sp-file-zone" id="zone-app" onclick="document.getElementById('file-app').click()" ondragover="dragOver(event,this)" ondragleave="dragLeave(this)" ondrop="dropFile(event,'app',this)">
+              <span class="sp-file-icon">📱</span>
+              <div class="sp-file-info">
+                <div class="sp-file-name" id="fname-app">Click or drag to upload</div>
+                <div class="sp-file-size" id="fsize-app">App_Ratings_and_Review_Report.xlsx</div>
+              </div>
+              <button class="sp-file-clear" id="fclear-app" style="display:none" onclick="clearFile(event,'app')">×</button>
+            </div>
+            <input type="file" class="sp-file-input" id="file-app" accept=".xlsx,.xls" onchange="fileSelected('app',this)">
+          </div>
+
+          <div class="sp-input-row">
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#EA580C"></span>QRF Irrelevancy Report (.xlsx)</div>
+            <div class="sp-file-zone" id="zone-qrf" onclick="document.getElementById('file-qrf').click()" ondragover="dragOver(event,this)" ondragleave="dragLeave(this)" ondrop="dropFile(event,'qrf',this)">
+              <span class="sp-file-icon">📋</span>
+              <div class="sp-file-info">
+                <div class="sp-file-name" id="fname-qrf">Click or drag to upload</div>
+                <div class="sp-file-size" id="fsize-qrf">QRF_Irrelevancy_Report_Monthly.xlsx</div>
+              </div>
+              <button class="sp-file-clear" id="fclear-qrf" style="display:none" onclick="clearFile(event,'qrf')">×</button>
+            </div>
+            <input type="file" class="sp-file-input" id="file-qrf" accept=".xlsx,.xls" onchange="fileSelected('qrf',this)">
+          </div>
+
+          <div class="sp-input-row">
+            <div class="sp-input-lbl"><span class="sp-dot" style="background:#047857"></span>BLNI Report (.xlsx)</div>
+            <div class="sp-file-zone" id="zone-bl" onclick="document.getElementById('file-bl').click()" ondragover="dragOver(event,this)" ondragleave="dragLeave(this)" ondrop="dropFile(event,'bl',this)">
+              <span class="sp-file-icon">📈</span>
+              <div class="sp-file-info">
+                <div class="sp-file-name" id="fname-bl">Click or drag to upload</div>
+                <div class="sp-file-size" id="fsize-bl">BL_NI_Weekly_Monthly_Report.xlsx</div>
+              </div>
+              <button class="sp-file-clear" id="fclear-bl" style="display:none" onclick="clearFile(event,'bl')">×</button>
+            </div>
+            <input type="file" class="sp-file-input" id="file-bl" accept=".xlsx,.xls" onchange="fileSelected('bl',this)">
+          </div>
+        </div>
+
+        <div id="file-status" class="sp-status"></div>
+
+        <button class="sp-sync-btn" onclick="syncFiles()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          Sync from Files
+        </button>
+      </div>
+
+      <!-- ── SUMMARIES TAB ── -->
+      <div id="sp-tab-summary" style="display:none">
+        <div class="sp-label">Edit dashboard summaries</div>
+        <div class="sp-section" style="margin-bottom:6px">
+          <div class="sp-input-hint" style="margin-bottom:16px;font-size:10px;line-height:1.6">
+            Each box updates the summary on the corresponding tab. Changes are pushed to the
+            <strong>GAS endpoint</strong> so every viewer sees the same summaries.<br>
+            If no GAS URL is set, changes apply <em>locally only</em> (this browser session).
+          </div>
+
+          <div class="sp-sum-block">
+            <div class="sp-sum-hdr" style="border-left-color:#059669">
+              <span class="sp-sum-lbl">📊 Overview & Problems</span>
+            </div>
+            <div class="sp-input-hint" style="margin-bottom:6px">Title shown in the summary header</div>
+            <input class="sp-input sp-sum-title" id="sum-title-ts-tab1" type="text"
+              value="📊 Since Oct '25 — at a glance" placeholder="e.g. 📊 At a glance — Mar '26">
+            <div class="sp-input-hint" style="margin-top:8px;margin-bottom:6px">Bullet points — one per line</div>
+            <textarea class="sp-sum-ta" id="sum-body-ts-tab1" rows="5"
+              placeholder="One bullet point per line...">NPS improved +1.84pp (23.6 → 25.4) — best ever recorded
+QRF Irrelevancy declined −0.51pp (5.45% → 4.94%) — best ever recorded
+BL Irrelevancy declined −1.20pp (5.61% → 4.41%) — steady quarter-on-quarter improvement
+App Rating flat at 3.41★ — peaked at 3.54 in Nov, no recovery in subsequent months
+🔴 Irrelevant Leads is the dominant seller problem — confirmed independently across all 4 data sources
+🟡 Low Conversion and Less BLs are persistent complaints across NPS and App feedback — unresolved</textarea>
+          </div>
+          <div class="sp-sum-block">
+            <div class="sp-sum-hdr" style="border-left-color:#059669">
+              <span class="sp-sum-lbl">📊 NPS Deep Dive</span>
+            </div>
+            <div class="sp-input-hint" style="margin-bottom:6px">Title shown in the summary header</div>
+            <input class="sp-input sp-sum-title" id="sum-title-ts-tab2" type="text"
+              value="📊 NPS Deep Dive — Feb '26" placeholder="e.g. 📊 At a glance — Mar '26">
+            <div class="sp-input-hint" style="margin-top:8px;margin-bottom:6px">Bullet points — one per line</div>
+            <textarea class="sp-sum-ta" id="sum-body-ts-tab2" rows="5"
+              placeholder="One bullet point per line...">STAR and LEADER are the healthiest seller segments — both at their best-ever NPS this month
+Catalog trails all other segments by a wide margin — the gap is not closing meaningfully
+TSCatalog is the only segment declining — the only one moving against the trend
+Established sellers are significantly more satisfied than new sellers — the onboarding experience likely remains a pain point
+New seller NPS jumped sharply in Feb — too early to confirm as a trend, needs March data</textarea>
+          </div>
+          <div class="sp-sum-block">
+            <div class="sp-sum-hdr" style="border-left-color:#EF4444">
+              <span class="sp-sum-lbl">🔍 NPS Complaints</span>
+            </div>
+            <div class="sp-input-hint" style="margin-bottom:6px">Title shown in the summary header</div>
+            <input class="sp-input sp-sum-title" id="sum-title-ts-tab3" type="text"
+              value="🔍 NPS Complaint Signals — Feb '26" placeholder="e.g. 📊 At a glance — Mar '26">
+            <div class="sp-input-hint" style="margin-top:8px;margin-bottom:6px">Bullet points — one per line</div>
+            <textarea class="sp-sum-ta" id="sum-body-ts-tab3" rows="5"
+              placeholder="One bullet point per line...">Irrelevant Leads dominates seller complaints — it is the single biggest pain point in NPS feedback
+Less BLs is rising fast — sellers are increasingly feeling undersupplied with enquiries
+Low Conversion is a growing concern — sellers are getting leads but struggling to close them
+Retail Leads and Wrong Category are the most cited reasons under Irrelevant Leads — specificity is improving
+The sharp rise in total complaints in Feb reflects higher survey participation, not a sudden deterioration</textarea>
+          </div>
+          <div class="sp-sum-block">
+            <div class="sp-sum-hdr" style="border-left-color:#8B5CF6">
+              <span class="sp-sum-lbl">📱 App Complaints</span>
+            </div>
+            <div class="sp-input-hint" style="margin-bottom:6px">Title shown in the summary header</div>
+            <input class="sp-input sp-sum-title" id="sum-title-ts-tab5" type="text"
+              value="📱 App Complaint Signals — Feb '26" placeholder="e.g. 📊 At a glance — Mar '26">
+            <div class="sp-input-hint" style="margin-top:8px;margin-bottom:6px">Bullet points — one per line</div>
+            <textarea class="sp-sum-ta" id="sum-body-ts-tab5" rows="5"
+              placeholder="One bullet point per line...">Irrelevant Leads complaints are gradually declining — an encouraging signal that relevance efforts are being felt
+Low Conversion has become the dominant concern on App — sellers are getting leads but not converting them
+Less BLs complaints have surged since October — mirrors what sellers are reporting on NPS, a cross-source signal worth acting on
+Sellers are increasingly selecting specific complaint reasons rather than Others — data quality is improving over time</textarea>
+          </div>
+        </div>
+
+        <div class="sp-input-row" style="margin-top:4px">
+          <div class="sp-input-lbl">GAS Summaries URL <span style="font-weight:400;color:var(--faint)">(optional — enables company-wide sync)</span></div>
+          <input class="sp-input" id="link-sum" type="url"
+            placeholder="https://script.google.com/macros/s/…/exec?route=summaries"
+            oninput="markFilled(this)">
+          <div class="sp-input-hint">Same GAS deployment as Script Links — add <code style="font-size:9px;background:#F1F5F9;padding:1px 4px;border-radius:3px">?route=summaries</code> or a dedicated endpoint</div>
+        </div>
+
+        <div id="sum-status" class="sp-status"></div>
+
+        <button class="sp-sync-btn" onclick="saveSummaries()" style="margin-top:4px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save &amp; Publish Summaries
+        </button>
+      </div>
+
+      <!-- ── VERBATIMS TAB ── -->
+      <div id="sp-tab-voice" style="display:none">
+        <div class="sp-label">Edit seller verbatims</div>
+        <div class="sp-section" style="margin-bottom:6px">
+          <div class="sp-input-hint" style="margin-bottom:16px;font-size:10px;line-height:1.6">
+            Update the seller quote, GLID and problem tag for each verbatim card.
+            Click <strong>Save &amp; Publish</strong> to push company-wide via GAS
+            (uses the same GAS URL as Script Links).
+          </div>
+
+          <div class="sp-voice-block" id="sp-vb-1">
+            <div class="sp-voice-block-hdr">
+              <span class="sp-voice-num">Verbatim 1</span>
+            </div>
+            <div class="sp-input-hint" style="margin-bottom:5px">Problem category</div>
+            <select class="sp-input sp-voice-select" id="voice-tag-sel-1" style="cursor:pointer">
+          <option value="vtag-irrel" selected>🎯 Irrelevant Leads</option>
+          <option value="vtag-conv" >💸 Low Conversion</option>
+          <option value="vtag-bls" >📉 Less BLs / Enquiries</option>
+          <option value="vtag-spec" >📋 Spec Mismatch</option>
+          <option value="vtag-iwb" >🙅 Issues with Buyer</option>
+        </select>
+            <div class="sp-input-hint" style="margin-top:10px;margin-bottom:5px">Seller quote</div>
+            <textarea class="sp-sum-ta" id="voice-quote-inp-1" rows="3"
+              placeholder="Paste the seller's verbatim here...">Regularly showing / receiving irrelevant buy leads which are not related to products added by us. I am regularly on daily basis sharing the screenshot of irrelevant buy leads to my AM — but till date issue is not resolved.</textarea>
+            <div class="sp-input-hint" style="margin-top:10px;margin-bottom:5px">GLID</div>
+            <input class="sp-input" id="voice-glid-inp-1" type="text"
+              placeholder="e.g. 3920885" value="3920885"
+              style="font-family:'JetBrains Mono',monospace;font-size:11px;">
+          </div>
+          <div class="sp-voice-block" id="sp-vb-2">
+            <div class="sp-voice-block-hdr">
+              <span class="sp-voice-num">Verbatim 2</span>
+            </div>
+            <div class="sp-input-hint" style="margin-bottom:5px">Problem category</div>
+            <select class="sp-input sp-voice-select" id="voice-tag-sel-2" style="cursor:pointer">
+          <option value="vtag-irrel" >🎯 Irrelevant Leads</option>
+          <option value="vtag-conv" selected>💸 Low Conversion</option>
+          <option value="vtag-bls" >📉 Less BLs / Enquiries</option>
+          <option value="vtag-spec" >📋 Spec Mismatch</option>
+          <option value="vtag-iwb" >🙅 Issues with Buyer</option>
+        </select>
+            <div class="sp-input-hint" style="margin-top:10px;margin-bottom:5px">Seller quote</div>
+            <textarea class="sp-sum-ta" id="voice-quote-inp-2" rows="3"
+              placeholder="Paste the seller's verbatim here...">Not satisfied with buy lead — not a single lead convert in last 3 months.</textarea>
+            <div class="sp-input-hint" style="margin-top:10px;margin-bottom:5px">GLID</div>
+            <input class="sp-input" id="voice-glid-inp-2" type="text"
+              placeholder="e.g. 3920885" value="97982728"
+              style="font-family:'JetBrains Mono',monospace;font-size:11px;">
+          </div>
+          <div class="sp-voice-block" id="sp-vb-3">
+            <div class="sp-voice-block-hdr">
+              <span class="sp-voice-num">Verbatim 3</span>
+            </div>
+            <div class="sp-input-hint" style="margin-bottom:5px">Problem category</div>
+            <select class="sp-input sp-voice-select" id="voice-tag-sel-3" style="cursor:pointer">
+          <option value="vtag-irrel" >🎯 Irrelevant Leads</option>
+          <option value="vtag-conv" >💸 Low Conversion</option>
+          <option value="vtag-bls" selected>📉 Less BLs / Enquiries</option>
+          <option value="vtag-spec" >📋 Spec Mismatch</option>
+          <option value="vtag-iwb" >🙅 Issues with Buyer</option>
+        </select>
+            <div class="sp-input-hint" style="margin-top:10px;margin-bottom:5px">Seller quote</div>
+            <textarea class="sp-sum-ta" id="voice-quote-inp-3" rows="3"
+              placeholder="Paste the seller's verbatim here...">I am not getting leads for my different products. Just Panchmukhi Hanuman is visible on my buy leads panel — please check and I request to get buyleads for all my products listed.</textarea>
+            <div class="sp-input-hint" style="margin-top:10px;margin-bottom:5px">GLID</div>
+            <input class="sp-input" id="voice-glid-inp-3" type="text"
+              placeholder="e.g. 3920885" value="4583854"
+              style="font-family:'JetBrains Mono',monospace;font-size:11px;">
+          </div>
+          <div class="sp-voice-block" id="sp-vb-4">
+            <div class="sp-voice-block-hdr">
+              <span class="sp-voice-num">Verbatim 4</span>
+            </div>
+            <div class="sp-input-hint" style="margin-bottom:5px">Problem category</div>
+            <select class="sp-input sp-voice-select" id="voice-tag-sel-4" style="cursor:pointer">
+          <option value="vtag-irrel" >🎯 Irrelevant Leads</option>
+          <option value="vtag-conv" >💸 Low Conversion</option>
+          <option value="vtag-bls" >📉 Less BLs / Enquiries</option>
+          <option value="vtag-spec" selected>📋 Spec Mismatch</option>
+          <option value="vtag-iwb" >🙅 Issues with Buyer</option>
+        </select>
+            <div class="sp-input-hint" style="margin-top:10px;margin-bottom:5px">Seller quote</div>
+            <textarea class="sp-sum-ta" id="voice-quote-inp-4" rows="3"
+              placeholder="Paste the seller's verbatim here...">Our primary product is White Agarbatti, but most of the inquiries we receive are related to black agarbatti, which does not match our offerings. Due to this mismatch, we are unable to convert the leads.</textarea>
+            <div class="sp-input-hint" style="margin-top:10px;margin-bottom:5px">GLID</div>
+            <input class="sp-input" id="voice-glid-inp-4" type="text"
+              placeholder="e.g. 3920885" value="107612289"
+              style="font-family:'JetBrains Mono',monospace;font-size:11px;">
+          </div>
+        </div>
+
+        <div id="voice-status" class="sp-status"></div>
+
+        <button class="sp-sync-btn" onclick="saveVoice()" style="margin-top:4px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save &amp; Publish Verbatims
+        </button>
+      </div>
+
+    </div><!-- /sp-body -->
+  </div><!-- /settings-panel -->
+</div><!-- /settings-overlay -->
+
+<!-- Toast -->
+<div id="sp-toast"></div>
 
 
 <div id="spk-tooltip" style="
