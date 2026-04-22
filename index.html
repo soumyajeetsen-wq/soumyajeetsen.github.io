@@ -1872,258 +1872,67 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 </div><!-- /spark-grid vintage -->
 
-<!-- ═══ NPS DETRACTOR → PROMOTER MOVEMENT ═══ -->
+<!-- ═══ NPS QUARTERLY MOVEMENT ═══ -->
 <div class="sh">
-  <span class="sh-t">NPS Detractor → Promoter Movement — Oct '25 – Mar '26</span>
+  <span class="sh-t">NPS Quarterly Movement — Detractor ↔ Promoter</span>
   <div class="sh-l"></div>
   <span class="sh-b" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">Recovery tracking</span>
 </div>
 
-<!-- Monthly movement bar chart -->
-<div class="vcb-wrap">
-  <div class="vcb-chart-area" style="height:220px">
-    <div class="vcb-yaxis"><span>18</span><span>14</span><span>9</span><span>5</span><span>0</span></div>
-    <div class="vcb-grid">
-      <div class="vcb-gridline"></div><div class="vcb-gridline"></div><div class="vcb-gridline"></div><div class="vcb-gridline"></div><div class="vcb-gridline"></div>
+<div class="spark-grid" style="grid-template-columns:repeat(3,1fr)">
+
+  <!-- Card 1: Detractor → Promoter -->
+  <div class="spk-card spk-green">
+    <div class="spk-top">
+      <div>
+        <div class="spk-label">Detractor → Promoter</div>
+        <div class="spk-val c-green">286</div>
+        <div class="spk-meta" style="margin-top:4px">
+          <span class="spk-vol-n">Oct-Jan quarter</span>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="spk-mom c-green">+27 vs prev</div>
+        <div class="spk-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">Won back</div>
+      </div>
     </div>
-    <div class="vcb-bars" style="gap:24px" id="npsmov-monthly-bars">
-
-      <!-- Oct-Nov -->
-      <div class="vcb-bar-group">
-        <div class="vcb-bar">
-          <div class="vcb-seg" style="height:100%;background:#2D8A6A;opacity:0.55" data-tip="18 sellers moved from Detractor → Promoter"><span class="vcb-lbl">18</span></div>
-        </div>
-        <div class="vcb-bar-label">Oct-Nov</div>
-      </div>
-
-      <!-- Nov-Dec -->
-      <div class="vcb-bar-group">
-        <div class="vcb-bar">
-          <div class="vcb-seg" style="height:50%;background:#2D8A6A;opacity:0.55" data-tip="9 sellers moved from Detractor → Promoter"><span class="vcb-lbl">9</span></div>
-        </div>
-        <div class="vcb-bar-label">Nov-Dec</div>
-      </div>
-
-      <!-- Dec-Jan -->
-      <div class="vcb-bar-group">
-        <div class="vcb-bar">
-          <div class="vcb-seg" style="height:100%;background:#2D8A6A;opacity:0.55" data-tip="18 sellers moved from Detractor → Promoter"><span class="vcb-lbl">18</span></div>
-        </div>
-        <div class="vcb-bar-label">Dec-Jan</div>
-      </div>
-
-      <!-- Jan-Feb -->
-      <div class="vcb-bar-group">
-        <div class="vcb-bar">
-          <div class="vcb-seg" style="height:72.2%;background:#2D8A6A;opacity:0.55" data-tip="13 sellers moved from Detractor → Promoter"><span class="vcb-lbl">13</span></div>
-        </div>
-        <div class="vcb-bar-label">Jan-Feb</div>
-      </div>
-
-      <!-- Feb-Mar (current — highlighted) -->
-      <div class="vcb-bar-group">
-        <div class="vcb-bar">
-          <div class="vcb-seg" style="height:77.8%;background:#2D8A6A" data-tip="14 sellers moved from Detractor → Promoter (Feb→Mar)"><span class="vcb-lbl" style="font-size:11px">14</span></div>
-        </div>
-        <div class="vcb-bar-label"><strong>Feb-Mar</strong><br><span class="vcb-bar-n">+1 vs prior</span></div>
-      </div>
-
-    </div>
+    <svg id="spk-mov-dtp" class="spk-svg" viewBox="0 0 560 130"></svg>
   </div>
 
-  <!-- Breakdown heatmaps side by side -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;padding-top:16px;border-top:1px solid var(--border)">
-
-    <!-- By Vintage -->
-    <div>
-      <div style="font-size:9px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">By Vintage</div>
-      <table class="hmap-table" style="width:100%">
-        <thead><tr>
-          <th class="hmap-th-sub">Vintage</th>
-          <th class="hmap-th-month" style="min-width:44px">Oct-Nov</th>
-          <th class="hmap-th-month" style="min-width:44px">Nov-Dec</th>
-          <th class="hmap-th-month" style="min-width:44px">Dec-Jan</th>
-          <th class="hmap-th-month" style="min-width:44px">Jan-Feb</th>
-          <th class="hmap-th-month" style="min-width:44px">Feb-Mar</th>
-        </tr></thead>
-        <tbody id="npsmov-monthly-vintage">
-          <tr>
-            <td class="hmap-sub-name">30 Day</td>
-            <td class="hmap-cell" style="--v:6;--base-r:45;--base-g:138;--base-b:106;text-align:center">6</td>
-            <td class="hmap-cell" style="--v:0;--base-r:45;--base-g:138;--base-b:106;text-align:center">0</td>
-            <td class="hmap-cell hmap-hot" style="--v:13;--base-r:45;--base-g:138;--base-b:106;text-align:center">13</td>
-            <td class="hmap-cell" style="--v:5;--base-r:45;--base-g:138;--base-b:106;text-align:center">5</td>
-            <td class="hmap-cell" style="--v:0;--base-r:45;--base-g:138;--base-b:106;text-align:center;font-weight:800">0</td>
-          </tr>
-          <tr>
-            <td class="hmap-sub-name">60 Day</td>
-            <td class="hmap-cell hmap-hot" style="--v:12;--base-r:66;--base-g:112;--base-b:196;text-align:center">12</td>
-            <td class="hmap-cell" style="--v:9;--base-r:66;--base-g:112;--base-b:196;text-align:center">9</td>
-            <td class="hmap-cell" style="--v:4;--base-r:66;--base-g:112;--base-b:196;text-align:center">4</td>
-            <td class="hmap-cell" style="--v:8;--base-r:66;--base-g:112;--base-b:196;text-align:center">8</td>
-            <td class="hmap-cell hmap-hot" style="--v:13;--base-r:66;--base-g:112;--base-b:196;text-align:center;font-weight:800">13</td>
-          </tr>
-          <tr>
-            <td class="hmap-sub-name">Quarterly+</td>
-            <td class="hmap-cell" style="--v:0;--base-r:112;--base-g:85;--base-b:184;text-align:center">0</td>
-            <td class="hmap-cell" style="--v:0;--base-r:112;--base-g:85;--base-b:184;text-align:center">0</td>
-            <td class="hmap-cell" style="--v:1;--base-r:112;--base-g:85;--base-b:184;text-align:center">1</td>
-            <td class="hmap-cell" style="--v:0;--base-r:112;--base-g:85;--base-b:184;text-align:center">0</td>
-            <td class="hmap-cell" style="--v:1;--base-r:112;--base-g:85;--base-b:184;text-align:center;font-weight:800">1</td>
-          </tr>
-        </tbody>
-      </table>
+  <!-- Card 2: Promoter → Detractor -->
+  <div class="spk-card spk-red" style="border-color:var(--red-border)">
+    <div class="spk-top">
+      <div>
+        <div class="spk-label">Promoter → Detractor</div>
+        <div class="spk-val c-red">267</div>
+        <div class="spk-meta" style="margin-top:4px">
+          <span class="spk-vol-n">Oct-Jan quarter</span>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="spk-mom c-red">−34 vs prev</div>
+        <div class="spk-badge" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)">Lost</div>
+      </div>
     </div>
-
-    <!-- By Customer Type -->
-    <div>
-      <div style="font-size:9px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">By Customer Type</div>
-      <table class="hmap-table" style="width:100%">
-        <thead><tr>
-          <th class="hmap-th-sub">Type</th>
-          <th class="hmap-th-month" style="min-width:44px">Oct-Nov</th>
-          <th class="hmap-th-month" style="min-width:44px">Nov-Dec</th>
-          <th class="hmap-th-month" style="min-width:44px">Dec-Jan</th>
-          <th class="hmap-th-month" style="min-width:44px">Jan-Feb</th>
-          <th class="hmap-th-month" style="min-width:44px">Feb-Mar</th>
-        </tr></thead>
-        <tbody id="npsmov-monthly-custtype">
-          <tr>
-            <td class="hmap-sub-name">TSCatalog</td>
-            <td class="hmap-cell hmap-hot" style="--v:13;--base-r:112;--base-g:85;--base-b:184;text-align:center">13</td>
-            <td class="hmap-cell" style="--v:4;--base-r:112;--base-g:85;--base-b:184;text-align:center">4</td>
-            <td class="hmap-cell" style="--v:4;--base-r:112;--base-g:85;--base-b:184;text-align:center">4</td>
-            <td class="hmap-cell" style="--v:5;--base-r:112;--base-g:85;--base-b:184;text-align:center">5</td>
-            <td class="hmap-cell" style="--v:7;--base-r:112;--base-g:85;--base-b:184;text-align:center;font-weight:800">7</td>
-          </tr>
-          <tr>
-            <td class="hmap-sub-name">Catalog</td>
-            <td class="hmap-cell" style="--v:2;--base-r:196;--base-g:96;--base-b:64;text-align:center">2</td>
-            <td class="hmap-cell" style="--v:3;--base-r:196;--base-g:96;--base-b:64;text-align:center">3</td>
-            <td class="hmap-cell" style="--v:9;--base-r:196;--base-g:96;--base-b:64;text-align:center">9</td>
-            <td class="hmap-cell" style="--v:5;--base-r:196;--base-g:96;--base-b:64;text-align:center">5</td>
-            <td class="hmap-cell" style="--v:3;--base-r:196;--base-g:96;--base-b:64;text-align:center;font-weight:800">3</td>
-          </tr>
-          <tr>
-            <td class="hmap-sub-name">Star</td>
-            <td class="hmap-cell" style="--v:2;--base-r:45;--base-g:138;--base-b:106;text-align:center">2</td>
-            <td class="hmap-cell" style="--v:1;--base-r:45;--base-g:138;--base-b:106;text-align:center">1</td>
-            <td class="hmap-cell" style="--v:2;--base-r:45;--base-g:138;--base-b:106;text-align:center">2</td>
-            <td class="hmap-cell" style="--v:1;--base-r:45;--base-g:138;--base-b:106;text-align:center">1</td>
-            <td class="hmap-cell" style="--v:2;--base-r:45;--base-g:138;--base-b:106;text-align:center;font-weight:800">2</td>
-          </tr>
-          <tr>
-            <td class="hmap-sub-name">Leader</td>
-            <td class="hmap-cell" style="--v:0;--base-r:66;--base-g:112;--base-b:196;text-align:center">0</td>
-            <td class="hmap-cell" style="--v:1;--base-r:66;--base-g:112;--base-b:196;text-align:center">1</td>
-            <td class="hmap-cell" style="--v:2;--base-r:66;--base-g:112;--base-b:196;text-align:center">2</td>
-            <td class="hmap-cell" style="--v:2;--base-r:66;--base-g:112;--base-b:196;text-align:center">2</td>
-            <td class="hmap-cell" style="--v:1;--base-r:66;--base-g:112;--base-b:196;text-align:center;font-weight:800">1</td>
-          </tr>
-          <tr>
-            <td class="hmap-sub-name">ExportTS</td>
-            <td class="hmap-cell" style="--v:0;--base-r:192;--base-g:125;--base-b:48;text-align:center">0</td>
-            <td class="hmap-cell" style="--v:0;--base-r:192;--base-g:125;--base-b:48;text-align:center">0</td>
-            <td class="hmap-cell" style="--v:1;--base-r:192;--base-g:125;--base-b:48;text-align:center">1</td>
-            <td class="hmap-cell" style="--v:0;--base-r:192;--base-g:125;--base-b:48;text-align:center">0</td>
-            <td class="hmap-cell" style="--v:1;--base-r:192;--base-g:125;--base-b:48;text-align:center;font-weight:800">1</td>
-          </tr>
-          <tr style="color:var(--muted)">
-            <td class="hmap-sub-name">Others</td>
-            <td class="hmap-cell" style="text-align:center">1</td>
-            <td class="hmap-cell" style="text-align:center">0</td>
-            <td class="hmap-cell" style="text-align:center">0</td>
-            <td class="hmap-cell" style="text-align:center">0</td>
-            <td class="hmap-cell" style="text-align:center;font-weight:800">0</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
+    <svg id="spk-mov-ptd" class="spk-svg" viewBox="0 0 560 130"></svg>
   </div>
 
-  <!-- Quarterly Movement -->
-  <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--border)">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-      <div style="font-size:9px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.5px" id="npsmov-qtr-label">Quarterly Movement — Oct '25 → Jan '26</div>
-      <div style="flex:1;height:1px;background:var(--border)"></div>
-      <div style="background:var(--green-bg);border:1px solid var(--green-border);border-radius:6px;padding:4px 12px;display:flex;align-items:center;gap:6px">
-        <div style="font-size:20px;font-weight:800;color:var(--green);letter-spacing:-1px;line-height:1" id="npsmov-qtr-total">286</div>
-        <div style="font-size:8.5px;font-weight:600;color:var(--green);line-height:1.2">Total<br>Converted</div>
+  <!-- Card 3: Net Movement -->
+  <div class="spk-card spk-green">
+    <div class="spk-top">
+      <div>
+        <div class="spk-label">Net Movement</div>
+        <div class="spk-val c-green">+19</div>
+        <div class="spk-meta" style="margin-top:4px">
+          <span class="spk-vol-n">Oct-Jan quarter</span>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="spk-mom c-green">+61 vs prev</div>
+        <div class="spk-badge" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">Net gain</div>
       </div>
     </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-
-      <!-- Quarterly By Vintage -->
-      <div>
-        <div style="font-size:9px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">By Vintage</div>
-        <table class="hmap-table" style="width:100%">
-          <thead><tr>
-            <th class="hmap-th-sub">Vintage</th>
-            <th class="hmap-th-month" style="min-width:60px">Count</th>
-            <th class="hmap-th-month" style="min-width:60px">Share</th>
-          </tr></thead>
-          <tbody id="npsmov-qtr-vintage">
-            <tr>
-              <td class="hmap-sub-name">Quarterly+</td>
-              <td class="hmap-cell hmap-hot" style="--v:40;--base-r:112;--base-g:85;--base-b:184;text-align:center">278<br><span class="hmap-n">dominant</span></td>
-              <td class="hmap-cell hmap-hot" style="--v:40;--base-r:112;--base-g:85;--base-b:184;text-align:center;font-weight:800">97.2%</td>
-            </tr>
-            <tr>
-              <td class="hmap-sub-name">30 Day</td>
-              <td class="hmap-cell" style="--v:2;--base-r:45;--base-g:138;--base-b:106;text-align:center">4</td>
-              <td class="hmap-cell" style="--v:2;--base-r:45;--base-g:138;--base-b:106;text-align:center">1.4%</td>
-            </tr>
-            <tr>
-              <td class="hmap-sub-name">60 Day</td>
-              <td class="hmap-cell" style="--v:2;--base-r:66;--base-g:112;--base-b:196;text-align:center">4</td>
-              <td class="hmap-cell" style="--v:2;--base-r:66;--base-g:112;--base-b:196;text-align:center">1.4%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Quarterly By Customer Type -->
-      <div>
-        <div style="font-size:9px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">By Customer Type</div>
-        <table class="hmap-table" style="width:100%">
-          <thead><tr>
-            <th class="hmap-th-sub">Type</th>
-            <th class="hmap-th-month" style="min-width:60px">Count</th>
-            <th class="hmap-th-month" style="min-width:60px">Share</th>
-          </tr></thead>
-          <tbody id="npsmov-qtr-custtype">
-            <tr>
-              <td class="hmap-sub-name">TSCatalog</td>
-              <td class="hmap-cell hmap-hot" style="--v:20;--base-r:112;--base-g:85;--base-b:184;text-align:center">106<br><span class="hmap-n">#1</span></td>
-              <td class="hmap-cell hmap-hot" style="--v:20;--base-r:112;--base-g:85;--base-b:184;text-align:center;font-weight:800">37.1%</td>
-            </tr>
-            <tr>
-              <td class="hmap-sub-name">Catalog</td>
-              <td class="hmap-cell" style="--v:14;--base-r:196;--base-g:96;--base-b:64;text-align:center">72<br><span class="hmap-n">#2</span></td>
-              <td class="hmap-cell" style="--v:14;--base-r:196;--base-g:96;--base-b:64;text-align:center">25.2%</td>
-            </tr>
-            <tr>
-              <td class="hmap-sub-name">Star</td>
-              <td class="hmap-cell" style="--v:8;--base-r:45;--base-g:138;--base-b:106;text-align:center">42</td>
-              <td class="hmap-cell" style="--v:8;--base-r:45;--base-g:138;--base-b:106;text-align:center">14.7%</td>
-            </tr>
-            <tr>
-              <td class="hmap-sub-name">Leader</td>
-              <td class="hmap-cell" style="--v:7;--base-r:66;--base-g:112;--base-b:196;text-align:center">36</td>
-              <td class="hmap-cell" style="--v:7;--base-r:66;--base-g:112;--base-b:196;text-align:center">12.6%</td>
-            </tr>
-            <tr>
-              <td class="hmap-sub-name">Others</td>
-              <td class="hmap-cell" style="--v:5;--base-r:180;--base-g:180;--base-b:185;text-align:center">30<br><span class="hmap-n">Export+Others</span></td>
-              <td class="hmap-cell" style="--v:5;--base-r:180;--base-g:180;--base-b:185;text-align:center">10.5%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
+    <svg id="spk-mov-net" class="spk-svg" viewBox="0 0 560 130"></svg>
   </div>
 
 </div>
@@ -3923,6 +3732,36 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   </ul>
 </div>
 
+<!-- KEY INSIGHTS ONE-LINERS -->
+<div style="display:flex;flex-direction:column;gap:0;margin-bottom:4px;border:1.5px solid var(--purple-border);border-radius:12px;overflow:hidden">
+  <div style="padding:10px 18px;background:linear-gradient(135deg,#F5F0FA,#EEF2FA);border-bottom:1px solid var(--purple-border);display:flex;align-items:center;gap:8px">
+    <span style="font-size:13px">⚡</span>
+    <span style="font-size:10px;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:.6px">5 Key Takeaways</span>
+  </div>
+  <div style="padding:0">
+    <div style="padding:9px 18px;border-bottom:1px solid #F0EFEC;display:flex;align-items:baseline;gap:10px;font-size:10.5px;line-height:1.5;color:var(--ink2)">
+      <span style="font-weight:800;color:var(--red);font-size:11px;flex-shrink:0">1.</span>
+      <span><strong>"Irrelevant Leads"</strong> is the #1 pain point across all 5 feedback channels — confirmed independently by NPS (34%), App (32%), QRF, BLNI, and 9696 calls</span>
+    </div>
+    <div style="padding:9px 18px;border-bottom:1px solid #F0EFEC;display:flex;align-items:baseline;gap:10px;font-size:10.5px;line-height:1.5;color:var(--ink2)">
+      <span style="font-weight:800;color:var(--red);font-size:11px;flex-shrink:0">2.</span>
+      <span><strong>Catalog seller NPS at 8.1</strong> — monthly ₹3K subscribers churn before the platform delivers value (takes 60-90 days based on TSCatalog recovery data)</span>
+    </div>
+    <div style="padding:9px 18px;border-bottom:1px solid #F0EFEC;display:flex;align-items:baseline;gap:10px;font-size:10.5px;line-height:1.5;color:var(--ink2)">
+      <span style="font-weight:800;color:var(--amber);font-size:11px;flex-shrink:0">3.</span>
+      <span><strong>Algorithm objectively improving</strong> (BLNI best-ever 4.33%) <strong>but seller perception worsening</strong> — NPS "Irrelevant Buyer" share rose from 31% to 34% despite better lead matching</span>
+    </div>
+    <div style="padding:9px 18px;border-bottom:1px solid #F0EFEC;display:flex;align-items:baseline;gap:10px;font-size:10.5px;line-height:1.5;color:var(--ink2)">
+      <span style="font-weight:800;color:var(--green);font-size:11px;flex-shrink:0">4.</span>
+      <span><strong>TSCatalog has the highest D→P recovery</strong> (106 quarterly) — understanding what converts these detractors back is the highest-leverage insight to replicate across segments</span>
+    </div>
+    <div style="padding:9px 18px;display:flex;align-items:baseline;gap:10px;font-size:10.5px;line-height:1.5;color:var(--ink2)">
+      <span style="font-weight:800;color:var(--blue);font-size:11px;flex-shrink:0">5.</span>
+      <span><strong>Top 3 NPS complaints now account for ~80%</strong> of all feedback — problems are concentrating (not diffusing), meaning focused fixes on 3 issues can move the needle</span>
+    </div>
+  </div>
+</div>
+
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!-- SECTION 1: SELLER PROBLEM CONSENSUS                            -->
@@ -5164,6 +5003,20 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
     color:'#C07D30', fmt:v=>v.toFixed(1), allLabels:true
   });
 
+  // ── Tab 2: Quarterly movement spark lines ────────────────────────
+  drawSparkLine('spk-mov-dtp',{
+    vals:[326,360,259,286], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan'],
+    color:'#2D8A6A', fmt:v=>Math.round(v), allLabels:true
+  });
+  drawSparkLine('spk-mov-ptd',{
+    vals:[378,297,301,267], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan'],
+    color:'#C0444A', fmt:v=>Math.round(v), allLabels:true
+  });
+  drawSparkLine('spk-mov-net',{
+    vals:[-52,63,-42,19], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan'],
+    color:'#4270C4', fmt:v=>(v>=0?'+':'')+Math.round(v), allLabels:true
+  });
+
   // Expose to outer scope so applyDashboardData and resize handler can call them
   window._drawSparkLine = drawSparkLine;
   window._linReg        = linReg;
@@ -5217,6 +5070,20 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
     drawSparkLine('spk-vint-new',{
       vals:[4.9,7.4,12.0,7.75,17.45], months:['Apr','Jul','Oct','Jan','Feb'],
       ns:[1159,1182,899,854,856], color:'#C07D30', fmt:v=>v.toFixed(1), allLabels:true
+    });
+
+    // Quarterly movement sparklines (4 quarters: Jan-Apr, Apr-Jul, Jul-Oct, Oct-Jan)
+    drawSparkLine('spk-mov-dtp',{
+      vals:[326,360,259,286], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan'],
+      color:'#2D8A6A', fmt:v=>Math.round(v), allLabels:true
+    });
+    drawSparkLine('spk-mov-ptd',{
+      vals:[378,297,301,267], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan'],
+      color:'#C0444A', fmt:v=>Math.round(v), allLabels:true, lowerBetter:true
+    });
+    drawSparkLine('spk-mov-net',{
+      vals:[-52,63,-42,19], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan'],
+      color:'#4270C4', fmt:v=>(v>=0?'+':'')+Math.round(v), allLabels:true, zeroLine:true
     });
   };
 })();
@@ -6305,8 +6172,8 @@ function applyNPSMovementData(d) {
 }
 
 // ══════════════════════════════════════════════════════════════════
-// AUTO-GENERATING INSIGHTS ENGINE
-// Rebuilds Sections 1-3 from parsed data, calls Claude API for S4
+// INSIGHTS AUTO-GENERATION ENGINE
+// Rebuilds Sections 1 & 4 from parsed data (no external API)
 // ══════════════════════════════════════════════════════════════════
 
 function rebuildInsights(nps, app, qrf, bl, tele, npsmov) {
@@ -6315,214 +6182,187 @@ function rebuildInsights(nps, app, qrf, bl, tele, npsmov) {
   var L = function(a) { return a && a.length ? a[a.length-1] : 0; };
   var P = function(a) { return a && a.length > 1 ? a[a.length-2] : 0; };
   var pct = function(n, d) { return d ? (n/d*100).toFixed(1) : '0.0'; };
-  var lastMo = nps.months && nps.months.length ? nps.months[nps.months.length-1] : "Mar'26";
-  var prevMo = nps.months && nps.months.length > 1 ? nps.months[nps.months.length-2] : "Feb'26";
+  var lastMo = nps.months && nps.months.length ? nps.months[nps.months.length-1] : "Latest";
 
-  // ── Compute all metrics from parsed data ──
-
-  // NPS complaint shares (current month)
-  var npsTotal = L(nps.totalComplaints ? [nps.totalComplaints.cur] : []) || 1;
+  // ── Compute metrics from parsed data ──
+  var npsTotal = nps.totalComplaints ? nps.totalComplaints.cur || 0 : 0;
+  if (!npsTotal) npsTotal = 1;
   var npsIrrel = nps.irrel ? nps.irrel.cur || 0 : 0;
   var npsConv = nps.lowConv ? nps.lowConv.cur || 0 : 0;
   var npsBls = nps.lessBL ? nps.lessBL.cur || 0 : 0;
   var npsIwb = nps.iwb ? nps.iwb.cur || 0 : 0;
-  var npsOth = nps.others ? nps.others.cur || 0 : 0;
 
-  // NPS complaint shares (prev month)
-  var npsTotalP = nps.totalComplaints ? (nps.totalComplaints.prev || 1) : 1;
-  var npsIrrelP = nps.irrel ? nps.irrel.prev || 0 : 0;
-  var npsConvP = nps.lowConv ? nps.lowConv.prev || 0 : 0;
-  var npsBlsP = nps.lessBL ? nps.lessBL.prev || 0 : 0;
-  var npsIwbP = nps.iwb ? nps.iwb.prev || 0 : 0;
-  var npsOthP = nps.others ? nps.others.prev || 0 : 0;
-
-  // App complaint shares
   var appTotal = app.totalComplaints ? (app.totalComplaints.cur || L(app.totalComplaints.full) || 1) : 1;
   var appIrrel = app.irrel ? (app.irrel.cur || L(app.irrel.full) || 0) : 0;
   var appConv = app.lowConv ? (app.lowConv.cur || L(app.lowConv.full) || 0) : 0;
   var appBls = app.lessBL ? (app.lessBL.cur || L(app.lessBL.full) || 0) : 0;
   var appIwb = app.iwb ? (app.iwb.cur || L(app.iwb.full) || 0) : 0;
 
-  // QRF and BLNI rates
   var qrfRate = L(qrf.irrelPct) || 0;
   var blRate = L(bl.blniPct) || 0;
-  var blRatePrev = P(bl.blniPct) || 0;
-
-  // NPS segment scores
-  var npsLast = L(nps.npsVals) || 0;
-  var npsPrev = P(nps.npsVals) || 0;
+  var blPrev = P(bl.blniPct) || 0;
+  var npsVal = L(nps.npsVals) || 0;
+  var npsPrevVal = P(nps.npsVals) || 0;
 
   var irrelPct = pct(npsIrrel, npsTotal);
   var convPct = pct(npsConv, npsTotal);
   var blsPct = pct(npsBls, npsTotal);
   var iwbPct = pct(npsIwb, npsTotal);
-  var othPct = pct(npsOth, npsTotal);
   var appIrrelPct = pct(appIrrel, appTotal);
   var appConvPct = pct(appConv, appTotal);
   var appBlsPct = pct(appBls, appTotal);
   var appIwbPct = pct(appIwb, appTotal);
-  var top3Pct = (+irrelPct + +convPct + +blsPct).toFixed(1);
+  var top3Pct = (+irrelPct + +convPct + +blsPct).toFixed(0);
+  var has9696 = !!tele;
 
-  // Consensus count
-  var irrelConsensus = 2; // NPS + App always
-  if (qrfRate > 0) irrelConsensus++;
-  if (blRate > 0) irrelConsensus++;
-  if (tele) irrelConsensus++;
-  var convConsensus = 2; // NPS + App
-  if (tele) convConsensus++;
+  // Consensus counts
+  var irrelCon = 2 + (qrfRate>0?1:0) + (blRate>0?1:0) + (has9696?1:0);
+  var convCon = 2 + (has9696?1:0);
+  var sources = has9696 ? 5 : 4;
 
   // ── SECTION 1: Consensus Table ──
   var s1 = document.getElementById('insight-s1');
   if (s1) {
-    var has9696 = !!tele;
-    s1.innerHTML = '<div style="font-size:10.5px;color:var(--ink2);line-height:1.7;margin-bottom:16px">' +
-      'IndiaMART collects seller feedback through ' + (has9696?'5':'4') + ' independent channels at different lifecycle stages. <strong>NPS</strong> is asked at 30, 60, and 90 days from onboarding. <strong>App internal feedback</strong> triggers after 5 buy-leads. <strong>QRF</strong> and <strong>BLNI</strong> are per-lead quality signals.' + (has9696?' <strong>9696</strong> captures sellers considering leaving.':'') + ' When the <strong>same problem surfaces as a top issue across 3+ channels</strong>, it\'s structural.</div>' +
-      '<table class="hmap-table" style="width:100%"><thead><tr>' +
+    var h = '<div style="font-size:10.5px;color:var(--ink2);line-height:1.7;margin-bottom:16px">' +
+      'Updated from uploaded data (' + lastMo + '). Feedback collected through ' + sources + ' channels: <strong>NPS</strong> (30/60/90-day), <strong>App</strong> (after 5 BLs), <strong>BLNI</strong> (algorithm), <strong>QRF</strong> (per-lead)' + (has9696?', <strong>9696</strong> (calls)':'') + '.</div>';
+
+    h += '<table class="hmap-table" style="width:100%"><thead><tr>' +
       '<th class="hmap-th-sub" style="min-width:180px">Seller Problem</th>' +
       '<th class="hmap-th-month" style="min-width:70px">NPS<br><span style="font-weight:400;font-size:7.5px">30/60/90d</span></th>' +
       '<th class="hmap-th-month" style="min-width:70px">App<br><span style="font-weight:400;font-size:7.5px">after 5 BLs</span></th>' +
       '<th class="hmap-th-month" style="min-width:70px">BLNI<br><span style="font-weight:400;font-size:7.5px">algorithm</span></th>' +
       '<th class="hmap-th-month" style="min-width:70px">QRF<br><span style="font-weight:400;font-size:7.5px">per-lead</span></th>' +
       (has9696?'<th class="hmap-th-month" style="min-width:70px">9696<br><span style="font-weight:400;font-size:7.5px">calls</span></th>':'') +
-      '<th class="hmap-th-delta" style="min-width:70px">Consensus</th>' +
-      '</tr></thead><tbody>' +
-      _insightRow('🎯 Irrelevant / Low-Quality Leads', true, '#1 '+irrelPct+'%', '#1 '+appIrrelPct+'%', '✅ '+blRate.toFixed(2)+'%', '✅ '+qrfRate.toFixed(2)+'%', has9696?'✅':'', irrelConsensus, has9696?5:4) +
-      _insightRow('💸 Low Conv / Less BLs', true, '#2+#3 '+convPct+'%+'+blsPct+'%', '#2+#3 '+appConvPct+'%+'+appBlsPct+'%', '—', '—', has9696?'✅':'', convConsensus, has9696?5:4) +
-      _insightRow('👤 Issues with Buyer', false, '#4 '+iwbPct+'%', '#4 '+appIwbPct+'%', '—', '—', '—', 2, has9696?5:4) +
-      '</tbody></table>' +
-      '<div style="margin-top:14px;padding:10px 14px;background:#FFF8F0;border:1px solid #EDD8A0;border-radius:7px;font-size:10px;color:var(--ink2);line-height:1.6">' +
-      '<strong>🔍 Key finding:</strong> "Irrelevant Leads" confirmed as #1 across <strong>' + irrelConsensus + '/' + (has9696?5:4) + ' channels</strong>. Top 3 NPS complaints (Irrelevant + Low Conversion + Less BLs) now account for <strong>~' + top3Pct + '% of all complaints</strong>.</div>';
+      '<th class="hmap-th-delta" style="min-width:70px">Consensus</th></tr></thead><tbody>';
+
+    h += _csRow('🎯 Irrelevant / Low-Quality Leads', true, '#1 '+irrelPct+'%', '#1 '+appIrrelPct+'%', '✅ '+blRate.toFixed(2)+'%', '✅ '+qrfRate.toFixed(2)+'%', has9696?'✅':'', irrelCon, sources);
+    h += _csRow('💸 Low Conv / Less BLs', true, '#2+#3 '+convPct+'%+'+blsPct+'%', '#2+#3 '+appConvPct+'%+'+appBlsPct+'%', '—', '—', has9696?'✅':'', convCon, sources);
+    h += _csRow('👤 Issues with Buyer', false, '#4 '+iwbPct+'%', '#4 '+appIwbPct+'%', '—', '—', '—', 2, sources);
+    h += '</tbody></table>';
+
+    h += '<div style="margin-top:14px;padding:10px 14px;background:#FFF8F0;border:1px solid #EDD8A0;border-radius:7px;font-size:10px;color:var(--ink2);line-height:1.6">' +
+      '<strong>🔍 Key finding (' + lastMo + '):</strong> "Irrelevant Leads" confirmed as #1 across <strong>' + irrelCon + '/' + sources + ' channels</strong>. ' +
+      'Top 3 NPS complaints now account for <strong>~' + top3Pct + '% of all complaints</strong>.</div>';
+
+    s1.innerHTML = h;
   }
 
-  // ── SECTION 4: AI-generated actions ──
-  _generateAIInsights(nps, app, qrf, bl, tele, npsmov, lastMo);
-
-  console.log('✓ rebuildInsights complete (sections 1 auto-generated, section 4 AI in progress)');
-}
-
-function _insightRow(label, isBold, npsCell, appCell, blniCell, qrfCell, teleCell, consensus, total) {
-  var hot = consensus >= 3 ? ' hmap-hot' : '';
-  var conColor = consensus >= 3 ? 'hmap-delta-up' : (consensus >= 2 ? '' : '');
-  var hasTele = teleCell !== '';
-  return '<tr>' +
-    '<td class="hmap-sub-name" style="font-weight:' + (isBold?'700':'500') + '">' + label + '</td>' +
-    '<td class="hmap-cell' + hot + '" style="--v:' + consensus*10 + ';--base-r:192;--base-g:68;--base-b:68;text-align:center;font-size:9px">' + npsCell + '</td>' +
-    '<td class="hmap-cell' + hot + '" style="--v:' + consensus*10 + ';--base-r:192;--base-g:68;--base-b:68;text-align:center;font-size:9px">' + appCell + '</td>' +
-    '<td class="hmap-cell" style="text-align:center;font-size:9px;' + (blniCell==='—'?'color:var(--faint)':'') + '">' + blniCell + '</td>' +
-    '<td class="hmap-cell" style="text-align:center;font-size:9px;' + (qrfCell==='—'?'color:var(--faint)':'') + '">' + qrfCell + '</td>' +
-    (hasTele ? '<td class="hmap-cell" style="text-align:center;font-size:9px;' + (teleCell==='—'?'color:var(--faint)':'') + '">' + teleCell + '</td>' : '') +
-    '<td class="hmap-delta ' + conColor + '" style="font-size:11px"><strong>' + consensus + ' / ' + total + '</strong></td>' +
-    '</tr>';
-}
-
-// ── AI-Generated Actions (Section 4) ──
-function _generateAIInsights(nps, app, qrf, bl, tele, npsmov, lastMo) {
+  // ── SECTION 4: Data-driven actions ──
   var s4 = document.getElementById('insight-s4');
-  if (!s4) return;
+  if (s4) {
+    var npsMom = npsVal - npsPrevVal;
+    var blMom = blRate - blPrev;
+    var blBest = blRate <= Math.min.apply(null, bl.blniPct.filter(function(v){return v!=null;}));
 
-  // Build a concise data summary for Claude
-  var L = function(a) { return a && a.length ? a[a.length-1] : 0; };
-  var P = function(a) { return a && a.length > 1 ? a[a.length-2] : 0; };
+    // Build actions dynamically from the data patterns
+    var actions = [];
 
-  var npsTotal = nps.totalComplaints ? nps.totalComplaints.cur || 0 : 0;
-  var dataContext = 'IndiaMART Seller Pulse Dashboard — ' + lastMo + ' data.\n' +
-    'NPS overall: ' + L(nps.npsVals) + ' (prev: ' + P(nps.npsVals) + ')\n' +
-    'NPS complaint shares: Irrelevant=' + (npsTotal ? ((nps.irrel?nps.irrel.cur:0)/npsTotal*100).toFixed(1) : '?') + '%, ' +
-    'LowConv=' + (npsTotal ? ((nps.lowConv?nps.lowConv.cur:0)/npsTotal*100).toFixed(1) : '?') + '%, ' +
-    'LessBLs=' + (npsTotal ? ((nps.lessBL?nps.lessBL.cur:0)/npsTotal*100).toFixed(1) : '?') + '%\n' +
-    'QRF irrelevancy: ' + L(qrf.irrelPct) + '%\n' +
-    'BLNI/Txn: ' + L(bl.blniPct) + '% (prev: ' + P(bl.blniPct) + '%)\n' +
-    'App paid seller rating: ' + L(app.ratings) + ' (prev: ' + P(app.ratings) + ')\n';
+    // Action 1: Always — Catalog seller investigation (structural issue)
+    actions.push({
+      action: 'Audit Catalog seller sales expectations vs 30-day reality — are agents overselling?',
+      data: 'Catalog sellers (₹3K/mo) consistently have lowest NPS. Monthly subscription may not allow 60-90 day acclimatisation. NPS=' + npsVal.toFixed(1) + ' overall.',
+      impact: 'High', effort: 'Low'
+    });
 
-  if (npsmov) {
-    var mLen = npsmov.totals ? npsmov.totals.length : 0;
-    dataContext += 'D→P monthly recovery: ' + (mLen ? npsmov.totals[mLen-1] : '?') + ' (prev: ' + (mLen>1?npsmov.totals[mLen-2]:'?') + ')\n';
-    if (npsmov.qtrTotal) dataContext += 'D→P quarterly: ' + npsmov.qtrTotal + '\n';
+    // Action 2: Conditional on BLNI trends
+    if (blMom > 0) {
+      actions.push({
+        action: 'Investigate BLNI/Txn reversal — what disposition drove the increase?',
+        data: 'BLNI/Txn went from ' + blPrev.toFixed(2) + '% to ' + blRate.toFixed(2) + '% (+' + (blMom).toFixed(2) + 'pp MoM). Check which disposition reversed.',
+        impact: 'High', effort: 'Low'
+      });
+    } else {
+      actions.push({
+        action: 'Document and replicate the BLNI improvement playbook — apply to remaining disposition gaps',
+        data: 'BLNI/Txn at ' + blRate.toFixed(2) + '%' + (blBest?' (best ever)':'') + '. Successful interventions on Wrong Location/Category can be extended to other dispositions.',
+        impact: 'High', effort: 'Low'
+      });
+    }
+
+    // Action 3: Based on NPS trend
+    if (npsMom < -2) {
+      actions.push({
+        action: 'Diagnose NPS drop — which segments and vintage cohorts drove the decline?',
+        data: 'NPS fell ' + npsMom.toFixed(1) + 'pp (' + npsPrevVal.toFixed(1) + ' → ' + npsVal.toFixed(1) + '). Check 30-day cohort (Catalog heavy) vs 90-day (tenured). Different causes need different fixes.',
+        impact: 'High', effort: 'Medium'
+      });
+    } else if (npsMom > 2) {
+      actions.push({
+        action: 'Identify what drove NPS improvement — replicate across lagging segments',
+        data: 'NPS rose ' + npsMom.toFixed(1) + 'pp to ' + npsVal.toFixed(1) + '. Understand which segment/vintage improved and why.',
+        impact: 'High', effort: 'Medium'
+      });
+    } else {
+      actions.push({
+        action: 'Compress the onboarding curve — can new sellers reach a complete catalog in <7 days?',
+        data: 'TSCatalog D→P recovery shows sellers who stay DO become satisfied. Faster onboarding = value realised sooner for monthly sellers.',
+        impact: 'High', effort: 'Medium'
+      });
+    }
+
+    // Action 4: Less BLs complaint trajectory
+    var blsShare = +blsPct;
+    if (blsShare > 18) {
+      actions.push({
+        action: 'Investigate "Less BLs" complaint surge (' + blsPct + '% of NPS) — supply or distribution?',
+        data: 'Could mean fewer buyers posting leads OR same leads going to fewer sellers. Check total BL volume trend vs active seller count.',
+        impact: 'Medium', effort: 'Low'
+      });
+    } else {
+      actions.push({
+        action: 'Monitor "Less BLs" complaint share — currently at ' + blsPct + '% of NPS feedback',
+        data: 'Not yet critical but track for acceleration. Cross-check with App feedback (' + appBlsPct + '% there).',
+        impact: 'Medium', effort: 'Low'
+      });
+    }
+
+    // Action 5: D→P recovery study (always relevant)
+    var dToP = npsmov && npsmov.totals ? L(npsmov.totals) : null;
+    actions.push({
+      action: 'Study TSCatalog D→P recovery mechanism — what converts their detractors back?',
+      data: (dToP !== null ? dToP + ' sellers recovered D→P this period. ' : '') + 'TSCatalog has highest recovery rate. Understanding this = high-leverage playbook for Catalog. Requires GLID linkage (see Section 6).',
+      impact: 'High', effort: 'High'
+    });
+
+    // Render
+    var h = '<div style="font-size:10.5px;color:var(--ink2);line-height:1.7;margin-bottom:16px">' +
+      'Auto-generated from uploaded ' + lastMo + ' data. Framed as <strong>hypotheses to validate</strong>, not conclusions.</div>';
+    h += '<table class="hmap-table" style="width:100%"><thead><tr>' +
+      '<th class="hmap-th-sub" style="min-width:30px">#</th>' +
+      '<th class="hmap-th-month" style="min-width:220px;text-align:left">Action</th>' +
+      '<th class="hmap-th-month" style="min-width:200px;text-align:left">Supporting Data</th>' +
+      '<th class="hmap-th-month" style="min-width:55px">Impact</th>' +
+      '<th class="hmap-th-month" style="min-width:55px">Effort</th></tr></thead><tbody>';
+
+    var ic = { High:'var(--green)', Medium:'var(--amber)' };
+    var ec = { Low:'var(--green)', Medium:'var(--amber)', High:'var(--red)' };
+    actions.forEach(function(a, i) {
+      h += '<tr>' +
+        '<td class="hmap-sub-name" style="text-align:center;font-weight:800;color:' + (i<2?'var(--red)':i<4?'var(--amber)':'var(--muted)') + '">' + (i+1) + '</td>' +
+        '<td class="hmap-cell" style="text-align:left;font-weight:700;line-height:1.5;font-family:\'Sora\',sans-serif">' + a.action + '</td>' +
+        '<td class="hmap-cell" style="text-align:left;font-size:9px;line-height:1.5;color:var(--muted)">' + a.data + '</td>' +
+        '<td class="hmap-cell" style="text-align:center;font-weight:700;color:' + (ic[a.impact]||'var(--muted)') + '">' + a.impact + '</td>' +
+        '<td class="hmap-cell" style="text-align:center;color:' + (ec[a.effort]||'var(--muted)') + '">' + a.effort + '</td></tr>';
+    });
+    h += '</tbody></table>';
+    h += '<div style="margin-top:10px;font-size:8.5px;color:var(--faint);text-align:right">Generated from uploaded data · ' + lastMo + '</div>';
+    s4.innerHTML = h;
   }
 
-  dataContext += '\nContext: IndiaMART is B2B. Buyers post leads, sellers consume them. ' +
-    'Catalog = monthly ₹3K sellers (cheapest), TSCatalog = annual (cheap). Star/Leader = premium annual. ' +
-    'NPS collected at 30/60/90 days from onboarding. App feedback after 5 BLs consumed. ' +
-    'Catalog sellers often churn before value materialises (takes 60-90 days). ' +
-    'TSCatalog has highest D→P recovery — acclimatisation hypothesis.';
-
-  var prompt = 'You are a senior product manager at IndiaMART. Based on this month\'s data, generate exactly 5 recommended actions for the Seller Pulse dashboard. ' +
-    'Each action should be: (a) a specific hypothesis to validate, not a conclusion, (b) tied to specific data points, (c) assigned High/Medium impact and Low/Medium/High effort.\n\n' +
-    'DATA:\n' + dataContext + '\n\n' +
-    'Respond ONLY with a JSON array of 5 objects: [{\"action\":\"...\",\"data\":\"...\",\"impact\":\"High|Medium\",\"effort\":\"Low|Medium|High\"}]\n' +
-    'Keep action text under 25 words. Keep data text under 40 words. No markdown, no preamble.';
-
-  // Show loading state
-  s4.innerHTML = '<div style="padding:20px;text-align:center;color:var(--muted)"><div style="font-size:11px;font-weight:600;margin-bottom:8px">🤖 Generating insights from uploaded data...</div><div style="font-size:9.5px">Analysing cross-source patterns with Claude</div></div>';
-
-  fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
-      messages: [{ role: 'user', content: prompt }]
-    })
-  }).then(function(r) { return r.json(); })
-  .then(function(data) {
-    var text = '';
-    if (data.content) data.content.forEach(function(b) { if (b.type==='text') text += b.text; });
-    text = text.replace(/```json|```/g, '').trim();
-    try {
-      var actions = JSON.parse(text);
-      _renderActions(s4, actions);
-    } catch(e) {
-      console.warn('AI response parse failed, using fallback', e);
-      _renderActionsFallback(s4, nps, app, qrf, bl, lastMo);
-    }
-  }).catch(function(err) {
-    console.warn('AI call failed, using fallback', err);
-    _renderActionsFallback(s4, nps, app, qrf, bl, lastMo);
-  });
+  console.log('✓ rebuildInsights complete');
 }
 
-function _renderActions(container, actions) {
-  var impactColor = { High: 'var(--green)', Medium: 'var(--amber)' };
-  var effortColor = { Low: 'var(--green)', Medium: 'var(--amber)', High: 'var(--red)' };
-  var h = '<div style="font-size:10.5px;color:var(--ink2);line-height:1.7;margin-bottom:16px">Auto-generated from uploaded data. Framed as <strong>hypotheses to validate</strong>.</div>';
-  h += '<table class="hmap-table" style="width:100%"><thead><tr>' +
-    '<th class="hmap-th-sub" style="min-width:30px">#</th>' +
-    '<th class="hmap-th-month" style="min-width:220px;text-align:left">Action</th>' +
-    '<th class="hmap-th-month" style="min-width:200px;text-align:left">Supporting Data</th>' +
-    '<th class="hmap-th-month" style="min-width:55px">Impact</th>' +
-    '<th class="hmap-th-month" style="min-width:55px">Effort</th>' +
-    '</tr></thead><tbody>';
-  actions.forEach(function(a, i) {
-    var ic = impactColor[a.impact] || 'var(--muted)';
-    var ec = effortColor[a.effort] || 'var(--muted)';
-    h += '<tr>';
-    h += '<td class="hmap-sub-name" style="text-align:center;font-weight:800;color:' + (i<2?'var(--red)':i<4?'var(--amber)':'var(--muted)') + '">' + (i+1) + '</td>';
-    h += '<td class="hmap-cell" style="text-align:left;font-weight:700;line-height:1.5;font-family:\'Sora\',sans-serif">' + a.action + '</td>';
-    h += '<td class="hmap-cell" style="text-align:left;font-size:9px;line-height:1.5;color:var(--muted)">' + a.data + '</td>';
-    h += '<td class="hmap-cell" style="text-align:center;font-weight:700;color:' + ic + '">' + a.impact + '</td>';
-    h += '<td class="hmap-cell" style="text-align:center;color:' + ec + '">' + a.effort + '</td>';
-    h += '</tr>';
-  });
-  h += '</tbody></table>';
-  h += '<div style="margin-top:10px;font-size:8.5px;color:var(--faint);text-align:right">🤖 Generated by Claude from uploaded data</div>';
-  container.innerHTML = h;
-}
-
-function _renderActionsFallback(container, nps, app, qrf, bl, lastMo) {
-  // Deterministic fallback when AI is unavailable
-  var L = function(a) { return a && a.length ? a[a.length-1] : 0; };
-  var npsVal = L(nps.npsVals) || 0;
-  var blVal = L(bl.blniPct) || 0;
-  var qrfVal = L(qrf.irrelPct) || 0;
-  var actions = [
-    { action: 'Investigate top NPS complaint trends — which categories are growing fastest?', data: 'NPS=' + npsVal.toFixed(1) + ', top complaints concentrating. Cross-check with App feedback for consistency.', impact: 'High', effort: 'Low' },
-    { action: 'Review algorithm disposition changes — which BLNI categories reversed direction?', data: 'BLNI/Txn=' + blVal.toFixed(2) + '%. Check for any disposition that improved then worsened.', impact: 'High', effort: 'Low' },
-    { action: 'Assess Catalog seller value delivery — are monthly sellers getting enough leads in 30 days?', data: 'Catalog NPS typically lowest. Monthly subscription may not allow enough acclimatisation time.', impact: 'High', effort: 'Medium' },
-    { action: 'Check "Less BLs" complaint trajectory — is it a supply or distribution issue?', data: 'QRF irrelevancy at ' + qrfVal.toFixed(2) + '%. Compare total BL volume trend with active seller count.', impact: 'Medium', effort: 'Low' },
-    { action: 'Study D→P recovery patterns by segment — what converts detractors back?', data: 'TSCatalog typically has highest recovery. Understanding this mechanism is key.', impact: 'High', effort: 'High' },
-  ];
-  _renderActions(container, actions);
-  container.innerHTML += '<div style="margin-top:4px;font-size:8.5px;color:var(--faint);text-align:right">⚡ Data-driven fallback (AI unavailable)</div>';
+function _csRow(label, bold, nps, app, blni, qrf, tele, con, total) {
+  var hot = con >= 3 ? ' hmap-hot' : '';
+  var hasTele = tele !== '';
+  return '<tr>' +
+    '<td class="hmap-sub-name" style="font-weight:' + (bold?'700':'500') + '">' + label + '</td>' +
+    '<td class="hmap-cell' + hot + '" style="--v:' + con*10 + ';--base-r:192;--base-g:68;--base-b:68;text-align:center;font-size:9px">' + nps + '</td>' +
+    '<td class="hmap-cell' + hot + '" style="--v:' + con*10 + ';--base-r:192;--base-g:68;--base-b:68;text-align:center;font-size:9px">' + app + '</td>' +
+    '<td class="hmap-cell" style="text-align:center;font-size:9px;' + (blni==='—'?'color:var(--faint)':'') + '">' + blni + '</td>' +
+    '<td class="hmap-cell" style="text-align:center;font-size:9px;' + (qrf==='—'?'color:var(--faint)':'') + '">' + qrf + '</td>' +
+    (hasTele ? '<td class="hmap-cell" style="text-align:center;font-size:9px;' + (tele==='—'?'color:var(--faint)':'') + '">' + tele + '</td>' : '') +
+    '<td class="hmap-delta ' + (con>=3?'hmap-delta-up':'') + '" style="font-size:11px"><strong>' + con + ' / ' + total + '</strong></td></tr>';
 }
 
 // ── Apply data to dashboard ───────────────────────────────
