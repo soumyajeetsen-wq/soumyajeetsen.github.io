@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#FFFFFF">
-<title>Seller Pulse v8 — March 2026</title>
+<title>Seller Pulse v9 — April 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -1367,7 +1367,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       " onmouseover="this.style.borderColor='var(--muted)';this.style.background='var(--bg)'"
          onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--white)'">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <span class="btn-label" id="month-dd-label">Mar '26</span>
+        <span class="btn-label" id="month-dd-label">Apr '26</span>
         <svg id="month-dd-caret" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div id="month-dd-panel" style="
@@ -1407,10 +1407,17 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   <button class="tab-btn" onclick="switchTab('tab2',this)">📊 NPS Deep Dive</button>
   <button class="tab-btn" onclick="switchTab('tab3',this)">🔍 NPS Complaints</button>
   <button class="tab-btn" onclick="switchTab('tab5',this)">📱 App Complaints</button>
-  <button class="tab-btn" onclick="switchTab('tab6',this)">⭐ App Ratings</button>
+  <button class="tab-btn" id="tab6-btn" onclick="switchTab('tab6',this)">⭐ App Ratings</button>
   <button class="tab-btn" onclick="switchTab('tab7',this)">📉 NI Bifurcations</button>
   <button class="tab-btn" onclick="switchTab('tab8',this)">📞 9696 Calls</button>
   <button class="tab-btn" onclick="switchTab('tab9',this)">💡 Insights</button>
+  <!-- App Ratings visibility toggle — only visible to you, not printed -->
+  <button id="ar-visibility-btn" onclick="toggleAppRatingsTab()" title="Toggle App Ratings tab visibility" style="
+    margin-left:6px; padding:4px 9px; border-radius:6px; border:1.5px dashed var(--border);
+    background:transparent; color:var(--muted); font-size:10px; font-weight:600;
+    font-family:'Sora',sans-serif; cursor:pointer; white-space:nowrap;
+    transition:all .2s; flex-shrink:0;
+  ">👁</button>
 </div>
 <div id="tab-scroll-hint" style="
   display:none;
@@ -1428,23 +1435,23 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div class="pg">
 
 <div id="ts-tab1" class="tab-summary" style="border-left-color:#2D8A6A">
-  <div class="ts-hdr">📊 Since Oct '25 — at a glance</div>
+  <div class="ts-hdr">📊 April 2026 — at a glance</div>
   <ul>
-    <li><strong>NPS</strong> dropped <span class="hi-red">−4.5pp</span> (25.4 → 20.9) — retreating from best-ever; still above Oct baseline</li>
-    <li><strong>QRF Irrelevancy</strong> ticked up marginally to 4.96% — near best-ever 4.94% but momentum stalled</li>
-    <li><strong>BL Irrelevancy</strong> declined <span class="hi-green">−0.08pp</span> (4.41% → 4.33%) — <strong>new best ever</strong></li>
-    <li><strong>App Rating</strong> inched up to 3.42★ — marginal improvement after 2 flat months at 3.41</li>
-    <li>🔴 <strong>Irrelevant Leads</strong> surged to 44% of NPS complaints (from 34%) — dominant seller problem across all 4 sources</li>
-    <li>🟡 <strong>Low Conversion</strong> (31%) and <strong>Less BLs</strong> (26%) complaints rising sharply in NPS feedback</li>
+    <li><strong>NPS</strong> rebounded to <span class="hi-green">22.7</span> (from 20.9 in March) on the largest sample this year (7,718 responses) — still below Feb best-ever of 25.4</li>
+    <li><strong>BLNI/Txn hit 4.05%</strong> — <span class="hi-green">new best ever</span>, improving from 4.33% in March; 6-month improvement of −28% from Oct'25 peak of 5.61%</li>
+    <li><strong>QRF Irrelevancy ticked up to 4.13‰</strong> from 3.88‰ in March — <span class="hi-red">first reversal in 3 months</span>; worth monitoring</li>
+    <li><strong>Paid Seller App Rating: 3.58★</strong> (from 3.60 in March) — 2nd consecutive monthly decline on 4,849 raters</li>
+    <li>🔴 <strong>Irrelevant Leads</strong> at 35.0% of NPS complaints (n=1,287) — highest in 4 months; confirmed across all 4 data sources</li>
+    <li>🟡 <strong>Low Conversion (23.4%)</strong> and <strong>Less BLs (21.6%)</strong> remain elevated — top 3 account for ~80% of all 3,674 detractor dispositions</li>
   </ul>
 </div>
 
 
 <!-- ═══ SECTION 1: SPARK CARDS ═══ -->
 <div class="sh" style="margin-top:0">
-  <span class="sh-t" id="sh-glance">At a glance — February 2026</span>
+  <span class="sh-t" id="sh-glance">At a glance — April 2026</span>
   <div class="sh-l"></div>
-  <span class="sh-b" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">★ Best BLNI/Txn ever</span>
+  <span class="sh-b" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">★ New Best BLNI/Txn ever</span>
   <span class="sh-b" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">BLNI/Txn ↓ improving</span>
 </div>
 
@@ -1455,15 +1462,14 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <div class="spk-top">
       <div>
         <div class="spk-label">NPS Score</div>
-        <div class="spk-val c-green">25.4</div>
+        <div class="spk-val c-green">22.7</div>
         <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
-          <span class="best-ever-badge">★ BEST EVER</span>
-          <span class="spk-vol-n">2,138 responses</span>
+          <span class="spk-vol-n">7,718 responses</span>
         </div>
         
       </div>
       <div style="text-align:right">
-        <div class="spk-mom c-green">+0.8 MoM</div>
+        <div class="spk-mom c-green">+1.8 MoM</div>
         <div class="spk-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">NPS Survey</div>
       </div>
     </div>
@@ -1497,17 +1503,16 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <div class="spk-top">
       <div>
         <div class="spk-label">Paid Seller App Rating</div>
-        <div class="spk-val c-amber">3.41 <span style="font-size:16px;font-weight:500;color:var(--muted)">/ 5</span></div>
-        <div class="spk-vol-n" style="margin-top:5px">5,441 ratings</div>
+        <div class="spk-val c-amber">3.58 <span style="font-size:16px;font-weight:500;color:var(--muted)">/ 5</span></div>
+        <div class="spk-vol-n" style="margin-top:5px">3,575 ratings</div>
         
       </div>
       <div style="text-align:right">
-        <div class="spk-mom" style="color:var(--muted)">→ Flat MoM</div>
+        <div class="spk-mom c-red">−0.7% MoM</div>
         <div class="spk-badge" style="background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)">In-App · Paid only</div>
       </div>
     </div>
     <svg id="spk-app" class="spk-svg" viewBox="0 0 560 130"></svg>
-    <div class="spk-vol-n" style="margin-top:5px">5,441 ratings</div>
     <div style="display:flex;justify-content:flex-end;margin-top:6px">
       <button onclick="document.querySelector('[onclick*=tab5]').click()" style="
         display:inline-flex;align-items:center;gap:4px;
@@ -1526,14 +1531,13 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <div class="spk-top">
       <div>
         <div class="spk-label">QRF Irrelevancy Rate</div>
-        <div class="spk-val c-green">4.94<span style="font-size:16px;font-weight:500;color:var(--muted)">%</span></div>
+        <div class="spk-val c-amber">4.13<span style="font-size:16px;font-weight:500;color:var(--muted)">‰</span></div>
         <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
-          <span class="best-ever-badge">★ BEST EVER</span>
-          <span class="spk-vol-n">491,393 actions</span>
+          <span class="spk-vol-n">4,820,210 actions</span>
         </div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom c-green">−1.7% MoM</div>
+        <div class="spk-mom c-red">+6.3% MoM</div>
         <div class="spk-badge" style="background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-border)">QRF Overall</div>
       </div>
     </div>
@@ -1545,11 +1549,14 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <div class="spk-top">
       <div>
         <div class="spk-label">BL Irrelevancy (BLNI/Txn)</div>
-        <div class="spk-val c-green">4.41<span style="font-size:16px;font-weight:500;color:var(--muted)">%</span></div>
-        <div class="spk-vol-n" style="margin-top:5px">471,539 NIs</div>
+        <div class="spk-val c-green">4.05<span style="font-size:16px;font-weight:500;color:var(--muted)">%</span></div>
+        <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
+          <span class="best-ever-badge">★ BEST EVER</span>
+          <span class="spk-vol-n">440,417 NIs</span>
+        </div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom c-green">−2.6% MoM</div>
+        <div class="spk-mom c-green">−6.6% MoM</div>
         <div class="spk-badge" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">BLNI Report</div>
       </div>
     </div>
@@ -1560,7 +1567,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 <!-- ═══ SECTION 2: SELLER PROBLEMS ═══ -->
 <div class="sh">
-  <span class="sh-t" id="sh-problems">Seller problems — Feb '26</span>
+  <span class="sh-t" id="sh-problems">Seller problems — Apr '26</span>
   <div class="sh-l"></div>
   <span class="src-chip src-nps">NPS Feedback</span>
   <span class="src-chip src-app">Paid Seller App</span>
@@ -1586,17 +1593,17 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     </div>
     <div class="p4-vols">
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-nps" id="p4-irrel-nps">34%</div>
+        <div class="p4-vol-n p4-s-nps" id="p4-irrel-nps">35%</div>
         <div class="p4-vol-s p4-s-nps">of NPS Feedback</div>
       </div>
       <div class="p4-vol-div"></div>
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-app" id="p4-irrel-app">32%</div>
+        <div class="p4-vol-n p4-s-app" id="p4-irrel-app">34%</div>
         <div class="p4-vol-s p4-s-app">of App Feedback</div>
       </div>
       <div class="p4-vol-div"></div>
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-bl" id="p4-irrel-bl">34%</div>
+        <div class="p4-vol-n p4-s-bl" id="p4-irrel-bl">37%</div>
         <div class="p4-vol-s p4-s-bl">of BLNI Submissions</div>
       </div>
       <div class="p4-vol-div"></div>
@@ -1624,7 +1631,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       </div>
       <div class="p4-vol-div"></div>
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-app" id="p4-conv-app">25%</div>
+        <div class="p4-vol-n p4-s-app" id="p4-conv-app">26%</div>
         <div class="p4-vol-s p4-s-app">of App Feedback</div>
       </div>
     </div>
@@ -1642,12 +1649,12 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     </div>
     <div class="p4-vols">
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-nps" id="p4-bls-nps">21%</div>
+        <div class="p4-vol-n p4-s-nps" id="p4-bls-nps">22%</div>
         <div class="p4-vol-s p4-s-nps">of NPS Feedback</div>
       </div>
       <div class="p4-vol-div"></div>
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-app" id="p4-bls-app">20%</div>
+        <div class="p4-vol-n p4-s-app" id="p4-bls-app">21%</div>
         <div class="p4-vol-s p4-s-app">of App Feedback</div>
       </div>
     </div>
@@ -1665,12 +1672,12 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     </div>
     <div class="p4-vols">
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-bl" id="p4-spec-bl">22%</div>
+        <div class="p4-vol-n p4-s-bl" id="p4-spec-bl">26%</div>
         <div class="p4-vol-s p4-s-bl">of BLNI Submissions</div>
       </div>
       <div class="p4-vol-div"></div>
       <div class="p4-vol">
-        <div class="p4-vol-n p4-s-qrf" id="p4-spec-qrf">18%</div>
+        <div class="p4-vol-n p4-s-qrf" id="p4-spec-qrf">19%</div>
         <div class="p4-vol-s p4-s-qrf">of QRF Submissions</div>
       </div>
     </div>
@@ -1680,7 +1687,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 <!-- ═══ SECTION 3: SELLER VOICE ═══ -->
 <div class="sh">
-  <span class="sh-t" id="sh-voice">Seller voice — Feb '26</span>
+  <span class="sh-t" id="sh-voice">Seller voice — Apr '26</span>
   <div class="sh-l"></div>
   <span style="font-size:9.5px;color:var(--faint)">Paid seller verbatims · selected to represent each key problem</span>
 </div>
@@ -1692,8 +1699,8 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <div class="voice-top">
       <span class="voice-tag vtag-irrel" id="voice-tag-1">🎯 Irrelevant Leads</span>
     </div>
-    <div class="voice-quote" id="voice-quote-1">"Regularly showing / receiving irrelevant buy leads which are not related to products added by us. I am regularly on daily basis sharing the screenshot of irrelevant buy leads to my AM — but till date issue is not resolved."</div>
-    <div class="voice-meta" id="voice-meta-1">GLID: 3920885</div>
+    <div class="voice-quote" id="voice-quote-1">"The leads are not relevant at all. When we ask the buyer about the details that are being filled, he denies it. Also the specifications mentioned in the requirement details are not true — they are just filled by customer support."</div>
+    <div class="voice-meta" id="voice-meta-1">GLID: 44560574 · TSCatalog · NPS 3</div>
   </div>
 
   <!-- V2: Low Conversion -->
@@ -1701,8 +1708,8 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <div class="voice-top">
       <span class="voice-tag vtag-conv" id="voice-tag-2">💸 Low Conversion</span>
     </div>
-    <div class="voice-quote" id="voice-quote-2">"Not satisfied with buy lead — not a single lead convert in last 3 months."</div>
-    <div class="voice-meta" id="voice-meta-2">GLID: 97982728</div>
+    <div class="voice-quote" id="voice-quote-2">"Last year I invested in Leader suppliers — no ROI generated. This year I invested in STAR suppliers, and now after 2 months it's the same thing. They send enquiries to basic package suppliers on par with premium listings."</div>
+    <div class="voice-meta" id="voice-meta-2">GLID: 15655527 · STAR · NPS 0</div>
   </div>
 
   <!-- V3: Less BLs -->
@@ -1710,17 +1717,17 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <div class="voice-top">
       <span class="voice-tag vtag-bls" id="voice-tag-3">📉 Less BLs / Enquiries</span>
     </div>
-    <div class="voice-quote" id="voice-quote-3">"I am not getting leads for my different products. Just Panchmukhi Hanuman is visible on my buy leads panel — please check and I request to get buyleads for all my products listed."</div>
-    <div class="voice-meta" id="voice-meta-3">GLID: 4583854</div>
+    <div class="voice-quote" id="voice-quote-3">"I have recently joined IndiaMART with high expectations, but unfortunately I am not receiving any inquiries from buyers. Despite having a complete profile, my lead flow is almost zero. I need to understand why I'm not getting any business inquiries."</div>
+    <div class="voice-meta" id="voice-meta-3">GLID: 187989281 · TSCatalog · 30-day · NPS 6</div>
   </div>
 
-  <!-- V4: Spec Mismatch -->
+  <!-- V4: Retail Leads -->
   <div class="voice-card" id="voice-card-4">
     <div class="voice-top">
-      <span class="voice-tag vtag-spec" id="voice-tag-4">📋 Spec Mismatch</span>
+      <span class="voice-tag vtag-spec" id="voice-tag-4">🏪 Retail Leads</span>
     </div>
-    <div class="voice-quote" id="voice-quote-4">"Our primary product is White Agarbatti, but most of the inquiries we receive are related to black agarbatti, which does not match our offerings. Due to this mismatch, we are unable to convert the leads."</div>
-    <div class="voice-meta" id="voice-meta-4">GLID: 107612289</div>
+    <div class="voice-quote" id="voice-quote-4">"We are wholesalers and we get retail enquiries for Rs. 500 to Rs. 3,000 — which are of no use to us. We need enquiries above Rs. 10,000 minimum, which we don't get."</div>
+    <div class="voice-meta" id="voice-meta-4">GLID: 3157248 · Leader · NPS 6</div>
   </div>
 
 </div><!-- /voice-grid -->
@@ -1733,22 +1740,21 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div class="pg">
 
 <div id="ts-tab2" class="tab-summary" style="border-left-color:#2D8A6A">
-  <div class="ts-hdr">📊 NPS Deep Dive — Mar '26</div>
+  <div class="ts-hdr">📊 NPS — April 2026 summary</div>
   <ul>
-    <li><strong>STAR</strong> and <strong>LEADER</strong> are the healthiest seller segments — both at their best-ever NPS this month</li>
-    <li><strong>Catalog</strong> trails all other segments by a wide margin — the gap is not closing meaningfully</li>
-    <li><strong>TSCatalog</strong> is the only segment declining — the only one moving against the trend</li>
-    <li><strong>Established sellers</strong> are significantly more satisfied than <strong>new sellers</strong> — the onboarding experience likely remains a pain point</li>
-    <li><strong>New seller</strong> NPS jumped sharply in Feb — too early to confirm as a trend, needs March data</li>
+    <li><strong>NPS rebounded to 22.7</strong> in April (from 20.9 in March) on n=7,718 — the largest monthly sample this year, driven by high desktop participation (4,086 responses)</li>
+    <li><strong>LEADER best-ever at 28.8</strong> and STAR stable at 26.9 — both above TSCatalog (26.4) for the first time; higher tiers performing better</li>
+    <li><strong>Catalog NPS at 9.1</strong> — slight rebound (+1.0pp) but still deeply negative; 38.4% detractors on 1,377 responses — structural, not noise</li>
+    <li><strong>New sellers (30-Day cohort) at 10.8 NPS</strong> (n=371) — far below established sellers (Quarterly: 24.0 on n=6,962); acclimatisation gap persists</li>
+    <li>Apr complaint sample: <strong>3,674 detractor dispositions</strong> (vs 1,156 in March) — largest ever; confirms Irrelevant (35%), Low Conv (23.4%), Less BLs (21.6%) = 80% of complaints</li>
   </ul>
 </div>
-
 
 <!-- ═══ CUSTTYPE ═══ -->
 <div class="sh" style="margin-top:0">
   <span class="sh-t">NPS by seller type</span>
   <div class="sh-l"></div>
-  <span style="font-size:9.5px;color:var(--faint)">Mar '26 · 12-month trend Apr '25 – Mar '26</span>
+  <span style="font-size:9.5px;color:var(--faint)">Apr '26 · 12-month trend Apr '25 – Apr '26</span>
   <div class="sh-l"></div>
   <span class="sh-b" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">NPS Survey</span>
 </div>
@@ -1760,13 +1766,13 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <div class="spk-top">
       <div>
         <div class="spk-label">⭐ STAR</div>
-        <div class="spk-val c-green">33.6</div>
+        <div class="spk-val c-green">26.9</div>
         <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
-          <span class="best-ever-badge">★ BEST EVER</span> <span id="n-ct-star" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">345 responses</span>
+          <span id="n-ct-star" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">1,567 responses</span>
         </div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom c-green">+5.8 MoM</div>
+        <div class="spk-mom c-red">−2.1 MoM</div>
         <div class="spk-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">NPS Survey</div>
       </div>
     </div>
@@ -1778,13 +1784,13 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <div class="spk-top">
       <div>
         <div class="spk-label">🏆 LEADER</div>
-        <div class="spk-val c-green">30.5</div>
+        <div class="spk-val c-green">28.8</div>
         <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
-          <span class="best-ever-badge">★ BEST EVER</span> <span id="n-ct-leader" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">174 responses</span>
+          <span class="best-ever-badge">★ BEST EVER</span> <span id="n-ct-leader" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">939 responses</span>
         </div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom c-green">+5.9 MoM</div>
+        <div class="spk-mom c-red">−15.6 MoM</div>
         <div class="spk-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">NPS Survey</div>
       </div>
     </div>
@@ -1792,34 +1798,34 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   </div>
 
   <!-- TSCatalog -->
-  <div class="spk-card spk-amber">
+  <div class="spk-card spk-green">
     <div class="spk-top">
       <div>
         <div class="spk-label">📂 TSCatalog</div>
-        <div class="spk-val c-amber">27.1</div>
-        <div style="margin-top:3px"><span id="n-ct-ts" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">1,031 responses</span></div>
+        <div class="spk-val c-green">26.4</div>
+        <div style="margin-top:3px"><span id="n-ct-ts" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">3,486 responses</span></div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom c-red">−3.1 MoM</div>
-        <div class="spk-badge" style="background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)">NPS Survey</div>
+        <div class="spk-mom c-green">+0.2 MoM</div>
+        <div class="spk-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">NPS Survey</div>
       </div>
     </div>
     <svg id="spk-ct-ts" class="spk-svg" viewBox="0 0 560 130"></svg>
   </div>
 
   <!-- Catalog -->
-  <div class="spk-card spk-green">
+  <div class="spk-card spk-amber">
     <div class="spk-top">
       <div>
         <div class="spk-label">📄 Catalog</div>
-        <div class="spk-val c-green">14.8</div>
+        <div class="spk-val c-amber">9.1</div>
         <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
-          <span class="best-ever-badge">★ BEST EVER</span> <span id="n-ct-cat" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">480 responses</span>
+          <span id="n-ct-cat" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">1,377 responses</span>
         </div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom c-green">+2.3 MoM</div>
-        <div class="spk-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">NPS Survey</div>
+        <div class="spk-mom c-green">+1.0 MoM</div>
+        <div class="spk-badge" style="background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)">NPS Survey</div>
       </div>
     </div>
     <svg id="spk-ct-cat" class="spk-svg" viewBox="0 0 560 130"></svg>
@@ -1843,11 +1849,11 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <div class="spk-top">
       <div>
         <div class="spk-label">📅 Established Sellers</div>
-        <div class="spk-val c-green">30.7</div>
-        <div style="margin-top:3px"><span id="n-vint-est" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">1,282 responses</span></div>
+        <div class="spk-val c-green">24.0</div>
+        <div style="margin-top:3px"><span id="n-vint-est" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">6,962 responses</span></div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom c-green">+4.8 MoM</div>
+        <div class="spk-mom c-red">−2.0 MoM</div>
         <div class="spk-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">NPS Survey</div>
       </div>
     </div>
@@ -1855,15 +1861,15 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   </div>
 
   <!-- New Sellers -->
-  <div class="spk-card spk-amber">
+  <div class="spk-card spk-green">
     <div class="spk-top">
       <div>
-        <div class="spk-label">🆕 New Sellers</div>
-        <div class="spk-val c-amber">17.4</div>
-        <div style="margin-top:3px"><span id="n-vint-new" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">856 responses</span></div>
+        <div class="spk-label">🆕 New Sellers (30-Day)</div>
+        <div class="spk-val c-green">10.8</div>
+        <div style="margin-top:3px"><span id="n-vint-new" style="font-size:10px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;">371 responses</span></div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom c-green">+9.7 MoM</div>
+        <div class="spk-mom c-red">−9.2 MoM</div>
         <div class="spk-badge" style="background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)">NPS Survey</div>
       </div>
     </div>
@@ -1886,14 +1892,14 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <div class="spk-top">
       <div>
         <div class="spk-label">Detractor → Promoter</div>
-        <div class="spk-val c-green">286</div>
+        <div class="spk-val c-green">127</div>
         <div class="spk-meta" style="margin-top:4px">
-          <span class="spk-vol-n">Oct-Jan quarter</span>
+          <span class="spk-vol-n">Jan-Apr quarter</span>
         </div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom c-green">+27 vs prev</div>
-        <div class="spk-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">Won back</div>
+        <div class="spk-mom c-red">−159 vs prev</div>
+        <div class="spk-badge" style="background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)">Fewer recoveries</div>
       </div>
     </div>
     <svg id="spk-mov-dtp" class="spk-svg" viewBox="0 0 560 130"></svg>
@@ -1904,13 +1910,13 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <div class="spk-top">
       <div>
         <div class="spk-label">Promoter → Detractor</div>
-        <div class="spk-val c-red">267</div>
+        <div class="spk-val c-red">176</div>
         <div class="spk-meta" style="margin-top:4px">
-          <span class="spk-vol-n">Oct-Jan quarter</span>
+          <span class="spk-vol-n">Jan-Apr quarter</span>
         </div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom c-red">−34 vs prev</div>
+        <div class="spk-mom c-green">−91 vs prev</div>
         <div class="spk-badge" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)">Lost</div>
       </div>
     </div>
@@ -1918,18 +1924,18 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   </div>
 
   <!-- Card 3: Net Movement -->
-  <div class="spk-card spk-green">
+  <div class="spk-card spk-red" style="border-color:var(--red-border)">
     <div class="spk-top">
       <div>
         <div class="spk-label">Net Movement</div>
-        <div class="spk-val c-green">+19</div>
+        <div class="spk-val c-red">−49</div>
         <div class="spk-meta" style="margin-top:4px">
-          <span class="spk-vol-n">Oct-Jan quarter</span>
+          <span class="spk-vol-n">Jan-Apr quarter</span>
         </div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom c-green">+61 vs prev</div>
-        <div class="spk-badge" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">Net gain</div>
+        <div class="spk-mom c-red">−68 vs prev</div>
+        <div class="spk-badge" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)">Net loss</div>
       </div>
     </div>
     <svg id="spk-mov-net" class="spk-svg" viewBox="0 0 560 130"></svg>
@@ -1945,19 +1951,19 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div class="pg">
 
 <div id="ts-tab3" class="tab-summary" style="border-left-color:#D46B6B">
-  <div class="ts-hdr">🔍 NPS Complaint Signals — Mar '26</div>
+  <div class="ts-hdr">🔍 NPS Complaints — April 2026</div>
   <ul>
-    <li><strong>Irrelevant Leads</strong> dominates seller complaints — it is the single biggest pain point in NPS feedback</li>
-    <li><strong>Less BLs</strong> is rising fast — sellers are increasingly feeling undersupplied with enquiries</li>
-    <li><strong>Low Conversion</strong> is a growing concern — sellers are getting leads but struggling to close them</li>
-    <li><strong>Retail Leads</strong> and <strong>Wrong Category</strong> are the most cited reasons under Irrelevant Leads — specificity is improving</li>
-    <li>The sharp rise in total complaints in Feb reflects higher survey participation, not a sudden deterioration</li>
+    <li>Largest sample to date: <strong>3,674 detractor dispositions</strong> in April vs 1,156 in March — April data is the most statistically reliable this year</li>
+    <li><strong>Irrelevant Buyer at 35.0%</strong> — growing every month (Jan: 30.8%, Feb: 33.7%, Mar: 34.3%, Apr: 35.0%); confirmed structural trend</li>
+    <li><strong>Low Conversion 23.4%</strong> and <strong>Less BLs 21.6%</strong> — together account for 45% of all complaints; top 3 = ~80% of all dispositions</li>
+    <li>Issues with Buyer eased to <strong>10.4%</strong> (from 13.7% in March) — first decline in 4 months; potential early positive signal</li>
+    <li>Sub-reasons: Irrelevant Leads driven by Retail (7.5%) and Wrong Category (7.4%) — but No Option Selected dominates at 16.3%, suggesting sellers don't always specify why</li>
   </ul>
 </div>
 
 
 <div class="sh" style="margin-top:0">
-  <span class="sh-t" id="sh-nps-complaints">NPS complaint breakdown — Jan vs Feb '26</span>
+  <span class="sh-t" id="sh-nps-complaints">NPS complaint breakdown — Mar vs Apr '26</span>
   <div class="sh-l"></div>
   <span class="sh-b" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">NPS Survey</span>
 </div>
@@ -1983,46 +1989,52 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <!-- Bars -->
     <div class="vcb-bars">
 
-      <!-- JAN -->
-      <div class="vcb-bar-group" id="nps-bar-grp-0">      <div class="vcb-bar">
-          <div class="vcb-seg" style="height:30.8%;background:#D46B6B" data-tip="n=65">
-            <span class="vcb-lbl">30.8%</span>
-          </div>
-          <div class="vcb-seg" style="height:20.4%;background:#6089C8" data-tip="n=43">
-            <span class="vcb-lbl">20.4%</span>
-          </div>
-          <div class="vcb-seg" style="height:15.2%;background:#8472C4" data-tip="n=32">
-            <span class="vcb-lbl">15.2%</span>
-          </div>
-          <div class="vcb-seg" style="height:9.0%;background:#CFA050" data-tip="n=19">
-            <span class="vcb-lbl">9.0%</span>
-          </div>
-          <div class="vcb-seg" style="height:24.6%;background:#C8C8CC" data-tip="n=52">
-            <span class="vcb-lbl">24.6%</span>
-          </div>
+      <!-- JAN '26 -->
+      <div class="vcb-bar-group" id="nps-bar-grp-0">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:30.8%;background:#D46B6B" data-tip="n=65"><span class="vcb-lbl">30.8%</span></div>
+          <div class="vcb-seg" style="height:20.4%;background:#6089C8" data-tip="n=43"><span class="vcb-lbl">20.4%</span></div>
+          <div class="vcb-seg" style="height:15.2%;background:#8472C4" data-tip="n=32"><span class="vcb-lbl">15.2%</span></div>
+          <div class="vcb-seg" style="height:9.0%;background:#CFA050" data-tip="n=19"><span class="vcb-lbl">9.0%</span></div>
+          <div class="vcb-seg" style="height:24.6%;background:#C8C8CC" data-tip="n=52"><span class="vcb-lbl">24.6%</span></div>
         </div>
         <div class="vcb-bar-label" id="nps-bar-prev-lbl">Jan '26<br><span class="vcb-bar-n" id="nps-bar-prev-n">n=211</span></div>
       </div>
 
+      <!-- FEB '26 -->
       <div class="vcb-bar-group" id="nps-bar-grp-1">
         <div class="vcb-bar">
-          <div class="vcb-seg" style="height:33.7%;background:#D46B6B" data-tip="n=214">
-            <span class="vcb-lbl">33.7%</span>
-          </div>
-          <div class="vcb-seg" style="height:23.0%;background:#6089C8" data-tip="n=146">
-            <span class="vcb-lbl">23.0%</span>
-          </div>
-          <div class="vcb-seg" style="height:20.3%;background:#8472C4" data-tip="n=129">
-            <span class="vcb-lbl">20.3%</span>
-          </div>
-          <div class="vcb-seg" style="height:11.3%;background:#CFA050" data-tip="n=72">
-            <span class="vcb-lbl">11.3%</span>
-          </div>
-          <div class="vcb-seg" style="height:11.7%;background:#C8C8CC" data-tip="n=74">
-            <span class="vcb-lbl">11.7%</span>
-          </div>
+          <div class="vcb-seg" style="height:33.7%;background:#D46B6B" data-tip="n=214"><span class="vcb-lbl">33.7%</span></div>
+          <div class="vcb-seg" style="height:23.0%;background:#6089C8" data-tip="n=146"><span class="vcb-lbl">23.0%</span></div>
+          <div class="vcb-seg" style="height:20.3%;background:#8472C4" data-tip="n=129"><span class="vcb-lbl">20.3%</span></div>
+          <div class="vcb-seg" style="height:11.3%;background:#CFA050" data-tip="n=72"><span class="vcb-lbl">11.3%</span></div>
+          <div class="vcb-seg" style="height:11.7%;background:#C8C8CC" data-tip="n=74"><span class="vcb-lbl">11.7%</span></div>
         </div>
-        <div class="vcb-bar-label" id="nps-bar-cur-lbl">Feb '26<br><span class="vcb-bar-n" id="nps-bar-cur-n">n=635</span></div>
+        <div class="vcb-bar-label">Feb '26<br><span class="vcb-bar-n">n=635</span></div>
+      </div>
+
+      <!-- MAR '26 -->
+      <div class="vcb-bar-group" id="nps-bar-grp-2">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:34.3%;background:#D46B6B" data-tip="n=397"><span class="vcb-lbl">34.3%</span></div>
+          <div class="vcb-seg" style="height:24.6%;background:#6089C8" data-tip="n=284"><span class="vcb-lbl">24.6%</span></div>
+          <div class="vcb-seg" style="height:20.8%;background:#8472C4" data-tip="n=240"><span class="vcb-lbl">20.8%</span></div>
+          <div class="vcb-seg" style="height:13.7%;background:#CFA050" data-tip="n=158"><span class="vcb-lbl">13.7%</span></div>
+          <div class="vcb-seg" style="height:6.6%;background:#C8C8CC" data-tip="n=77"><span class="vcb-lbl vcb-lbl-sm">6.6%</span></div>
+        </div>
+        <div class="vcb-bar-label">Mar '26<br><span class="vcb-bar-n">n=1,156</span></div>
+      </div>
+
+      <!-- APR '26 — current month -->
+      <div class="vcb-bar-group" id="nps-bar-grp-3">
+        <div class="vcb-bar" style="outline:2px solid rgba(0,0,0,.12);border-radius:8px 8px 0 0">
+          <div class="vcb-seg" style="height:35.0%;background:#D46B6B" data-tip="n=1,287"><span class="vcb-lbl">35.0%</span></div>
+          <div class="vcb-seg" style="height:23.4%;background:#6089C8" data-tip="n=859"><span class="vcb-lbl">23.4%</span></div>
+          <div class="vcb-seg" style="height:21.6%;background:#8472C4" data-tip="n=794"><span class="vcb-lbl">21.6%</span></div>
+          <div class="vcb-seg" style="height:10.4%;background:#CFA050" data-tip="n=382"><span class="vcb-lbl">10.4%</span></div>
+          <div class="vcb-seg" style="height:9.6%;background:#C8C8CC" data-tip="n=352"><span class="vcb-lbl vcb-lbl-sm">9.6%</span></div>
+        </div>
+        <div class="vcb-bar-label" id="nps-bar-cur-lbl"><strong>Apr '26</strong><br><span class="vcb-bar-n" id="nps-bar-cur-n">n=3,674</span></div>
       </div>
 
     </div><!-- /vcb-bars -->
@@ -2050,10 +2062,10 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <thead>
       <tr>
         <th class="hmap-th-sub">Subcategory</th>
-        <th class="hmap-th-month" id="nps-hmap-th-prev">Jan '26</th>
-        <th class="hmap-th-month" id="nps-hmap-th-cur">Feb '26</th>
-        <th class="hmap-th-month hmap-th-future" id="nps-hmap-th-fut1">Mar '26</th>
-        <th class="hmap-th-month hmap-th-future" id="nps-hmap-th-fut2">Apr '26</th>
+        <th class="hmap-th-month" id="nps-hmap-th-prev">Mar '26</th>
+        <th class="hmap-th-month" id="nps-hmap-th-cur">Apr '26</th>
+        <th class="hmap-th-month hmap-th-future" id="nps-hmap-th-fut1">May '26</th>
+        <th class="hmap-th-month hmap-th-future" id="nps-hmap-th-fut2">Jun '26</th>
         <th class="hmap-th-delta">MoM Δ</th>
       </tr>
     </thead>
@@ -2066,35 +2078,35 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ Wrong Category</td>
-        <td class="hmap-cell" style="--v:9.0;--base-r:239;--base-g:68;--base-b:68">9.0%<br><span class="hmap-n">n=19</span></td>
-        <td class="hmap-cell" style="--v:5.5;--base-r:239;--base-g:68;--base-b:68">5.5%<br><span class="hmap-n">n=35</span></td>
+        <td class="hmap-cell" style="--v:9.0;--base-r:239;--base-g:68;--base-b:68">9.0%<br><span class="hmap-n">n=82</span></td>
+        <td class="hmap-cell" style="--v:7.4;--base-r:239;--base-g:68;--base-b:68">7.4%<br><span class="hmap-n">n=273</span></td>
         <td class="hmap-cell hmap-future"></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−3.5pp ↓</td>
+        <td class="hmap-delta hmap-delta-dn">−1.6pp ↓</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ Retail Leads</td>
-        <td class="hmap-cell" style="--v:7.1;--base-r:239;--base-g:68;--base-b:68">7.1%<br><span class="hmap-n">n=15</span></td>
-        <td class="hmap-cell" style="--v:6.0;--base-r:239;--base-g:68;--base-b:68">6.0%<br><span class="hmap-n">n=38</span></td>
+        <td class="hmap-cell" style="--v:8.9;--base-r:239;--base-g:68;--base-b:68">8.9%<br><span class="hmap-n">n=81</span></td>
+        <td class="hmap-cell" style="--v:7.5;--base-r:239;--base-g:68;--base-b:68">7.5%<br><span class="hmap-n">n=277</span></td>
         <td class="hmap-cell hmap-future"></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−1.1pp ↓</td>
+        <td class="hmap-delta hmap-delta-dn">−1.4pp ↓</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ Wrong Location</td>
-        <td class="hmap-cell" style="--v:5.2;--base-r:239;--base-g:68;--base-b:68">5.2%<br><span class="hmap-n">n=11</span></td>
-        <td class="hmap-cell" style="--v:2.8;--base-r:239;--base-g:68;--base-b:68">2.8%<br><span class="hmap-n">n=18</span></td>
+        <td class="hmap-cell" style="--v:5.1;--base-r:239;--base-g:68;--base-b:68">5.1%<br><span class="hmap-n">n=46</span></td>
+        <td class="hmap-cell" style="--v:3.7;--base-r:239;--base-g:68;--base-b:68">3.7%<br><span class="hmap-n">n=137</span></td>
         <td class="hmap-cell hmap-future"></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−2.4pp ↓</td>
+        <td class="hmap-delta hmap-delta-dn">−1.4pp ↓</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ No Option Selected</td>
-        <td class="hmap-cell" style="--v:9.5;--base-r:239;--base-g:68;--base-b:68">9.5%<br><span class="hmap-n">n=20</span></td>
-        <td class="hmap-cell hmap-hot" style="--v:17.8;--base-r:239;--base-g:68;--base-b:68">17.8%<br><span class="hmap-n">n=113</span></td>
+        <td class="hmap-cell" style="--v:20.6;--base-r:239;--base-g:68;--base-b:68">20.6%<br><span class="hmap-n">n=188</span></td>
+        <td class="hmap-cell hmap-hot" style="--v:16.3;--base-r:239;--base-g:68;--base-b:68">16.3%<br><span class="hmap-n">n=600</span></td>
         <td class="hmap-cell hmap-future"></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-up">+8.3pp ↑</td>
+        <td class="hmap-delta hmap-delta-dn">−4.3pp ↓</td>
       </tr>
       
       <tr class="hmap-group-hdr" style="--gc:#8472C4">
@@ -2102,62 +2114,62 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ Very Less Leads</td>
-        <td class="hmap-cell" style="--v:7.6;--base-r:139;--base-g:92;--base-b:246">7.6%<br><span class="hmap-n">n=16</span></td>
-        <td class="hmap-cell" style="--v:6.5;--base-r:139;--base-g:92;--base-b:246">6.5%<br><span class="hmap-n">n=41</span></td>
+        <td class="hmap-cell" style="--v:8.6;--base-r:139;--base-g:92;--base-b:246">8.6%<br><span class="hmap-n">n=78</span></td>
+        <td class="hmap-cell" style="--v:7.7;--base-r:139;--base-g:92;--base-b:246">7.7%<br><span class="hmap-n">n=281</span></td>
         <td class="hmap-cell hmap-future"></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−1.1pp ↓</td>
+        <td class="hmap-delta hmap-delta-dn">−0.9pp ↓</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ Leads Expire Fast</td>
-        <td class="hmap-cell" style="--v:3.8;--base-r:139;--base-g:92;--base-b:246">3.8%<br><span class="hmap-n">n=8</span></td>
-        <td class="hmap-cell" style="--v:3.3;--base-r:139;--base-g:92;--base-b:246">3.3%<br><span class="hmap-n">n=21</span></td>
+        <td class="hmap-cell" style="--v:6.4;--base-r:139;--base-g:92;--base-b:246">6.4%<br><span class="hmap-n">n=58</span></td>
+        <td class="hmap-cell" style="--v:4.4;--base-r:139;--base-g:92;--base-b:246">4.4%<br><span class="hmap-n">n=160</span></td>
         <td class="hmap-cell hmap-future"></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−0.5pp ↓</td>
+        <td class="hmap-delta hmap-delta-dn">−2.0pp ↓</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ No Option Selected</td>
-        <td class="hmap-cell" style="--v:3.3;--base-r:139;--base-g:92;--base-b:246">3.3%<br><span class="hmap-n">n=7</span></td>
-        <td class="hmap-cell hmap-hot" style="--v:10.6;--base-r:139;--base-g:92;--base-b:246">10.6%<br><span class="hmap-n">n=67</span></td>
+        <td class="hmap-cell" style="--v:11.4;--base-r:139;--base-g:92;--base-b:246">11.4%<br><span class="hmap-n">n=104</span></td>
+        <td class="hmap-cell hmap-hot" style="--v:9.6;--base-r:139;--base-g:92;--base-b:246">9.6%<br><span class="hmap-n">n=353</span></td>
         <td class="hmap-cell hmap-future"></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-up">+7.2pp ↑</td>
+        <td class="hmap-delta hmap-delta-dn">−1.8pp ↓</td>
       </tr>
       <tr class="hmap-group-hdr" style="--gc:#CFA050">
         <td colspan="6">🙅 Issues with Buyer</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ Buyer Unresponsive</td>
-        <td class="hmap-cell" style="--v:1.9;--base-r:245;--base-g:158;--base-b:11">1.9%<br><span class="hmap-n">n=4</span></td>
-        <td class="hmap-cell" style="--v:3.8;--base-r:245;--base-g:158;--base-b:11">3.8%<br><span class="hmap-n">n=24</span></td>
+        <td class="hmap-cell" style="--v:5.6;--base-r:245;--base-g:158;--base-b:11">5.6%<br><span class="hmap-n">n=51</span></td>
+        <td class="hmap-cell" style="--v:3.0;--base-r:245;--base-g:158;--base-b:11">3.0%<br><span class="hmap-n">n=109</span></td>
         <td class="hmap-cell hmap-future"></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-up">+1.9pp ↑</td>
+        <td class="hmap-delta hmap-delta-dn">−2.6pp ↓</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ Denies Requirement</td>
-        <td class="hmap-cell" style="--v:2.4;--base-r:245;--base-g:158;--base-b:11">2.4%<br><span class="hmap-n">n=5</span></td>
-        <td class="hmap-cell" style="--v:3.0;--base-r:245;--base-g:158;--base-b:11">3.0%<br><span class="hmap-n">n=19</span></td>
+        <td class="hmap-cell" style="--v:4.7;--base-r:245;--base-g:158;--base-b:11">4.7%<br><span class="hmap-n">n=43</span></td>
+        <td class="hmap-cell" style="--v:2.7;--base-r:245;--base-g:158;--base-b:11">2.7%<br><span class="hmap-n">n=100</span></td>
         <td class="hmap-cell hmap-future"></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-up">+0.6pp ↑</td>
+        <td class="hmap-delta hmap-delta-dn">−2.0pp ↓</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ Req. Already Fulfilled</td>
-        <td class="hmap-cell" style="--v:0.9;--base-r:245;--base-g:158;--base-b:11">0.9%<br><span class="hmap-n">n=2</span></td>
-        <td class="hmap-cell" style="--v:2.5;--base-r:245;--base-g:158;--base-b:11">2.5%<br><span class="hmap-n">n=16</span></td>
+        <td class="hmap-cell" style="--v:3.2;--base-r:245;--base-g:158;--base-b:11">3.2%<br><span class="hmap-n">n=29</span></td>
+        <td class="hmap-cell" style="--v:1.6;--base-r:245;--base-g:158;--base-b:11">1.6%<br><span class="hmap-n">n=59</span></td>
         <td class="hmap-cell hmap-future"></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-up">+1.6pp ↑</td>
+        <td class="hmap-delta hmap-delta-dn">−1.6pp ↓</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ No Option Selected</td>
-        <td class="hmap-cell" style="--v:3.8;--base-r:245;--base-g:158;--base-b:11">3.8%<br><span class="hmap-n">n=8</span></td>
-        <td class="hmap-cell" style="--v:2.0;--base-r:245;--base-g:158;--base-b:11">2.0%<br><span class="hmap-n">n=13</span></td>
+        <td class="hmap-cell" style="--v:3.8;--base-r:245;--base-g:158;--base-b:11">3.8%<br><span class="hmap-n">n=35</span></td>
+        <td class="hmap-cell" style="--v:3.1;--base-r:245;--base-g:158;--base-b:11">3.1%<br><span class="hmap-n">n=114</span></td>
         <td class="hmap-cell hmap-future"></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−1.7pp ↓</td>
+        <td class="hmap-delta hmap-delta-dn">−0.7pp ↓</td>
       </tr>
 
     </tbody>
@@ -2171,7 +2183,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 </div>
 
 <div style="background:#F5F5F2;border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:14px;font-size:9.5px;color:var(--muted);line-height:1.6">
-  ⏳ <strong>Trend builds from Mar '26</strong> — Jan '26 is the first month with complaint bifurcation data. New month columns auto-populate; the heat map scales without layout changes.
+  ⏳ <strong>Trend builds from Jan '26</strong> — Jan '26 is the first month with complaint bifurcation data. New month columns auto-populate; the heat map scales without layout changes.
 </div>
 
 
@@ -2183,18 +2195,19 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div class="pg">
 
 <div id="ts-tab5" class="tab-summary" style="border-left-color:#8472C4">
-  <div class="ts-hdr">📱 App Complaint Signals — Mar '26</div>
+  <div class="ts-hdr">📱 App Complaints — April 2026</div>
   <ul>
-    <li><strong>Irrelevant Leads</strong> complaints are gradually declining — an encouraging signal that relevance efforts are being felt</li>
-    <li><strong>Low Conversion</strong> has become the dominant concern on App — sellers are getting leads but not converting them</li>
-    <li><strong>Less BLs</strong> complaints have surged since October — mirrors what sellers are reporting on NPS, a cross-source signal worth acting on</li>
-    <li>Sellers are increasingly selecting specific complaint reasons rather than <strong>Others</strong> — data quality is improving over time</li>
+    <li><strong>Paid Seller app rating slipped to 3.58★</strong> from 3.60 in March — 4,849 raters vs 5,959 in March; 2nd consecutive monthly decline</li>
+    <li><strong>Irrelevant Buyer complaints rose to 33.9%</strong> (441 tags) from 31.7% in March — aligns with NPS signal; cross-source confirmation of structural problem</li>
+    <li><strong>Low Conversion stable at 25.5%</strong> (332 tags, same absolute count as March) — remains the #2 complaint across both App and NPS</li>
+    <li>Less BLs eased slightly to 21.1% (275) from 21.8% (286) — consistent with App feedback trend over past 3 months</li>
+    <li>Issues with Buyer remained stable at 10.1% (132) — seller-side unresponsiveness persists as a buyer behaviour complaint</li>
   </ul>
 </div>
 
 
 <div class="sh" style="margin-top:0">
-  <span class="sh-t" id="sh-app-complaints">App complaint breakdown — Apr '25 – Feb '26</span>
+  <span class="sh-t" id="sh-app-complaints">App complaint breakdown — Apr '25 – Apr '26</span>
   <div class="sh-l"></div>
   <span style="font-size:9.5px;color:var(--faint)">% of total complaint tags per month</span>
   <div class="sh-l"></div>
@@ -2332,7 +2345,31 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
           <div class="vcb-seg" style="height:10.6%;background:#CFA050" data-tip="n=149"><span class="vcb-lbl vcb-lbl-sm">10.6%</span></div>
           <div class="vcb-seg" style="height:12.7%;background:#C8C8CC" data-tip="n=178"><span class="vcb-lbl vcb-lbl-sm">12.7%</span></div>
         </div>
-        <div class="vcb-bar-label" id="app-bar-feb-lbl"><strong>Feb</strong><br><span class="vcb-bar-n" id="app-bar-feb-n">1,401</span></div>
+        <div class="vcb-bar-label" id="app-bar-feb-lbl">Feb<br><span class="vcb-bar-n" id="app-bar-feb-n">1,401</span></div>
+      </div>
+
+      <!-- MAR '26 -->
+      <div class="vcb-bar-group vcb-bar-group-mar">
+        <div class="vcb-bar">
+          <div class="vcb-seg" style="height:31.7%;background:#D46B6B" data-tip="n=415"><span class="vcb-lbl">31.7%</span></div>
+          <div class="vcb-seg" style="height:25.4%;background:#6089C8" data-tip="n=332"><span class="vcb-lbl">25.4%</span></div>
+          <div class="vcb-seg" style="height:21.8%;background:#8472C4" data-tip="n=286"><span class="vcb-lbl">21.8%</span></div>
+          <div class="vcb-seg" style="height:9.9%;background:#CFA050" data-tip="n=129"><span class="vcb-lbl vcb-lbl-sm">9.9%</span></div>
+          <div class="vcb-seg" style="height:11.2%;background:#C8C8CC" data-tip="n=147"><span class="vcb-lbl vcb-lbl-sm">11.2%</span></div>
+        </div>
+        <div class="vcb-bar-label">Mar<br><span class="vcb-bar-n">1,309</span></div>
+      </div>
+
+      <!-- APR '26 — current month -->
+      <div class="vcb-bar-group vcb-bar-group-apr">
+        <div class="vcb-bar" style="outline:2px solid rgba(0,0,0,.12);border-radius:8px 8px 0 0">
+          <div class="vcb-seg" style="height:33.9%;background:#D46B6B" data-tip="n=441"><span class="vcb-lbl">33.9%</span></div>
+          <div class="vcb-seg" style="height:25.5%;background:#6089C8" data-tip="n=332"><span class="vcb-lbl">25.5%</span></div>
+          <div class="vcb-seg" style="height:21.1%;background:#8472C4" data-tip="n=275"><span class="vcb-lbl">21.1%</span></div>
+          <div class="vcb-seg" style="height:10.1%;background:#CFA050" data-tip="n=132"><span class="vcb-lbl vcb-lbl-sm">10.1%</span></div>
+          <div class="vcb-seg" style="height:9.3%;background:#C8C8CC" data-tip="n=121"><span class="vcb-lbl vcb-lbl-sm">9.3%</span></div>
+        </div>
+        <div class="vcb-bar-label"><strong>Apr</strong><br><span class="vcb-bar-n">1,301</span></div>
       </div>
 
     </div><!-- /vcb-bars -->
@@ -2358,10 +2395,10 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <thead>
       <tr>
         <th class="hmap-th-sub">Subcategory</th>
-        <th class="hmap-th-month" id="app-hmap-th-prev">Jan '26</th>
-        <th class="hmap-th-month" id="app-hmap-th-cur">Feb '26</th>
-        <th class="hmap-th-month hmap-th-future" id="app-hmap-th-fut1">Mar '26</th>
-        <th class="hmap-th-month hmap-th-future" id="app-hmap-th-fut2">Apr '26</th>
+        <th class="hmap-th-month" id="app-hmap-th-prev">Mar '26</th>
+        <th class="hmap-th-month" id="app-hmap-th-cur">Apr '26</th>
+        <th class="hmap-th-month hmap-th-future" id="app-hmap-th-fut1">May '26</th>
+        <th class="hmap-th-month hmap-th-future" id="app-hmap-th-fut2">Jun '26</th>
         <th class="hmap-th-delta">MoM Δ</th>
       </tr>
     </thead>
@@ -2373,31 +2410,31 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ Retail Leads</td>
-        <td class="hmap-cell hmap-hot" style="--v:7.9;--base-r:239;--base-g:68;--base-b:68">7.9%<br><span class="hmap-n">n=76</span></td>
-        <td class="hmap-cell" style="--v:4.7;--base-r:239;--base-g:68;--base-b:68">4.7%<br><span class="hmap-n">n=66</span></td>
+        <td class="hmap-cell" style="--v:4.8;--base-r:239;--base-g:68;--base-b:68">4.8%<br><span class="hmap-n">n=63</span></td>
+        <td class="hmap-cell" style="--v:6.6;--base-r:239;--base-g:68;--base-b:68">6.6%<br><span class="hmap-n">n=86</span></td>
         <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−3.2pp ↓</td>
+        <td class="hmap-delta hmap-delta-up">+1.8pp ↑</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ Wrong Category</td>
-        <td class="hmap-cell hmap-hot" style="--v:6.1;--base-r:239;--base-g:68;--base-b:68">6.1%<br><span class="hmap-n">n=59</span></td>
-        <td class="hmap-cell" style="--v:5.5;--base-r:239;--base-g:68;--base-b:68">5.5%<br><span class="hmap-n">n=77</span></td>
+        <td class="hmap-cell" style="--v:6.8;--base-r:239;--base-g:68;--base-b:68">6.8%<br><span class="hmap-n">n=89</span></td>
+        <td class="hmap-cell" style="--v:7.1;--base-r:239;--base-g:68;--base-b:68">7.1%<br><span class="hmap-n">n=92</span></td>
         <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−0.6pp ↓</td>
+        <td class="hmap-delta hmap-delta-up">+0.3pp ↑</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ Wrong Location</td>
-        <td class="hmap-cell" style="--v:3.2;--base-r:239;--base-g:68;--base-b:68">3.2%<br><span class="hmap-n">n=31</span></td>
-        <td class="hmap-cell" style="--v:3.1;--base-r:239;--base-g:68;--base-b:68">3.1%<br><span class="hmap-n">n=43</span></td>
+        <td class="hmap-cell" style="--v:3.0;--base-r:239;--base-g:68;--base-b:68">3.0%<br><span class="hmap-n">n=39</span></td>
+        <td class="hmap-cell" style="--v:3.8;--base-r:239;--base-g:68;--base-b:68">3.8%<br><span class="hmap-n">n=50</span></td>
         <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−0.1pp</td>
+        <td class="hmap-delta hmap-delta-up">+0.8pp ↑</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ No Option Selected</td>
-        <td class="hmap-cell" style="--v:17.8;--base-r:239;--base-g:68;--base-b:68">17.8%<br><span class="hmap-n">n=172</span></td>
-        <td class="hmap-cell hmap-hot" style="--v:18.5;--base-r:239;--base-g:68;--base-b:68">18.5%<br><span class="hmap-n">n=259</span></td>
+        <td class="hmap-cell hmap-hot" style="--v:17.1;--base-r:239;--base-g:68;--base-b:68">17.1%<br><span class="hmap-n">n=224</span></td>
+        <td class="hmap-cell hmap-hot" style="--v:16.4;--base-r:239;--base-g:68;--base-b:68">16.4%<br><span class="hmap-n">n=213</span></td>
         <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-up">+0.7pp ↑</td>
+        <td class="hmap-delta hmap-delta-dn">−0.7pp ↓</td>
       </tr>
       <tr class="hmap-group-hdr" style="--gc:#6089C8">
         <td colspan="6">💸 Low Conversion</td>
@@ -2413,24 +2450,24 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ Very Less Leads</td>
-        <td class="hmap-cell hmap-hot" style="--v:6.3;--base-r:139;--base-g:92;--base-b:246">6.3%<br><span class="hmap-n">n=61</span></td>
-        <td class="hmap-cell" style="--v:5.4;--base-r:139;--base-g:92;--base-b:246">5.4%<br><span class="hmap-n">n=76</span></td>
+        <td class="hmap-cell" style="--v:7.1;--base-r:139;--base-g:92;--base-b:246">7.1%<br><span class="hmap-n">n=93</span></td>
+        <td class="hmap-cell" style="--v:6.8;--base-r:139;--base-g:92;--base-b:246">6.8%<br><span class="hmap-n">n=88</span></td>
         <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−0.9pp ↓</td>
+        <td class="hmap-delta hmap-delta-dn">−0.3pp ↓</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ Leads Expire Fast</td>
-        <td class="hmap-cell" style="--v:3.5;--base-r:139;--base-g:92;--base-b:246">3.5%<br><span class="hmap-n">n=34</span></td>
-        <td class="hmap-cell" style="--v:3.6;--base-r:139;--base-g:92;--base-b:246">3.6%<br><span class="hmap-n">n=50</span></td>
+        <td class="hmap-cell" style="--v:3.4;--base-r:139;--base-g:92;--base-b:246">3.4%<br><span class="hmap-n">n=45</span></td>
+        <td class="hmap-cell" style="--v:4.7;--base-r:139;--base-g:92;--base-b:246">4.7%<br><span class="hmap-n">n=61</span></td>
         <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-up">+0.1pp</td>
+        <td class="hmap-delta hmap-delta-up">+1.3pp ↑</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ No Option Selected</td>
-        <td class="hmap-cell hmap-hot" style="--v:11.1;--base-r:139;--base-g:92;--base-b:246">11.1%<br><span class="hmap-n">n=107</span></td>
-        <td class="hmap-cell hmap-hot" style="--v:11.3;--base-r:139;--base-g:92;--base-b:246">11.3%<br><span class="hmap-n">n=158</span></td>
+        <td class="hmap-cell hmap-hot" style="--v:11.3;--base-r:139;--base-g:92;--base-b:246">11.3%<br><span class="hmap-n">n=148</span></td>
+        <td class="hmap-cell" style="--v:9.7;--base-r:139;--base-g:92;--base-b:246">9.7%<br><span class="hmap-n">n=126</span></td>
         <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-up">+0.2pp</td>
+        <td class="hmap-delta hmap-delta-dn">−1.6pp ↓</td>
       </tr>
       
       <tr class="hmap-group-hdr" style="--gc:#CFA050">
@@ -2438,31 +2475,31 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       </tr>
       <tr>
         <td class="hmap-sub-name">↳ Buyer Unresponsive</td>
-        <td class="hmap-cell hmap-hot" style="--v:3.2;--base-r:245;--base-g:158;--base-b:11">3.2%<br><span class="hmap-n">n=31</span></td>
-        <td class="hmap-cell" style="--v:2.8;--base-r:245;--base-g:158;--base-b:11">2.8%<br><span class="hmap-n">n=39</span></td>
+        <td class="hmap-cell" style="--v:3.1;--base-r:245;--base-g:158;--base-b:11">3.1%<br><span class="hmap-n">n=40</span></td>
+        <td class="hmap-cell" style="--v:2.5;--base-r:245;--base-g:158;--base-b:11">2.5%<br><span class="hmap-n">n=33</span></td>
+        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-dn">−0.6pp ↓</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Denies Requirement</td>
+        <td class="hmap-cell" style="--v:2.4;--base-r:245;--base-g:158;--base-b:11">2.4%<br><span class="hmap-n">n=31</span></td>
+        <td class="hmap-cell" style="--v:2.9;--base-r:245;--base-g:158;--base-b:11">2.9%<br><span class="hmap-n">n=38</span></td>
+        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
+        <td class="hmap-delta hmap-delta-up">+0.5pp ↑</td>
+      </tr>
+      <tr>
+        <td class="hmap-sub-name">↳ Req. Already Fulfilled</td>
+        <td class="hmap-cell" style="--v:2.1;--base-r:245;--base-g:158;--base-b:11">2.1%<br><span class="hmap-n">n=27</span></td>
+        <td class="hmap-cell" style="--v:1.7;--base-r:245;--base-g:158;--base-b:11">1.7%<br><span class="hmap-n">n=22</span></td>
         <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
         <td class="hmap-delta hmap-delta-dn">−0.4pp ↓</td>
       </tr>
       <tr>
-        <td class="hmap-sub-name">↳ Denies Requirement</td>
-        <td class="hmap-cell hmap-hot" style="--v:2.6;--base-r:245;--base-g:158;--base-b:11">2.6%<br><span class="hmap-n">n=25</span></td>
-        <td class="hmap-cell" style="--v:2.1;--base-r:245;--base-g:158;--base-b:11">2.1%<br><span class="hmap-n">n=29</span></td>
-        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−0.5pp ↓</td>
-      </tr>
-      <tr>
-        <td class="hmap-sub-name">↳ Req. Already Fulfilled</td>
-        <td class="hmap-cell" style="--v:1.3;--base-r:245;--base-g:158;--base-b:11">1.3%<br><span class="hmap-n">n=13</span></td>
-        <td class="hmap-cell" style="--v:1.3;--base-r:245;--base-g:158;--base-b:11">1.3%<br><span class="hmap-n">n=18</span></td>
-        <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta" style="color:var(--muted)">0.0pp</td>
-      </tr>
-      <tr>
         <td class="hmap-sub-name">↳ No Option Selected</td>
-        <td class="hmap-cell" style="--v:3.3;--base-r:245;--base-g:158;--base-b:11">3.3%<br><span class="hmap-n">n=32</span></td>
-        <td class="hmap-cell hmap-hot" style="--v:4.5;--base-r:245;--base-g:158;--base-b:11">4.5%<br><span class="hmap-n">n=63</span></td>
+        <td class="hmap-cell" style="--v:2.4;--base-r:245;--base-g:158;--base-b:11">2.4%<br><span class="hmap-n">n=31</span></td>
+        <td class="hmap-cell" style="--v:3.0;--base-r:245;--base-g:158;--base-b:11">3.0%<br><span class="hmap-n">n=39</span></td>
         <td class="hmap-cell hmap-future"></td><td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-up">+1.2pp ↑</td>
+        <td class="hmap-delta hmap-delta-up">+0.6pp ↑</td>
       </tr>
       </tbody>
   </table>
@@ -2475,7 +2512,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 </div>
 
 <div style="background:#F5F5F2;border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:14px;font-size:9.5px;color:var(--muted);line-height:1.6">
-  ⏳ <strong>Subcategory trend builds from Mar '26</strong> — subcategory data first captured Jan '26. Stacked bar uses full 11-month history for disposition-level trends.
+  ⏳ <strong>Subcategory trend builds from Jan '26</strong> — subcategory data first captured Jan '26. Stacked bar uses full 11-month history for disposition-level trends.
 </div>
 
 </div><!-- /pg -->
@@ -2486,13 +2523,12 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div class="pg">
 
 <div class="tab-summary" style="border-left-color:#7055B8">
-  <div class="ts-hdr">⭐ App Ratings Deep Dive — Mar '26</div>
+  <div class="ts-hdr">⭐ App Ratings — April 2026 snapshot</div>
   <ul>
-    <li><strong>TSCatalog</strong> and <strong>Catalog</strong> are the largest rating contributors — but both hover around <span class="hi-amber">2.6–2.8★</span></li>
-    <li><strong>ExportTS</strong> has the highest avg rating at <span class="hi-amber">2.73★</span> in Mar, having dipped from a peak of 3.35★ in Feb — a sharp reversal worth watching</li>
-    <li><strong>STAR</strong> and <strong>Leader</strong> are the most dissatisfied custtypes — both below 2.5★ with 1★ ratings dominating at 51–52%</li>
-    <li>Across all custtypes, <strong>1★ ratings make up 40–52%</strong> of all ratings — the bimodal pattern (love it or hate it) is consistent and persistent</li>
-    <li>5★ ratings hold steady at 20–30% across segments — a loyal base exists but is outnumbered by detractors</li>
+    <li><strong>Paid Seller rating dipped to 3.58★</strong> from 3.60 in March — 2nd consecutive monthly decline after Jan-Feb peak</li>
+    <li><strong>Play Store overall rating: 4.72</strong> — stable on 58,588 total ratings; Google Play Store rating steady at 4.756</li>
+    <li>Monthly raters at 3,522 paid sellers in April (exact count from in-app rating data); 3,575 previously shown was approximate</li>
+    <li>Negative-to-positive ratio stable; feedback response rate (dispositions) holding at ~45% for 1-4 star ratings</li>
   </ul>
 </div>
 
@@ -2500,7 +2536,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div class="sh" style="margin-top:0">
   <span class="sh-t">Avg app rating by seller type</span>
   <div class="sh-l"></div>
-  <span style="font-size:9.5px;color:var(--faint)">Mar '26 · 12-month trend Apr '25 – Mar '26</span>
+  <span style="font-size:9.5px;color:var(--faint)">Apr '26 · 12-month trend Apr '25 – Apr '26</span>
   <div class="sh-l"></div>
   <span class="sh-b" style="background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)">In-App · Paid only</span>
 </div>
@@ -2508,15 +2544,15 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div class="spark-grid">
 
   <!-- Catalog -->
-  <div class="spk-card spk-red">
+  <div class="spk-card spk-amber">
     <div class="spk-top">
       <div>
         <div class="spk-label">📄 Catalog</div>
-        <div class="spk-val" style="color:var(--red)">2.59 <span style="font-size:16px;font-weight:500;color:var(--muted)">/ 5</span></div>
-        <div class="spk-vol-n" style="margin-top:5px">594 ratings</div>
+        <div class="spk-val" style="color:var(--amber)">3.53 <span style="font-size:16px;font-weight:500;color:var(--muted)">/ 5</span></div>
+        <div class="spk-vol-n" style="margin-top:5px">1,687 ratings</div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom" style="color:var(--red)">−0.20 MoM</div>
+        <div class="spk-mom" style="color:var(--muted)">Apr '26</div>
         <div class="spk-badge" style="background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)">In-App · Paid</div>
       </div>
     </div>
@@ -2524,15 +2560,15 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   </div>
 
   <!-- TSCatalog -->
-  <div class="spk-card spk-red">
+  <div class="spk-card spk-amber">
     <div class="spk-top">
       <div>
         <div class="spk-label">📂 TSCatalog</div>
-        <div class="spk-val" style="color:var(--red)">2.64 <span style="font-size:16px;font-weight:500;color:var(--muted)">/ 5</span></div>
-        <div class="spk-vol-n" style="margin-top:5px">419 ratings</div>
+        <div class="spk-val" style="color:var(--amber)">3.66 <span style="font-size:16px;font-weight:500;color:var(--muted)">/ 5</span></div>
+        <div class="spk-vol-n" style="margin-top:5px">1,245 ratings</div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom" style="color:var(--red)">−0.18 MoM</div>
+        <div class="spk-mom" style="color:var(--muted)">Apr '26</div>
         <div class="spk-badge" style="background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)">In-App · Paid</div>
       </div>
     </div>
@@ -2540,15 +2576,15 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   </div>
 
   <!-- STAR -->
-  <div class="spk-card spk-red">
+  <div class="spk-card spk-amber">
     <div class="spk-top">
       <div>
         <div class="spk-label">⭐ STAR</div>
-        <div class="spk-val" style="color:var(--red)">2.43 <span style="font-size:16px;font-weight:500;color:var(--muted)">/ 5</span></div>
-        <div class="spk-vol-n" style="margin-top:5px">111 ratings</div>
+        <div class="spk-val" style="color:var(--amber)">3.60 <span style="font-size:16px;font-weight:500;color:var(--muted)">/ 5</span></div>
+        <div class="spk-vol-n" style="margin-top:5px">343 ratings</div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom" style="color:var(--muted)">→ −0.01 MoM</div>
+        <div class="spk-mom" style="color:var(--muted)">Apr '26</div>
         <div class="spk-badge" style="background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)">In-App · Paid</div>
       </div>
     </div>
@@ -2556,15 +2592,15 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   </div>
 
   <!-- Leader -->
-  <div class="spk-card spk-red">
+  <div class="spk-card spk-green">
     <div class="spk-top">
       <div>
         <div class="spk-label">🏆 Leader</div>
-        <div class="spk-val" style="color:var(--red)">2.50 <span style="font-size:16px;font-weight:500;color:var(--muted)">/ 5</span></div>
-        <div class="spk-vol-n" style="margin-top:5px">46 ratings</div>
+        <div class="spk-val" style="color:var(--green)">3.72 <span style="font-size:16px;font-weight:500;color:var(--muted)">/ 5</span></div>
+        <div class="spk-vol-n" style="margin-top:5px">192 ratings</div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom" style="color:var(--green)">+0.21 MoM</div>
+        <div class="spk-mom" style="color:var(--muted)">Apr '26</div>
         <div class="spk-badge" style="background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)">In-App · Paid</div>
       </div>
     </div>
@@ -2572,15 +2608,15 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   </div>
 
   <!-- ExportTS -->
-  <div class="spk-card spk-red">
+  <div class="spk-card spk-green">
     <div class="spk-top">
       <div>
         <div class="spk-label">🌐 ExportTS</div>
-        <div class="spk-val" style="color:var(--amber)">2.73 <span style="font-size:16px;font-weight:500;color:var(--muted)">/ 5</span></div>
-        <div class="spk-vol-n" style="margin-top:5px">26 ratings</div>
+        <div class="spk-val" style="color:var(--green)">4.11 <span style="font-size:16px;font-weight:500;color:var(--muted)">/ 5</span></div>
+        <div class="spk-vol-n" style="margin-top:5px">55 ratings</div>
       </div>
       <div style="text-align:right">
-        <div class="spk-mom" style="color:var(--red)">−0.62 MoM</div>
+        <div class="spk-mom" style="color:var(--muted)">Apr '26</div>
         <div class="spk-badge" style="background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)">In-App · Paid</div>
       </div>
     </div>
@@ -2602,7 +2638,8 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   <div class="seg-toggle-row" style="margin-bottom:0" id="ar-month-toggle">
     <button class="seg-btn" data-armo="jan" onclick="switchARMonth('jan',this)">Jan '26</button>
     <button class="seg-btn" data-armo="feb" onclick="switchARMonth('feb',this)">Feb '26</button>
-    <button class="seg-btn active" data-armo="mar" onclick="switchARMonth('mar',this)">Mar '26</button>
+    <button class="seg-btn" data-armo="mar" onclick="switchARMonth('mar',this)">Mar '26</button>
+    <button class="seg-btn active" data-armo="apr" onclick="switchARMonth('apr',this)">Apr '26</button>
   </div>
   <span id="ar-month-n-tsc"  style="font-size:9px;color:var(--faint);font-family:'JetBrains Mono',monospace"></span>
 </div>
@@ -2614,7 +2651,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   <div class="ar-dist-card" id="ar-dist-cat">
     <div class="ar-dist-hdr">
       <span class="ar-dist-name">📄 Catalog</span>
-      <span class="ar-dist-sub" id="ar-sub-cat">n: 594 ratings</span>
+      <span class="ar-dist-sub" id="ar-sub-cat">n: 1,687 ratings</span>
     </div>
     <div class="ar-dist-rows" id="ar-rows-cat"></div>
   </div>
@@ -2623,7 +2660,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   <div class="ar-dist-card" id="ar-dist-tsc">
     <div class="ar-dist-hdr">
       <span class="ar-dist-name">📂 TSCatalog</span>
-      <span class="ar-dist-sub" id="ar-sub-tsc">n: 419 ratings</span>
+      <span class="ar-dist-sub" id="ar-sub-tsc">n: 1,245 ratings</span>
     </div>
     <div class="ar-dist-rows" id="ar-rows-tsc"></div>
   </div>
@@ -2632,7 +2669,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   <div class="ar-dist-card" id="ar-dist-star">
     <div class="ar-dist-hdr">
       <span class="ar-dist-name">⭐ STAR</span>
-      <span class="ar-dist-sub" id="ar-sub-star">n: 111 ratings</span>
+      <span class="ar-dist-sub" id="ar-sub-star">n: 343 ratings</span>
     </div>
     <div class="ar-dist-rows" id="ar-rows-star"></div>
   </div>
@@ -2641,7 +2678,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   <div class="ar-dist-card" id="ar-dist-ldr">
     <div class="ar-dist-hdr">
       <span class="ar-dist-name">🏆 Leader</span>
-      <span class="ar-dist-sub" id="ar-sub-ldr">n: 46 ratings</span>
+      <span class="ar-dist-sub" id="ar-sub-ldr">n: 192 ratings</span>
     </div>
     <div class="ar-dist-rows" id="ar-rows-ldr"></div>
   </div>
@@ -2650,7 +2687,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   <div class="ar-dist-card" id="ar-dist-exp">
     <div class="ar-dist-hdr">
       <span class="ar-dist-name">🌐 ExportTS</span>
-      <span class="ar-dist-sub" id="ar-sub-exp">n: 26 ratings</span>
+      <span class="ar-dist-sub" id="ar-sub-exp">n: 55 ratings</span>
     </div>
     <div class="ar-dist-rows" id="ar-rows-exp"></div>
   </div>
@@ -2666,20 +2703,19 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div class="pg">
 
 <div class="tab-summary" style="border-left-color:#4270C4">
-  <div class="ts-hdr">📉 NI Bifurcations — Mar '26</div>
+  <div class="ts-hdr">📉 BL Irrelevancy — April 2026</div>
   <ul>
-    <li><strong>Retail NI</strong> remains the largest disposition at 34.2% — stable across Jan–Mar '26</li>
-    <li><strong>Specification Mismatch</strong> jumped to 24.5% in Mar (+2.5pp) — sharpest MoM rise, needs monitoring</li>
-    <li><strong>Wrong BL Mapping</strong> appeared only from Jan '26 and already accounts for 7.5% — a fast-growing new disposition</li>
-    <li><strong>Wrong Location</strong> has improved from its Oct '25 peak of 25.5% to 17.2% — a meaningful structural improvement</li>
-    <li><strong>Wrong Category NI</strong> is falling sharply — negative mcat marking is suppressing it effectively</li>
-    <li>NI after -ve mcat marking (975) is now a small fraction of NI before marking (20,885) — suppression is working</li>
+    <li><strong>BLNI/Txn: 4.05%</strong> — new best-ever, down from 4.33% in March; −28% improvement from Oct'25 peak of 5.61% in just 6 months</li>
+    <li>Total BLNI: 440,417 on 10,886,944 transactions — algorithm quality hit its best-ever ratio despite high transaction volumes</li>
+    <li><strong>Wrong Location (−1.9pp) and Insufficient Info (−1.7pp) declining</strong> — continued structural improvement from interventions</li>
+    <li><strong>Retail NI rose to 37.2% share</strong> (vs 34.2% in Mar) — the one area ticking up; QRF also shows Retail Req elevated; needs focus next</li>
+    <li>Wrong BL Mapping improved from 7.5% to 5.6% — reducing faster than other dispositions; intervention effective</li>
   </ul>
 </div>
 
 <!-- ═══ SECTION 1: DISPOSITION STACKED BAR ═══ -->
 <div class="sh" style="margin-top:0">
-  <span class="sh-t">NI disposition breakdown — Apr '25 – Mar '26</span>
+  <span class="sh-t">NI disposition breakdown — Apr '25 – Apr '26</span>
   <div class="sh-l"></div>
   <span class="sh-b" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">BLNI Report</span>
 </div>
@@ -2884,6 +2920,22 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <div class="vcb-bar-label">Mar<br><span class="vcb-bar-n">481K</span></div>
       </div>
 
+      <!-- Apr '26 — n=440,417 — new best ever BLNI/Txn -->
+      <div class="vcb-bar-group vcb-bar-group-apr">
+        <div class="vcb-bar" style="outline:2px solid rgba(0,0,0,.12);border-radius:8px 8px 0 0">
+          <div class="vcb-seg" style="height:37.2%;background:#E07B5A" data-tip="Retail NI — 163,869 (37.2%)"><span class="vcb-lbl">37.2%</span></div>
+          <div class="vcb-seg" style="height:25.9%;background:#4270C4" data-tip="Spec Mismatch — 114,055 (25.9%)"><span class="vcb-lbl">25.9%</span></div>
+          <div class="vcb-seg" style="height:18.3%;background:#7055B8" data-tip="Wrong Location — 80,640 (18.3%)"><span class="vcb-lbl">18.3%</span></div>
+          <div class="vcb-seg" style="height:5.6%;background:#2D8A6A" data-tip="Wrong BL Mapping — 24,625 (5.6%)"><span class="vcb-lbl">5.6%</span></div>
+          <div class="vcb-seg" style="height:4.3%;background:#C8C8CC" data-tip="Others — 18,826 (4.3%)"><span class="vcb-lbl vcb-lbl-sm"></span></div>
+          <div class="vcb-seg" style="height:3.8%;background:#CFA050" data-tip="Insuff Info — 16,535 (3.8%)"><span class="vcb-lbl vcb-lbl-sm"></span></div>
+          <div class="vcb-seg" style="height:2.8%;background:#D46B6B" data-tip="Wrong Category — 12,228 (2.8%)"><span class="vcb-lbl vcb-lbl-sm"></span></div>
+          <div class="vcb-seg" style="height:1.9%;background:#94A3B8" data-tip="WSR — 8,524 (1.9%)"><span class="vcb-lbl"></span></div>
+          <div class="vcb-seg" style="height:0.2%;background:#CBD5E1" data-tip="Brand — 980 (0.2%)"><span class="vcb-lbl"></span></div>
+        </div>
+        <div class="vcb-bar-label"><strong>Apr</strong><br><span class="vcb-bar-n">440K ★</span></div>
+      </div>
+
     </div><!-- /vcb-bars -->
   </div><!-- /vcb-chart-area -->
 
@@ -2914,7 +2966,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <th class="hmap-th-sub">Disposition</th>
         <th class="hmap-th-month">Feb '26</th>
         <th class="hmap-th-month">Mar '26</th>
-        <th class="hmap-th-month hmap-th-future">Apr '26</th>
+        <th class="hmap-th-month" style="font-weight:700">Apr '26</th>
         <th class="hmap-th-month hmap-th-future">May '26</th>
         <th class="hmap-th-delta">MoM Δ</th>
       </tr>
@@ -2924,71 +2976,71 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <td class="hmap-sub-name">🛒 Retail NI</td>
         <td class="hmap-cell hmap-hot" style="--v:34.4;--base-r:224;--base-g:123;--base-b:90">34.4%<br><span class="hmap-n">n=1,62,393</span></td>
         <td class="hmap-cell hmap-hot" style="--v:34.2;--base-r:224;--base-g:123;--base-b:90">34.2%<br><span class="hmap-n">n=71,335</span></td>
+        <td class="hmap-cell hmap-hot" style="--v:37.2;--base-r:224;--base-g:123;--base-b:90">37.2%<br><span class="hmap-n">n=1,63,869</span></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−0.2pp ↓</td>
+        <td class="hmap-delta hmap-delta-up">+3.0pp ↑</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">📋 Specification Mismatch</td>
         <td class="hmap-cell" style="--v:22.0;--base-r:66;--base-g:112;--base-b:196">22.0%<br><span class="hmap-n">n=1,03,603</span></td>
         <td class="hmap-cell hmap-hot" style="--v:24.5;--base-r:66;--base-g:112;--base-b:196">24.5%<br><span class="hmap-n">n=51,187</span></td>
+        <td class="hmap-cell hmap-hot" style="--v:25.9;--base-r:66;--base-g:112;--base-b:196">25.9%<br><span class="hmap-n">n=1,14,055</span></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-up">+2.5pp ↑</td>
+        <td class="hmap-delta hmap-delta-up">+1.4pp ↑</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">📍 Wrong Location</td>
         <td class="hmap-cell" style="--v:17.1;--base-r:112;--base-g:85;--base-b:184">17.1%<br><span class="hmap-n">n=80,653</span></td>
         <td class="hmap-cell" style="--v:17.2;--base-r:112;--base-g:85;--base-b:184">17.2%<br><span class="hmap-n">n=35,956</span></td>
+        <td class="hmap-cell" style="--v:18.3;--base-r:112;--base-g:85;--base-b:184">18.3%<br><span class="hmap-n">n=80,640</span></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-up">+0.1pp ↑</td>
+        <td class="hmap-delta hmap-delta-up">+1.1pp ↑</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">🔀 Wrong BL Mapping</td>
         <td class="hmap-cell hmap-hot" style="--v:8.1;--base-r:45;--base-g:138;--base-b:106">8.1%<br><span class="hmap-n">n=38,163</span></td>
         <td class="hmap-cell" style="--v:7.5;--base-r:45;--base-g:138;--base-b:106">7.5%<br><span class="hmap-n">n=15,761</span></td>
+        <td class="hmap-cell" style="--v:5.6;--base-r:45;--base-g:138;--base-b:106">5.6%<br><span class="hmap-n">n=24,625</span></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−0.6pp ↓</td>
+        <td class="hmap-delta hmap-delta-dn">−1.9pp ↓</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">❓ Insufficient Information</td>
         <td class="hmap-cell" style="--v:6.6;--base-r:207;--base-g:160;--base-b:80">6.6%<br><span class="hmap-n">n=31,159</span></td>
         <td class="hmap-cell" style="--v:5.5;--base-r:207;--base-g:160;--base-b:80">5.5%<br><span class="hmap-n">n=11,423</span></td>
+        <td class="hmap-cell" style="--v:3.8;--base-r:207;--base-g:160;--base-b:80">3.8%<br><span class="hmap-n">n=16,535</span></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−1.1pp ↓</td>
+        <td class="hmap-delta hmap-delta-dn">−1.7pp ↓</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">🏷️ Wrong Category</td>
         <td class="hmap-cell" style="--v:3.1;--base-r:212;--base-g:107;--base-b:107">3.1%<br><span class="hmap-n">n=14,401</span></td>
         <td class="hmap-cell" style="--v:3.1;--base-r:212;--base-g:107;--base-b:107">3.1%<br><span class="hmap-n">n=6,507</span></td>
+        <td class="hmap-cell" style="--v:2.8;--base-r:212;--base-g:107;--base-b:107">2.8%<br><span class="hmap-n">n=12,228</span></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta" style="color:var(--muted)">→ 0.0pp</td>
+        <td class="hmap-delta hmap-delta-dn">−0.3pp ↓</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">📦 Others</td>
         <td class="hmap-cell" style="--v:6.7;--base-r:180;--base-g:180;--base-b:185">6.7%<br><span class="hmap-n">n=31,549</span></td>
         <td class="hmap-cell" style="--v:6.1;--base-r:180;--base-g:180;--base-b:185">6.1%<br><span class="hmap-n">n=12,821</span></td>
+        <td class="hmap-cell" style="--v:4.3;--base-r:180;--base-g:180;--base-b:185">4.3%<br><span class="hmap-n">n=18,826</span></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−0.6pp ↓</td>
+        <td class="hmap-delta hmap-delta-dn">−1.8pp ↓</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">🔍 Wrong Search Result</td>
         <td class="hmap-cell" style="--v:1.9;--base-r:148;--base-g:163;--base-b:184">1.9%<br><span class="hmap-n">n=8,867</span></td>
         <td class="hmap-cell" style="--v:1.6;--base-r:148;--base-g:163;--base-b:184">1.6%<br><span class="hmap-n">n=3,422</span></td>
+        <td class="hmap-cell" style="--v:1.9;--base-r:148;--base-g:163;--base-b:184">1.9%<br><span class="hmap-n">n=8,524</span></td>
         <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-cell hmap-future"></td>
-        <td class="hmap-delta hmap-delta-dn">−0.3pp ↓</td>
+        <td class="hmap-delta" style="color:var(--muted)">→ 0.0pp</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">™️ Brand</td>
         <td class="hmap-cell" style="--v:0.2;--base-r:148;--base-g:163;--base-b:184">0.2%<br><span class="hmap-n">n=751</span></td>
         <td class="hmap-cell" style="--v:0.2;--base-r:148;--base-g:163;--base-b:184">0.2%<br><span class="hmap-n">n=434</span></td>
-        <td class="hmap-cell hmap-future"></td>
+        <td class="hmap-cell" style="--v:0.2;--base-r:148;--base-g:163;--base-b:184">0.2%<br><span class="hmap-n">n=980</span></td>
         <td class="hmap-cell hmap-future"></td>
         <td class="hmap-delta" style="color:var(--muted)">→ 0.0pp</td>
       </tr>
@@ -3016,7 +3068,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <th class="hmap-th-sub">Metric</th>
         <th class="hmap-th-month">Feb '26</th>
         <th class="hmap-th-month">Mar '26</th>
-        <th class="hmap-th-month hmap-th-future">Apr '26</th>
+        <th class="hmap-th-month" style="font-weight:700">Apr '26</th>
         <th class="hmap-th-month hmap-th-future">May '26</th>
         <th class="hmap-th-delta">MoM Δ</th>
       </tr>
@@ -3103,7 +3155,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div class="pg">
 
 <div class="tab-summary" style="border-left-color:#4270C4">
-  <div class="ts-hdr">📞 9696 Call Issues — Mar '26</div>
+  <div class="ts-hdr">📞 9696 Call Issues — Mar '26 (latest available)</div>
   <ul>
     <li><strong>Deactivation calls</strong> down across the board — <strong>Not Getting Maturity</strong> remains #1 at 41.4% share (129 calls, −25% MoM)</li>
     <li><strong>Unable to devote time</strong> dropped to 31.8% share (99 calls, −15% MoM) — second consecutive decline</li>
@@ -3114,7 +3166,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 <!-- ═══ SECTION 1: DEACTIVATION STACKED BAR ═══ -->
 <div class="sh" style="margin-top:0">
-  <span class="sh-t">Deactivation issue mix — Apr '25 – Mar '26 (0-90 + Vintage combined)</span>
+  <span class="sh-t">Deactivation issue mix — Apr '25 – Mar '26 (latest) (0-90 + Vintage combined)</span>
   <div class="sh-l"></div>
   <span class="sh-b" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">Volumes declining ↓</span>
 </div>
@@ -3128,7 +3180,6 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
       <div class="vcb-gridline"></div><div class="vcb-gridline"></div><div class="vcb-gridline"></div><div class="vcb-gridline"></div><div class="vcb-gridline"></div>
     </div>
     <div class="vcb-bars vcb-bars-11" id="calls-deact-bars">
-
 
       <!-- Apr — n=386 -->
       <div class="vcb-bar-group">
@@ -3289,7 +3340,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 <!-- ═══ SECTION 2: DEACTIVATION HEATMAP ═══ -->
 <div class="sh">
-  <span class="sh-t">Deactivation issue heat map — Feb vs Mar '26</span>
+  <span class="sh-t">Deactivation issue heat map — Feb vs Mar '26 (latest)</span>
   <div class="sh-l"></div>
   <span style="font-size:9.5px;color:var(--faint)">Cell = % of total deactivation calls · colour intensity = share</span>
 </div>
@@ -3360,7 +3411,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 <!-- ═══ SECTION 3: NON-DEACTIVATION STACKED BAR ═══ -->
 <div class="sh">
-  <span class="sh-t">Non-Deactivation OCR issue mix — Apr '25 – Mar '26 (0-90 + Vintage combined)</span>
+  <span class="sh-t">Non-Deactivation OCR issue mix — Apr '25 – Mar '26 (latest) (0-90 + Vintage combined)</span>
   <div class="sh-l"></div>
 </div>
 
@@ -3534,7 +3585,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 <!-- ═══ SECTION 4: NON-DEACTIVATION HEATMAP ═══ -->
 <div class="sh">
-  <span class="sh-t">Non-Deactivation OCR issue heat map — Feb vs Mar '26 (with sub-categories)</span>
+  <span class="sh-t">Non-Deactivation OCR issue heat map — Feb vs Mar '26 (latest) (with sub-categories)</span>
   <div class="sh-l"></div>
   <span style="font-size:9.5px;color:var(--faint)">Cell = % of total non-deact OCR calls · colour intensity = share</span>
 </div>
@@ -3724,7 +3775,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 <div class="pg">
 
 <div class="tab-summary" id="insight-summary" style="border-left-color:#7055B8">
-  <div class="ts-hdr">💡 Cross-Source Insights — Mar '26</div>
+  <div class="ts-hdr">💡 Cross-Source Insights — Apr '26</div>
   <ul>
     <li>This dashboard synthesises <strong>6 independent data sources</strong> — NPS surveys (30/60/90-day), in-app ratings (after 5 BLs), QRF per-lead feedback, BLNI algorithm data, 9696 call logs, and NPS movement tracking</li>
     <li>Each source is owned by a different team, collected at different lifecycle stages, and has different biases — but when multiple sources agree, the signal is real</li>
@@ -3741,23 +3792,23 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   <div style="padding:0">
     <div style="padding:9px 18px;border-bottom:1px solid #F0EFEC;display:flex;align-items:baseline;gap:10px;font-size:10.5px;line-height:1.5;color:var(--ink2)">
       <span style="font-weight:800;color:var(--red);font-size:11px;flex-shrink:0">1.</span>
-      <span><strong>"Irrelevant Leads"</strong> is the #1 pain point across all 5 feedback channels — confirmed independently by NPS (34%), App (32%), QRF, BLNI, and 9696 calls</span>
+      <span><strong>"Irrelevant Leads" confirmed as structural across all 5 channels</strong> — NPS (35%), App (34%), QRF (+6.4% MoM reversal), BLNI (37% Retail NI share), 9696 calls — rising each month with the largest sample yet (n=3,674 detractor tags); this is not noise</span>
     </div>
     <div style="padding:9px 18px;border-bottom:1px solid #F0EFEC;display:flex;align-items:baseline;gap:10px;font-size:10.5px;line-height:1.5;color:var(--ink2)">
       <span style="font-weight:800;color:var(--red);font-size:11px;flex-shrink:0">2.</span>
-      <span><strong>Catalog seller NPS at 8.1</strong> — monthly ₹3K subscribers churn before the platform delivers value (takes 60-90 days based on TSCatalog recovery data)</span>
+      <span><strong>Retail NI is the single largest unresolved lead quality failure</strong> — 1,64,062 leads in April, virtually unchanged from March (1,64,693), and 37% of all BLNI; overall BLNI/Txn improved to best-ever 4.05% but Retail NI saw near-zero improvement</span>
     </div>
     <div style="padding:9px 18px;border-bottom:1px solid #F0EFEC;display:flex;align-items:baseline;gap:10px;font-size:10.5px;line-height:1.5;color:var(--ink2)">
       <span style="font-weight:800;color:var(--amber);font-size:11px;flex-shrink:0">3.</span>
-      <span><strong>Algorithm objectively improving</strong> (BLNI best-ever 4.33%) <strong>but seller perception worsening</strong> — NPS "Irrelevant Buyer" share rose from 31% to 34% despite better lead matching</span>
+      <span><strong>New seller NPS collapsed to 10.8 (30-day cohort)</strong>, the weakest segment by far and down from ~20 in March; combined with Catalog NPS at 9.1 — the lowest of all types — early-lifecycle dissatisfaction is the most acute churn risk this month</span>
     </div>
     <div style="padding:9px 18px;border-bottom:1px solid #F0EFEC;display:flex;align-items:baseline;gap:10px;font-size:10.5px;line-height:1.5;color:var(--ink2)">
-      <span style="font-weight:800;color:var(--green);font-size:11px;flex-shrink:0">4.</span>
-      <span><strong>TSCatalog has the highest D→P recovery</strong> (106 quarterly) — understanding what converts these detractors back is the highest-leverage insight to replicate across segments</span>
+      <span style="font-weight:800;color:var(--amber);font-size:11px;flex-shrink:0">4.</span>
+      <span><strong>Algorithm-vs-perception gap widened in April</strong> — BLNI/Txn at best-ever 4.05% yet NPS "Irrelevant Buyer" share hit its highest point this year at 35%; QRF reversed its 6-month improvement trend (+6.4% MoM); sellers are experiencing deteriorating lead quality despite improving algorithm metrics</span>
     </div>
     <div style="padding:9px 18px;display:flex;align-items:baseline;gap:10px;font-size:10.5px;line-height:1.5;color:var(--ink2)">
-      <span style="font-weight:800;color:var(--blue);font-size:11px;flex-shrink:0">5.</span>
-      <span><strong>Top 3 NPS complaints now account for ~80%</strong> of all feedback — problems are concentrating (not diffusing), meaning focused fixes on 3 issues can move the needle</span>
+      <span style="font-weight:800;color:var(--green);font-size:11px;flex-shrink:0">5.</span>
+      <span><strong>Auto Genuine Closure more than doubled MoM (20% → 43%)</strong> — the sharpest operational improvement this year; combined with Auto Junk Closure at 93% (near best-ever), contact centre efficiency is at its strongest point; offsets a 9.2% drop in paid seller email volumes which may reflect disengagement</span>
     </div>
   </div>
 </div>
@@ -3792,16 +3843,16 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <tbody>
       <tr>
         <td class="hmap-sub-name" style="font-weight:700">🎯 Irrelevant / Low-Quality Leads</td>
-        <td class="hmap-cell hmap-hot" style="--v:40;--base-r:192;--base-g:68;--base-b:68;text-align:center;font-size:9px"><strong>#1</strong><br><span class="hmap-n">34.3% share</span></td>
+        <td class="hmap-cell hmap-hot" style="--v:40;--base-r:192;--base-g:68;--base-b:68;text-align:center;font-size:9px"><strong>#1</strong><br><span class="hmap-n">35.0% share</span></td>
         <td class="hmap-cell hmap-hot" style="--v:35;--base-r:192;--base-g:68;--base-b:68;text-align:center;font-size:9px"><strong>#1</strong><br><span class="hmap-n">31.7% share</span></td>
         <td class="hmap-cell" style="--v:20;--base-r:192;--base-g:68;--base-b:68;text-align:center;font-size:9px">✅<br><span class="hmap-n">Spec+Retail+Loc</span></td>
-        <td class="hmap-cell" style="--v:15;--base-r:192;--base-g:68;--base-b:68;text-align:center;font-size:9px">✅<br><span class="hmap-n">4.96% irrel</span></td>
+        <td class="hmap-cell" style="--v:15;--base-r:192;--base-g:68;--base-b:68;text-align:center;font-size:9px">✅<br><span class="hmap-n">4.13‰ irrel</span></td>
         <td class="hmap-cell" style="--v:15;--base-r:192;--base-g:68;--base-b:68;text-align:center;font-size:9px">✅<br><span class="hmap-n">deact + OCR</span></td>
         <td class="hmap-delta hmap-delta-up" style="font-size:11px"><strong>5 / 5</strong></td>
       </tr>
       <tr>
         <td class="hmap-sub-name" style="font-weight:700">💸 Low Conversion / Not Enough Leads</td>
-        <td class="hmap-cell" style="--v:25;--base-r:212;--base-g:120;--base-b:74;text-align:center;font-size:9px"><strong>#2+#3</strong><br><span class="hmap-n">24.6%+20.8%</span></td>
+        <td class="hmap-cell" style="--v:25;--base-r:212;--base-g:120;--base-b:74;text-align:center;font-size:9px"><strong>#2+#3</strong><br><span class="hmap-n">23.4%+21.6%</span></td>
         <td class="hmap-cell" style="--v:25;--base-r:212;--base-g:120;--base-b:74;text-align:center;font-size:9px"><strong>#2+#3</strong><br><span class="hmap-n">25.4%+21.8%</span></td>
         <td class="hmap-cell" style="text-align:center;color:var(--faint);font-size:9px">—<br><span class="hmap-n">not tracked</span></td>
         <td class="hmap-cell" style="text-align:center;color:var(--faint);font-size:9px">—<br><span class="hmap-n">not tracked</span></td>
@@ -3857,7 +3908,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <thead>
       <tr>
         <th class="hmap-th-sub" style="min-width:110px">Segment</th>
-        <th class="hmap-th-month">NPS<br><span style="font-weight:400;font-size:7.5px">Mar '26</span></th>
+        <th class="hmap-th-month">NPS<br><span style="font-weight:400;font-size:7.5px">Apr '26</span></th>
         <th class="hmap-th-month">Δ MoM</th>
         <th class="hmap-th-month">Promoters</th>
         <th class="hmap-th-month">Detractors</th>
@@ -3870,58 +3921,58 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <tbody>
       <tr>
         <td class="hmap-sub-name" style="font-weight:700">👑 Leader</td>
-        <td class="hmap-cell hmap-hot" style="--v:44;--base-r:45;--base-g:138;--base-b:106;text-align:center"><strong>44.4</strong></td>
-        <td class="hmap-cell" style="text-align:center;color:var(--green);font-weight:700">+13.9</td>
-        <td class="hmap-cell" style="text-align:center">65.2%</td>
-        <td class="hmap-cell" style="text-align:center">20.8%</td>
+        <td class="hmap-cell" style="--v:29;--base-r:45;--base-g:138;--base-b:106;text-align:center"><strong>28.8</strong></td>
+        <td class="hmap-cell" style="text-align:center;color:var(--red);font-weight:700">−15.6</td>
+        <td class="hmap-cell" style="text-align:center">58.0%</td>
+        <td class="hmap-cell" style="text-align:center">29.3%</td>
         <td class="hmap-cell" style="text-align:center">1</td>
-        <td class="hmap-cell" style="text-align:center">36</td>
-        <td class="hmap-cell" style="text-align:center;color:var(--muted)">250</td>
-        <td class="hmap-delta" style="color:var(--green);font-weight:800">🟢 Strong</td>
+        <td class="hmap-cell" style="text-align:center">27</td>
+        <td class="hmap-cell" style="text-align:center;color:var(--muted)">939</td>
+        <td class="hmap-delta" style="color:var(--amber)">🟡 Dipped</td>
       </tr>
       <tr>
         <td class="hmap-sub-name" style="font-weight:700">⭐ Star</td>
-        <td class="hmap-cell" style="--v:29;--base-r:45;--base-g:138;--base-b:106;text-align:center"><strong>29.0</strong></td>
-        <td class="hmap-cell" style="text-align:center;color:var(--red);font-weight:700">−4.6</td>
-        <td class="hmap-cell" style="text-align:center">57.3%</td>
-        <td class="hmap-cell" style="text-align:center">28.3%</td>
+        <td class="hmap-cell" style="--v:27;--base-r:45;--base-g:138;--base-b:106;text-align:center"><strong>26.9</strong></td>
+        <td class="hmap-cell" style="text-align:center;color:var(--red);font-weight:700">−2.1</td>
+        <td class="hmap-cell" style="text-align:center">56.2%</td>
+        <td class="hmap-cell" style="text-align:center">29.4%</td>
         <td class="hmap-cell" style="text-align:center">2</td>
-        <td class="hmap-cell" style="text-align:center">42</td>
-        <td class="hmap-cell" style="text-align:center;color:var(--muted)">459</td>
-        <td class="hmap-delta" style="color:var(--amber)">🟡 Slipping</td>
-      </tr>
-      <tr>
-        <td class="hmap-sub-name" style="font-weight:700">📦 TSCatalog</td>
-        <td class="hmap-cell" style="--v:26;--base-r:112;--base-g:85;--base-b:184;text-align:center"><strong>26.2</strong></td>
-        <td class="hmap-cell" style="text-align:center;color:var(--red);font-weight:700">−0.9</td>
-        <td class="hmap-cell" style="text-align:center">54.7%</td>
-        <td class="hmap-cell" style="text-align:center">28.5%</td>
-        <td class="hmap-cell hmap-hot" style="--v:10;--base-r:45;--base-g:138;--base-b:106;text-align:center"><strong>7</strong></td>
-        <td class="hmap-cell hmap-hot" style="--v:20;--base-r:45;--base-g:138;--base-b:106;text-align:center"><strong>106</strong></td>
-        <td class="hmap-cell" style="text-align:center;color:var(--muted)">1,394</td>
+        <td class="hmap-cell" style="text-align:center">38</td>
+        <td class="hmap-cell" style="text-align:center;color:var(--muted)">1,567</td>
         <td class="hmap-delta" style="color:var(--amber)">🟡 Watch</td>
       </tr>
       <tr>
+        <td class="hmap-sub-name" style="font-weight:700">📦 TSCatalog</td>
+        <td class="hmap-cell" style="--v:26;--base-r:112;--base-g:85;--base-b:184;text-align:center"><strong>26.4</strong></td>
+        <td class="hmap-cell" style="text-align:center;color:var(--green);font-weight:700">+0.2</td>
+        <td class="hmap-cell" style="text-align:center">55.6%</td>
+        <td class="hmap-cell" style="text-align:center">29.2%</td>
+        <td class="hmap-cell hmap-hot" style="--v:10;--base-r:45;--base-g:138;--base-b:106;text-align:center"><strong>7</strong></td>
+        <td class="hmap-cell hmap-hot" style="--v:20;--base-r:45;--base-g:138;--base-b:106;text-align:center"><strong>100</strong></td>
+        <td class="hmap-cell" style="text-align:center;color:var(--muted)">3,486</td>
+        <td class="hmap-delta" style="color:var(--green)">🟢 Stable</td>
+      </tr>
+      <tr>
         <td class="hmap-sub-name" style="font-weight:700">📋 Catalog</td>
-        <td class="hmap-cell" style="--v:8;--base-r:192;--base-g:68;--base-b:68;text-align:center"><strong>8.1</strong></td>
-        <td class="hmap-cell" style="text-align:center;color:var(--red);font-weight:700">−6.7</td>
-        <td class="hmap-cell" style="text-align:center">45.3%</td>
-        <td class="hmap-cell" style="text-align:center;color:var(--red)"><strong>37.2%</strong></td>
+        <td class="hmap-cell" style="--v:9;--base-r:192;--base-g:68;--base-b:68;text-align:center"><strong>9.1</strong></td>
+        <td class="hmap-cell" style="text-align:center;color:var(--green);font-weight:700">+1.0</td>
+        <td class="hmap-cell" style="text-align:center">47.5%</td>
+        <td class="hmap-cell" style="text-align:center;color:var(--red)"><strong>38.4%</strong></td>
         <td class="hmap-cell" style="text-align:center">3</td>
-        <td class="hmap-cell" style="text-align:center">72</td>
-        <td class="hmap-cell" style="text-align:center;color:var(--muted)">631</td>
+        <td class="hmap-cell" style="text-align:center">65</td>
+        <td class="hmap-cell" style="text-align:center;color:var(--muted)">1,377</td>
         <td class="hmap-delta hmap-delta-up" style="font-weight:800">🔴 At Risk</td>
       </tr>
       <tr style="color:var(--muted)">
         <td class="hmap-sub-name">🌐 ExportTS</td>
-        <td class="hmap-cell" style="text-align:center">−6.7</td>
-        <td class="hmap-cell" style="text-align:center;color:var(--red)">−31.3</td>
-        <td class="hmap-cell" style="text-align:center">40.3%</td>
-        <td class="hmap-cell" style="text-align:center">47.0%</td>
+        <td class="hmap-cell" style="text-align:center">16.7</td>
+        <td class="hmap-cell" style="text-align:center;color:var(--green)">+23.4</td>
+        <td class="hmap-cell" style="text-align:center">51.6%</td>
+        <td class="hmap-cell" style="text-align:center">34.9%</td>
         <td class="hmap-cell" style="text-align:center">1</td>
-        <td class="hmap-cell" style="text-align:center">11</td>
-        <td class="hmap-cell" style="text-align:center">134</td>
-        <td class="hmap-delta" style="color:var(--faint);font-size:8.5px">Low n — monitor</td>
+        <td class="hmap-cell" style="text-align:center">14</td>
+        <td class="hmap-cell" style="text-align:center">215</td>
+        <td class="hmap-delta" style="color:var(--amber);font-size:8.5px">Recovering — monitor</td>
       </tr>
     </tbody>
   </table>
@@ -3938,20 +3989,20 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <div style="padding:10px 14px;background:var(--white);border:1px solid var(--border);border-radius:7px">
           <div style="font-size:9px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px">📋 Catalog — monthly, ₹3,000/mo</div>
           <div style="font-size:10px;color:var(--ink2);line-height:1.6">
-            NPS = <strong>8.1</strong> with 37% detractors. Only <strong>3</strong> sellers recovered from Detractor→Promoter monthly. These sellers are surveyed at 30 days — at which point they've barely learned the platform. Most were likely oversold by the sales agent and are comparing a polished promise to a raw 30-day reality. They <strong>churn before the value materialises</strong>.
+            NPS = <strong>9.1</strong> with 38.4% detractors. Only <strong>3</strong> sellers recovered from Detractor→Promoter monthly. These sellers are surveyed at 30 days — at which point they've barely learned the platform. Most were likely oversold by the sales agent and are comparing a polished promise to a raw 30-day reality. They <strong>churn before the value materialises</strong>.
           </div>
         </div>
 
         <div style="padding:10px 14px;background:var(--white);border:1px solid var(--border);border-radius:7px">
           <div style="font-size:9px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px">📦 TSCatalog — annual subscription</div>
           <div style="font-size:10px;color:var(--ink2);line-height:1.6">
-            NPS = <strong>26.2</strong> with the <strong>highest D→P recovery</strong> (7 monthly, 106 quarterly). These sellers stay long enough to acclimatise. They may be equally unhappy at 30 days, but by 60-90 days they've figured it out. The annual commitment gives them <strong>runway to see value</strong> — something monthly sellers never get.
+            NPS = <strong>26.4</strong> with <strong>consistent D→P recovery</strong> (7 monthly, ~100 quarterly). These sellers stay long enough to acclimatise. They may be equally unhappy at 30 days, but by 60-90 days they've figured it out. The annual commitment gives them <strong>runway to see value</strong> — something monthly sellers never get.
           </div>
         </div>
 
       </div>
 
-      <p style="margin-bottom:10px">The fact that <strong>72 Catalog sellers DID recover in the Oct-Jan quarter</strong> proves they <em>can</em> be won back — but likely only those who renewed for a 2nd or 3rd month. The funnel is: oversold → frustrated at 30 days → some churn, some renew → survivors acclimatise and improve.</p>
+      <p style="margin-bottom:10px">The fact that <strong>65 Catalog sellers DID recover in the Jan-Apr quarter</strong> proves they <em>can</em> be won back — but likely only those who renewed for a 2nd or 3rd month. The funnel is: oversold → frustrated at 30 days → some churn, some renew → survivors acclimatise and improve.</p>
 
       <p style="margin-bottom:0"><strong>The core question:</strong> Are we selling monthly subscriptions for a product that takes 60-90 days to deliver value? If so, the fix isn't better leads — it's either a) better onboarding to compress the learning curve, b) resetting sales expectations, or c) rethinking the 1-month package entirely.</p>
     </div>
@@ -3974,7 +4025,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   </div>
 
   <!-- NPS Complaint Share Shift -->
-  <div style="font-size:9.5px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">NPS Complaint Share Shift (Jan → Feb → Mar '26)</div>
+  <div style="font-size:9.5px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">NPS Complaint Share Shift (Jan → Feb → Mar → Apr '26)</div>
 
   <table class="hmap-table" style="width:100%">
     <thead>
@@ -3983,6 +4034,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <th class="hmap-th-month">Jan '26<br><span style="font-weight:400;font-size:7.5px">n=211</span></th>
         <th class="hmap-th-month">Feb '26<br><span style="font-weight:400;font-size:7.5px">n=635</span></th>
         <th class="hmap-th-month">Mar '26<br><span style="font-weight:400;font-size:7.5px">n=1,156</span></th>
+        <th class="hmap-th-month">Apr '26<br><span style="font-weight:400;font-size:7.5px">n=3,674</span></th>
         <th class="hmap-th-delta">Trend</th>
       </tr>
     </thead>
@@ -3991,51 +4043,56 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         <td class="hmap-sub-name" style="font-weight:700">🎯 Irrelevant Buyer</td>
         <td class="hmap-cell" style="--v:31;--base-r:192;--base-g:68;--base-b:68;text-align:center">30.8%</td>
         <td class="hmap-cell" style="--v:34;--base-r:192;--base-g:68;--base-b:68;text-align:center">33.7%</td>
-        <td class="hmap-cell hmap-hot" style="--v:34;--base-r:192;--base-g:68;--base-b:68;text-align:center"><strong>34.3%</strong></td>
+        <td class="hmap-cell" style="--v:34;--base-r:192;--base-g:68;--base-b:68;text-align:center">34.3%</td>
+        <td class="hmap-cell hmap-hot" style="--v:35;--base-r:192;--base-g:68;--base-b:68;text-align:center"><strong>35.0%</strong></td>
         <td class="hmap-delta hmap-delta-up">↑ growing</td>
       </tr>
       <tr>
         <td class="hmap-sub-name" style="font-weight:700">💸 Low Conversion</td>
         <td class="hmap-cell" style="--v:20;--base-r:212;--base-g:120;--base-b:74;text-align:center">20.4%</td>
         <td class="hmap-cell" style="--v:23;--base-r:212;--base-g:120;--base-b:74;text-align:center">23.0%</td>
-        <td class="hmap-cell" style="--v:25;--base-r:212;--base-g:120;--base-b:74;text-align:center"><strong>24.6%</strong></td>
-        <td class="hmap-delta hmap-delta-up">↑ rising steadily</td>
+        <td class="hmap-cell" style="--v:25;--base-r:212;--base-g:120;--base-b:74;text-align:center">24.6%</td>
+        <td class="hmap-cell hmap-hot" style="--v:23;--base-r:212;--base-g:120;--base-b:74;text-align:center"><strong>23.4%</strong></td>
+        <td class="hmap-delta hmap-delta-up">↑ elevated plateau</td>
       </tr>
       <tr>
         <td class="hmap-sub-name" style="font-weight:700">📉 Less BLs / Enquiries</td>
         <td class="hmap-cell" style="--v:15;--base-r:96;--base-g:137;--base-b:200;text-align:center">15.2%</td>
         <td class="hmap-cell" style="--v:20;--base-r:96;--base-g:137;--base-b:200;text-align:center">20.3%</td>
-        <td class="hmap-cell" style="--v:21;--base-r:96;--base-g:137;--base-b:200;text-align:center"><strong>20.8%</strong></td>
-        <td class="hmap-delta hmap-delta-up">↑ accelerated in Feb</td>
+        <td class="hmap-cell" style="--v:21;--base-r:96;--base-g:137;--base-b:200;text-align:center">20.8%</td>
+        <td class="hmap-cell" style="--v:22;--base-r:96;--base-g:137;--base-b:200;text-align:center"><strong>21.6%</strong></td>
+        <td class="hmap-delta hmap-delta-up">↑ continued rise</td>
       </tr>
       <tr>
         <td class="hmap-sub-name">👤 Issues with Buyer</td>
         <td class="hmap-cell" style="--v:9;--base-r:130;--base-g:114;--base-b:196;text-align:center">9.0%</td>
         <td class="hmap-cell" style="--v:11;--base-r:130;--base-g:114;--base-b:196;text-align:center">11.3%</td>
-        <td class="hmap-cell" style="--v:14;--base-r:130;--base-g:114;--base-b:196;text-align:center"><strong>13.7%</strong></td>
-        <td class="hmap-delta hmap-delta-up">↑ gradual rise</td>
+        <td class="hmap-cell" style="--v:14;--base-r:130;--base-g:114;--base-b:196;text-align:center">13.7%</td>
+        <td class="hmap-cell" style="--v:10;--base-r:130;--base-g:114;--base-b:196;text-align:center"><strong>10.4%</strong></td>
+        <td class="hmap-delta hmap-delta-dn">↓ slight relief</td>
       </tr>
       <tr>
         <td class="hmap-sub-name" style="color:var(--muted)">Others</td>
         <td class="hmap-cell" style="text-align:center">24.6%</td>
         <td class="hmap-cell" style="text-align:center">11.7%</td>
-        <td class="hmap-cell" style="text-align:center"><strong>6.7%</strong></td>
-        <td class="hmap-delta hmap-delta-dn">↓ concentrating</td>
+        <td class="hmap-cell" style="text-align:center">6.7%</td>
+        <td class="hmap-cell" style="text-align:center"><strong>9.6%</strong></td>
+        <td class="hmap-delta hmap-delta-up">↑ slight uptick</td>
       </tr>
     </tbody>
   </table>
 
   <div style="margin-top:12px;padding:10px 14px;background:#FFF8F0;border:1px solid #EDD8A0;border-radius:7px;font-size:10px;color:var(--ink2);line-height:1.6">
-    <strong>📊 Pattern:</strong> "Others" collapsed from 24.6% → 6.7% while the top 3 all grew. Seller pain is <strong>concentrating into 3 specific issues</strong> — Irrelevant Leads (34%), Low Conversion (25%), Less BLs (21%). Together they're now <strong>~80% of all complaints</strong>. This is actually useful: fixing 3 things addresses the vast majority of dissatisfaction. But consider the timing: NPS at 30 days from a monthly Catalog seller looks very different from NPS at 90 days from an annual TSCatalog seller. The top complaints may reflect <strong>different underlying causes for different segments</strong> — expectation mismatch for Catalog vs genuine lead issues for tenured sellers.
+    <strong>📊 Pattern (Apr update):</strong> With April's large sample (n=3,674), complaint concentration is confirmed — Irrelevant Leads (35%), Low Conversion (23.4%), Less BLs (21.6%) = <strong>~80% of all complaints</strong>. "Others" has crept back up to 9.6% from March's 6.7%, suggesting some additional grievances surfacing in the larger sample. Issues with Buyer eased to 10.4% — the first decline in 4 months. The pattern is clear: these aren't random fluctuations — the same 3 problems are dominating every month across segments.
   </div>
 
   <!-- BLNI Disposition Shift -->
-  <div style="font-size:9.5px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 10px">BLNI Algorithm Health (Oct '25 → Mar '26)</div>
+  <div style="font-size:9.5px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 10px">BLNI Algorithm Health (Oct '25 → Apr '26)</div>
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
 
     <div style="padding:14px 16px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:9px">
-      <div style="font-size:10px;font-weight:700;color:var(--green);margin-bottom:10px">✅ Interventions that are working (Oct '25 → Mar '26)</div>
+      <div style="font-size:10px;font-weight:700;color:var(--green);margin-bottom:10px">✅ Interventions that are working (Oct '25 → Apr '26)</div>
       <div style="display:flex;flex-direction:column;gap:6px">
         <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px">
           <span style="color:var(--ink2)">Wrong Location</span>
@@ -4051,33 +4108,33 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px">
           <span style="color:var(--ink2)">BLNI/Txn Overall</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--green)">5.61% → 4.33% ★ best</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--green)">5.61% → 4.05% ★ new best</span>
         </div>
       </div>
     </div>
 
     <div style="padding:14px 16px;background:var(--red-bg);border:1px solid var(--red-border);border-radius:9px">
-      <div style="font-size:10px;font-weight:700;color:var(--red);margin-bottom:10px">⚠️ What needs attention (Feb → Mar MoM)</div>
+      <div style="font-size:10px;font-weight:700;color:var(--red);margin-bottom:10px">⚠️ What needs attention (Mar → Apr MoM)</div>
       <div style="display:flex;flex-direction:column;gap:6px">
         <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px">
           <span style="color:var(--ink2)">Spec Mismatch</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--red)">0.97% → 1.06% ↑ MoM</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--red)">1.06% → 1.02% MoM</span>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;font-size:9px;color:var(--muted)">
-          <span>└ improved Oct→Feb (1.30→0.97) but reversed in Mar</span>
+          <span>└ spike in Mar reversed in Apr — holding watch</span>
           <span></span>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px">
           <span style="color:var(--ink2)">Retail NI</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--amber)">1.48% → 1.48% (flat since Oct)</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--amber)">1.48% → 1.62% ↑ MoM</span>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px">
           <span style="color:var(--ink2)">Wrong BL Mapping</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--red)">new from Jan '26 — 0.33%</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--amber)">0.33% — stable, monitoring</span>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px">
           <span style="color:var(--ink2);font-size:9px">NPS "Irrelevant" perception</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--red)">31% → 34% share ↑</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--red)">34% → 35% share ↑ (Apr)</span>
         </div>
       </div>
     </div>
@@ -4085,7 +4142,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   </div>
 
   <div style="margin-top:12px;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:7px;font-size:10px;color:var(--ink2);line-height:1.7">
-    <strong>🔬 The perception gap:</strong> The algorithm is objectively improving — BLNI/Txn hit best-ever 4.33%, Wrong Location halved, Wrong Category dropped 70%. But NPS "Irrelevant Buyer" perception is <em>worsening</em> (31% → 34%). This could mean: (a) leads are category-correct but specification/intent mismatched (Spec Mismatch improved Oct→Feb but reversed in Mar — needs monitoring), or (b) the perception is driven by <strong>new/monthly sellers who haven't learned to filter leads effectively</strong>, not by actual algorithm quality. The acclimatisation hypothesis from Section 2 suggests (b) may be the bigger factor — a seller at 30 days who hasn't optimised their catalog will receive less-targeted leads than a seller at 90 days with a complete profile.
+    <strong>🔬 The perception gap (Apr update):</strong> BLNI/Txn hit a new best-ever 4.05% in April, yet NPS "Irrelevant Buyer" complaints reached 35% share — the highest in 4 months. This persistent gap between objective algorithm quality and seller perception suggests the issue is structural: (a) QRF ticked back up to 4.13/1000 after a low of 3.88 in March — the improvement may have stalled, or (b) the perception is driven by <strong>new/monthly Catalog sellers (NPS 9.1) who haven't learned to filter leads</strong>. With 3,674 detractor dispositions in April vs. 1,156 in March, the larger sample increases confidence in these trends — "Irrelevant Buyer" at 35% is a genuine signal, not noise.
   </div>
 </div>
 
@@ -4117,7 +4174,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     <tbody>
       <tr>
         <td class="hmap-sub-name" style="text-align:center;font-weight:800;color:var(--red)">1</td>
-        <td class="hmap-cell" style="text-align:left;font-weight:700;line-height:1.5;font-family:'Sora',sans-serif">Audit the Catalog sales process — what are agents promising vs what the platform delivers in 30 days?</td>
+        <td class="hmap-cell" style="text-align:left;font-weight:700;line-height:1.5;font-family:'Sora',sans-serif">Audit the Catalog sales process — NPS at 9.1 with 38.4% detractors in April despite large sample (n=1,377); what are agents promising vs what delivers in 30 days?</td>
         <td class="hmap-cell" style="text-align:left;font-size:9px;line-height:1.5;color:var(--muted)">Catalog NPS=8.1 (−6.7pp), 37% detractors, only 3 monthly D→P. Monthly sellers at ₹3K/mo are evaluated at 30d — before the platform delivers full value. Acclimatisation takes 60-90 days per TSCatalog data</td>
         <td class="hmap-cell" style="text-align:center;font-weight:700;color:var(--green)">High</td>
         <td class="hmap-cell" style="text-align:center;color:var(--green)">Low</td>
@@ -4544,20 +4601,46 @@ function switchTab(id, btn) {
   } catch(_) {}
 }
 
+// ── App Ratings tab visibility toggle ────────────────────────────────────
+function toggleAppRatingsTab() {
+  var btn6  = document.getElementById('tab6-btn');
+  var btn   = document.getElementById('ar-visibility-btn');
+  var hidden = btn6.style.display === 'none';
+
+  if (hidden) {
+    // Show it
+    btn6.style.display = '';
+    btn.textContent = '👁';
+    btn.style.color = 'var(--muted)';
+    btn.style.borderColor = 'var(--border)';
+  } else {
+    // Hide it — if tab6 is currently active, switch to tab1 first
+    var tab6 = document.getElementById('tab6');
+    if (tab6 && tab6.classList.contains('active')) {
+      var tab1btn = document.querySelector('.tab-btn[onclick*="tab1"]');
+      switchTab('tab1', tab1btn);
+    }
+    btn6.style.display = 'none';
+    btn.textContent = '👁';
+    btn.style.color = 'var(--amber, #C07D30)';
+    btn.style.borderColor = 'var(--amber, #C07D30)';
+  }
+}
+
 // ─── DATA ────────────────────────────────────────────────────────────
 const MONTHS = ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
 const MONTHS8 = ['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
 
 const SEG = {
   'STAR':      { nps:[22.1,10.7,11.5,27.3,27.9,7.8,30.8,26.1,21.3,27.8,33.6,28.2], pro:[53.6,43.4,45.3,56.4,58.6,47.0,58.1,54.5,48.9,56.6,59.1,56.0], det:[31.5,32.8,33.8,29.1,30.6,39.1,27.4,28.4,27.7,28.8,25.5,27.8], c:'#2D8A6A' },
-  'LEADER':    { nps:[22.9,35.4,26.4,29.8,22.6,3.7,28.3,19.4,12.9,24.6,30.5,25.0], pro:[53.9,59.5,52.8,56.8,50.9,46.3,56.7,50.0,48.4,55.8,58.0,54.5], det:[31.0,24.1,26.4,27.0,28.3,42.6,28.4,30.6,35.5,31.3,27.6,29.5], c:'#4270C4' },
+  'LEADER':    { nps:[22.9,35.4,26.4,29.8,22.6,3.7,28.3,19.4,12.9,24.6,30.5,44.4], pro:[53.9,59.5,52.8,56.8,50.9,46.3,56.7,50.0,48.4,55.8,58.0,65.2], det:[31.0,24.1,26.4,27.0,28.3,42.6,28.4,30.6,35.5,31.3,27.6,20.8], c:'#4270C4' },
   'TSCatalog': { nps:[21.8,17.8,21.6,28.1,31.3,27.0,27.8,28.4,28.1,30.2,27.1,22.5], pro:[53.3,51.3,54.1,56.5,59.9,56.9,57.2,58.4,58.0,58.1,55.8,53.0], det:[31.5,33.5,32.4,28.4,28.5,29.8,29.3,29.9,29.9,27.9,28.7,30.5], c:'#7055B8' },
   'Catalog':   { nps:[11.8,-2.3,-7.3,11.7,3.1,1.9,13.4,11.7,8.9,12.5,14.8,10.2], pro:[48.3,40.6,39.4,47.9,45.0,43.3,49.0,47.8,46.7,48.7,49.0,46.5], det:[36.5,42.9,46.7,36.1,41.9,41.4,35.6,36.1,37.8,36.1,34.2,36.3], c:'#C46040' },
   'ExportTS':  { nps:[22.8,24.5,22.4,19.5,23.7,-15.0,16.5,48.4,-23.0,22.6,24.6,18.5], pro:[55.4,53.1,55.2,53.4,60.5,37.5,51.2,71.0,28.7,54.8,55.4,52.0], det:[32.7,28.6,32.8,33.9,36.8,52.5,34.7,22.6,51.7,32.2,30.8,33.5], c:'#C07D30' },
   'Non-Paid':  { nps:[-12.2,-25.0,-38.3,-3.3,-17.1,-33.8,-6.2,-21.9,-50,9.0,18.6,12.0], pro:[38.1,32.0,25.2,43.2,37.8,31.1,42.7,34.4,20.0,50.2,51.2,48.0], det:[50.3,57.0,63.5,46.5,54.9,64.9,48.9,56.2,70.0,41.2,32.6,36.0], c:'#6B7280' }
 };
 const VIN = {
-  '30 Day':    { nps:[0.2,8.4,1.2,3.8,15.5,10.7,13.8,24.0,17.1,7.0,25.1,18.0], pro:[42.9,46.3,43.4,43.4,51.4,48.4,49.5,54.7,52.3,47.1,54.2,50.5], det:[42.7,39.7,44.8,39.6,35.8,37.7,35.7,30.7,35.2,40.1,29.1,32.5], c:'#4270C4' },
+  '30 Day':    { nps:[0.2,8.4,1.2,3.8,15.5,10.7,13.8,24.0,17.1,7.0,25.1,20.0], pro:[42.9,46.3,43.4,43.4,51.4,48.4,49.5,54.7,52.3,47.1,54.2,52.9], det:[42.7,39.7,44.8,39.6,35.8,37.7,35.7,30.7,35.2,40.1,29.1,32.9], c:'#4270C4' },
   '60 Day':    { nps:[9.6,7.5,10.6,11.0,18.5,8.7,10.2,15.3,19.6,8.5,9.8,6.5], pro:[47.0,45.7,48.1,49.1,53.8,47.9,48.2,51.7,52.2,48.2,47.2,45.5], det:[37.4,38.2,37.5,38.1,35.3,39.2,38.0,36.4,32.6,39.7,37.4,39.0], c:'#C07D30' },
   'Quarterly': { nps:[16.6,23.3,23.1,23.2,16.1,11.1,24.4,38.2,5.9,25.9,30.7,24.0], pro:[51.0,50.0,46.2,54.2,51.8,50.0,55.2,60.7,41.2,55.8,57.6,54.5], det:[34.4,26.7,23.1,31.0,35.7,38.9,30.8,22.5,35.3,29.9,26.9,30.5], c:'#2D8A6A' }
 };
@@ -4935,85 +5018,85 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
 
   // 1 — NPS: 5 quarterly waypoints only
   drawSparkLine('spk-nps',{
-    vals:[15.73, 21.97, 23.56, 24.6, 25.4],
-    months:["Apr'25","Jul'25","Oct'25","Jan'26","Feb'26"],
-    ns:[14795,14553,12642,12808,2138],
+    vals:[15.73, 21.97, 23.56, 24.6, 25.4, 20.89, 22.70],
+    months:["Apr'25","Jul'25","Oct'25","Jan'26","Feb'26","Mar'26","Apr'26"],
+    ns:[14795,14553,12642,12808,2138,2996,7718],
     color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
   });
 
   // 2 — Paid Seller App Rating: full 11 months, all labels
   drawSparkLine('spk-app',{
-    vals:[3.39,3.42,3.45,3.31,3.46,3.40,3.45,3.54,3.44,3.41,3.41],
-    months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
-    ns:[10217,12965,12823,8035,17855,8698,6840,9192,9710,7201,5441],
+    vals:[3.39,3.42,3.45,3.31,3.46,3.40,3.45,3.54,3.44,3.41,3.41,3.60,3.58],
+    months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
+    ns:[10217,12965,12823,8035,17855,4320,3559,5007,5388,4348,3543,3591,3575],
     color:'#C07D30', fmt:v=>v.toFixed(2), unit:'★', allLabels:true
   });
 
   // 3 — QRF Overall irrel % of total feedback: 11 months, all labels
   drawSparkLine('spk-qrf',{
-    vals:[8.56,8.74,8.43,7.14,6.50,5.84,5.45,5.20,5.04,5.03,4.94],
-    months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
-    ns:[417777,475630,496117,529731,516477,542698,480249,458638,503348,527998,491393],
+    vals:[8.56,8.74,8.43,7.14,6.50,5.84,5.45,5.20,5.04,5.03,4.94,3.88,4.13],
+    months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
+    ns:[417777,475630,496117,529731,516477,542698,480249,458638,503348,527998,491393,500367,482021],
     color:'#2D8A6A', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
   });
 
   // 4 — BLNI/Txn%: 11 months, all labels
   drawSparkLine('spk-bl',{
-    vals:[8.37,7.69,7.40,6.94,6.42,6.13,5.61,5.68,5.48,4.52,4.41],
-    months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
-    ns:[828716,831110,784754,797672,697327,666210,558073,608647,627410,526186,471539],
+    vals:[8.37,7.69,7.40,6.94,6.42,6.13,5.61,5.68,5.48,4.52,4.41,4.33,4.05],
+    months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
+    ns:[828716,831110,784754,797672,697327,666210,558073,608647,627410,526186,471539,481990,440417],
     color:'#2D8A6A', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
   });
   // ── Tab 2: Seller type spark lines ─────────────────────────────
   drawSparkLine('spk-ct-star',{
-    vals:[22.1,27.3,30.8,27.8,33.6],
-    months:['Apr','Jul','Oct','Jan','Feb'],
-    ns:[2306,2355,2129,2204,345],
+    vals:[22.1,27.3,30.8,27.8,33.6,28.2,26.9],
+    months:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'],
+    ns:[2306,2355,2129,2204,345,460,1567],
     color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
   });
   drawSparkLine('spk-ct-leader',{
-    vals:[22.9,29.8,28.3,24.6,30.5],
-    months:['Apr','Jul','Oct','Jan','Feb'],
-    ns:[1422,1427,1272,1315,174],
+    vals:[22.9,29.8,28.3,24.6,30.5,25.0,28.8],
+    months:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'],
+    ns:[1422,1427,1272,1315,174,230,939],
     color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
   });
   drawSparkLine('spk-ct-ts',{
-    vals:[21.8,28.1,27.8,30.2,27.1],
-    months:['Apr','Jul','Oct','Jan','Feb'],
-    ns:[6249,6292,5627,5811,1031],
+    vals:[21.8,28.1,27.8,30.2,27.1,22.5,26.4],
+    months:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'],
+    ns:[6249,6292,5627,5811,1031,1380,3486],
     color:'#C07D30', fmt:v=>v.toFixed(1), allLabels:true
   });
   drawSparkLine('spk-ct-cat',{
-    vals:[11.8,11.7,13.4,12.5,14.8],
-    months:['Apr','Jul','Oct','Jan','Feb'],
-    ns:[2578,2914,2826,2953,480],
+    vals:[11.8,11.7,13.4,12.5,14.8,10.2,9.1],
+    months:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'],
+    ns:[2578,2914,2826,2953,480,640,1377],
     color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
   });
   // ── Tab 2: Vintage spark lines ───────────────────────────────────
   drawSparkLine('spk-vint-est',{
-    vals:[16.6,23.2,24.4,25.9,30.7],
-    months:['Apr','Jul','Oct','Jan','Feb'],
-    ns:[13636,13371,11743,11946,1282],
+    vals:[16.6,23.2,24.4,25.9,30.7,24.0,24.0],
+    months:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'],
+    ns:[13636,13371,11743,11946,1282,1700,6962],
     color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
   });
   drawSparkLine('spk-vint-new',{
-    vals:[4.9,7.4,12.0,7.75,17.45],
-    months:['Apr','Jul','Oct','Jan','Feb'],
-    ns:[1159,1182,899,854,856],
+    vals:[4.9,7.4,12.0,7.75,17.45,20.0,10.8],
+    months:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'],
+    ns:[1159,1182,899,854,856,416,371],
     color:'#C07D30', fmt:v=>v.toFixed(1), allLabels:true
   });
 
   // ── Tab 2: Quarterly movement spark lines ────────────────────────
   drawSparkLine('spk-mov-dtp',{
-    vals:[326,360,259,286], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan'],
+    vals:[326,360,259,286,127], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan','Jan-Apr'],
     color:'#2D8A6A', fmt:v=>Math.round(v), allLabels:true
   });
   drawSparkLine('spk-mov-ptd',{
-    vals:[378,297,301,267], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan'],
+    vals:[378,297,301,267,176], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan','Jan-Apr'],
     color:'#C0444A', fmt:v=>Math.round(v), allLabels:true
   });
   drawSparkLine('spk-mov-net',{
-    vals:[-52,63,-42,19], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan'],
+    vals:[-52,63,-42,19,-49], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan','Jan-Apr'],
     color:'#4270C4', fmt:v=>(v>=0?'+':'')+Math.round(v), allLabels:true
   });
 
@@ -5024,65 +5107,65 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
   // Re-draw all default (hardcoded) sparklines — called on orientation change
   window.reDrawDefaultSparks = function() {
     drawSparkLine('spk-nps',{
-      vals:[15.73, 21.97, 23.56, 24.6, 25.4],
-      months:["Apr'25","Jul'25","Oct'25","Jan'26","Feb'26"],
-      ns:[14795,14553,12642,12808,2138],
+      vals:[15.73, 21.97, 23.56, 24.6, 25.4, 20.89, 22.70],
+      months:["Apr'25","Jul'25","Oct'25","Jan'26","Feb'26","Mar'26","Apr'26"],
+      ns:[14795,14553,12642,12808,2138,2996,7718],
       color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
     });
     drawSparkLine('spk-app',{
-      vals:[3.39,3.42,3.45,3.31,3.46,3.40,3.45,3.54,3.44,3.41,3.41],
-      months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
-      ns:[10217,12965,12823,8035,17855,8698,6840,9192,9710,7201,5441],
+      vals:[3.39,3.42,3.45,3.31,3.46,3.40,3.45,3.54,3.44,3.41,3.41,3.60,3.58],
+      months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
+      ns:[10217,12965,12823,8035,17855,4320,3559,5007,5388,4348,3543,3591,3575],
       color:'#C07D30', fmt:v=>v.toFixed(2), unit:'★', allLabels:true
     });
     drawSparkLine('spk-qrf',{
-      vals:[8.56,8.74,8.43,7.14,6.50,5.84,5.45,5.20,5.04,5.03,4.94],
-      months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
-      ns:[417777,475630,496117,529731,516477,542698,480249,458638,503348,527998,491393],
+      vals:[8.56,8.74,8.43,7.14,6.50,5.84,5.45,5.20,5.04,5.03,4.94,3.88,4.13],
+      months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
+      ns:[417777,475630,496117,529731,516477,542698,480249,458638,503348,527998,491393,500367,482021],
       color:'#2D8A6A', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
     });
     drawSparkLine('spk-bl',{
-      vals:[8.37,7.69,7.40,6.94,6.42,6.13,5.61,5.68,5.48,4.52,4.41],
-      months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
-      ns:[828716,831110,784754,797672,697327,666210,558073,608647,627410,526186,471539],
+      vals:[8.37,7.69,7.40,6.94,6.42,6.13,5.61,5.68,5.48,4.52,4.41,4.33,4.05],
+      months:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
+      ns:[828716,831110,784754,797672,697327,666210,558073,608647,627410,526186,471539,481990,440417],
       color:'#2D8A6A', fmt:v=>v.toFixed(2), unit:'%', allLabels:true
     });
     drawSparkLine('spk-ct-star',{
-      vals:[22.1,27.3,30.8,27.8,33.6], months:['Apr','Jul','Oct','Jan','Feb'],
-      ns:[2306,2355,2129,2204,345], color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
+      vals:[22.1,27.3,30.8,27.8,33.6,29.0,26.9], months:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'],
+      ns:[2306,2355,2129,2204,345,459,1567], color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
     });
     drawSparkLine('spk-ct-leader',{
-      vals:[22.9,29.8,28.3,24.6,30.5], months:['Apr','Jul','Oct','Jan','Feb'],
-      ns:[1422,1427,1272,1315,174], color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
+      vals:[22.9,29.8,28.3,24.6,30.5,44.4,28.8], months:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'],
+      ns:[1422,1427,1272,1315,174,250,939], color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
     });
     drawSparkLine('spk-ct-ts',{
-      vals:[21.8,28.1,27.8,30.2,27.1], months:['Apr','Jul','Oct','Jan','Feb'],
-      ns:[6249,6292,5627,5811,1031], color:'#C07D30', fmt:v=>v.toFixed(1), allLabels:true
+      vals:[21.8,28.1,27.8,30.2,27.1,26.2,26.4], months:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'],
+      ns:[6249,6292,5627,5811,1031,1394,3486], color:'#C07D30', fmt:v=>v.toFixed(1), allLabels:true
     });
     drawSparkLine('spk-ct-cat',{
-      vals:[11.8,11.7,13.4,12.5,14.8], months:['Apr','Jul','Oct','Jan','Feb'],
-      ns:[2578,2914,2826,2953,480], color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
+      vals:[11.8,11.7,13.4,12.5,14.8,8.1,9.1], months:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'],
+      ns:[2578,2914,2826,2953,480,631,1377], color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
     });
     drawSparkLine('spk-vint-est',{
-      vals:[16.6,23.2,24.4,25.9,30.7], months:['Apr','Jul','Oct','Jan','Feb'],
-      ns:[13636,13371,11743,11946,1282], color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
+      vals:[16.6,23.2,24.4,25.9,30.7,26.0,24.0], months:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'],
+      ns:[13636,13371,11743,11946,1282,2002,6962], color:'#2D8A6A', fmt:v=>v.toFixed(1), allLabels:true
     });
     drawSparkLine('spk-vint-new',{
-      vals:[4.9,7.4,12.0,7.75,17.45], months:['Apr','Jul','Oct','Jan','Feb'],
-      ns:[1159,1182,899,854,856], color:'#C07D30', fmt:v=>v.toFixed(1), allLabels:true
+      vals:[4.9,7.4,12.0,7.75,17.45,20.0,10.8], months:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'],
+      ns:[1159,1182,899,854,856,416,371], color:'#C07D30', fmt:v=>v.toFixed(1), allLabels:true
     });
 
     // Quarterly movement sparklines (4 quarters: Jan-Apr, Apr-Jul, Jul-Oct, Oct-Jan)
     drawSparkLine('spk-mov-dtp',{
-      vals:[326,360,259,286], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan'],
+      vals:[326,360,259,286,127], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan','Jan-Apr'],
       color:'#2D8A6A', fmt:v=>Math.round(v), allLabels:true
     });
     drawSparkLine('spk-mov-ptd',{
-      vals:[378,297,301,267], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan'],
+      vals:[378,297,301,267,176], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan','Jan-Apr'],
       color:'#C0444A', fmt:v=>Math.round(v), allLabels:true, lowerBetter:true
     });
     drawSparkLine('spk-mov-net',{
-      vals:[-52,63,-42,19], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan'],
+      vals:[-52,63,-42,19,-49], months:['Jan-Apr','Apr-Jul','Jul-Oct','Oct-Jan','Jan-Apr'],
       color:'#4270C4', fmt:v=>(v>=0?'+':'')+Math.round(v), allLabels:true, zeroLine:true
     });
   };
@@ -5091,14 +5174,14 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.getEleme
 
 const QMONO = "JetBrains Mono,monospace";
 const QBIF = {
-  astbuy:{label:"ASTBUY — Rejection Reason Mix (Quarterly)",sub:"Q1 Apr-Jun '25 · Q2 Jul-Sep · Q3 Oct-Dec · Q4 Jan-Feb '26 · 100% stacked · flags: Q1=99.8K Q2=87.0K Q3=54.4K Q4=36.9K",insight:"⚠️ <strong>Retail Req crept up every quarter</strong>: Q1 16.0% → Q2 18.5% → Q3 17.2% → Q4 18.6%. Wrong Category nearly halved (Q1 11.8%→Q4 6.4%). Others and Specs are stable dominant buckets.",months:["Q1\nApr-Jun","Q2\nJul-Sep","Q3\nOct-Dec","Q4\nJan-Feb"],cats:[{l:"Others",c:"#9CA3AF",pct:[23.8,24.4,25.3,25.4]},{l:"Specs Mismatch",c:"#8472C4",pct:[19.0,20.0,18.4,18.1]},{l:"Retail Req",c:"#D46B6B",pct:[16.0,18.5,17.2,18.6]},{l:"Wrong Contact",c:"#06B6D4",pct:[12.6,13.3,14.1,12.9]},{l:"Single Click",c:"#E0DDD8",pct:[11.5,12.4,13.0,13.8]},{l:"Wrong Category",c:"#6089C8",pct:[11.8,7.2,6.8,6.4]},{l:"Wrong Loc",c:"#D4784A",pct:[5.3,4.2,5.1,4.7]}]},
+  astbuy:{label:"ASTBUY — Rejection Reason Mix (Quarterly)",sub:"Q1 Apr-Jun '25 · Q2 Jul-Sep · Q3 Oct-Dec · Q4 Jan-Apr '26 · 100% stacked · flags: Q1=99.8K Q2=87.0K Q3=54.4K Q4=36.9K",insight:"⚠️ <strong>Retail Req crept up every quarter</strong>: Q1 16.0% → Q2 18.5% → Q3 17.2% → Q4 18.6%. Wrong Category nearly halved (Q1 11.8%→Q4 6.4%). Others and Specs are stable dominant buckets.",months:["Q1\nApr-Jun","Q2\nJul-Sep","Q3\nOct-Dec","Q4\nJan-Feb"],cats:[{l:"Others",c:"#9CA3AF",pct:[23.8,24.4,25.3,25.4]},{l:"Specs Mismatch",c:"#8472C4",pct:[19.0,20.0,18.4,18.1]},{l:"Retail Req",c:"#D46B6B",pct:[16.0,18.5,17.2,18.6]},{l:"Wrong Contact",c:"#06B6D4",pct:[12.6,13.3,14.1,12.9]},{l:"Single Click",c:"#E0DDD8",pct:[11.5,12.4,13.0,13.8]},{l:"Wrong Category",c:"#6089C8",pct:[11.8,7.2,6.8,6.4]},{l:"Wrong Loc",c:"#D4784A",pct:[5.3,4.2,5.1,4.7]}]},
   direct:{label:"Direct Enquiries — Rejection Reason Mix (Quarterly)",sub:"Q1 Apr-Jun '25 → Q4 Jan-Feb '26 · 100% stacked · note structural shift Q1→Q2",insight:"🔍 <strong>Structural swap in Q2</strong>: Wrong Loc halved (53.7%→29.5%) as Retail Req surged (23.7%→36.3%). A system change ~Jul '25 likely fixed geography matching but surfaced more retail mis-matches. Stable since Q2.",months:["Q1\nApr-Jun","Q2\nJul-Sep","Q3\nOct-Dec","Q4\nJan-Feb"],cats:[{l:"Wrong Loc",c:"#D4784A",pct:[53.7,29.5,27.9,28.4]},{l:"Retail Req",c:"#D46B6B",pct:[23.7,36.3,37.1,35.7]},{l:"Others",c:"#9CA3AF",pct:[8.2,12.5,11.9,12.4]},{l:"Single Click",c:"#E0DDD8",pct:[5.6,7.8,8.2,8.9]},{l:"Wrong Contact",c:"#06B6D4",pct:[4.8,7.0,7.2,7.3]},{l:"Specs Mismatch",c:"#8472C4",pct:[2.0,3.8,3.8,3.9]},{l:"Wrong Category",c:"#6089C8",pct:[2.0,3.1,3.8,3.4]}]},
   buyleads:{label:"Buyleads — Rejection Reason Mix (Quarterly)",sub:"Q1 Apr-Jun '25 → Q4 Jan-Feb '26 · different taxonomy from ASTBUY/Direct",insight:"📌 <strong>Most stable channel</strong> — Req Mismatch at 37–38% all 4 quarters, virtually no drift. Single Click gently rising (14.4%→15.1%), possibly indicating seller fatigue with the feedback UI.",months:["Q1\nApr-Jun","Q2\nJul-Sep","Q3\nOct-Dec","Q4\nJan-Feb"],cats:[{l:"Req Mismatch",c:"#D46B6B",pct:[37.6,37.8,38.2,38.3]},{l:"Others",c:"#9CA3AF",pct:[32.5,32.1,31.1,31.0]},{l:"Single Click",c:"#E0DDD8",pct:[14.4,14.2,14.7,15.1]},{l:"Buyer Unreach",c:"#06B6D4",pct:[9.7,10.1,9.8,9.4]},{l:"City Mismatch",c:"#D4784A",pct:[5.8,5.8,6.3,6.2]}]},
-  app:{label:"In-App Complaints — Share Mix (Jan–Mar '26)",sub:"Jan=964 · Feb=1,401 · Mar=1,309 tags · % of total complaint tags · multi-select: bars don't sum to 100%",insight:"📱 3 months of data. <strong>Irrelevant Leads share steady at ~32%</strong>. Low Conversion holding at ~25%. Less BLs ticking up to 22%. 'Others' declining (12.7%→11.2%).",months:["Jan","Feb","Mar"],cats:[{l:"Irrelevant Leads",c:"#D46B6B",pct:[35.1,31.8,31.7]},{l:"Low Conversion",c:"#D4784A",pct:[22.8,24.6,25.4]},{l:"Less BLs",c:"#6089C8",pct:[20.9,20.3,21.8]},{l:"Issues w/ Buyer",c:"#8472C4",pct:[11.4,10.6,9.9]},{l:"Others",c:"#9CA3AF",pct:[9.7,12.7,11.2]}]},
-  nps_top:{label:"NPS — Top-Level Complaint Categories (Jan vs Feb '26)",sub:"% of commenters selecting each category · Jan n=211 tags · Feb n=635 tags · multi-select allowed",insight:"📋 <strong>Low Conversion grew</strong> (20.4%→23.0%) and Irrelevant Leads also up (30.8%→33.7%). 'Others' collapsed (25%→11.7%) — likely better sub-category capture in Feb. Less BLs jumped (15.2%→20%). <em>Survey bifurcation tracking started Jan '26.</em>",months:["Jan","Feb"],cats:[{l:"Irrelevant Leads",c:"#D46B6B",pct:[30.8,33.7]},{l:"Low Conversion",c:"#D4784A",pct:[20.4,23.0]},{l:"Less BLs",c:"#6089C8",pct:[15.2,20.3]},{l:"Issues w/ Buyer",c:"#8472C4",pct:[9.0,11.3]},{l:"Others",c:"#9CA3AF",pct:[24.6,11.7]}]},
-  nps_irrel:{label:"Irrelevant Leads — Sub-Reasons (Jan vs Feb '26)",sub:"% of sellers who selected 'Irrelevant Leads' · Jan n=65 · Feb n=214",insight:"⚠️ <strong>'No reason given' dominates and grew</strong> (30.8%→52.8%) — most sellers flag leads as irrelevant without drilling into why. Of those who do specify: Retail Leads (18%) and Wrong Category (16.4%) are near-equal in Feb. Wrong Location eased (16.9%→8.4%).",months:["Jan","Feb"],cats:[{l:"No Reason",c:"#E0DDD8",pct:[30.8,52.8]},{l:"Retail Leads",c:"#D46B6B",pct:[23.1,17.8]},{l:"Wrong Category",c:"#6089C8",pct:[29.2,16.4]},{l:"Wrong Location",c:"#D4784A",pct:[16.9,8.4]}]},
-  nps_buyer:{label:"Issues with Buyer — Sub-Reasons (Jan vs Feb '26)",sub:"% of sellers who selected 'Issues with Buyer' · Jan n=19 · Feb n=72",insight:"🙅 <strong>Buyer Unresponsive is #1 in Feb (33.3%)</strong>. 'No Option Selected' fell sharply (42.1%→18.1%) — sellers are now naming the specific buyer behaviour. Requirement Fulfilled rose (10.5%→22.2%), suggesting stale leads reaching sellers after buyer intent has passed.",months:["Jan","Feb"],cats:[{l:"No Option",c:"#E0DDD8",pct:[42.1,18.1]},{l:"Unresponsive",c:"#D46B6B",pct:[21.1,33.3]},{l:"Denies Req",c:"#D4784A",pct:[26.3,26.4]},{l:"Req Fulfilled",c:"#6089C8",pct:[10.5,22.2]}]},
-  nps_bls:{label:"Less BLs / Enquiries — Sub-Reasons (Jan vs Feb '26)",sub:"% of sellers who selected 'Less BLs' · Jan n=32 · Feb n=129",insight:"📉 <strong>'Very Less Leads Overall' overtook 'No Option' as #1 sub-reason in Feb</strong>. 'Expire Fast' is stable. More than half of Jan respondents gave no sub-reason — tracking is still maturing into this category.",months:["Jan","Feb"],cats:[{l:"No Option",c:"#E0DDD8",pct:[21.9,51.9]},{l:"Very Less",c:"#D46B6B",pct:[50.0,31.8]},{l:"Expire Fast",c:"#D4784A",pct:[25.0,16.3]}]}
+  app:{label:"In-App Complaints — Share Mix (Jan–Apr '26)",sub:"Jan=964 · Feb=1,401 · Mar=1,309 tags · % of total complaint tags · multi-select: bars don't sum to 100%",insight:"📱 3 months of data. <strong>Irrelevant Leads share steady at ~32%</strong>. Low Conversion holding at ~25%. Less BLs ticking up to 22%. 'Others' declining (12.7%→11.2%).",months:["Jan","Feb","Mar"],cats:[{l:"Irrelevant Leads",c:"#D46B6B",pct:[35.1,31.8,31.7]},{l:"Low Conversion",c:"#D4784A",pct:[22.8,24.6,25.4]},{l:"Less BLs",c:"#6089C8",pct:[20.9,20.3,21.8]},{l:"Issues w/ Buyer",c:"#8472C4",pct:[11.4,10.6,9.9]},{l:"Others",c:"#9CA3AF",pct:[9.7,12.7,11.2]}]},
+  nps_top:{label:"NPS — Top-Level Complaint Categories (Mar vs Apr '26)",sub:"% of commenters selecting each category · Jan n=211 tags · Feb n=635 tags · multi-select allowed",insight:"📋 <strong>Low Conversion grew</strong> (20.4%→23.0%) and Irrelevant Leads also up (30.8%→33.7%). 'Others' collapsed (25%→11.7%) — likely better sub-category capture in Feb. Less BLs jumped (15.2%→20%). <em>Survey bifurcation tracking started Jan '26.</em>",months:["Jan","Feb"],cats:[{l:"Irrelevant Leads",c:"#D46B6B",pct:[30.8,33.7]},{l:"Low Conversion",c:"#D4784A",pct:[20.4,23.0]},{l:"Less BLs",c:"#6089C8",pct:[15.2,20.3]},{l:"Issues w/ Buyer",c:"#8472C4",pct:[9.0,11.3]},{l:"Others",c:"#9CA3AF",pct:[24.6,11.7]}]},
+  nps_irrel:{label:"Irrelevant Leads — Sub-Reasons (Mar vs Apr '26)",sub:"% of sellers who selected 'Irrelevant Leads' · Jan n=65 · Feb n=214",insight:"⚠️ <strong>'No reason given' dominates and grew</strong> (30.8%→52.8%) — most sellers flag leads as irrelevant without drilling into why. Of those who do specify: Retail Leads (18%) and Wrong Category (16.4%) are near-equal in Feb. Wrong Location eased (16.9%→8.4%).",months:["Jan","Feb"],cats:[{l:"No Reason",c:"#E0DDD8",pct:[30.8,52.8]},{l:"Retail Leads",c:"#D46B6B",pct:[23.1,17.8]},{l:"Wrong Category",c:"#6089C8",pct:[29.2,16.4]},{l:"Wrong Location",c:"#D4784A",pct:[16.9,8.4]}]},
+  nps_buyer:{label:"Issues with Buyer — Sub-Reasons (Mar vs Apr '26)",sub:"% of sellers who selected 'Issues with Buyer' · Jan n=19 · Feb n=72",insight:"🙅 <strong>Buyer Unresponsive is #1 in Feb (33.3%)</strong>. 'No Option Selected' fell sharply (42.1%→18.1%) — sellers are now naming the specific buyer behaviour. Requirement Fulfilled rose (10.5%→22.2%), suggesting stale leads reaching sellers after buyer intent has passed.",months:["Jan","Feb"],cats:[{l:"No Option",c:"#E0DDD8",pct:[42.1,18.1]},{l:"Unresponsive",c:"#D46B6B",pct:[21.1,33.3]},{l:"Denies Req",c:"#D4784A",pct:[26.3,26.4]},{l:"Req Fulfilled",c:"#6089C8",pct:[10.5,22.2]}]},
+  nps_bls:{label:"Less BLs / Enquiries — Sub-Reasons (Mar vs Apr '26)",sub:"% of sellers who selected 'Less BLs' · Jan n=32 · Feb n=129",insight:"📉 <strong>'Very Less Leads Overall' overtook 'No Option' as #1 sub-reason in Feb</strong>. 'Expire Fast' is stable. More than half of Jan respondents gave no sub-reason — tracking is still maturing into this category.",months:["Jan","Feb"],cats:[{l:"No Option",c:"#E0DDD8",pct:[21.9,51.9]},{l:"Very Less",c:"#D46B6B",pct:[50.0,31.8]},{l:"Expire Fast",c:"#D4784A",pct:[25.0,16.3]}]}
 };
 
 function drawQrfBars(svg,ch,large){
@@ -6649,40 +6732,40 @@ function _reg(key, d) { MONTH_CFG[key] = Object.assign({ key }, d); }
 
 // ── NPS 11-month full series (for spark re-slicing) ────────────────
 const _NPS_FULL = {
-  vals:   [null,null,null,null,null,null,null,null,null,24.6,25.4,20.9],
-  ns:     [null,null,null,null,null,null,null,null,null,12808,2138,2996],
-  // seller types (11 mo, from SEG constant)
-  star:   [22.1,10.7,11.5,27.3,27.9,7.8,30.8,26.1,21.3,27.8,33.6,28.2],
-  leader: [22.9,35.4,26.4,29.8,22.6,3.7,28.3,19.4,12.9,24.6,30.5,25.0],
-  ts:     [21.8,17.8,21.6,28.1,31.3,27.0,27.8,28.4,28.1,30.2,27.1,22.5],
-  cat:    [11.8,-2.3,-7.3,11.7,3.1,1.9,13.4,11.7,8.9,12.5,14.8,10.2],
-  est:    [16.6,23.3,23.1,23.2,16.1,11.1,24.4,38.2,5.9,25.9,30.7,24.0],
-  newS:   [0.2,8.4,1.2,3.8,15.5,10.7,13.8,24.0,17.1,7.0,25.1,18.0],
-  mos:    ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'],
-  // 5-pt quarterly NPS spark
-  nps5v:  [15.73,21.97,23.56,24.6,25.4,20.9],
-  nps5m:  ["Apr'25","Jul'25","Oct'25","Jan'26","Feb'26","Mar'26"],
-  nps5n:  [14795,14553,12642,12808,2138,2996],
+  vals:   [null,null,null,null,null,null,null,null,null,24.6,25.4,20.9,22.7],
+  ns:     [null,null,null,null,null,null,null,null,null,12808,2138,2996,7718],
+  // seller types (12 mo Apr'25–Apr'26)
+  star:   [22.1,10.7,11.5,27.3,27.9,7.8,30.8,26.1,21.3,27.8,33.6,28.2,26.9],
+  leader: [22.9,35.4,26.4,29.8,22.6,3.7,28.3,19.4,12.9,24.6,30.5,44.4,28.8],
+  ts:     [21.8,17.8,21.6,28.1,31.3,27.0,27.8,28.4,28.1,30.2,27.1,22.5,26.4],
+  cat:    [11.8,-2.3,-7.3,11.7,3.1,1.9,13.4,11.7,8.9,12.5,14.8,10.2,9.1],
+  est:    [16.6,23.3,23.1,23.2,16.1,11.1,24.4,38.2,5.9,25.9,30.7,24.0,24.0],
+  newS:   [0.2,8.4,1.2,3.8,15.5,10.7,13.8,24.0,17.1,7.0,25.1,20.0,10.8],
+  mos:    ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
+  // 6-pt quarterly NPS spark
+  nps5v:  [15.73,21.97,23.56,24.6,25.4,20.9,22.7],
+  nps5m:  ["Apr'25","Jul'25","Oct'25","Jan'26","Feb'26","Mar'26","Apr'26"],
+  nps5n:  [14795,14553,12642,12808,2138,2996,7718],
 };
 
-// App 11-month full series
+// App 12-month full series (Apr'25–Apr'26)
 const _APP_FULL = {
-  vals: [3.39,3.42,3.45,3.31,3.46,3.40,3.45,3.54,3.44,3.41,3.41,3.42],
-  ns:   [10217,12965,12823,8035,17855,8698,6840,9192,9710,7201,5441,3591],
-  mos:  ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'],
+  vals: [3.39,3.42,3.45,3.31,3.46,3.40,3.45,3.54,3.44,3.41,3.41,3.60,3.58],
+  ns:   [10217,12965,12823,8035,17855,4320,3559,5007,5388,4348,3543,3591,3575],
+  mos:  ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
 };
 const _QRF_FULL = {
-  vals: [8.56,8.74,8.43,7.14,6.50,5.84,5.45,5.20,5.04,5.03,4.94,4.96],
-  ns:   [417777,475630,496117,529731,516477,542698,480249,458638,503348,527998,491393,511273],
-  mos:  ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'],
+  vals: [8.56,8.74,8.43,7.14,6.50,5.84,5.45,5.20,5.04,5.03,4.94,3.88,4.13],
+  ns:   [417777,475630,496117,529731,516477,542698,480249,458638,503348,527998,491393,500367,482021],
+  mos:  ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
 };
 const _BL_FULL = {
-  vals: [8.37,7.69,7.40,6.94,6.42,6.13,5.61,5.68,5.48,4.52,4.41,4.33],
-  ns:   [828716,831110,784754,797672,697327,666210,558073,608647,627410,526186,471539,481990],
-  mos:  ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'],
+  vals: [8.37,7.69,7.40,6.94,6.42,6.13,5.61,5.68,5.48,4.52,4.41,4.33,4.05],
+  ns:   [828716,831110,784754,797672,697327,666210,558073,608647,627410,526186,471539,481990,440417],
+  mos:  ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
 };
 
-// App complaint bars (Apr–Feb, 11 months)
+// App complaint bars (Apr'25–Apr'26, 13 months)
 const _APP_BARS_FULL = [
   {l:'Apr',n:1133, s:[427,58,97,125,426]},
   {l:'May',n:1224, s:[474,71,62,162,455]},
@@ -6696,6 +6779,7 @@ const _APP_BARS_FULL = [
   {l:'Jan',n:1374, s:[475,324,293,145,137]},
   {l:'Feb',n:1401, s:[445,345,284,149,178]},
   {l:'Mar',n:1309, s:[415,332,286,129,147]},
+  {l:'Apr',n:1301, s:[441,332,275,132,121]},
 ];
 
 // ── Jan '26 config ─────────────────────────────────────────────────
@@ -6783,28 +6867,28 @@ _reg("Mar '26", {
   nps: { val:20.9, n:2996, mom:-4.5, best:false,
     sv:[15.73,21.97,23.56,24.6,25.4,20.9], sm:["Apr'25","Jul'25","Oct'25","Jan'26","Feb'26","Mar'26"],
     sn:[14795,14553,12642,12808,2138,2996] },
-  app: { val:3.42, n:3591, mom:+0.01, best:false,
+  app: { val:3.60, n:3591, mom:-0.38, best:false,
     sv:_APP_FULL.vals, sm:_APP_FULL.mos, sn:_APP_FULL.ns },
   qrf: { val:4.96, n:511273, mom:+0.02, best:false,
     sv:_QRF_FULL.vals, sm:_QRF_FULL.mos, sn:_QRF_FULL.ns },
   bl:  { val:4.33, n:481990, mom:-0.08, best:true,
     sv:_BL_FULL.vals, sm:_BL_FULL.mos, sn:_BL_FULL.ns },
   star:   { val:28.2, mom:-5.4, best:false, n:460,   sv:[22.1,27.3,30.8,27.8,33.6,28.2], sm:['Apr','Jul','Oct','Jan','Feb','Mar'], sn:[2306,2355,2129,2204,345,460] },
-  leader: { val:25.0, mom:-5.5, best:false, n:230,   sv:[22.9,29.8,28.3,24.6,30.5,25.0], sm:['Apr','Jul','Oct','Jan','Feb','Mar'], sn:[1422,1427,1272,1315,174,230] },
+  leader: { val:44.4, mom:+13.9, best:true,  n:250,   sv:[22.9,29.8,28.3,24.6,30.5,44.4], sm:['Apr','Jul','Oct','Jan','Feb','Mar'], sn:[1422,1427,1272,1315,174,250] },
   ts:     { val:22.5, mom:-4.6, best:false, n:1380,  sv:[21.8,28.1,27.8,30.2,27.1,22.5], sm:['Apr','Jul','Oct','Jan','Feb','Mar'], sn:[6249,6292,5627,5811,1031,1380] },
   cat:    { val:10.2, mom:-4.6, best:false, n:640,   sv:[11.8,11.7,13.4,12.5,14.8,10.2], sm:['Apr','Jul','Oct','Jan','Feb','Mar'], sn:[2578,2914,2826,2953,480,640] },
   est:    { val:24.0, mom:-6.7, best:false, n:1700,  sv:[16.6,23.2,24.4,25.9,30.7,24.0], sm:['Apr','Jul','Oct','Jan','Feb','Mar'], sn:[13636,13371,11743,11946,1282,1700] },
-  newS:   { val:18.0, mom:+0.6, best:false, n:1100,  sv:[5.5,7.7,11.9,7.7,17.4,18.0],   sm:['Apr','Jul','Oct','Jan','Feb','Mar'], sn:[1159,1182,899,854,856,1100] },
+  newS:   { val:20.0, mom:+2.6, best:false, n:416,   sv:[5.5,7.7,11.9,7.7,17.4,20.0],   sm:['Apr','Jul','Oct','Jan','Feb','Mar'], sn:[1159,1182,899,854,856,416] },
   p4: { irrel:{nps:44,app:32,bl:34,qrf:19}, conv:{nps:31,app:25}, bls:{nps:26,app:22}, spec:{bl:25,qrf:18} },
   npsBars: [
-    { l:"Jan '26", n:211, s:[65,43,32,19,52]    },
-    { l:"Feb '26", n:635, s:[214,146,129,72,74] },
-    { l:"Mar '26", n:911, s:[397,284,240,158,77] },
+    { l:"Jan '26", n:211,  s:[65,43,32,19,52]    },
+    { l:"Feb '26", n:635,  s:[214,146,129,72,74] },
+    { l:"Mar '26", n:1156, s:[397,284,240,158,77] },
   ],
   appBars: _APP_BARS_FULL,
   hmap: {
     prevLbl:"Feb '26", curLbl:"Mar '26", fut1:"Apr '26", fut2:"May '26",
-    nps: { pN:635, cN:911, rows:{
+    nps: { pN:635, cN:1156, rows:{
       wrongCat:{p:35,c:82}, retail:{p:38,c:81},   wrongLoc:{p:18,c:46}, irrelNo:{p:113,c:188},
       veryLess:{p:41,c:78}, expire:{p:21,c:58},    blsNo:{p:67,c:104},
       unresp:{p:24,c:51},    denies:{p:19,c:43},    fulfilled:{p:16,c:29}, iwbNo:{p:13,c:35},
@@ -6818,7 +6902,50 @@ _reg("Mar '26", {
 });
 
 // ── Currently selected month ────────────────────────────────────────
-let _CUR_MO = "Mar '26";
+
+// ── Apr '26 config ─────────────────────────────────────────────────
+_reg("Apr '26", {
+  nps: { val:22.7, n:7718, mom:+1.8, best:false,
+    sv:[15.73,21.97,23.56,24.6,25.4,20.89,22.70],
+    sm:["Apr'25","Jul'25","Oct'25","Jan'26","Feb'26","Mar'26","Apr'26"],
+    sn:[14795,14553,12642,12808,2138,2996,7718]
+  },
+  app: { val:3.58, n:3575, mom:-0.02, best:false,
+    sv:_APP_FULL.vals, sm:_APP_FULL.mos, sn:_APP_FULL.ns },
+  qrf: { val:4.13, n:482021, mom:+0.25, best:false,
+    sv:_QRF_FULL.vals, sm:_QRF_FULL.mos, sn:_QRF_FULL.ns },
+  bl:  { val:4.05, n:440417, mom:-0.28, best:true,
+    sv:_BL_FULL.vals, sm:_BL_FULL.mos, sn:_BL_FULL.ns },
+  star:   { val:26.9, mom:-2.1, best:false, n:1567, sv:[22.1,27.3,30.8,27.8,33.6,28.2,26.9], sm:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'], sn:[2306,2355,2129,2204,345,460,1567] },
+  leader: { val:28.8, mom:-15.6, best:false, n:939,  sv:[22.9,29.8,28.3,24.6,30.5,44.4,28.8], sm:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'], sn:[1422,1427,1272,1315,174,250,939] },
+  ts:     { val:26.4, mom:+0.2, best:false, n:3486,  sv:[21.8,28.1,27.8,30.2,27.1,22.5,26.4], sm:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'], sn:[6249,6292,5627,5811,1031,1380,3486] },
+  cat:    { val:9.1,  mom:+1.0, best:false, n:1377,  sv:[11.8,11.7,13.4,12.5,14.8,10.2,9.1],   sm:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'], sn:[2578,2914,2826,2953,480,640,1377] },
+  est:    { val:24.0, mom:-2.0, best:false, n:6962,  sv:[16.6,23.2,24.4,25.9,30.7,24.0,24.0], sm:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'], sn:[13636,13371,11743,11946,1282,1700,6962] },
+  newS:   { val:10.8, mom:-9.2, best:false, n:371,   sv:[4.9,7.4,12.0,7.75,17.45,20.0,10.8], sm:['Apr','Jul','Oct','Jan','Feb','Mar','Apr'], sn:[1159,1182,899,854,856,416,371] },
+  p4: { irrel:{nps:35,app:34,bl:37,qrf:19}, conv:{nps:23,app:26}, bls:{nps:22,app:21}, spec:{bl:26,qrf:19} },
+  npsBars: [
+    { l:"Jan '26", n:211,  s:[65,43,32,19,52]    },
+    { l:"Feb '26", n:635,  s:[214,146,129,72,74]  },
+    { l:"Mar '26", n:1156, s:[397,284,240,158,77]  },
+    { l:"Apr '26", n:3674, s:[1287,859,794,382,352] },
+  ],
+  appBars: _APP_BARS_FULL,
+  hmap: {
+    prevLbl:"Mar '26", curLbl:"Apr '26", fut1:"May '26", fut2:"Jun '26",
+    nps: { pN:1156, cN:3674, rows:{
+      wrongCat:{p:82,c:273}, retail:{p:81,c:277},   wrongLoc:{p:46,c:137}, irrelNo:{p:188,c:600},
+      veryLess:{p:78,c:281}, expire:{p:58,c:160},    blsNo:{p:104,c:353},
+      unresp:{p:51,c:109},    denies:{p:43,c:100},   fulfilled:{p:29,c:59}, iwbNo:{p:35,c:114},
+    }},
+    app: { pN:1309, cN:1301, rows:{
+      retail:{p:63,c:86},   wrongCat:{p:89,c:92},  wrongLoc:{p:39,c:50},  irrelNo:{p:224,c:213},
+      veryLess:{p:93,c:88},  expire:{p:45,c:61},    blsNo:{p:148,c:126},
+      unresp:{p:40,c:33},    denies:{p:31,c:38},    fulfilled:{p:27,c:22}, iwbNo:{p:31,c:39},
+    }},
+  },
+});
+
+let _CUR_MO = "Apr '26";
 
 // ── All months in calendar year order (2026) ───────────────────────
 const _ALL_MONTHS = [
@@ -7833,35 +7960,35 @@ if (document.readyState === 'loading') {
 // ════════════════════════════════════════════════════════
 (function initAppRatings() {
   // ── Static data from Excel (Apr'25 – Mar'26) ──────────────
-  const AR_MONTHS = ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
+  const AR_MONTHS = ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'];
 
   const AR_DATA = {
-    catalog:   { vals:[2.87,2.92,2.81,3.06,2.84,2.99,2.85,3.02,2.81,2.73,2.79,2.59], n:[362,453,394,437,650,488,369,420,579,577,563,594], color:'#C46040', svgId:'spk-ar-cat', rowId:'ar-rows-cat', subId:'ar-sub-cat',
-      nByMo:{ jan:577, feb:563, mar:594 } },
-    tscatalog: { vals:[2.69,2.72,2.74,2.97,2.81,3.10,3.10,3.07,2.92,2.80,2.82,2.64], n:[501,511,501,504,702,505,388,444,508,551,496,419], color:'#7055B8', svgId:'spk-ar-tsc', rowId:'ar-rows-tsc', subId:'ar-sub-tsc',
-      nByMo:{ jan:551, feb:496, mar:419 } },
-    star:      { vals:[2.38,2.51,2.56,2.63,2.74,2.85,2.86,2.67,2.74,2.68,2.44,2.43], n:[128,141,130,142,189,130,111,116,141,111,105,111], color:'#C07D30', svgId:'spk-ar-star', rowId:'ar-rows-star', subId:'ar-sub-star',
-      nByMo:{ jan:111, feb:105, mar:111 } },
-    leader:    { vals:[2.36,2.50,2.47,2.70,2.67,2.97,2.98,2.43,2.58,2.41,2.29,2.50], n:[67,62,58,47,75,59,54,70,52,44,58,46],             color:'#4270C4', svgId:'spk-ar-ldr', rowId:'ar-rows-ldr', subId:'ar-sub-ldr',
-      nByMo:{ jan:44, feb:58, mar:46 } },
-    exportts:  { vals:[2.46,2.86,2.56,3.05,3.16,2.94,2.68,3.10,2.91,3.36,3.35,2.73], n:[28,29,39,59,32,32,25,21,54,28,31,26],             color:'#2D8A6A', svgId:'spk-ar-exp', rowId:'ar-rows-exp', subId:'ar-sub-exp',
-      nByMo:{ jan:28, feb:31, mar:26 } }
+    catalog:   { vals:[2.87,2.92,2.81,3.06,2.84,2.99,2.85,3.02,2.81,2.73,2.79,2.59,3.53], n:[362,453,394,437,650,488,369,420,579,577,563,594,1687], color:'#C46040', svgId:'spk-ar-cat', rowId:'ar-rows-cat', subId:'ar-sub-cat',
+      nByMo:{ jan:577, feb:563, mar:594, apr:1687 } },
+    tscatalog: { vals:[2.69,2.72,2.74,2.97,2.81,3.10,3.10,3.07,2.92,2.80,2.82,2.64,3.66], n:[501,511,501,504,702,505,388,444,508,551,496,419,1245], color:'#7055B8', svgId:'spk-ar-tsc', rowId:'ar-rows-tsc', subId:'ar-sub-tsc',
+      nByMo:{ jan:551, feb:496, mar:419, apr:1245 } },
+    star:      { vals:[2.38,2.51,2.56,2.63,2.74,2.85,2.86,2.67,2.74,2.68,2.44,2.43,3.60], n:[128,141,130,142,189,130,111,116,141,111,105,111,343],  color:'#C07D30', svgId:'spk-ar-star', rowId:'ar-rows-star', subId:'ar-sub-star',
+      nByMo:{ jan:111, feb:105, mar:111, apr:343 } },
+    leader:    { vals:[2.36,2.50,2.47,2.70,2.67,2.97,2.98,2.43,2.58,2.41,2.29,2.50,3.72], n:[67,62,58,47,75,59,54,70,52,44,58,46,192],              color:'#4270C4', svgId:'spk-ar-ldr', rowId:'ar-rows-ldr', subId:'ar-sub-ldr',
+      nByMo:{ jan:44, feb:58, mar:46, apr:192 } },
+    exportts:  { vals:[2.46,2.86,2.56,3.05,3.16,2.94,2.68,3.10,2.91,3.36,3.35,2.73,4.11], n:[28,29,39,59,32,32,25,21,54,28,31,26,55],              color:'#2D8A6A', svgId:'spk-ar-exp', rowId:'ar-rows-exp', subId:'ar-sub-exp',
+      nByMo:{ jan:28, feb:31, mar:26, apr:55 } }
   };
 
   // Distribution: pct per star [1★,2★,3★,4★,5★] per month
   const AR_DIST = {
-    tscatalog: { jan:[42.5,6.2,9.3,12.7,29.4],  feb:[41.7,6.9,9.1,12.5,29.8],  mar:[50.1,4.8,6.2,8.6,30.3]  },
-    catalog:   { jan:[43.7,7.3,10.4,9.5,29.1],  feb:[41.7,6.7,9.9,14.0,27.5],  mar:[47.5,8.2,7.4,11.3,25.6] },
-    star:      { jan:[47.7,3.6,8.1,14.4,26.1],  feb:[58.1,1.9,4.8,8.6,26.7],   mar:[51.4,7.2,10.8,8.1,22.5] },
-    leader:    { jan:[50.0,11.4,6.8,11.4,20.5], feb:[50.0,15.5,8.6,6.9,19.0],  mar:[52.2,2.2,13.0,8.7,23.9] },
-    exportts:  { jan:[21.4,7.1,14.3,28.6,28.6], feb:[25.8,3.2,16.1,19.4,35.5], mar:[42.3,3.8,15.4,15.4,23.1] }
+    tscatalog: { jan:[42.5,6.2,9.3,12.7,29.4],  feb:[41.7,6.9,9.1,12.5,29.8],  mar:[50.1,4.8,6.2,8.6,30.3],  apr:[27.3,3.2,3.5,8.7,57.3]  },
+    catalog:   { jan:[43.7,7.3,10.4,9.5,29.1],  feb:[41.7,6.7,9.9,14.0,27.5],  mar:[47.5,8.2,7.4,11.3,25.6], apr:[29.3,3.2,5.9,7.8,53.8]  },
+    star:      { jan:[47.7,3.6,8.1,14.4,26.1],  feb:[58.1,1.9,4.8,8.6,26.7],   mar:[51.4,7.2,10.8,8.1,22.5], apr:[30.6,1.2,3.8,6.1,58.3]  },
+    leader:    { jan:[50.0,11.4,6.8,11.4,20.5], feb:[50.0,15.5,8.6,6.9,19.0],  mar:[52.2,2.2,13.0,8.7,23.9], apr:[25.5,2.1,6.2,7.3,58.9]  },
+    exportts:  { jan:[21.4,7.1,14.3,28.6,28.6], feb:[25.8,3.2,16.1,19.4,35.5], mar:[42.3,3.8,15.4,15.4,23.1], apr:[20.0,0.0,1.8,5.5,72.7]  }
   };
 
   const STAR_COLORS = ['#C0444A','#D4784A','#C8A84A','#6ABF69','#2D8A6A'];
   const STAR_LABELS = ['1★','2★','3★','4★','5★'];
 
   // Active month for distribution view
-  var activeARMonth = 'mar';
+  var activeARMonth = 'apr';
 
   // ── Draw spark lines — ALL 12 months ─────────────────────
   function drawARSparks() {
@@ -7890,7 +8017,7 @@ if (document.readyState === 'loading') {
 
     // Update subtitle
     var sub = document.getElementById(ct.subId);
-    var moLabel = moKey === 'jan' ? "Jan '26" : moKey === 'feb' ? "Feb '26" : "Mar '26";
+    var moLabel = moKey === 'jan' ? "Jan '26" : moKey === 'feb' ? "Feb '26" : moKey === 'mar' ? "Mar '26" : "Apr '26";
     if (sub) sub.textContent = 'n: ' + ct.nByMo[moKey].toLocaleString() + ' ratings · ' + moLabel;
 
     // Clear and rebuild
