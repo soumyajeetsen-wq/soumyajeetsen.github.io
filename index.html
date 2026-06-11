@@ -1429,6 +1429,7 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   <button class="tab-btn" onclick="switchTab('tab7',this)">📉 NI Bifurcations</button>
   <button class="tab-btn" onclick="switchTab('tab8',this)">📞 9696 Calls</button>
   <button class="tab-btn" onclick="switchTab('tab9',this)">💡 Insights</button>
+  <button class="tab-btn" onclick="switchTab('tab10',this)">📋 Summary</button>
   <!-- App Ratings visibility toggle — only visible to you, not printed -->
   <button id="ar-visibility-btn" onclick="toggleAppRatingsTab()" title="Toggle App Ratings tab visibility" style="
     margin-left:6px; padding:4px 9px; border-radius:6px; border:1.5px dashed var(--border);
@@ -4512,6 +4513,235 @@ button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 </div><!-- /pg -->
 </div><!-- /tab9 -->
+
+
+<!-- ═══ TAB 10: PLAIN-ENGLISH SUMMARY ═══ -->
+<div id="tab10" class="tab-pane">
+<div class="pg">
+
+<style>
+  #tab10 .sum-wrap{ max-width:1080px; margin:0 auto; }
+  #tab10 .sum-lede{
+    font-size:12.5px;line-height:1.7;color:var(--ink2);
+    border-left:3px solid var(--border);padding:8px 0 8px 14px;margin:6px 0 26px;max-width:900px;
+  }
+  #tab10 .sum-lede b{color:var(--ink);font-weight:700;}
+  #tab10 .sum-sec{margin-top:24px;background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+  #tab10 .sum-hd{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+  #tab10 .sum-eyebrow{font-size:12px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--ink);white-space:nowrap;}
+  #tab10 .sum-badge{font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:.2px;padding:4px 11px;border-radius:6px;white-space:nowrap;}
+  #tab10 .sum-b-green{color:var(--green);background:var(--green-bg);border:1px solid var(--green-border);}
+  #tab10 .sum-b-amber{color:var(--amber, #C07D30);background:var(--amber-bg);border:1px solid var(--amber-border);}
+  #tab10 .sum-b-red{color:var(--red);background:var(--red-bg);border:1px solid var(--red-border);}
+  #tab10 .sum-rule{flex:1;height:1px;background:var(--border);min-width:20px;}
+  #tab10 table.sum-tbl{width:100%;border-collapse:collapse;}
+  #tab10 table.sum-tbl thead th{text-align:left;font-size:10.5px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.4px;padding:9px 18px;background:var(--bg);border-bottom:1px solid var(--border);}
+  #tab10 table.sum-tbl thead th:first-child{width:34%;}
+  #tab10 table.sum-tbl tbody td{padding:14px 18px;vertical-align:top;border-bottom:1px solid var(--border);font-size:12px;line-height:1.62;}
+  #tab10 table.sum-tbl tbody tr:last-child td{border-bottom:none;}
+  #tab10 table.sum-tbl tbody tr:nth-child(even){background:var(--bg);}
+  #tab10 .sum-metric{font-weight:600;color:var(--ink);font-size:12.5px;}
+  #tab10 .sum-says{color:var(--ink2);}
+  #tab10 .sum-says b{color:var(--ink);font-weight:600;}
+  #tab10 .sum-up{color:var(--red);font-weight:700;}
+  #tab10 .sum-down{color:var(--green);font-weight:700;}
+  #tab10 .sum-flat{color:var(--amber, #C07D30);font-weight:700;}
+  #tab10 .sum-arrow{font-family:'JetBrains Mono',monospace;}
+  #tab10 .sum-foot{margin-top:28px;border-top:1px solid var(--border);padding-top:14px;font-size:10.5px;color:var(--muted);line-height:1.7;}
+  #tab10 .sum-foot b{color:var(--ink2);}
+  @media (max-width:640px){
+    #tab10 table.sum-tbl thead th:first-child{width:42%;}
+    #tab10 table.sum-tbl tbody td{font-size:11px;padding:11px 13px;}
+    #tab10 .sum-eyebrow{font-size:10.5px;letter-spacing:.8px;}
+  }
+</style>
+
+<div class="sum-wrap">
+
+  <div class="sh" style="margin-top:0">
+    <span class="sh-t">Seller Pulse Summary — May '26</span>
+    <div class="sh-l"></div>
+    <span class="sh-b" style="background:var(--bg);color:var(--muted);border:1px solid var(--border)">5 sources · plain-English</span>
+  </div>
+
+  <div class="sum-lede">
+    May was a <b>holding month that quietly worsened underneath</b>, and the movement spans every report — not just NPS. Headline NPS was flat (22.5) but came on under half April's sample as desktop responses collapsed, so it's now an app-heavy read. On lead quality, <b>BL irrelevancy reversed off its best-ever low</b> (4.05% → 4.11%) as Wrong Location and Wrong Category regressed, and <b>QRF rose for a second straight month</b> (4.13 → 4.26‰) — the buyer-side and algorithm-side signals now agree the problem is growing. The paid <b>app rating slipped again to 3.47★</b>, with the volume segments (TSCatalog, Star, Catalog) clustered at the bottom. The one clear bright spot is the <b>contact centre</b>, where auto-closures hit best-ever levels and paid-seller email volume rebounded.
+  </div>
+
+  <!-- NPS -->
+  <div class="sum-sec">
+    <div class="sum-hd">
+      <span class="sum-eyebrow">NPS &amp; Seller Sentiment</span>
+      <span class="sum-badge sum-b-amber">22.5 → from 22.7 · held flat</span>
+      <span class="sum-rule"></span>
+    </div>
+    <table class="sum-tbl">
+      <thead><tr><th>Metric</th><th>What it says</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="sum-metric">Overall NPS 22.5 <span class="sum-flat sum-arrow">→ −0.2</span></td>
+          <td class="sum-says">Essentially flat vs April, but on <b>n=3,663 — under half</b> of April's 7,718. Desktop responses collapsed to 142 (from 4,086), so the score is now an app-heavy read. Detractor share steady at 31.7%.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Irrelevant Buyer 37% <span class="sum-up sum-arrow">↑</span></td>
+          <td class="sum-says"><b>Largest complaint, and at a new high</b> — up every month it's been tracked (30.8 → 33.7 → 34.3 → 35.0 → 37.1). 48% still couldn't pick a reason ("No option") — sellers are getting too many mismatched leads to articulate the problem. Retail leads (20%) and wrong category (20%) are the top identifiable sub-causes.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Low Conversion 25% + Less BLs 23%</td>
+          <td class="sum-says">Both rose MoM. Together with Irrelevant Buyer, these three now account for <b>~85% of all detractor complaints</b> (up from ~80% in April). All point to the same root: sellers aren't seeing enough return on their subscription.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Issues with Buyer 10% <span class="sum-down sum-arrow">↓</span></td>
+          <td class="sum-says">Eased for a second month (10.4% → 9.7%). 32% cite buyer unresponsiveness, 29% say the buyer denied the requirement after connecting — sellers spending time on leads where buyer intent was never real. The one complaint moving the right way.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">New Seller NPS 13.4 <span class="sum-down sum-arrow">↑ from 10.8</span></td>
+          <td class="sum-says">Recovered from April but <b>still the weakest cohort</b> — first-month sellers remain far below established sellers (NPS 26.0). High churn risk persists: the lead-quality expectation-vs-reality gap shows up earliest in onboarding.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Catalog NPS 9.8</td>
+          <td class="sum-says"><b>Lowest segment on NPS, again</b> (37.5% detractors). Catalog's app rating (3.35★) is also weak, near the bottom — consistently dissatisfied on both signals, making it the highest-priority segment for AM intervention.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Leader NPS 32.3 <span class="sum-down sum-arrow">↑ from 28.8</span></td>
+          <td class="sum-says">Rebounded and now the strongest tier. Higher tiers (Leader, TSCatalog 27.4) continue to outperform — satisfaction scales with tenure and spend.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BL -->
+  <div class="sum-sec">
+    <div class="sum-hd">
+      <span class="sum-eyebrow">Lead Quality — BL Irrelevancy</span>
+      <span class="sum-badge sum-b-red">4.11% BLNI/Txn — reversed off best-ever</span>
+      <span class="sum-rule"></span>
+    </div>
+    <table class="sum-tbl">
+      <thead><tr><th>Metric</th><th>What it says</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="sum-metric">BLNI/Txn 4.11% <span class="sum-up sum-arrow">↑ from 4.05%</span></td>
+          <td class="sum-says"><b>First reversal after the record low.</b> Still −27% vs the Oct'25 peak of 5.61%, so the longer trend is intact — but the best-ever streak has broken. Worth confirming next month.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Total BLNI 4,39,854 <span class="sum-flat sum-arrow">→ flat</span></td>
+          <td class="sum-says">Down just −0.1% MoM while transactions fell −1.7% — so the ratio rose because the <b>denominator shrank, not because irrelevancy grew</b>. Still ~1 in 24 delivered leads flagged — significant at scale.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Wrong Location <span class="sum-up sum-arrow">↑ 18.3% → 19.1%</span></td>
+          <td class="sum-says">Rose as a share of dispositions — one of the two drivers of the reversal. Geography matching slipped this month after a long run of improvement.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Wrong Category <span class="sum-up sum-arrow">↑ 2.8% → 4.3%</span></td>
+          <td class="sum-says"><b>The sharpest regression in the mix</b> — share more than 1.5×'d. Combined with Wrong Location, this is why BLNI/Txn ticked up. Apply the proven algo-fix rigour here before it trends.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Retail NI 1,58,386 <span class="sum-down sum-arrow">↓ −3.5%</span></td>
+          <td class="sum-says">Still the single largest disposition (~36% of all BLNI), down slightly in volume. QRF shows the same Retail pressure — the #1 cross-source lead-quality watch-item.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Wrong BL Mapping <span class="sum-down sum-arrow">↓ −12%</span></td>
+          <td class="sum-says">24,636 → 21,566. Kept improving — the interventions on this disposition are still working.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Insufficient Info <span class="sum-down sum-arrow">↓ −18%</span></td>
+          <td class="sum-says">16,494 → 13,579. Continued reduction; buyer-side requirement-form improvements may be contributing.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- QRF -->
+  <div class="sum-sec">
+    <div class="sum-hd">
+      <span class="sum-eyebrow">Buyer-Side Lead Quality — QRF</span>
+      <span class="sum-badge sum-b-red">4.26‰ ↑ from 4.13‰</span>
+      <span class="sum-rule"></span>
+    </div>
+    <table class="sum-tbl">
+      <thead><tr><th>Metric</th><th>What it says</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="sum-metric">QRF Irrelevancy 4.26‰ <span class="sum-up sum-arrow">↑ +3.2%</span></td>
+          <td class="sum-says"><b>Second straight monthly rise</b> (3.88 → 4.13 → 4.26‰). What looked like a one-month blip in April is now a trend — the improvement run that bottomed in March has clearly stalled and is reversing. This is the buyer-side mirror of the same "irrelevant leads" problem sellers report in NPS, so the two signals now agree.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CONTACT CENTER -->
+  <div class="sum-sec">
+    <div class="sum-hd">
+      <span class="sum-eyebrow">Contact Center</span>
+      <span class="sum-badge sum-b-green">Auto closures at best-ever</span>
+      <span class="sum-rule"></span>
+    </div>
+    <table class="sum-tbl">
+      <thead><tr><th>Metric</th><th>What it says</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="sum-metric">Mails received 46,078 <span class="sum-up sum-arrow">↑ +3.6%</span></td>
+          <td class="sum-says">Rose vs April, <b>reversing the prior dip</b> — more sellers writing in. In the context of flat NPS, more inbound isn't necessarily bad: it can mean sellers are still engaged enough to raise issues.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Auto Genuine Closure 53% <span class="sum-down sum-arrow">↑ from 43%</span></td>
+          <td class="sum-says">Climbed again after April's jump. More genuine queries resolved without agent involvement, freeing capacity for complex issues.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Auto Junk Closure 96%</td>
+          <td class="sum-says"><b>New best-ever.</b> Spam/irrelevant inbound filtered out almost entirely. 1-hour closure also hit 92%.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Paid seller emails 5,487 <span class="sum-down sum-arrow">↑ +8.2%</span></td>
+          <td class="sum-says">Rose vs April, reversing the earlier decline — paid sellers re-engaging with support rather than going quiet. Operational health is the clearest positive this month.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- APP RATING -->
+  <div class="sum-sec">
+    <div class="sum-hd">
+      <span class="sum-eyebrow">App Rating — Paid Sellers</span>
+      <span class="sum-badge sum-b-amber">3.47★ overall · 3,947 raters</span>
+      <span class="sum-rule"></span>
+    </div>
+    <table class="sum-tbl">
+      <thead><tr><th>Segment</th><th>What it says</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="sum-metric">Overall 3.47★ <span class="sum-up sum-arrow">↓ from 3.58</span></td>
+          <td class="sum-says"><b>Second consecutive decline</b> off March's 3.60 peak, on fewer raters (3,947 vs 4,849). A thinner, more polarised base is pulling the average down.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">ExportTS 4.28★ (n=32)</td>
+          <td class="sum-says"><b>Highest rated.</b> Sophisticated exporters with clearer use-cases — better product-market fit, but a small sample.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">Leader 3.97★ — strongest large tier</td>
+          <td class="sum-says">65% gave 5 stars. Premium segments have clearer ROI expectations that the product broadly meets.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">TSCatalog 3.31★ · Star 3.35★ · Catalog 3.35★</td>
+          <td class="sum-says"><b>The volume segments cluster at the bottom</b> — TSCatalog is actually the lowest-rated (3.31), with Star and Catalog just above (3.35). All three carry ~34–38% 1-star shares. Note the split with NPS: Catalog is worst on NPS, but TSCatalog is worst on app rating — different segments, same underperformance band.</td>
+        </tr>
+        <tr>
+          <td class="sum-metric">1-star share ~31%, 5-star ~53%</td>
+          <td class="sum-says"><b>Polarised distribution</b> — sellers either love or actively dislike the app, with little middle ground. 1-star share rose (29% → 31%) while 5-star share fell — negative experiences are getting sharper, not milder.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sum-foot">
+    <b>Sources:</b> NPS Monthly · App Ratings V2 · QRF Overall (ASTBUY per-1,000 enquiries) · BL Total NI-Monthly · Contact Center Email Snapshot. All figures May '26 vs April '26 unless noted. <b>Caveat:</b> May's NPS sample skews app-heavy (desktop n=142), so read absolute complaint shares with that sampling shift in mind.
+  </div>
+
+</div>
+
+</div><!-- /pg -->
+</div><!-- /tab10 -->
 
 
 
